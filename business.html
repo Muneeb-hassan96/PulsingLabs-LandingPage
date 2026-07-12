@@ -1,0 +1,166 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>For Business · PulsingLabs Corporate Wellness</title>
+  <meta name="description" content="Preventive health screening and wellness for your team, with an HR dashboard of aggregate insights, and individual medical data kept private. Estimate your absenteeism cost." />
+  <link rel="preconnect" href="https://api.fontshare.com" crossorigin />
+  <link href="https://api.fontshare.com/v2/css?f[]=general-sans@400,500,600,700&display=swap" rel="stylesheet" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/style.css?v=82" />
+  <link rel="icon" type="image/png" href="assets/img/favicon.png" />
+</head>
+<body>
+  <div id="site-header"></div>
+
+  <!-- ============ PAGE HERO (dark futuristic) ============ -->
+  <section class="page-hero s-dark">
+    <img class="ph-photo" src="assets/img/ppl_discussion_new.jpeg" alt="" aria-hidden="true" loading="lazy" />
+    <div class="wrap page-enter">
+      <span class="eyebrow" data-i18n="pg.biz.eyebrow">For Business</span>
+      <h1 data-i18n-html="pg.biz.h1">Healthier teams,<br><span class="grad-text">lower absenteeism</span></h1>
+      <p class="lead" data-i18n="pg.biz.lead">Give employees preventive screening and wellness, with an HR dashboard that turns it into insight, without ever exposing individual medical data.</p>
+      <div class="hero-cta" style="justify-content:center;">
+        <a class="btn btn-primary" href="contact.html" data-magnetic data-i18n-html="biz.heroB1">Book a demo <span class="arrow">→</span></a>
+        <a class="btn btn-light" href="pricing.html" data-i18n="biz.heroB2">See pricing</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ STATS (cream) ============ -->
+  <section class="s-cream">
+    <div class="wrap center" style="max-width:760px;margin:0 auto;">
+      <span class="eyebrow reveal" data-i18n="biz.stats.eye">The cost of poor health</span>
+      <h2 class="reveal d1" data-i18n="biz.stats.h2">Ill health is expensive, and largely preventable.</h2>
+      <p class="lead reveal d2" style="margin:14px auto 0;" data-i18n="biz.stats.lead">Sick days, lost productivity and late diagnoses quietly drain your business. Preventive screening is one of the highest-ROI benefits you can offer.</p>
+    </div>
+    <div class="wrap">
+      <div class="stat-cards">
+        <div class="stat reveal"><div class="n"><span data-count="1">0</span> in 4</div><div class="l" data-i18n="biz.s1">employees affected by work-related ill health*</div></div>
+        <div class="stat reveal d1"><div class="n"><span data-count="9">0</span></div><div class="l" data-i18n="biz.s2">average sick days per employee, per year*</div></div>
+        <div class="stat reveal d2"><div class="n"><span data-count="80" data-suffix="%">0</span></div><div class="l" data-i18n="biz.s3">of early-stage conditions are manageable if caught in time*</div></div>
+        <div class="stat reveal d3"><div class="n"><span data-count="30" data-suffix="-day">0</span></div><div class="l" data-i18n="biz.s4">free trial, no credit card required</div></div>
+      </div>
+      <p class="reveal center" style="margin-top:22px;font-size:13px;color:var(--muted);" data-i18n="stats.note">* Industry estimates, figures vary by region.</p>
+    </div>
+  </section>
+
+  <!-- ============ BENEFITS + ROI (light, dark calculator card) ============ -->
+  <section class="s-cream">
+    <div class="wrap">
+      <div class="split boxed">
+        <div class="split-copy reveal-l">
+          <span class="eyebrow" data-i18n="biz.wyg.eye">What you get</span>
+          <h2 data-i18n="biz.wyg.h2">An HR wellness platform, not a spreadsheet.</h2>
+          <ul class="split-list" style="margin-top:22px;">
+            <li data-i18n="biz.wyg.l1">Company dashboard with aggregate wellness analytics</li>
+            <li data-i18n="biz.wyg.l2">Proactive alerts when the team's health needs attention</li>
+            <li data-i18n="biz.wyg.l3">AI HR assistant for appointments &amp; roster questions</li>
+            <li data-i18n="biz.wyg.l4">One-click employee invites &amp; CSV exports</li>
+            <li data-i18n="biz.wyg.l5">Individual employee health reports (PDF)</li>
+            <li data-i18n="biz.wyg.l6">Privacy-first: employees' results stay private to them</li>
+          </ul>
+        </div>
+        <div class="split-media reveal-r">
+          <div class="calc glass">
+            <h3 data-i18n="biz.calc.h">What does poor health cost you?</h3>
+            <div class="sub" data-i18n="biz.calc.sub">Estimate the annual cost of employee sick days, and what prevention could save.</div>
+            <label for="emp" data-i18n="biz.calc.lab1">Number of employees</label>
+            <div class="rowval"><span data-i18n="biz.calc.r1">Employees</span><span id="empVal">15</span></div>
+            <input type="range" id="emp" min="5" max="500" value="15" step="5" />
+            <label for="days" data-i18n="biz.calc.lab2">Avg. sick days per employee / year</label>
+            <div class="rowval"><span data-i18n="biz.calc.r2">Sick days</span><span id="daysVal">8</span></div>
+            <input type="range" id="days" min="2" max="20" value="8" step="1" />
+            <label for="cost" data-i18n="biz.calc.lab3">Avg. daily cost per employee (PKR)</label>
+            <div class="rowval"><span data-i18n="biz.calc.r3">Daily cost</span><span id="costVal">5,000</span></div>
+            <input type="range" id="cost" min="2000" max="20000" value="5000" step="500" />
+            <div class="result">
+              <div class="big" id="roiTotal">PKR 600,000</div>
+              <div class="cap" data-i18n="biz.calc.cap">estimated annual cost of absenteeism, preventive screening helps cut it.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ HR DASHBOARD SHOWCASE (dark stage) ============ -->
+  <section class="s-dark hr-stage">
+    <div class="hs-head">
+      <span class="eyebrow reveal">The HR dashboard</span>
+      <h2 class="reveal d1">Your whole team's wellness, served on one screen.</h2>
+      <p class="lead reveal d2">Who's tested, who's pending, and how the team is trending — live, at a glance, without ever exposing an individual's results.</p>
+    </div>
+    <div class="hr-stage-visual reveal d2">
+      <div class="hr-chip hc-1"><span class="hc-ic" data-icon="target"></span><span><b>9/10 tested</b><span>this drive</span></span></div>
+      <div class="hr-chip hc-2"><span class="hc-ic" data-icon="chart"></span><span><b>Aggregate insights</b><span>never individual results</span></span></div>
+      <div class="hr-chip hc-3"><span class="hc-ic" data-icon="users"></span><span><b>2 approvals</b><span>one click away</span></span></div>
+      <img src="assets/img/hr-homepage.png" alt="The PulsingLabs HR dashboard on a laptop, showing team testing progress and pending approvals" loading="lazy" />
+    </div>
+  </section>
+
+  <!-- ============ HOW CORPORATE WORKS (cream) ============ -->
+  <section class="s-cream">
+    <div class="wrap center" style="max-width:680px;margin:0 auto;">
+      <span class="eyebrow reveal" data-i18n="biz.gs.eye">Getting started</span>
+      <h2 class="reveal d1" data-i18n="biz.gs.h2">Up and running in a day</h2>
+    </div>
+    <div class="wrap">
+      <div class="steps">
+        <div class="step reveal"><div class="num">1</div><h3 data-i18n="biz.gs.s1h">Register your company</h3><p data-i18n="biz.gs.s1p">Create your company account and start a 30-day free trial, no credit card.</p></div>
+        <div class="step reveal d1"><div class="num">2</div><h3 data-i18n="biz.gs.s2h">Invite your team</h3><p data-i18n="biz.gs.s2p">Send invites or upload a CSV. Employees join with their own private accounts.</p></div>
+        <div class="step reveal d2"><div class="num">3</div><h3 data-i18n="biz.gs.s3h">See wellness insights</h3><p data-i18n="biz.gs.s3p">Track aggregate trends and proactive alerts, individual results stay private.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ VIDEO TESTIMONIAL (cream) ============ -->
+  <!-- TODO: replace with a real company case study -->
+  <section class="s-cream">
+    <div class="wrap">
+      <div class="split tstm-split tstm-portrait">
+        <div class="split-copy reveal-l">
+          <span class="eyebrow">From a pilot</span>
+          <div class="tstm-meta">
+            <strong>HR Lead</strong>
+            <span>Pilot company &middot; Islamabad</span>
+          </div>
+          <blockquote class="tstm-quote">"The aggregate dashboard helped us spot trends early and plan screening drives, without ever seeing anyone's private results. Roll-out took under a week, and for the first time our wellness budget has numbers behind it."</blockquote>
+        </div>
+        <div class="split-media reveal-r">
+          <div class="media photo tall no-reveal-clip">
+            <video class="media-vid" src="assets/img/person2vid.mp4" autoplay muted loop playsinline preload="metadata"></video>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ KINETIC TYPE BAND ============ -->
+  <div class="kinetic-band" aria-hidden="true">
+    <div class="kinetic-track" data-kinetic>
+      <i>01</i><span data-i18n="kb.teams">Healthier teams</span><em>/</em><i>02</i><span class="fill" data-i18n="kb.sick">Fewer sick days</span><em>/</em><i>03</i><span data-i18n="kb.roi">Real ROI</span><em>/</em><i>01</i><span data-i18n="kb.teams">Healthier teams</span><em>/</em><i>02</i><span class="fill" data-i18n="kb.sick">Fewer sick days</span><em>/</em><i>03</i><span data-i18n="kb.roi">Real ROI</span><em>/</em>
+    </div>
+  </div>
+
+  <!-- ============ CTA ============ -->
+  <section>
+    <div class="wrap">
+      <div class="cta-band reveal-zoom">
+        <h2 data-i18n="biz.cta.h">Invest in your team's health</h2>
+        <p data-i18n="biz.cta.p">Start a 30-day free trial, or book a 15-minute demo to see the HR dashboard.</p>
+        <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;">
+          <a class="btn btn-light" href="#" data-cta="register" data-magnetic style="background:#fff;color:var(--teal-d);" data-i18n="biz.cta.b1">Register your company</a>
+          <a class="btn btn-light" href="contact.html" data-i18n="biz.cta.b2">Book a demo</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div id="site-footer"></div>
+  <script src="assets/app.js?v=77"></script>
+</body>
+</html>

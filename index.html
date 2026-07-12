@@ -1,0 +1,497 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PulsingLabs · Book lab tests. Understand your results. In minutes.</title>
+  <meta name="description" content="Book blood-test packages, get plain-English AI explanations of your results, track trends, and manage your whole family's health, plus corporate wellness for businesses." />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="PulsingLabs · Your health, simplified" />
+  <meta property="og:description" content="Book lab tests, understand your results with AI, and track your family's health in one app." />
+  <meta property="og:image" content="https://pulsinglabs.pk/og-image.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="PulsingLabs · Your health, simplified" />
+  <meta name="twitter:description" content="Book lab tests, understand your results with AI, and track your family's health in one app." />
+  <meta name="twitter:image" content="https://pulsinglabs.pk/og-image.png" />
+  <link rel="preconnect" href="https://api.fontshare.com" crossorigin />
+  <link href="https://api.fontshare.com/v2/css?f[]=general-sans@400,500,600,700&display=swap" rel="stylesheet" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/style.css?v=82" />
+  <link rel="icon" type="image/png" href="assets/img/favicon.png" />
+  <!-- 3D engine for the holographic body band. Self-hosted (pinned
+       model-viewer@3.5.0, hash-verified against the official CDN) so the
+       showcase never depends on a third-party fetch. -->
+  <script type="module" src="assets/vendor/model-viewer.min.js?v=1"></script>
+</head>
+<body>
+  <div id="site-header"></div>
+
+  <!-- ============ HERO (cream band) ============ -->
+  <section class="hero">
+    <canvas id="hero-particles" aria-hidden="true"></canvas>
+    <div class="hero-deco" data-depth="0.6" aria-hidden="true"><span class="ring r1"></span><span class="ring r2"></span><span class="dots"></span></div>
+    <div class="wrap hero-grid">
+      <div class="page-enter">
+        <span class="eyebrow" data-scramble data-i18n="home.eyebrow">Your health, simplified</span>
+        <h1 data-i18n-html="home.h1">Book lab tests.<br>Then actually <span class="grad-text">understand</span> them.</h1>
+        <p class="lead" data-i18n="home.lead">50+ blood-test packages, booked at your lab or your door, with every result explained in plain English by AI. For you, and your whole family.</p>
+        <div class="hero-cta">
+          <a class="btn btn-primary" href="#" data-cta="app" data-magnetic data-i18n-html="home.cta1">Get started free <span class="arrow">→</span></a>
+          <a class="btn btn-ghost" href="features.html" data-i18n="home.cta2">See how it works</a>
+        </div>
+        <div class="hero-note"><span class="ico-inline" data-icon="shield"></span> <span data-i18n="home.note">Private &amp; secure</span></div>
+      </div>
+      <div class="page-enter">
+        <div class="media media-mint tall">
+          <div class="phone-card" aria-hidden="true">
+            <div class="phone-head">
+              <div><strong>Health Score</strong><div class="score">Last updated · today</div></div>
+              <div class="ring" data-ring="88"><i>0</i></div>
+            </div>
+            <div class="marker"><span class="name">HbA1c</span><span class="val">5.4%</span><span class="pill ok">Normal</span></div>
+            <div class="marker"><span class="name">LDL Cholesterol</span><span class="val">145 mg/dL</span><span class="pill hi">High</span></div>
+            <div class="marker"><span class="name">Vitamin D</span><span class="val">22 ng/mL</span><span class="pill mid">Low</span></div>
+            <div class="marker"><span class="name">TSH</span><span class="val">2.1 mIU/L</span><span class="pill ok">Normal</span></div>
+          </div>
+          <div class="badge-float bf-tl" data-depth="1.6"><span class="bf-ic" data-icon="sparkle"></span><span><b>AI explained</b><span>your HbA1c</span></span></div>
+          <div class="badge-float bf-br" data-depth="1.2"><span class="bf-ic" data-icon="trend"></span><span><b>Trending up</b><span>since March</span></span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ MARQUEE (white thin band) ============ -->
+  <div class="marquee">
+    <div class="marquee-track">
+      <span class="marquee-item"><span class="ic" data-icon="droplet"></span> <span data-i18n="mq.packages">50+ test packages</span></span>
+      <span class="marquee-item"><span class="ic" data-icon="home"></span> <span data-i18n="mq.home">Home sample collection</span></span>
+      <span class="marquee-item"><span class="ic" data-icon="sparkle"></span> <span data-i18n="mq.ai">AI-powered insights</span></span>
+      <span class="marquee-item"><span class="ic" data-icon="users"></span> <span data-i18n="mq.family">Family profiles</span></span>
+      <span class="marquee-item"><span class="ic" data-icon="trend"></span> <span data-i18n="mq.trend">Trend tracking</span></span>
+      <span class="marquee-item"><span class="ic" data-icon="file"></span> <span data-i18n="mq.import">Import any lab report</span></span>
+      <span class="marquee-item"><span class="ic" data-icon="globe"></span> <span data-i18n="mq.lang">AI chat understands Urdu</span></span>
+      <span class="marquee-item"><span class="ic" data-icon="droplet"></span> <span data-i18n="mq.packages">50+ test packages</span></span>
+      <span class="marquee-item"><span class="ic" data-icon="home"></span> <span data-i18n="mq.home">Home sample collection</span></span>
+      <span class="marquee-item"><span class="ic" data-icon="sparkle"></span> <span data-i18n="mq.ai">AI-powered insights</span></span>
+      <span class="marquee-item"><span class="ic" data-icon="users"></span> <span data-i18n="mq.family">Family profiles</span></span>
+      <span class="marquee-item"><span class="ic" data-icon="trend"></span> <span data-i18n="mq.trend">Trend tracking</span></span>
+      <span class="marquee-item"><span class="ic" data-icon="file"></span> <span data-i18n="mq.import">Import any lab report</span></span>
+      <span class="marquee-item"><span class="ic" data-icon="globe"></span> <span data-i18n="mq.lang">AI chat understands Urdu</span></span>
+    </div>
+  </div>
+
+  <!-- ============ KINETIC TYPE BAND (scroll-velocity reactive) ============ -->
+  <div class="kinetic-band" aria-hidden="true">
+    <div class="kinetic-track" data-kinetic>
+      <i>01</i><span data-i18n="kb.decoded">Your health, decoded</span><em>/</em><i>02</i><span data-i18n="kb.book">Book</span><em>/</em><i>03</i><span data-i18n="kb.test">Test</span><em>/</em><i>04</i><span class="fill" data-i18n="kb.understand">Understand</span><em>/</em><i>05</i><span data-i18n="kb.act">Act early</span><em>/</em><i>01</i><span data-i18n="kb.decoded">Your health, decoded</span><em>/</em><i>02</i><span data-i18n="kb.book">Book</span><em>/</em><i>03</i><span data-i18n="kb.test">Test</span><em>/</em><i>04</i><span class="fill" data-i18n="kb.understand">Understand</span><em>/</em><i>05</i><span data-i18n="kb.act">Act early</span><em>/</em>
+    </div>
+  </div>
+
+  <!-- ============ BIG STATEMENT (white) ============ -->
+  <section>
+    <div class="wrap section-box">
+      <div class="split wide-text">
+        <div class="reveal-l">
+          <span class="eyebrow" data-i18n="prob.eyebrow">The problem</span>
+          <h2 data-i18n="prob.h2">Understanding your health shouldn't need a medical degree.</h2>
+        </div>
+        <div class="reveal-r">
+          <p class="lead" data-i18n="prob.lead">Most people leave the lab with a printout full of arrows and acronyms, and no idea what it means for them. PulsingLabs turns those numbers into clear, personal answers, and helps you act on them in time.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ BENTO GRID (cream) ============ -->
+  <section class="s-cream">
+    <div class="wrap section-box">
+      <div class="sec-head reveal">
+        <span class="eyebrow" data-i18n="bn.eyebrow">One app, everything</span>
+        <h2 data-i18n="bn.h2">Built like your health deserves it.</h2>
+      </div>
+      <div class="bento">
+        <div class="card bento-tile bt-big reveal" data-tilt>
+          <div class="bt-ring" aria-hidden="true"><i>88</i></div>
+          <h3 data-i18n="bn.score">One score for your whole body</h3>
+          <p data-i18n="bn.scoreSub">Every marker rolls up into a single 0 to 100 health score, weighted by what matters clinically.</p>
+        </div>
+        <div class="card bento-tile bt-wide reveal" data-tilt>
+          <svg class="bt-spark" viewBox="0 0 220 60" preserveAspectRatio="none" aria-hidden="true">
+            <polyline points="0,44 30,40 60,46 90,30 120,34 150,20 180,24 220,10" fill="none" stroke="#00BFA5" stroke-width="3" stroke-linecap="round"/>
+            <circle cx="220" cy="10" r="4" fill="#00BFA5"/>
+          </svg>
+          <h3 data-i18n="bn.trend">Trends you can actually see</h3>
+          <p data-i18n="bn.trendSub">Months of results on one chart, with healthy zones drawn in.</p>
+        </div>
+        <div class="card bento-tile reveal" data-tilt>
+          <div class="bt-num"><span data-count="50" data-suffix="+">50+</span></div>
+          <h3 data-i18n="bn.pkg">Test packages</h3>
+          <p data-i18n="bn.pkgSub">At your lab, or your door.</p>
+        </div>
+        <div class="card bento-tile reveal" data-tilt>
+          <div class="bt-bubble" data-i18n="bn.aiMsg">Your LDL is high. Here is what to do this month.</div>
+          <h3 data-i18n="bn.ai">AI that explains</h3>
+          <p data-i18n="bn.aiSub">Plain answers, your language.</p>
+        </div>
+        <div class="card bento-tile reveal" data-tilt>
+          <div class="bt-avatars"><span>A</span><span>S</span><span>M</span><span class="plus">+</span></div>
+          <h3 data-i18n="bn.family">Whole-family care</h3>
+          <p data-i18n="bn.familySub">Parents, kids, one account.</p>
+        </div>
+        <div class="card bento-tile reveal" data-tilt>
+          <div class="bt-lang">AI <em>·</em> اردو</div>
+          <h3 data-i18n="bn.lang">AI that speaks Urdu</h3>
+          <p data-i18n="bn.langSub">Ask it anything, in Urdu or English.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ SPOTLIGHT A, Understand (cream) ============ -->
+  <section class="s-cream">
+    <div class="wrap">
+      <div class="split boxed">
+        <div class="split-copy reveal-l">
+          <span class="eyebrow" data-i18n="spA.eyebrow">Understand your results</span>
+          <h2 data-i18n="spA.h2">See exactly where you stand.</h2>
+          <p class="lead" data-i18n="spA.lead">Every marker sits on a clinical zone chart (Normal, Borderline, or High), tuned to your age and sex, with a plain-English explanation underneath.</p>
+          <ul class="split-list">
+            <li data-i18n="spA.li1">Colour-coded healthy ranges, not raw numbers</li>
+            <li data-i18n="spA.li2">AI explanations grounded in your own results</li>
+            <li data-i18n="spA.li3">Trends across months and years, at a glance</li>
+          </ul>
+        </div>
+        <div class="split-media reveal-r">
+          <div class="media photo tall">
+            <img class="media-img" src="assets/img/result.jpeg" alt="The PulsingLabs results screen showing a Hematocrit trend on a clinical zone chart" loading="lazy" />
+            <div class="badge-float bf-br"><span class="bf-ic" data-icon="chart"></span><span><b>Hematocrit</b><span>within range</span></span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ SPOTLIGHT B, AI assistant (DARK, flipped) ============ -->
+  <section class="s-dark">
+    <div class="wrap">
+      <div class="split flip boxed">
+        <div class="split-copy reveal-r">
+          <span class="eyebrow" data-i18n="spB.eyebrow">AI health assistant</span>
+          <h2 data-i18n="spB.h2">Ask anything. In your language.</h2>
+          <p class="lead" data-i18n="spB.lead">Chat about your results like you would with a calm, knowledgeable friend, in English or اردو, and let it book your next test right inside the conversation.</p>
+          <ul class="split-list">
+            <li data-i18n="spB.li1">Plain answers, never jargon or scare-talk</li>
+            <li data-i18n="spB.li2">Books, reschedules &amp; cancels conversationally</li>
+            <li data-i18n="spB.li3">Urgent symptoms trigger emergency guidance</li>
+          </ul>
+        </div>
+        <div class="split-media reveal-l">
+          <!-- AI chat panel: realistic product showcase replacing generic chat bubbles -->
+          <div class="ai-panel">
+            <!-- Header -->
+            <div class="ai-panel-head">
+              <div class="ai-panel-logo">
+                <svg viewBox="0 0 24 24"><path d="M12 2a5 5 0 015 5c0 1.9-1.05 3.56-2.6 4.43L13 12.5V14h-2v-1.5l-1.4-.07A5.002 5.002 0 017 7a5 5 0 015-5zm0 11.5V17h2v1a2 2 0 01-4 0v-1h2v-2.5z"/></svg>
+              </div>
+              <div>
+                <div class="ai-panel-nm">PulsingLabs AI</div>
+                <div class="ai-panel-sub">Your personal health assistant</div>
+              </div>
+              <div class="ai-panel-live">Live</div>
+            </div>
+            <!-- Greeting -->
+            <div class="ai-greeting">
+              <strong>Hello Ahmed,</strong>
+              <span>I reviewed your latest results. Here is what matters most right now.</span>
+            </div>
+            <!-- Conversation -->
+            <div class="ai-msgs">
+              <div class="ai-msg-u">Why is my LDL still high after 3 months?</div>
+              <div class="ai-msg-b">
+                <div class="ai-msg-av">
+                  <svg viewBox="0 0 24 24"><path d="M12 2a5 5 0 015 5c0 1.9-1.05 3.56-2.6 4.43L13 12.5V14h-2v-1.5l-1.4-.07A5.002 5.002 0 017 7a5 5 0 015-5z"/></svg>
+                </div>
+                <div class="ai-msg-tx">
+                  Your LDL is 145 mg/dL, above the 100 optimal target. Combined with your borderline CRP (2.1), this signals mild cardiovascular risk. A Mediterranean-style diet and a lipid recheck in 3 months is the right move.
+                  <div class="ai-badge-watch">&#9888; Watch &middot; Follow up in 3 months</div>
+                </div>
+              </div>
+              <div class="ai-msg-u">Yes please, book next Tuesday</div>
+              <div class="ai-msg-b">
+                <div class="ai-msg-av">
+                  <svg viewBox="0 0 24 24"><path d="M12 2a5 5 0 015 5c0 1.9-1.05 3.56-2.6 4.43L13 12.5V14h-2v-1.5l-1.4-.07A5.002 5.002 0 017 7a5 5 0 015-5z"/></svg>
+                </div>
+                <div class="ai-badge-booked">
+                  <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+                  Lipid Panel booked at City Lab &middot; Tue 29 Oct, 10:00 AM
+                </div>
+              </div>
+            </div>
+            <!-- Quick-action chips -->
+            <div class="ai-chips">
+              <button class="ai-chip">Explain my TSH</button>
+              <button class="ai-chip">View trends</button>
+              <button class="ai-chip">Book follow-up</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 3D HOLOGRAPHIC BODY (dark band) ============ -->
+  <section class="s-dark body3d-band">
+    <div class="wrap body3d-grid">
+      <div class="body3d-copy reveal-l">
+        <span class="eyebrow" data-i18n="b3d.eyebrow">Live organ health</span>
+        <h2 data-i18n="b3d.h2">Your body, decoded in 3D.</h2>
+        <p class="lead" data-i18n="b3d.lead">Every result you take maps onto a holographic body inside the app. Spin it, tap an organ, and see its live condition scored from your own blood work.</p>
+        <ul class="split-list">
+          <li data-i18n="b3d.li1">Heart, liver, kidneys, thyroid and more, each scored 0 to 100</li>
+          <li data-i18n="b3d.li2">Organs glow green, amber or red with your latest results</li>
+          <li data-i18n="b3d.li3">Tap any organ to zoom in and get the full story</li>
+        </ul>
+        <div class="hero-cta">
+          <a class="btn btn-primary" href="#" data-cta="app" data-magnetic data-i18n-html="b3d.cta">Scan your health <span class="arrow">→</span></a>
+        </div>
+      </div>
+      <div class="body3d-stage reveal-r" aria-hidden="true">
+        <div class="body3d-glow"></div>
+        <!-- Horizontal-only orbit: phi pinned on both bounds so vertical drags
+             never tip the figure; touch-action pan-y lets vertical swipes
+             scroll the page through the model. -->
+        <model-viewer id="mv-body"
+          src="assets/models/body.glb"
+          alt="Holographic 3D body with glowing organs"
+          auto-rotate rotation-per-second="12deg"
+          camera-controls disable-zoom disable-pan
+          min-camera-orbit="-Infinity 75deg auto"
+          max-camera-orbit="Infinity 75deg auto"
+          touch-action="pan-y"
+          interaction-prompt="none"
+          exposure="0.65" shadow-intensity="0"
+          loading="lazy"></model-viewer>
+        <div class="b3d-chip c1"><span class="dot ok"></span> Heart · 92</div>
+        <div class="b3d-chip c2"><span class="dot warn"></span> Liver · 61</div>
+        <div class="b3d-chip c3"><span class="dot ok"></span> Thyroid · 95</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ VIDEO TESTIMONIAL (cream) ============ -->
+  <section class="s-cream">
+    <div class="wrap">
+      <div class="split tstm-split">
+        <div class="split-copy reveal-l">
+          <span class="eyebrow">Real stories</span>
+          <div class="tstm-meta">
+            <strong>Bilal Ahmed</strong>
+            <span>33 years &middot; Teacher, father of two</span>
+          </div>
+          <blockquote class="tstm-quote">"I used to file my lab reports away and just hope for the best. PulsingLabs explained every number in plain language and flagged my rising sugar before it became a problem. For the first time, I actually understand my own health, and my family's."</blockquote>
+        </div>
+        <div class="split-media reveal-r">
+          <div class="media photo tall no-reveal-clip">
+            <video class="media-vid" src="assets/img/personvid.mp4" autoplay muted loop playsinline preload="metadata"></video>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ SPOTLIGHT C, Family + import (cream) ============ -->
+  <section class="s-cream">
+    <div class="wrap">
+      <div class="split boxed">
+        <div class="split-copy reveal-l">
+          <span class="eyebrow" data-i18n="spC.eyebrow">Family &amp; history</span>
+          <h2 data-i18n="spC.h2">Your whole household, one account.</h2>
+          <p class="lead" data-i18n="spC.lead">Add parents, kids and your spouse, and bring in old reports from any lab by snapping a photo, so every result, past and present, lives on one timeline.</p>
+          <ul class="split-list">
+            <li data-i18n="spC.li1">Age-, sex- &amp; pregnancy-aware reference ranges</li>
+            <li data-i18n="spC.li2">OCR reads photos &amp; PDFs, you just confirm</li>
+            <li data-i18n="spC.li3">Imports join the same trend charts</li>
+          </ul>
+        </div>
+        <div class="split-media reveal-r">
+          <div class="media photo tall">
+            <img class="media-img" style="object-position:center 22%;" src="assets/img/family-tab.jpeg" alt="The Family tab in the PulsingLabs app, one relative under your care with results and health score" loading="lazy" />
+            <div class="badge-float bf-br"><span class="bf-ic" data-icon="file"></span><span><b>Imported</b><span>from City Lab</span></span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ HOME COLLECTION (light) ============ -->
+  <section class="s-cream">
+    <div class="wrap">
+      <div class="split flip boxed">
+        <div class="split-copy reveal-r">
+          <span class="eyebrow" data-i18n="hc.eyebrow">Home sample collection</span>
+          <h2 data-i18n="hc.h2">Prefer to skip the lab? We come to you.</h2>
+          <p class="lead" data-i18n="hc.lead">Book a home visit and a certified phlebotomist collects your sample at your door, at a time that suits you. Same accredited labs, same results in-app, zero travel.</p>
+          <ul class="split-list">
+            <li data-i18n="hc.li1">Choose "home collection" when you book</li>
+            <li data-i18n="hc.li2">Pick a slot, morning, afternoon or evening</li>
+            <li data-i18n="hc.li3">Results flow into the app like any other test</li>
+          </ul>
+          <div class="hero-cta">
+            <a class="btn btn-primary" href="#" data-cta="home-visit" data-magnetic data-i18n-html="hc.btn">Book a home visit <span class="arrow">→</span></a>
+          </div>
+        </div>
+        <div class="split-media reveal-l">
+          <div class="media photo tall">
+            <img class="media-img" src="assets/img/home1new.png" alt="A certified phlebotomist collecting a sample at a patient's home" loading="lazy" />
+            <div class="badge-float bf-tl"><span class="bf-ic" data-icon="home"></span><span><b>On the way</b><span>arriving 09:10</span></span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ BENTO — everything at a glance ============ -->
+  <section>
+    <div class="wrap section-box">
+      <div class="center reveal" style="max-width:740px;margin:0 auto;">
+        <span class="eyebrow" data-i18n="bento.eyebrow">One app</span>
+        <h2 data-i18n="bento.h2">Everything your health needs, in one place.</h2>
+      </div>
+      <div class="bento reveal">
+        <div class="b-tile feat b-a">
+          <span class="b-ic" data-icon="chat"></span>
+          <div><h3 data-i18n="bento.b1h">An AI that explains every result</h3><p data-i18n="bento.b1p">Chat about your numbers in plain English or اردو, and let it book your next test, right in the conversation.</p></div>
+        </div>
+        <div class="b-tile b-wide">
+          <span class="b-ic" data-icon="chart"></span>
+          <div><h3 data-i18n="bento.b2h">Clinical zone charts</h3><p data-i18n="bento.b2p">See exactly where you stand, tuned to your age &amp; sex.</p></div>
+        </div>
+        <div class="b-tile">
+          <span class="b-ic" data-icon="droplet"></span>
+          <div><h3 class="big-num">50+</h3><p data-i18n="bento.b3p">curated test packages</p></div>
+        </div>
+        <div class="b-tile">
+          <span class="b-ic" data-icon="home"></span>
+          <div><h3 data-i18n="bento.b4h">Home collection</h3><p data-i18n="bento.b4p">We come to you.</p></div>
+        </div>
+        <div class="b-tile b-wide">
+          <span class="b-ic" data-icon="users"></span>
+          <div><h3 data-i18n="bento.b5h">Your whole family</h3><p data-i18n="bento.b5p">Parents, kids &amp; spouse on one account, each with age-aware ranges.</p></div>
+        </div>
+        <div class="b-tile">
+          <span class="b-ic" data-icon="file"></span>
+          <div><h3 data-i18n="bento.b6h">Import any report</h3><p data-i18n="bento.b6p">Snap a photo, OCR does the rest.</p></div>
+        </div>
+        <div class="b-tile">
+          <span class="b-ic" data-icon="globe"></span>
+          <div><h3 data-i18n="bento.b7h">AI that speaks Urdu</h3><p data-i18n="bento.b7p">Ask your health questions in Urdu, too.</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ HOW IT WORKS (sticky stack) ============ -->
+  <section id="how">
+    <div class="wrap section-box">
+      <div class="center reveal" style="max-width:680px;margin:0 auto;">
+        <span class="eyebrow" data-i18n="how.eyebrow">How it works</span>
+        <h2 data-i18n="how.h2">Three steps to clarity</h2>
+      </div>
+      <div class="stack" style="margin-top:50px;">
+        <div class="stack-card"><div class="sc-num">1</div><div><h3 data-i18n="how.s1h">Choose a package</h3><p data-i18n="how.s1p">Browse 50+ curated blood-test packages, or scan an existing report to import it.</p></div></div>
+        <div class="stack-card"><div class="sc-num">2</div><div><h3 data-i18n="how.s2h">Pick lab &amp; time</h3><p data-i18n="how.s2p">Select a partner lab or home collection, then a slot that works for you.</p></div></div>
+        <div class="stack-card"><div class="sc-num">3</div><div><h3 data-i18n="how.s3h">Get results + insights</h3><p data-i18n="how.s3p">Results arrive in-app with charts, trends, and AI explanations you understand.</p></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ WHY IT MATTERS (light) ============ -->
+  <section class="s-cream sec-photo-bg">
+    <img class="sec-bg-img" src="assets/img/iceberghomenew.png" alt="" aria-hidden="true" loading="lazy" />
+    <div class="wrap center" style="max-width:760px;margin:0 auto;position:relative;z-index:2;">
+      <span class="eyebrow reveal" data-i18n="why.eyebrow">Why it matters</span>
+      <h2 class="reveal d1" data-i18n="why.h2">Most chronic illness is caught far too late.</h2>
+      <p class="lead reveal d2" style="margin:16px auto 0;" data-i18n="why.lead">Diabetes, high cholesterol and thyroid disorders develop silently for years. Early screening changes the outcome. PulsingLabs makes it effortless.</p>
+    </div>
+    <div class="wrap" style="position:relative;z-index:2;">
+      <div class="stat-cards">
+        <div class="stat reveal"><div class="n"><span data-count="1">0</span> in 4</div><div class="l" data-i18n="why.s1">adults live with a chronic condition, many undiagnosed*</div></div>
+        <div class="stat reveal d1"><div class="n"><span data-count="80" data-suffix="%">0</span></div><div class="l" data-i18n="why.s2">of early-stage conditions are manageable when caught in time*</div></div>
+        <div class="stat reveal d2"><div class="n"><span data-count="50" data-suffix="+" data-live="packages">0</span></div><div class="l" data-i18n="why.s3">curated blood-test packages to choose from</div></div>
+        <div class="stat reveal d3"><div class="n"><span data-count="7">0</span></div><div class="l" data-i18n="why.s4">organ systems scored in real time</div></div>
+      </div>
+      <p class="reveal center" style="margin-top:22px;font-size:13px;color:var(--muted);" data-i18n="stats.note">* Industry estimates, figures vary by region.</p>
+    </div>
+  </section>
+
+  <!-- ============ FOR BUSINESS (cream split) ============ -->
+  <section class="s-cream">
+    <div class="wrap section-box">
+      <div class="split wide-text">
+        <div class="split-copy reveal-l">
+          <span class="eyebrow" data-i18n="fb.eyebrow">For Business</span>
+          <h2 data-i18n="fb.h2">Healthier teams, lower absenteeism.</h2>
+          <p class="lead" data-i18n="fb.lead">Give employees preventive screening and wellness, with an HR dashboard that turns it into insight, without ever exposing individual medical data.</p>
+          <div class="hero-cta">
+            <a class="btn btn-primary" href="business.html" data-magnetic data-i18n-html="fb.btn1">See the business plan <span class="arrow">→</span></a>
+            <a class="btn btn-ghost" href="contact.html" data-i18n="fb.btn2">Book a demo</a>
+          </div>
+        </div>
+        <div class="split-media reveal-r">
+          <div class="grid-2" style="margin-top:0;gap:16px;">
+            <div class="card" data-tilt><div class="ficon" data-icon="pie"></div><h3 style="font-size:16px;" data-i18n="fb.c1h">Aggregate analytics</h3><p style="font-size:13.5px;" data-i18n="fb.c1p">Wellness trends, never individual records.</p></div>
+            <div class="card" data-tilt><div class="ficon" data-icon="bell"></div><h3 style="font-size:16px;" data-i18n="fb.c2h">Proactive alerts</h3><p style="font-size:13.5px;" data-i18n="fb.c2p">Know when the team needs attention.</p></div>
+            <div class="card" data-tilt><div class="ficon" data-icon="chat"></div><h3 style="font-size:16px;" data-i18n="fb.c3h">AI HR assistant</h3><p style="font-size:13.5px;" data-i18n="fb.c3p">Appointments &amp; roster answers.</p></div>
+            <div class="card" data-tilt><div class="ficon" data-icon="shield"></div><h3 style="font-size:16px;" data-i18n="fb.c4h">Privacy-first</h3><p style="font-size:13.5px;" data-i18n="fb.c4p">Results stay private to employees.</p></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ TESTIMONIALS (white) ============ -->
+  <section>
+    <div class="wrap section-box">
+      <div class="center reveal" style="max-width:680px;margin:0 auto;">
+        <span class="eyebrow" data-i18n="test.eyebrow">Loved by users</span>
+        <h2 data-i18n="test.h2">What people say</h2>
+      </div>
+      <!-- TODO: replace placeholder testimonials with real ones before launch -->
+      <div class="reveal-zoom">
+      <div class="tcarousel">
+        <div class="ttrack" id="ttrack">
+          <div class="tslide"><div class="tcard"><div class="stars">★★★★★</div><div class="quote" data-i18n="test.q1">"I finally understand my blood reports. The app tells me what's normal and what isn't, and I can track my parents' results too."</div><div class="who">Beta user, Lahore</div></div></div>
+          <div class="tslide"><div class="tcard"><div class="stars">★★★★★</div><div class="quote" data-i18n="test.q2">"Home collection plus instant explanations is a game-changer. I gave a sample at home and understood every number the same day."</div><div class="who">Beta user, Karachi</div></div></div>
+          <div class="tslide"><div class="tcard"><div class="stars">★★★★★</div><div class="quote" data-i18n="test.q3">"As an HR lead, the aggregate dashboard helped us spot trends early, without ever seeing anyone's private results."</div><div class="who">Pilot company, Islamabad</div></div></div>
+        </div>
+      </div>
+      <div class="tnav"><button id="tprev" aria-label="Previous">‹</button><div class="tdots" id="tdots"></div><button id="tnext" aria-label="Next">›</button></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ CINEMATIC SCENE (image expands on scroll) ============ -->
+  <section class="scene">
+    <div class="scene-sticky">
+      <div class="scene-frame">
+        <img class="scene-img" src="assets/img/family1new.png" alt="A family together" loading="lazy" />
+        <div class="scene-veil"></div>
+      </div>
+      <div class="scene-cap">
+        <span class="eyebrow" data-i18n="scene.eyebrow">Why PulsingLabs</span>
+        <h2 data-i18n="scene.h2">Clarity for the people you love.</h2>
+        <p data-i18n="scene.p">From your own numbers to your whole family's, every result explained, tracked, and within reach.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- The closing CTA lives in the mega footer now (same headline + Open the
+       App button), so the old teal band was removed as a duplicate. -->
+  <div id="site-footer"></div>
+  <script src="assets/app.js?v=77"></script>
+</body>
+</html>

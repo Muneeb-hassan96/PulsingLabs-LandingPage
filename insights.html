@@ -1,0 +1,95 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Insights · PulsingLabs</title>
+  <meta name="description" content="Plain-English guides to understanding your lab results and staying ahead of chronic illness." />
+  <link rel="preconnect" href="https://api.fontshare.com" crossorigin />
+  <link href="https://api.fontshare.com/v2/css?f[]=general-sans@400,500,600,700&display=swap" rel="stylesheet" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/style.css?v=82" />
+  <link rel="icon" type="image/png" href="assets/img/favicon.png" />
+</head>
+<body>
+  <div id="site-header"></div>
+
+  <!-- ============ PAGE HERO (cream) ============ -->
+  <section class="page-hero s-cream">
+    <div class="wrap page-enter">
+      <span class="eyebrow" data-i18n="pg.ins.eyebrow">Insights</span>
+      <h1 data-i18n-html="pg.ins.h1">Learn about<br><span class="grad-text">your health</span></h1>
+      <p class="lead" data-i18n="pg.ins.lead">Plain-English guides to understanding your lab results and staying ahead of chronic illness.</p>
+    </div>
+  </section>
+
+  <!-- ============ FEATURED + ARTICLES (white) ============ -->
+  <section>
+    <div class="wrap">
+      <!-- Featured -->
+      <a class="media photo tall no-reveal-clip" href="#" style="display:grid;align-items:end;text-decoration:none;padding:36px;">
+        <img class="media-img" src="assets/img/foodnew.png" alt="" aria-hidden="true" loading="lazy" />
+        <div style="position:relative;z-index:2;max-width:560px;">
+          <span class="eyebrow" style="color:var(--teal-l);" data-i18n="ins.feat.eye">Featured guide</span>
+          <h2 style="color:var(--on-dark);font-size:clamp(28px,4vw,46px);" data-i18n="ins.feat.h2">What your HbA1c really tells you</h2>
+          <p style="color:var(--on-dark-soft);font-size:17px;margin-top:12px;" data-i18n="ins.feat.p">The diabetes marker everyone talks about, what the numbers mean, and what to do at each level.</p>
+        </div>
+      </a>
+
+      <!-- TODO: link these to real blog posts once published -->
+      <div class="art-grid" style="margin-top:28px;">
+        <a class="art reveal" href="#">
+          <div class="thumb" data-icon="droplet"></div>
+          <div class="body"><div class="date" data-i18n="ins.dGuide">Guide</div><h3 data-i18n="ins.a1h">Cholesterol, decoded</h3><p data-i18n="ins.a1p">LDL, HDL, triglycerides, which numbers matter and how to move them in the right direction.</p></div>
+        </a>
+        <a class="art reveal d1" href="#">
+          <div class="thumb t2" data-icon="sparkle"></div>
+          <div class="body"><div class="date" data-i18n="ins.dGuide">Guide</div><h3 data-i18n="ins.a2h">Why Vitamin D matters</h3><p data-i18n="ins.a2p">Low Vitamin D is common and easy to miss. How to read your level and act on it.</p></div>
+        </a>
+        <a class="art reveal d2" href="#">
+          <div class="thumb t3" data-icon="heart"></div>
+          <div class="body"><div class="date" data-i18n="ins.dGuide">Guide</div><h3 data-i18n="ins.a3h">Understanding your thyroid (TSH)</h3><p data-i18n="ins.a3p">What TSH, T3 and T4 mean, and the signs worth a follow-up test.</p></div>
+        </a>
+        <a class="art reveal" href="#">
+          <div class="thumb t2" data-icon="chart"></div>
+          <div class="body"><div class="date" data-i18n="ins.dGuide">Guide</div><h3 data-i18n="ins.a4h">Reading a Complete Blood Count</h3><p data-i18n="ins.a4p">Haemoglobin, RBC, WBC and platelets, a calm walkthrough of the most common panel.</p></div>
+        </a>
+        <a class="art reveal d1" href="#">
+          <div class="thumb t3" data-icon="home"></div>
+          <div class="body"><div class="date" data-i18n="ins.dHowto">How-to</div><h3 data-i18n="ins.a5h">Preparing for a fasting blood test</h3><p data-i18n="ins.a5p">What "fasting" really means, how long, and what you can still do beforehand.</p></div>
+        </a>
+        <a class="art reveal d2" href="#">
+          <div class="thumb" data-icon="users"></div>
+          <div class="body"><div class="date" data-i18n="ins.dFamily">Family</div><h3 data-i18n="ins.a6h">Health checks by age</h3><p data-i18n="ins.a6p">Which screenings make sense in your 20s, 30s, 40s and beyond, for the whole family.</p></div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ NEWSLETTER (cream, matches the rest of the page) ============ -->
+  <section class="s-cream">
+    <div class="wrap center" style="max-width:640px;margin:0 auto;">
+      <span class="eyebrow reveal" data-i18n="ins.nl.eye">Stay in the loop</span>
+      <h2 class="reveal d1" data-i18n="ins.nl.h2">Get launch updates &amp; health tips</h2>
+      <p class="lead reveal d2" style="margin:12px auto 0;" data-i18n="ins.nl.p">Occasional emails about new features and understanding your health. No spam.</p>
+      <form data-newsletter class="reveal d2" style="margin:26px auto 0;max-width:480px;">
+        <!-- Honeypot: hidden from humans; bots that fill it are silently dropped server-side. -->
+        <div aria-hidden="true" style="position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden;">
+          <label>Leave this field empty<input type="text" name="website" tabindex="-1" autocomplete="off" /></label>
+        </div>
+        <div style="display:flex;gap:12px;">
+          <input id="nle" type="email" placeholder="you@email.com" required style="flex:1;padding:14px 16px;border:1px solid var(--line);border-radius:12px;background:#fff;color:var(--ink);font-family:inherit;font-size:15px;" />
+          <button type="submit" class="btn btn-primary" data-i18n="ins.nl.btn">Subscribe</button>
+        </div>
+        <div class="ok-msg" style="margin:14px auto 0;" data-i18n="ins.nl.ok">Thanks, you're on the list!</div>
+        <div class="err-msg" style="margin:14px auto 0;display:none;" data-i18n="ins.nl.err">Could not subscribe right now. Please try again later.</div>
+      </form>
+    </div>
+  </section>
+
+  <div id="site-footer"></div>
+  <script src="assets/app.js?v=77"></script>
+</body>
+</html>

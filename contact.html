@@ -1,0 +1,102 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contact &amp; Book a Demo · PulsingLabs</title>
+  <meta name="description" content="Talk to the PulsingLabs team, book a 15-minute corporate wellness demo, ask about partnerships, or get support." />
+  <link rel="preconnect" href="https://api.fontshare.com" crossorigin />
+  <link href="https://api.fontshare.com/v2/css?f[]=general-sans@400,500,600,700&display=swap" rel="stylesheet" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/style.css?v=82" />
+  <link rel="icon" type="image/png" href="assets/img/favicon.png" />
+</head>
+<body>
+  <div id="site-header"></div>
+
+  <!-- ============ PAGE HERO (dark futuristic) ============ -->
+  <section class="page-hero s-dark" style="padding-bottom:70px;">
+    <img class="ph-photo" src="assets/img/team2new.png" alt="" aria-hidden="true" loading="lazy" />
+    <div class="wrap page-enter">
+      <span class="eyebrow" data-i18n="pg.contact.eyebrow">Get in touch</span>
+      <h1 data-i18n-html="pg.contact.h1">Let's <span class="grad-text">talk</span></h1>
+      <p class="lead" data-i18n="pg.contact.lead">Book a demo, ask about partnerships, or just say hello. We usually reply within one business day.</p>
+    </div>
+  </section>
+
+  <!-- ============ CONTACT GRID (cream) ============ -->
+  <section class="s-cream">
+    <div class="wrap ct-grid">
+      <div class="reveal-l">
+        <span class="eyebrow" data-i18n="ct.ch.eye">Reach us directly</span>
+        <h2 style="font-size:clamp(26px,3.4vw,38px);" data-i18n="ct.ch.h2">Channels</h2>
+        <div style="display:grid;gap:16px;margin-top:24px;">
+          <a class="card" href="mailto:hello@pulsinglabs.pk" style="display:flex;gap:16px;align-items:center;padding:22px;">
+            <span class="ficon" style="margin:0;" data-icon="mail"></span>
+            <span><strong style="display:block;color:var(--ink-dark);" data-i18n="ct.ch1t">General &amp; support</strong><span style="color:var(--muted);font-size:14px;">hello@pulsinglabs.pk</span></span>
+          </a>
+          <a class="card" href="mailto:sales@pulsinglabs.pk" style="display:flex;gap:16px;align-items:center;padding:22px;">
+            <span class="ficon" style="margin:0;" data-icon="briefcase"></span>
+            <span><strong style="display:block;color:var(--ink-dark);" data-i18n="ct.ch2t">Corporate sales &amp; demos</strong><span style="color:var(--muted);font-size:14px;">sales@pulsinglabs.pk</span></span>
+          </a>
+          <a class="card" href="mailto:labs@pulsinglabs.pk" style="display:flex;gap:16px;align-items:center;padding:22px;">
+            <span class="ficon" style="margin:0;" data-icon="lab"></span>
+            <span><strong style="display:block;color:var(--ink-dark);" data-i18n="ct.ch3t">Labs &amp; clinic partnerships</strong><span style="color:var(--muted);font-size:14px;">labs@pulsinglabs.pk</span></span>
+          </a>
+        </div>
+        <p style="margin-top:22px;color:var(--muted);font-size:14px;" data-i18n="ct.madeIn">Made with care in Pakistan</p>
+        <!-- TODO: add phone, address, and social links once available -->
+      </div>
+
+      <div class="reveal-r">
+        <div class="form-card" style="margin:0;">
+          <h3 style="font-size:24px;margin-bottom:6px;" data-i18n="ct.form.h">Send us a message</h3>
+          <p style="color:var(--muted);font-size:14px;margin-bottom:22px;" data-i18n="ct.form.sub">Tell us a bit about what you need and we'll get back to you.</p>
+          <form data-lead>
+            <!-- Honeypot: hidden from humans; bots that fill it are silently dropped server-side. -->
+            <div aria-hidden="true" style="position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden;">
+              <label>Leave this field empty<input type="text" name="website" tabindex="-1" autocomplete="off" /></label>
+            </div>
+            <div class="form-row">
+              <div class="field"><label for="cn" data-i18n="ct.lbl.name">Full name</label><input id="cn" name="name" type="text" placeholder="Your name" data-i18n-ph="ct.ph.name" required /></div>
+              <div class="field"><label for="ce" data-i18n="ct.lbl.email">Email</label><input id="ce" name="email" type="email" placeholder="you@email.com" required /></div>
+            </div>
+            <div class="form-row">
+              <div class="field"><label for="cc" data-i18n="ct.lbl.company">Company (optional)</label><input id="cc" name="company" type="text" placeholder="Company name" data-i18n-ph="ct.ph.company" /></div>
+              <div class="field">
+                <label for="ct" data-i18n="ct.lbl.interest">I'm interested in</label>
+                <select id="ct" name="interest">
+                  <option data-i18n="ct.opt1">Booking a corporate demo</option>
+                  <option data-i18n="ct.opt2">Lab / clinic partnership</option>
+                  <option data-i18n="ct.opt3">General question</option>
+                  <option data-i18n="ct.opt4">Support</option>
+                </select>
+              </div>
+            </div>
+            <div class="field"><label for="cm" data-i18n="ct.lbl.msg">Message</label><textarea id="cm" name="message" placeholder="How can we help?" data-i18n-ph="ct.ph.msg"></textarea></div>
+            <button type="submit" class="btn btn-primary" style="width:100%;" data-magnetic data-i18n-html="ct.form.btn">Send message <span class="arrow">→</span></button>
+            <div class="ok-msg" data-i18n="ct.form.ok">Thanks, your message is on its way! We'll be in touch shortly.</div>
+            <div class="err-msg" data-i18n="ct.form.err">Something went wrong. Please email hello@pulsinglabs.pk.</div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ CTA ============ -->
+  <section>
+    <div class="wrap">
+      <div class="cta-band reveal-zoom">
+        <h2 data-i18n="ct.cta.h">Prefer to just try it?</h2>
+        <p data-i18n="ct.cta.p">Download PulsingLabs and start understanding your results in minutes, no demo needed.</p>
+        <a class="btn btn-light" href="#" data-cta="app" data-magnetic style="background:#fff;color:var(--teal-d);" data-i18n-html="ct.cta.btn">Get the app <span class="arrow">→</span></a>
+      </div>
+    </div>
+  </section>
+
+  <div id="site-footer"></div>
+  <script src="assets/app.js?v=77"></script>
+</body>
+</html>
