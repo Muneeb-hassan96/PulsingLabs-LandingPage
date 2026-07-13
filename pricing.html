@@ -10,7 +10,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="assets/style.css?v=82" />
+  <link rel="stylesheet" href="assets/style.css?v=83" />
   <link rel="icon" type="image/png" href="assets/img/favicon.png" />
 </head>
 <body>
@@ -18,7 +18,7 @@
 
   <!-- ============ PAGE HERO (dark futuristic) ============ -->
   <section class="page-hero s-dark">
-    <img class="ph-photo" src="assets/img/vials.jpg" alt="" aria-hidden="true" loading="lazy" />
+    <img class="ph-photo" src="assets/img/vials.jpg" alt="" aria-hidden="true" loading="eager" fetchpriority="high" decoding="async" />
     <div class="wrap page-enter">
       <span class="eyebrow" data-i18n="pg.price.eyebrow">Pricing</span>
       <h1 data-i18n-html="pg.price.h1">Simple, <span class="grad-text">transparent</span> pricing</h1>
@@ -110,6 +110,6 @@
   </section>
 
   <div id="site-footer"></div>
-  <script src="assets/app.js?v=77"></script>
+  <script src="assets/app.js?v=78"></script>
 </body>
 </html>

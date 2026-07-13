@@ -1149,9 +1149,41 @@
     // there's no unpinnable dynamic-import supply-chain surface.
     // NOTE: import() here resolves relative to THIS SCRIPT's URL (/assets/),
     // not the page. './assets/vendor/...' 404'd and silently killed the helix.
-    import('./vendor/three.module.js')
-      .then(function (THREE) { buildHelix(THREE, hero); })
-      .catch(function () { /* offline / blocked → the 2D particle field stays */ });
+    // PERF: the helix is a decorative layer over the 2D particle field, so the
+    // 1.2MB engine must never compete with first paint — wait for the full
+    // page load, then a browser-idle moment, before fetching it.
+    var start = function () {
+      import('./vendor/three.module.js')
+        .then(function (THREE) { buildHelix(THREE, hero); })
+        .catch(function () { /* offline / blocked → the 2D particle field stays */ });
+    };
+    var whenIdle = function () {
+      if ('requestIdleCallback' in window) requestIdleCallback(start, { timeout: 2500 });
+      else setTimeout(start, 1200);
+    };
+    if (document.readyState === 'complete') whenIdle();
+    else window.addEventListener('load', whenIdle, { once: true });
+  }
+  /* model-viewer (~1MB module) powers the holographic body band far below
+     the fold — inject it only when the band approaches the viewport. The
+     stage has a fixed CSS height, so the late upgrade causes no layout
+     shift; the <model-viewer> GLB itself stays loading="lazy". */
+  function bindModelViewerLoader() {
+    var mv = document.querySelector('model-viewer');
+    if (!mv) return;
+    var injected = false;
+    var inject = function () {
+      if (injected) return; injected = true;
+      var s = document.createElement('script');
+      s.type = 'module';
+      s.src = 'assets/vendor/model-viewer.min.js?v=1';
+      document.head.appendChild(s);
+    };
+    if (!('IntersectionObserver' in window)) { inject(); return; }
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) { if (e.isIntersecting) { inject(); io.disconnect(); } });
+    }, { rootMargin: '900px 0px' });
+    io.observe(mv);
   }
   function buildHelix(THREE, hero) {
     var canvas = document.createElement('canvas');
@@ -1482,9 +1514,11 @@
     bindClipReveal();
     bindSpotlight();
     bindLenis();
-    bindCursor();
+    // bindCursor() intentionally not called: keep the normal system pointer,
+    // no custom dot/ring cursor.
     bindParticles();
     bind3D();
+    bindModelViewerLoader();
     bindBodyOrbit();
     bindKinetic();
     bindStack();
