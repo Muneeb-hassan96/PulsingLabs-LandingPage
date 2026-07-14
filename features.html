@@ -12,6 +12,9 @@
   <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="assets/style.css?v=84" />
   <link rel="icon" type="image/png" href="assets/img/favicon.png" />
+  <!-- Warm the last spotlight image during idle so it is ready before the
+       user scrolls to it, without competing with the hero (low priority). -->
+  <link rel="preload" as="image" href="assets/img/family1new.webp" fetchpriority="low" />
 </head>
 <body>
   <div id="site-header"></div>
@@ -124,7 +127,7 @@
         </div>
         <div class="split-media reveal-l">
           <div class="media photo tall">
-            <img class="media-img" src="assets/img/family1new.webp" alt="A parent and child outdoors, the whole household on one timeline" loading="lazy" />
+            <img class="media-img" src="assets/img/family1new.webp" alt="A parent and child outdoors, the whole household on one timeline" loading="lazy" decoding="async" />
             <div class="badge-float bf-br"><span class="bf-ic" data-icon="file"></span><span><b>Imported</b><span>from City Lab</span></span></div>
           </div>
         </div>

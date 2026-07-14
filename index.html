@@ -114,7 +114,7 @@
         </div>
         <div class="split-media reveal-r">
           <div class="media photo tall">
-            <img class="media-img" src="assets/img/result.jpeg" alt="The PulsingLabs results screen showing a Hematocrit trend on a clinical zone chart" loading="lazy" />
+            <img class="media-img" src="assets/img/result.jpeg" alt="The PulsingLabs results screen showing a Hematocrit trend on a clinical zone chart" loading="eager" fetchpriority="high" decoding="async" />
             <div class="badge-float bf-br"><span class="bf-ic" data-icon="chart"></span><span><b>Hematocrit</b><span>within range</span></span></div>
           </div>
         </div>
@@ -212,7 +212,7 @@
              never tip the figure; touch-action pan-y lets vertical swipes
              scroll the page through the model. -->
         <model-viewer id="mv-body"
-          src="assets/models/body.glb"
+          src="assets/models/body.glb?v=2"
           alt="Holographic 3D body with glowing organs"
           auto-rotate rotation-per-second="12deg"
           camera-controls disable-zoom disable-pan
