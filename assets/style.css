@@ -318,10 +318,8 @@ body.mega-open .mega-backdrop { opacity: 1; visibility: visible; pointer-events:
   position: fixed; inset: 0; z-index: 9999; background: var(--grad-teal);
   display: grid; place-items: center; transform: translateY(100%); pointer-events: none;
 }
-/* Same lockup as the header .logo (Quicksand 400, mark:text 2:1, gap 10px),
-   scaled x1.5 for the full-screen moment. */
-.page-curtain .pc-logo { display:flex; align-items:center; gap:15px; color:#fff; font-family: 'Quicksand', 'General Sans', sans-serif; font-weight:400; font-size:42px; letter-spacing:-.01em; opacity:0; transform: translateY(10px); }
-.page-curtain .pc-logo .logo-mark { width: 84px; height: 84px; object-fit: contain; }
+.page-curtain .pc-logo { display:flex; align-items:center; gap:14px; color:#fff; font-family: 'Quicksand', 'General Sans', sans-serif; font-weight:700; font-size:32px; opacity:0; transform: translateY(10px); }
+.page-curtain .pc-logo .logo-mark { width: 42px; height: 42px; object-fit: contain; }
 .page-curtain.cover { transform: translateY(0); transition: transform .55s var(--ease-curtain); }
 .page-curtain.cover .pc-logo { opacity:1; transform: translateY(0); transition: opacity .4s .15s, transform .4s .15s; }
 .page-curtain.reveal { transform: translateY(-100%); transition: transform .6s var(--ease-curtain); }
@@ -867,11 +865,26 @@ html.anim .media.photo.no-reveal-clip { clip-path: none; }
   .stack-card { grid-template-columns: 1fr; gap: 16px; min-height: 0; }
 }
 
+/* --- Image entrance: photos fade in when their bytes arrive (bindImgFade
+   adds html.imgfade + per-img .ld on load). OPACITY ONLY — never put
+   transform/transition:all on .media-img (parallax history: JS owns transform).
+   Without JS the imgfade class never lands, so images show normally. --- */
+html.imgfade img.media-img,
+html.imgfade img.scene-img,
+html.imgfade img.sec-bg-img { opacity: 0; transition: opacity .6s ease; }
+html.imgfade img.media-img.ld,
+html.imgfade img.scene-img.ld,
+html.imgfade img.sec-bg-img.ld { opacity: 1; }
+
 /* --- Cinematic scene band (static image, no scroll-driven expansion) --- */
 /* Cream base + bottom padding = a real gap below the photo. The cream fill
    covers the fixed dark page-theme layer so the gap can't turn navy. */
 .scene { position: relative; height: auto; padding: 0 0 180px; background: var(--cream); }
-.scene .scene-sticky { position: static; height: 58vh; overflow: hidden; display: grid; place-items: center; }
+/* MUST be positioned: .scene-frame is absolute inset:0 and resolves against the
+   nearest positioned ancestor. When this was static, the frame anchored to
+   .scene itself, so the photo stretched down THROUGH the 180px cream gap and
+   the footer's rounded corners sat directly on the image (mobile bug report). */
+.scene .scene-sticky { position: relative; height: 58vh; overflow: hidden; display: grid; place-items: center; }
 .scene .scene-frame { position: absolute; inset: 0; overflow: hidden; clip-path: none; }
 .scene .scene-img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center 32%; transform: none; }
 /* Veil: readable text up top, self-contained dark band (no bleed into footer). */
@@ -1428,6 +1441,8 @@ footer.site.mf .mf-bottom a { display: inline; color: rgba(255,255,255,.62); mar
 footer.site.mf .mf-bottom a:hover { color: var(--teal-l); padding-left: 0; }
 @media (max-width: 900px) {
   footer.site.mf { border-radius: 26px 26px 0 0; padding: 90px 0 30px; }
+  /* tighter photo→footer rhythm on phones (180px reads as a hole) */
+  .scene { padding-bottom: 96px; }
   .mf-cards { grid-template-columns: 1fr; }
   .mf-menu { grid-column: 1; grid-row: auto; text-align: left; }
   .mf-links { align-items: flex-start; }

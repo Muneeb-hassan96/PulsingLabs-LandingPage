@@ -10,18 +10,15 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="assets/style.css?v=84" />
+  <link rel="stylesheet" href="assets/style.css?v=83" />
   <link rel="icon" type="image/png" href="assets/img/favicon.png" />
-  <!-- Warm the last spotlight image during idle so it is ready before the
-       user scrolls to it, without competing with the hero (low priority). -->
-  <link rel="preload" as="image" href="assets/img/family1new.webp" fetchpriority="low" />
 </head>
 <body>
   <div id="site-header"></div>
 
   <!-- ============ PAGE HERO (dark, futuristic) ============ -->
   <section class="page-hero s-dark">
-    <img class="ph-photo" src="assets/img/result.jpeg" alt="" aria-hidden="true" loading="eager" fetchpriority="high" decoding="async" />
+    <img class="ph-photo" src="assets/img/result.jpeg" alt="" aria-hidden="true" loading="lazy" />
     <div class="wrap page-enter">
       <span class="eyebrow" data-i18n="pg.feat.eyebrow">Features</span>
       <h1 data-i18n-html="pg.feat.h1">Everything you need to<br><span class="grad-text">own your health</span></h1>
@@ -127,7 +124,7 @@
         </div>
         <div class="split-media reveal-l">
           <div class="media photo tall">
-            <img class="media-img" src="assets/img/family1new.webp" alt="A parent and child outdoors, the whole household on one timeline" loading="lazy" decoding="async" />
+            <img class="media-img" src="assets/img/family1new.jpg" alt="A parent and child outdoors, the whole household on one timeline" loading="lazy" />
             <div class="badge-float bf-br"><span class="bf-ic" data-icon="file"></span><span><b>Imported</b><span>from City Lab</span></span></div>
           </div>
         </div>
@@ -186,6 +183,6 @@
   </section>
 
   <div id="site-footer"></div>
-  <script src="assets/app.js?v=80"></script>
+  <script src="assets/app.js?v=78"></script>
 </body>
 </html>

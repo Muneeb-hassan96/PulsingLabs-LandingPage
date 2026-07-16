@@ -120,8 +120,8 @@
         blurb: 'Book a demo, ask about partnerships, or just say hello.',
         items: [
           { href: 'contact.html',               icon: 'calendar',  title: 'Book a demo',       desc: '15-minute walkthrough' },
-          { href: 'mailto:contact@pulsinglabs.com',  icon: 'mail',      title: 'General & support', desc: 'contact@pulsinglabs.com' },
-          { href: 'mailto:contact@pulsinglabs.com',  icon: 'briefcase', title: 'Corporate sales',   desc: 'Demos & partnerships' },
+          { href: 'mailto:hello@pulsinglabs.pk',  icon: 'mail',      title: 'General & support', desc: 'hello@pulsinglabs.pk' },
+          { href: 'mailto:sales@pulsinglabs.pk',  icon: 'briefcase', title: 'Corporate sales',   desc: 'Demos & partnerships' },
           { href: 'contact.html',               icon: 'chat',      title: 'Send a message',    desc: 'Use the contact form' }
         ] } }
   ];
@@ -151,7 +151,7 @@
       'mm.5.b': 'Our mission: make your health make sense, for everyone.',
       'mm.5.0t': 'About us', 'mm.5.0d': 'Our mission & story', 'mm.5.1t': 'The PulsingLabs App', 'mm.5.1d': 'Everything it does', 'mm.5.2t': 'For Business', 'mm.5.2d': 'Corporate wellness', 'mm.5.3t': 'FAQ', 'mm.5.3d': 'Common questions', 'mm.5.4t': 'Contact', 'mm.5.4d': 'Talk to us',
       'mm.6.b': 'Book a demo, ask about partnerships, or just say hello.',
-      'mm.6.0t': 'Book a demo', 'mm.6.0d': '15-minute walkthrough', 'mm.6.1t': 'General & support', 'mm.6.1d': 'contact@pulsinglabs.com', 'mm.6.2t': 'Corporate sales', 'mm.6.2d': 'Demos & partnerships', 'mm.6.3t': 'Send a message', 'mm.6.3d': 'Use the contact form',
+      'mm.6.0t': 'Book a demo', 'mm.6.0d': '15-minute walkthrough', 'mm.6.1t': 'General & support', 'mm.6.1d': 'hello@pulsinglabs.pk', 'mm.6.2t': 'Corporate sales', 'mm.6.2d': 'Demos & partnerships', 'mm.6.3t': 'Send a message', 'mm.6.3d': 'Use the contact form',
       'foot.product': 'Product', 'foot.business': 'Business', 'foot.company': 'Company',
       'foot.tagline': "Book lab tests, understand your results, and track your family's health, all in one app.",
       'foot.rights': 'All rights reserved.', 'foot.made': 'Made with care in Pakistan',
@@ -286,7 +286,7 @@
       'pr.q3': 'What counts as an "active employee"?', 'pr.a3': 'Any approved employee account that logged at least one activity, an appointment booked or a result viewed, in the billing month.',
       'pr.q4': 'Is my health data private from my employer?', 'pr.a4': 'Always. Corporate dashboards show only anonymised, aggregate statistics. Employers never see individual test values or personal health records.',
       'pr.q5': 'Can I cancel anytime?', 'pr.a5': 'Yes. Cancel from your account settings and access continues to the end of the current billing period. No lock-in.',
-      'pr.q6': 'Do you offer non-profit or academic discounts?', 'pr.a6': 'Yes, email <a href="mailto:contact@pulsinglabs.com" style="color:var(--teal-d);font-weight:700;">contact@pulsinglabs.com</a> and we will sort out special pricing.',
+      'pr.q6': 'Do you offer non-profit or academic discounts?', 'pr.a6': 'Yes, email <a href="mailto:hello@pulsinglabs.pk" style="color:var(--teal-d);font-weight:700;">hello@pulsinglabs.pk</a> and we will sort out special pricing.',
       'pr.cta.h': 'Start free today', 'pr.cta.p': 'Individuals start instantly. Businesses get a 30-day trial, no card required.', 'pr.cta.b1': 'Get the app', 'pr.cta.b2': 'Talk to sales',
       'biz.heroB1': 'Book a demo <span class="arrow">→</span>', 'biz.heroB2': 'See pricing',
       'biz.stats.eye': 'The cost of poor health', 'biz.stats.h2': 'Ill health is expensive, and largely preventable.', 'biz.stats.lead': 'Sick days, lost productivity and late diagnoses quietly drain your business. Preventive screening is one of the highest-ROI benefits you can offer.',
@@ -340,7 +340,7 @@
       'ct.lbl.name': 'Full name', 'ct.lbl.email': 'Email', 'ct.lbl.company': 'Company (optional)', 'ct.lbl.interest': 'I am interested in', 'ct.lbl.msg': 'Message',
       'ct.ph.name': 'Your name', 'ct.ph.company': 'Company name', 'ct.ph.msg': 'How can we help?',
       'ct.opt1': 'Booking a corporate demo', 'ct.opt2': 'Lab / clinic partnership', 'ct.opt3': 'General question', 'ct.opt4': 'Support',
-      'ct.form.btn': 'Send message <span class="arrow">→</span>', 'ct.form.ok': 'Thanks, your message is on its way! We will be in touch shortly.', 'ct.form.err': 'Something went wrong. Please email contact@pulsinglabs.com.',
+      'ct.form.btn': 'Send message <span class="arrow">→</span>', 'ct.form.ok': 'Thanks, your message is on its way! We will be in touch shortly.', 'ct.form.err': 'Something went wrong. Please email hello@pulsinglabs.pk.',
       'ct.cta.h': 'Prefer to just try it?', 'ct.cta.p': 'Download PulsingLabs and start understanding your results in minutes, no demo needed.', 'ct.cta.btn': 'Get the app <span class="arrow">→</span>'
     }
   };
@@ -449,7 +449,7 @@
         '</div>' +
         '<div class="foot-bottom mf-bottom">' +
           '<span class="mf-logo">' + LOGO_SVG + ' PulsingLabs</span>' +
-          '<span>© <span id="yr"></span> PulsingLabs · <a href="privacy.html" data-i18n="foot.privacy">Privacy</a> · <a href="faq.html" data-i18n="foot.faq">FAQ</a> · <a href="mailto:muneeb@pulsinglabs.com" data-i18n="foot.labs">Labs &amp; clinics</a></span>' +
+          '<span>© <span id="yr"></span> PulsingLabs · <a href="privacy.html" data-i18n="foot.privacy">Privacy</a> · <a href="faq.html" data-i18n="foot.faq">FAQ</a> · <a href="mailto:labs@pulsinglabs.pk" data-i18n="foot.labs">Labs &amp; clinics</a></span>' +
           '<span data-i18n="foot.made">Made with care in Pakistan</span>' +
         '</div>' +
       '</div></footer>';
@@ -901,6 +901,27 @@
   }
 
   /* Clip-path wipe reveal on photographic media panels */
+  function bindImgFade() {
+    // Photos fade in the moment their bytes finish arriving, instead of
+    // painting scanline-by-scanline on slow connections (owner bug report:
+    // result.jpeg visibly streamed top-to-bottom on first load). Opacity
+    // only, gated behind html.imgfade so no-JS/reduced-motion users simply
+    // see images normally. Runs on ALL devices including touch.
+    if (reducedMotion()) return;
+    var imgs = document.querySelectorAll('img.media-img, img.scene-img, img.sec-bg-img');
+    if (!imgs.length) return;
+    document.documentElement.classList.add('imgfade');
+    imgs.forEach(function (img) {
+      var done = function () { img.classList.add('ld'); };
+      if (img.complete && img.naturalWidth > 0) { done(); return; }
+      img.addEventListener('load', done);
+      img.addEventListener('error', done); // never leave a broken img invisible
+    });
+    // Safety net: whatever happens (cache oddities, decode stalls), nothing
+    // stays invisible for more than 3s.
+    setTimeout(function () { imgs.forEach(function (i) { i.classList.add('ld'); }); }, 3000);
+  }
+
   function bindClipReveal() {
     // Touch devices skip the wipe entirely (html.anim never added, so photos
     // are simply visible): a missed IntersectionObserver tick during a fast
@@ -1149,41 +1170,9 @@
     // there's no unpinnable dynamic-import supply-chain surface.
     // NOTE: import() here resolves relative to THIS SCRIPT's URL (/assets/),
     // not the page. './assets/vendor/...' 404'd and silently killed the helix.
-    // PERF: the helix is a decorative layer over the 2D particle field, so the
-    // 1.2MB engine must never compete with first paint — wait for the full
-    // page load, then a browser-idle moment, before fetching it.
-    var start = function () {
-      import('./vendor/three.module.js')
-        .then(function (THREE) { buildHelix(THREE, hero); })
-        .catch(function () { /* offline / blocked → the 2D particle field stays */ });
-    };
-    var whenIdle = function () {
-      if ('requestIdleCallback' in window) requestIdleCallback(start, { timeout: 2500 });
-      else setTimeout(start, 1200);
-    };
-    if (document.readyState === 'complete') whenIdle();
-    else window.addEventListener('load', whenIdle, { once: true });
-  }
-  /* model-viewer (~1MB module) powers the holographic body band far below
-     the fold — inject it only when the band approaches the viewport. The
-     stage has a fixed CSS height, so the late upgrade causes no layout
-     shift; the <model-viewer> GLB itself stays loading="lazy". */
-  function bindModelViewerLoader() {
-    var mv = document.querySelector('model-viewer');
-    if (!mv) return;
-    var injected = false;
-    var inject = function () {
-      if (injected) return; injected = true;
-      var s = document.createElement('script');
-      s.type = 'module';
-      s.src = 'assets/vendor/model-viewer.min.js?v=1';
-      document.head.appendChild(s);
-    };
-    if (!('IntersectionObserver' in window)) { inject(); return; }
-    var io = new IntersectionObserver(function (entries) {
-      entries.forEach(function (e) { if (e.isIntersecting) { inject(); io.disconnect(); } });
-    }, { rootMargin: '900px 0px' });
-    io.observe(mv);
+    import('./vendor/three.module.js')
+      .then(function (THREE) { buildHelix(THREE, hero); })
+      .catch(function () { /* offline / blocked → the 2D particle field stays */ });
   }
   function buildHelix(THREE, hero) {
     var canvas = document.createElement('canvas');
@@ -1436,7 +1425,7 @@
             f.querySelectorAll('input, textarea').forEach(function (i) { if (i.type !== 'submit') i.value = ''; });
           })
           .catch(function () {
-            if (err) { err.textContent = 'Could not reach our server. Please email contact@pulsinglabs.com.'; err.style.display = 'block'; }
+            if (err) { err.textContent = 'Could not reach our server. Please email hello@pulsinglabs.pk.'; err.style.display = 'block'; }
           })
           .then(function () { if (btn) { btn.disabled = false; btn.innerHTML = label; } });
       });
@@ -1511,14 +1500,13 @@
     splitHeadlines();
     // bindParallax() and bindScene() intentionally not called: photos on the
     // site must stay static, not drift/expand on scroll.
+    bindImgFade();
     bindClipReveal();
     bindSpotlight();
     bindLenis();
-    // bindCursor() intentionally not called: keep the normal system pointer,
-    // no custom dot/ring cursor.
+    bindCursor();
     bindParticles();
     bind3D();
-    bindModelViewerLoader();
     bindBodyOrbit();
     bindKinetic();
     bindStack();
