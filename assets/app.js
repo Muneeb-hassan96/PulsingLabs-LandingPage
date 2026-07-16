@@ -552,6 +552,12 @@
     var backdrop = document.getElementById('navBackdrop');
     var bar = document.querySelector('.scroll-bar');
 
+    // Auto-hide header: slides up on scroll-down, reappears on scroll-up.
+    // Skipped entirely under reduced-motion (header just stays put).
+    var hideEnabled = !reducedMotion();
+    var lastY = window.scrollY || document.documentElement.scrollTop;
+    var REVEAL_TOP = 80; // always visible near the top, no flicker on load
+
     function onScroll() {
       var y = window.scrollY || document.documentElement.scrollTop;
       if (nav) nav.classList.toggle('scrolled', y > 12);
@@ -559,6 +565,18 @@
         var h = document.documentElement.scrollHeight - window.innerHeight;
         bar.style.width = (h > 0 ? (y / h) * 100 : 0) + '%';
       }
+      if (hideEnabled && nav) {
+        // never hide while the mobile drawer or a mega dropdown is in use
+        var menuOpen = (links && links.classList.contains('open')) ||
+                       document.body.classList.contains('mega-open') ||
+                       nav.querySelector('.has-mega.open');
+        if (y <= REVEAL_TOP || y < lastY || menuOpen) {
+          nav.classList.remove('nav-hidden');
+        } else if (y > lastY) {
+          nav.classList.add('nav-hidden');
+        }
+      }
+      lastY = y;
     }
     window.addEventListener('scroll', onScroll, { passive: true });
     onScroll();

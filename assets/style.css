@@ -231,14 +231,17 @@ html.theme-dark section:not(.s-dark) .split.boxed .split-copy .split-list li::be
 /* ---------- Nav (injected) ---------- */
 .nav {
   position: fixed; top: 0; left: 0; right: 0; z-index: 200;
-  transition: background .3s, box-shadow .3s, padding .3s;
+  transition: background .3s, box-shadow .3s, padding .3s, transform .35s var(--ease);
   padding: 14px 0;
 }
 .nav.scrolled {
   background: rgba(var(--pg-bg),.82); backdrop-filter: saturate(180%) blur(16px);
   box-shadow: 0 1px 0 rgba(0,0,0,.05); padding: 8px 0;
-  transition: background-color var(--theme-ms) var(--ease), padding .3s;
+  transition: background-color var(--theme-ms) var(--ease), padding .3s, transform .35s var(--ease);
 }
+/* Auto-hide on scroll down, reveal on scroll up (bindNav's onScroll).
+   Kept OFF the drawer state and near-top region in JS, not here. */
+.nav.nav-hidden { transform: translateY(-100%); }
 .nav-inner { display: flex; align-items: center; justify-content: space-between; }
 .logo { display: flex; align-items: center; gap: 10px; font-family: 'Quicksand', 'General Sans', sans-serif; font-weight: 400; font-size: 28px; color: rgb(var(--pg-fg)); letter-spacing:-.01em; transition: color var(--theme-ms) var(--ease); }
 /* Brand mark is the bare colourful DNA helix (transparent, no tile) — big and
