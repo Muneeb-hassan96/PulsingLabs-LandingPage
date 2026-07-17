@@ -655,19 +655,48 @@
   /* Scroll reveal (IntersectionObserver)                               */
   /* ------------------------------------------------------------------ */
   function bindReveal() {
-    var els = document.querySelectorAll('.reveal, .reveal-l, .reveal-r, .reveal-zoom');
+    var els = [].slice.call(document.querySelectorAll('.reveal, .reveal-l, .reveal-r, .reveal-zoom'));
+    if (!els.length) return;
     if (!('IntersectionObserver' in window)) { els.forEach(function (el) { el.classList.add('in'); }); return; }
-    // Pre-trigger well below the fold so content is already revealed by the time
-    // the user scrolls to it (fixes the "waiting for content to appear" lag).
-    // Touch scrolling flings much faster than wheel: pre-reveal further below
-    // the fold so content never appears "missing" mid-fling.
-    var pre = window.matchMedia('(hover: none)').matches ? '48%' : '22%';
+
+    // How far below the fold to pre-reveal (fraction of a viewport). Touch flings
+    // fast AND iOS Safari DEFERS IntersectionObserver callbacks during momentum
+    // scrolling — that was the "text appears late on the stacked cards, dark one
+    // takes forever" bug. So on touch we pre-reveal ~a full screen early.
+    var touch = window.matchMedia('(hover: none)').matches;
+    var pre = touch ? 0.9 : 0.22;
+
+    // Primary path: IntersectionObserver (efficient, smooth staggered reveals).
     var io = new IntersectionObserver(function (entries) {
       entries.forEach(function (en) {
-        if (en.isIntersecting) { en.target.classList.add('in'); io.unobserve(en.target); }
+        if (en.isIntersecting) { en.target.classList.add('in'); en.target.__shown = true; io.unobserve(en.target); }
       });
-    }, { threshold: 0, rootMargin: '0px 0px ' + pre + ' 0px' });
+    }, { threshold: 0, rootMargin: '0px 0px ' + Math.round(pre * 100) + '% 0px' });
     els.forEach(function (el) { io.observe(el); });
+
+    // Safety net: getBoundingClientRect stays accurate even when iOS defers the
+    // observer, so a scroll-driven sweep reveals on time regardless. rAF-throttled.
+    function sweep() {
+      var vh = window.innerHeight;
+      for (var i = 0; i < els.length; i++) {
+        var el = els[i];
+        if (el.__shown) continue;
+        var r = el.getBoundingClientRect();
+        if (r.top < vh * (1 + pre) && r.bottom > 0) {
+          el.classList.add('in'); el.__shown = true; io.unobserve(el);
+        }
+      }
+    }
+    var ticking = false;
+    function onScroll() {
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(function () { ticking = false; sweep(); });
+    }
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onScroll, { passive: true });
+    sweep();
+    setTimeout(sweep, 400); // catch late layout (fonts/images) settling
   }
 
   /* ------------------------------------------------------------------ */
@@ -739,7 +768,12 @@
     var fx = document.createElement('div'); fx.id = 'bgfx'; document.body.appendChild(fx);
 
     var root = document.documentElement;
-    var darkEls = document.querySelectorAll('.s-dark, .dark');
+    // Stacked spotlight cards are excluded (owner: "the card in that color is
+    // enough") — a dark .stack-card styles ITSELF dark via CSS and must not
+    // drag the whole page through the theme crossfade. Driving 3 root vars
+    // every scroll frame while a sticky card crawls past centre forced a
+    // full-page style recalc per frame = the features-page lag.
+    var darkEls = document.querySelectorAll('.s-dark:not(.stack-card), .dark:not(.stack-card)');
     if (!darkEls.length) return;
 
     // SCROLL-PROGRESSIVE crossfade (owner request — no hard flip): the page
@@ -1402,7 +1436,10 @@
         var p = 1 - (nt - TOP) / Math.max(window.innerHeight - TOP, 1);
         p = Math.max(0, Math.min(1, p));
         cards[i].style.transform = p > 0 ? 'scale(' + (1 - p * 0.05).toFixed(4) + ')' : '';
-        cards[i].style.filter = p > 0 ? 'brightness(' + (1 - p * 0.16).toFixed(3) + ')' : '';
+        // Dim via a ::after overlay opacity (--peel, compositor-only) instead of
+        // filter:brightness() — filtering a full-width sticky section repainted
+        // it every scroll frame and was a big part of the stack-scroll jank.
+        cards[i].style.setProperty('--peel', p > 0 ? (p * 0.55).toFixed(3) : '0');
       }
     }
     window.addEventListener('scroll', function () {
