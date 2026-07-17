@@ -55,7 +55,10 @@ html.theme-dark {
 .btn:focus-visible, .card:focus-visible { outline-offset: 2px; }
 /* Anchor targets land clear of the fixed header instead of underneath it. */
 [id] { scroll-margin-top: 96px; }
-html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; background: #fff; }
+html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; background: #fff; overflow-x: hidden; }
+/* Long headline words must be able to break rather than force the page wider
+   than the phone screen (the mobile hero-overflow fix). */
+h1, h2, .display { overflow-wrap: break-word; }
 body {
   font-family: 'General Sans', 'Hanken Grotesk', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   color: var(--ink);
@@ -395,7 +398,12 @@ body.loaded .hero .page-enter > .hero-cta ~ * { transition-delay: 1.5s; }
 .hero { padding: 150px 0 110px; position: relative; overflow: hidden; background: transparent; }
 .hero::before { content:""; position:absolute; inset:0; background: var(--grad-mesh); z-index:0; }
 .hero .wrap { position: relative; z-index: 2; }
-.hero-grid { display: grid; grid-template-columns: 1.05fr .95fr; gap: 56px; align-items: center; }
+.hero-grid { display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(0, .95fr); gap: 56px; align-items: center; }
+/* minmax(0,…) + min-width:0 lets tracks/children shrink below their content's
+   intrinsic width. Without this, the default 1fr (=minmax(auto,1fr)) refuses to
+   shrink past the phone-card / split-headline min-content, so on a phone the
+   hero column stayed wider than the screen and text/CTA clipped off the right. */
+.hero-grid > * { min-width: 0; }
 .hero h1 .hl { background: var(--grad-teal); -webkit-background-clip:text; background-clip:text; color: transparent; }
 .hero p.lead { margin-top: 22px; }
 .hero-cta { margin-top: 34px; display: flex; gap: 14px; flex-wrap: wrap; }
@@ -411,7 +419,7 @@ body.loaded .hero .page-enter > .hero-cta ~ * { transition-delay: 1.5s; }
 /* phone mock card */
 .phone-card {
   background: rgba(255,255,255,.92); backdrop-filter: blur(8px); border: 1px solid var(--line);
-  border-radius: var(--radius-lg); box-shadow: var(--shadow); padding: 24px; max-width: 380px; margin-left: auto;
+  border-radius: var(--radius-lg); box-shadow: var(--shadow); padding: 24px; max-width: min(380px, 100%); margin-left: auto;
   animation: bob 6s ease-in-out infinite;
 }
 @keyframes bob { 0%,100%{ transform: translateY(0) rotate(-.4deg);} 50%{ transform: translateY(-12px) rotate(.4deg);} }
@@ -608,7 +616,7 @@ footer.site a:hover { color: var(--teal-l); padding-left: 4px; }
 
 /* ---------- Responsive ---------- */
 @media (max-width: 960px) {
-  .hero-grid, .biz-grid, .spotlight, .split, .split.wide-text { grid-template-columns: 1fr; gap: 38px; }
+  .hero-grid, .biz-grid, .spotlight, .split, .split.wide-text { grid-template-columns: minmax(0, 1fr); gap: 38px; }
   .spotlight.rev .sp-visual, .split.flip .split-media { order: 0; }
   .phone-card { margin: 0 auto; }
   .grid-3, .grid-2, .steps, .art-grid, .price-grid { grid-template-columns: 1fr; }
@@ -681,6 +689,12 @@ footer.site a:hover { color: var(--teal-l); padding-left: 4px; }
   .stat-cards, .foot-grid { grid-template-columns: 1fr; }
   .form-row { grid-template-columns: 1fr; }
   .cta-band { padding: 50px 20px; }
+  /* Headline clamp floors (46/52px) are too tall for phones and pushed long
+     words off-screen — scale them to fit a ~330px content width. */
+  h1 { font-size: clamp(30px, 8.2vw, 44px); line-height: 1.08; }
+  .display { font-size: clamp(38px, 12vw, 60px); }
+  .hero h1, .page-hero h1 { font-size: clamp(32px, 8.6vw, 46px); }
+  .hero p.lead, .page-hero .lead { font-size: 16.5px; }
 }
 
 /* =====================================================================
