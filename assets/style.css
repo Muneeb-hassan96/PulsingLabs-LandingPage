@@ -988,9 +988,12 @@ html.imgfade img.sec-bg-img.ld { opacity: var(--imgo, 1); }
    the footer's rounded corners sat directly on the image (mobile bug report). */
 .scene .scene-sticky { position: relative; height: 58vh; overflow: hidden; display: grid; place-items: center; }
 .scene .scene-frame { position: absolute; inset: 0; overflow: hidden; clip-path: none; }
-.scene .scene-img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center 32%; transform: none; }
+/* Photo runs soft-focus so the caption owns the moment (owner request — same
+   "image recedes, text leads" treatment as the iceberg band). Static blur is a
+   one-time paint (never animated); the small scale hides blurred edge fringe. */
+.scene .scene-img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center 32%; transform: scale(1.05); filter: blur(7px); }
 /* Veil: readable text up top, self-contained dark band (no bleed into footer). */
-.scene .scene-veil { position: absolute; inset: 0; background: linear-gradient(180deg, rgba(8,24,21,.30) 0%, rgba(8,24,21,.34) 42%, rgba(8,24,21,.60) 100%); }
+.scene .scene-veil { position: absolute; inset: 0; background: linear-gradient(180deg, rgba(8,24,21,.38) 0%, rgba(8,24,21,.44) 42%, rgba(8,24,21,.66) 100%); }
 /* Homepage: the footer's dark rounded "sheet" follows the cream gap set on
    .scene above. NOTE the selector: app.js replaces <div id="site-footer"> via
    outerHTML with <footer class="site mf">, so #site-footer no longer exists at
@@ -1000,8 +1003,8 @@ html.imgfade img.sec-bg-img.ld { opacity: var(--imgo, 1); }
 .scene .scene-cap { position: relative; z-index: 2; text-align: center; max-width: 860px; padding: 0 24px; }
 .scene .scene-cap .eyebrow { color: var(--teal-l); justify-content: center; }
 .scene .scene-cap .eyebrow::before { background: var(--teal-l); }
-.scene .scene-cap h2 { color: #fff; }
-.scene .scene-cap p { color: rgba(255,255,255,.88); font-size: clamp(17px, 2vw, 22px); margin: 14px auto 0; }
+.scene .scene-cap h2 { color: #fff; text-shadow: 0 2px 24px rgba(8,24,21,.45); }
+.scene .scene-cap p { color: rgba(255,255,255,.94); font-size: clamp(17px, 2vw, 22px); margin: 14px auto 0; text-shadow: 0 1px 14px rgba(8,24,21,.5); }
 
 /* ===================================================================
    Phone frame mockup (realistic tilted phone showing app UI)
