@@ -777,8 +777,19 @@ html.theme-dark .s-dark::after, html.theme-dark .dark::after { opacity: .6; }
 /* Same faint-photo-backdrop language, generalised to any regular (non-hero)
    section that wants a metaphorical/atmospheric photo behind its text. */
 .sec-photo-bg { position: relative; overflow: hidden; }
-.sec-bg-img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: 0; opacity: .22; }
-.sec-photo-bg.s-dark .sec-bg-img { opacity: .16; }
+/* --imgo carries the DESIGNED resting opacity so the imgfade load-in can
+   restore it (fading to a hardcoded 1 washed the section out — bug). */
+.sec-bg-img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: 0; opacity: .22; --imgo: .22; }
+.sec-photo-bg.s-dark .sec-bg-img { opacity: .16; --imgo: .16; }
+/* Slow Ken-Burns drift on section photo backdrops — barely-perceptible life,
+   compositor-only; the global reduced-motion rule disables it. */
+.sec-photo-bg .sec-bg-img { animation: bgDrift 26s ease-in-out infinite alternate; will-change: transform; }
+@keyframes bgDrift { from { transform: scale(1); } to { transform: scale(1.07) translateY(-1.5%); } }
+/* Readability over the photo (owner request): lead, stat labels and footnote
+   run dark ink on light photo sections instead of the muted grey. */
+.sec-photo-bg:not(.s-dark) .lead { color: var(--ink); }
+.sec-photo-bg:not(.s-dark) .stat .l { color: var(--ink); }
+.sec-photo-bg:not(.s-dark) .stats-note, .sec-photo-bg:not(.s-dark) p[data-i18n="stats.note"] { color: var(--ink) !important; }
 .page-hero .wrap { z-index: 2; }
 
 /* ---------- Cinematic headline word reveal ---------- */
@@ -925,9 +936,11 @@ html.anim .media.photo.no-reveal-clip { clip-path: none; }
 html.imgfade img.media-img,
 html.imgfade img.scene-img,
 html.imgfade img.sec-bg-img { opacity: 0; transition: opacity .6s ease; }
+/* Fade back to the element's DESIGNED opacity (--imgo), not a blanket 1 —
+   sec-bg-img ghosts rest at .22/.16 and were being washed out to full. */
 html.imgfade img.media-img.ld,
 html.imgfade img.scene-img.ld,
-html.imgfade img.sec-bg-img.ld { opacity: 1; }
+html.imgfade img.sec-bg-img.ld { opacity: var(--imgo, 1); }
 
 /* --- Cinematic scene band (static image, no scroll-driven expansion) --- */
 /* Cream base + bottom padding = a real gap below the photo. The cream fill
