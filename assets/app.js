@@ -795,6 +795,13 @@
              Math.round(a[2] + (b[2] - a[2]) * t);
     }
 
+    // iOS Safari colours its own toolbar/status-bar by sampling edge pixels
+    // when no theme-color meta is set — that sampling lags our JS crossfade,
+    // which reads as the toolbar "jumping" a beat behind the page (owner
+    // report on mobile). Driving the meta tag ourselves, every frame, in the
+    // exact same loop, makes the browser chrome track the page exactly.
+    var themeMeta = document.getElementById('themeColorMeta');
+
     var ticking = false;
     function apply() {
       ticking = false;
@@ -808,10 +815,12 @@
         if (k > t) t = k;
       });
       var e = t * t * (3 - 2 * t); // smoothstep — gentle at both ends
-      root.style.setProperty('--pg-bg', mix(LIGHT.bg, DARK.bg, e));
+      var bg = mix(LIGHT.bg, DARK.bg, e);
+      root.style.setProperty('--pg-bg', bg);
       root.style.setProperty('--pg-fg', mix(LIGHT.fg, DARK.fg, e));
       root.style.setProperty('--pg-muted', mix(LIGHT.muted, DARK.muted, e));
       root.classList.toggle('theme-dark', e >= 0.5);
+      if (themeMeta) themeMeta.setAttribute('content', 'rgb(' + bg + ')');
     }
     function onScroll() {
       if (!ticking) { ticking = true; requestAnimationFrame(apply); }
