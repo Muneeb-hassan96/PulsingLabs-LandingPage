@@ -64,7 +64,10 @@ html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; background: #fff
    than the phone screen (the mobile hero-overflow fix). */
 h1, h2, .display { overflow-wrap: break-word; }
 body {
-  font-family: 'General Sans', 'Hanken Grotesk', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  /* PREVIEW: whole-site type set to the Quicksand wordmark font (owner wants
+     to see the look). Cascades to headings + body since neither sets its own
+     family. Easy to revert to 'General Sans' if it's too rounded for body copy. */
+  font-family: 'Quicksand', 'General Sans', 'Hanken Grotesk', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   color: var(--ink);
   line-height: 1.6;
   background: transparent;
