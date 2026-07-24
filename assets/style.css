@@ -225,8 +225,9 @@ html.theme-dark section:not(.s-dark) .split.boxed .split-copy .split-list li::be
 }
 /* Hover lift + press feedback (touch users get the press; hover users both).
    Compositor-only (transform/shadow), 150-250ms per the motion guidelines. */
-.btn:hover { transform: translateY(-2px); }
-.btn:active { transform: translateY(0) scale(.985); transition-duration: .12s; }
+/* Calm hover (owner request): no lift/movement - colour + shadow only. */
+.btn:hover { transform: none; }
+.btn:active { transform: scale(.985); transition-duration: .12s; }
 .btn-primary { background: var(--grad-teal); color: #fff; box-shadow: var(--shadow-teal); }
 .btn-primary:hover { box-shadow: 0 22px 50px rgba(0,191,165,.45); }
 .btn-ghost { background: #fff; color: var(--navy); border-color: var(--line); }
@@ -236,14 +237,10 @@ html.theme-dark section:not(.s-dark) .split.boxed .split-copy .split-list li::be
 .btn-dark { background: var(--navy); color:#fff; }
 .btn-dark:hover { background: var(--navy-2); }
 .btn .arrow { transition: transform .25s var(--ease); }
-.btn:hover .arrow { transform: translateX(4px); }
-/* shine sweep */
-.btn::after {
-  content: ""; position: absolute; top: 0; left: -120%; width: 60%; height: 100%;
-  background: linear-gradient(100deg, transparent, rgba(255,255,255,.35), transparent);
-  transform: skewX(-18deg); transition: left .6s var(--ease);
-}
-.btn:hover::after { left: 130%; }
+.btn:hover .arrow { transform: none; }
+/* shine sweep - DISABLED (owner request: buttons must stay still on hover).
+   Restore by re-adding the ::after block + .btn:hover::after { left: 130%; } */
+.btn::after { content: none; }
 
 /* ---------- Nav (injected) ---------- */
 .nav {
@@ -259,13 +256,18 @@ html.theme-dark section:not(.s-dark) .split.boxed .split-copy .split-list li::be
 /* Auto-hide on scroll down, reveal on scroll up (bindNav's onScroll).
    Kept OFF the drawer state and near-top region in JS, not here. */
 .nav.nav-hidden { transform: translateY(-100%); }
-.nav-inner { display: flex; align-items: center; justify-content: space-between; }
+/* True 3-zone alignment: logo hard-left, links dead-centre, CTA hard-right.
+   (flex space-between let the middle drift when the sides differed in width) */
+.nav-inner { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; }
+.nav-inner > .logo { justify-self: start; }
+.nav-inner > .nav-links { justify-self: center; }
+.nav-inner > .nav-cta { justify-self: end; }
 .logo { display: flex; align-items: center; gap: 10px; font-family: 'Quicksand', 'General Sans', sans-serif; font-weight: 400; font-size: 28px; color: rgb(var(--pg-fg)); letter-spacing:-.01em; transition: color var(--theme-ms) var(--ease); }
 /* Brand mark is the bare colourful DNA helix (transparent, no tile) — big and
    clean beside the wordmark. */
 .logo .dot { width: 56px; height: 56px; display: grid; place-items: center; }
 .logo .dot .logo-mark { width: 56px; height: 56px; object-fit: contain; }
-.nav-links { display: flex; align-items: center; gap: 6px; }
+.nav-links { display: flex; align-items: center; gap: 14px; }
 .nav-links a {
   position: relative; font-size: 16px; color: rgb(var(--pg-fg));
   /* Same typeface as the PulsingLabs wordmark (owner request) — Quicksand,
@@ -610,7 +612,7 @@ footer.site a:hover { color: var(--teal-l); padding-left: 4px; }
 .badges { display: flex; gap: 10px; margin-top: 18px; }
 .app-badge { border: 1px solid rgba(255,255,255,.25); border-radius: 11px; padding: 9px 14px; font-size: 12px; color: rgba(255,255,255,.85); transition: border-color .2s; }
 .app-badge:hover { border-color: var(--teal); }
-.foot-bottom { border-top: 1px solid rgba(255,255,255,.12); margin-top: 46px; padding-top: 24px; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 12px; font-size: 13px; }
+.foot-bottom { border-top: 1px solid rgba(255,255,255,.12); margin-top: 26px; padding-top: 16px; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 12px; font-size: 13px; }
 
 /* ---------- Page header (inner pages) ---------- */
 .page-hero { padding: 160px 0 80px; background: transparent; position: relative; overflow: hidden; text-align: center; }
@@ -1028,6 +1030,17 @@ html.imgfade img.sec-bg-img { opacity: 0; transition: opacity .6s ease; }
 html.imgfade img.media-img.ld,
 html.imgfade img.scene-img.ld,
 html.imgfade img.sec-bg-img.ld { opacity: var(--imgo, 1); }
+/* Reduced-motion: still hide-until-loaded (no scanline), but reveal INSTANTLY
+   with no fade animation - honouring the motion preference while killing the
+   partial-paint. */
+@media (prefers-reduced-motion: reduce) {
+  html.imgfade img.media-img,
+  html.imgfade img.scene-img,
+  html.imgfade img.sec-bg-img { transition: none; }
+}
+/* Themed skeleton behind photo tiles so the pre-load state reads as an
+   intentional placeholder, never a white flash. Colour variants override it. */
+.media.photo { background: linear-gradient(150deg, #EAF4F1, #DCEDE8); }
 
 /* --- Cinematic scene band (static image, no scroll-driven expansion) --- */
 /* Cream base + bottom padding = a real gap below the photo. The cream fill
@@ -1551,7 +1564,9 @@ footer.site.mf {
   position: relative; overflow: hidden;
   margin-top: -30px;
   border-radius: 42px 42px 0 0;
-  padding: 130px 0 36px;
+  /* Compact footer (owner request): keep the dome/blur reveal animation but
+     roughly halve the vertical bulk so it never fills the whole screen. */
+  padding: 64px 0 26px;
   background: var(--navy);
   box-shadow: 0 -26px 74px rgba(13,31,45,.30);
 }
@@ -1562,29 +1577,31 @@ footer.site.mf {
   filter: blur(26px); pointer-events: none;
 }
 .mf-headline {
-  font-size: clamp(40px, 6.6vw, 88px); line-height: 1.03; letter-spacing: -0.03em;
-  color: #fff; font-weight: 700; margin-bottom: 56px; max-width: 16ch;
+  font-size: clamp(26px, 3.8vw, 44px); line-height: 1.08; letter-spacing: -0.02em;
+  color: #fff; font-weight: 700; margin-bottom: 28px; max-width: 22ch;
   will-change: transform, filter, opacity;
 }
-.mf-cards { display: grid; grid-template-columns: 1.05fr 1fr; gap: 16px; margin-bottom: 52px; }
+/* Three equal cards side by side - the old 2-row layout left the menu card
+   towering with empty space once the nav shrank to 3 links. */
+.mf-cards { display: grid; grid-template-columns: 1.2fr .75fr 1.2fr; gap: 14px; margin-bottom: 28px; align-items: stretch; }
 .mf-card {
   background: rgba(255,255,255,.05); border: 1px solid rgba(255,255,255,.09);
-  border-radius: 30px; padding: 36px; backdrop-filter: blur(10px);
+  border-radius: 22px; padding: 22px 24px; backdrop-filter: blur(10px);
 }
-.mf-connect { grid-column: 1; }
-.mf-touch { grid-column: 1; }
-.mf-menu { grid-column: 2; grid-row: 1 / span 2; display: flex; flex-direction: column; text-align: center; }
+.mf-connect { grid-column: auto; }
+.mf-touch { grid-column: auto; }
+.mf-menu { grid-column: auto; grid-row: auto; display: flex; flex-direction: column; text-align: center; }
 .mf-eyebrow {
   display: block; font-size: 12px; letter-spacing: .14em; text-transform: uppercase;
-  color: rgba(255,255,255,.55); font-weight: 700; margin-bottom: 18px;
+  color: rgba(255,255,255,.55); font-weight: 700; margin-bottom: 12px;
 }
-.mf-big { font-size: clamp(19px, 1.9vw, 24px); color: #fff; line-height: 1.35; font-weight: 600; margin-bottom: 26px; max-width: 26ch; }
+.mf-big { font-size: 17px; color: #fff; line-height: 1.4; font-weight: 600; margin-bottom: 16px; max-width: 30ch; }
 .mf-ctas { display: flex; gap: 12px; flex-wrap: wrap; }
 footer.site.mf .mf-ghost { background: transparent; color: #fff; border-color: rgba(255,255,255,.32); }
 .mf-ghost:hover { border-color: var(--teal-l); color: var(--teal-l); }
 .mf-links { display: flex; flex-direction: column; gap: 4px; margin: auto 0; }
 footer.site.mf .mf-links a {
-  display: block; font-size: clamp(28px, 3.1vw, 44px); font-weight: 700;
+  display: block; font-size: clamp(18px, 1.7vw, 24px); font-weight: 700;
   color: rgba(255,255,255,.88); padding: 3px 0; margin: 0;
   transition: color .25s var(--ease), transform .25s var(--ease);
 }
@@ -1688,4 +1705,44 @@ footer.site.mf .mf-bottom a:hover { color: var(--teal-l); padding-left: 0; }
   color: rgb(var(--pg-fg));
   border-color: rgba(var(--pg-fg), .30);
   background: rgba(var(--pg-fg), .06);
+}
+
+/* =====================================================================
+   Premium pricing cards (Standard / Premium / Platinum)
+   ===================================================================== */
+.plan {
+  border-radius: 26px;
+  padding: 38px 32px;
+  border: 1px solid transparent;
+  background: linear-gradient(#fff, #fff) padding-box,
+              linear-gradient(180deg, rgba(0,191,165,.38), rgba(13,31,45,.08)) border-box;
+  box-shadow: 0 10px 30px rgba(13,31,45,.06);
+}
+.plan:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 26px 56px rgba(13,31,45,.14), 0 0 0 1px rgba(0,191,165,.22);
+}
+.plan .amt { font-size: 44px; }
+.plan .amt span { display: inline-block; margin-left: 4px; }
+.plan li { align-items: flex-start; }
+.plan li::before {
+  content: "✓";
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 20px; height: 20px; margin-top: 1px;
+  border-radius: 50%;
+  background: rgba(0,191,165,.12);
+  color: var(--teal-d);
+  font-size: 11px; font-weight: 900;
+  flex: 0 0 20px;
+}
+.plan.featured li::before { background: rgba(255,255,255,.14); color: var(--teal-l); }
+/* Platinum (last card): a quiet luxe edge - teal into soft violet. */
+.price-grid .plan:last-child {
+  background: linear-gradient(#fff, #fff) padding-box,
+              linear-gradient(135deg, rgba(0,191,165,.55), rgba(129,140,248,.42), rgba(0,191,165,.22)) border-box;
+  box-shadow: 0 12px 34px rgba(93,95,239,.10), 0 10px 30px rgba(13,31,45,.06);
+}
+.price-grid .plan:last-child h3 {
+  background: linear-gradient(90deg, var(--teal-d), #6D6FF0);
+  -webkit-background-clip: text; background-clip: text; color: transparent;
 }

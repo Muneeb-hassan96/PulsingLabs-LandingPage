@@ -7,7 +7,7 @@
 (function () {
   'use strict';
 
-  // ---- Launch config — set APP_URL + PROD_API_BASE to your real hosts ----
+  // ---- Launch config - set APP_URL + PROD_API_BASE to your real hosts ----
   // APP_URL: where the deployed Flutter web app lives. Until it is set, every
   // "app" CTA gracefully falls back to the contact page (DEMO_URL) so no button
   // is ever a dead end. Set it once here and all CTAs across all pages light up.
@@ -30,12 +30,12 @@
     switch (kind) {
       case 'app':        return app || DEMO_URL;
       case 'home-visit': return app || DEMO_URL;
-      case 'register':   return DEMO_URL;   // B2B sales — capture as a lead
+      case 'register':   return DEMO_URL;   // B2B sales - capture as a lead
       case 'demo':       return DEMO_URL;
       default:           return DEMO_URL;
     }
   }
-  // The brand icon — self-contained rounded-square DNA-helix mark (its own
+  // The brand icon - self-contained rounded-square DNA-helix mark (its own
   // mint-gradient tile baked in), reads on both the cream and dark scroll themes.
   var LOGO_SVG = '<img class="logo-mark" src="assets/img/logo-mark.png" alt="" width="42" height="42" />';
 
@@ -73,8 +73,11 @@
   }
 
   var NAV = [
-    { href: 'index.html',    label: 'Home' },
-    { href: 'features.html', label: 'Features', mega: {
+    // enabled:false items are DISABLED, not deleted - flip back to re-enable.
+    // Home: removed per owner request (the logo already links to index.html,
+    // so a separate "Home" tab was redundant).
+    { href: 'index.html',    label: 'Home', enabled: false },
+    { href: 'features.html', label: 'Features', enabled: false, mega: {
         blurb: 'Everything PulsingLabs does, from booking to understanding every number.',
         items: [
           { href: 'features.html', icon: 'zap',   title: 'Book in minutes',     desc: 'Packages, labs & slots' },
@@ -84,7 +87,7 @@
           { href: 'features.html', icon: 'file',  title: 'Import any report',    desc: 'OCR from any lab' },
           { href: 'features.html', icon: 'users', title: 'Family profiles',      desc: 'One account, whole family' }
         ] } },
-    { href: 'business.html', label: 'For Business', mega: {
+    { href: 'business.html', label: 'For Business', enabled: false, mega: {
         blurb: 'Preventive screening & wellness for your team, with privacy-first HR insight.',
         items: [
           { href: 'business.html', icon: 'pie',      title: 'Corporate wellness', desc: 'HR dashboard & analytics' },
@@ -100,7 +103,7 @@
           { href: 'pricing.html', icon: 'lab',     title: 'Labs & Clinics',  desc: 'Custom white-label terms' },
           { href: 'pricing.html', icon: 'card',    title: 'Pricing FAQ',     desc: 'Trials, billing & cancellation' }
         ] } },
-    { href: 'insights.html', label: 'Insights', mega: {
+    { href: 'insights.html', label: 'Insights', enabled: false, mega: {
         blurb: 'Plain-English guides to understanding your lab results.',
         items: [
           { href: 'insights.html', icon: 'file',    title: 'All Insights',  desc: 'Guides & how-tos' },
@@ -113,7 +116,7 @@
           { href: 'about.html',    icon: 'compass', title: 'About us',           desc: 'Our mission & story' },
           { href: 'features.html', icon: 'zap',     title: 'The PulsingLabs App', desc: 'Everything it does' },
           { href: 'business.html', icon: 'users',   title: 'For Business',       desc: 'Corporate wellness' },
-          { href: 'faq.html',      icon: 'chat',    title: 'FAQ',                desc: 'Common questions' },
+          { href: 'pricing.html#faq', icon: 'chat', title: 'FAQ',                desc: 'Common questions' },
           { href: 'contact.html',  icon: 'mail',    title: 'Contact',            desc: 'Talk to us' }
         ] } },
     { href: 'contact.html',  label: 'Contact', mega: {
@@ -130,7 +133,7 @@
   if (page === '') page = 'index.html';
 
   /* ------------------------------------------------------------------ */
-  /* i18n — English only. The site used to also ship a full Urdu UI; that   */
+  /* i18n - English only. The site used to also ship a full Urdu UI; that   */
   /* was retired (Urdu now lives only in the in-app AI chatbot). This      */
   /* dictionary + data-i18n plumbing stays as the single source of truth   */
   /* for shared chrome (nav/footer) + the home page body copy.             */
@@ -251,7 +254,7 @@
       'pg.faq.eyebrow': 'Help centre', 'pg.faq.h1': 'Frequently <span class="grad-text">asked</span>', 'pg.faq.lead': 'Everything about booking, results, privacy and the corporate plan. Can\'t find it? <a href="contact.html" style="color:var(--teal-l);font-weight:600;">Get in touch.</a>',
       'pg.biz.eyebrow': 'For Business', 'pg.biz.h1': 'Healthier teams,<br><span class="grad-text">lower absenteeism</span>', 'pg.biz.lead': 'Give employees preventive screening and wellness, with an HR dashboard that turns it into insight, without ever exposing individual medical data.',
       'pg.ins.eyebrow': 'Insights', 'pg.ins.h1': 'Learn about<br><span class="grad-text">your health</span>', 'pg.ins.lead': 'Plain-English guides to understanding your lab results and staying ahead of chronic illness.',
-      'pg.price.eyebrow': 'Pricing', 'pg.price.h1': 'Simple, <span class="grad-text">transparent</span> pricing', 'pg.price.lead': 'No subscriptions for individuals, pay per test package. Businesses get a flat per-employee plan, and labs get custom white-label terms.',
+      'pg.price.eyebrow': 'Pricing', 'pg.price.h1': 'Simple, <span class="grad-text">transparent</span> pricing', 'pg.price.lead': 'Three simple test packages - pick the depth you want. Pay once per package, no subscription, and book at home or a partner lab.',
       'pg.about.eyebrow': 'Our mission', 'pg.about.h1': 'Make your health<br><span class="grad-text">make sense</span>', 'pg.about.lead': 'Lab reports shouldn\'t need a medical degree to read. PulsingLabs turns confusing numbers into clear, personal understanding, for everyone.',
       'pg.priv.eyebrow': 'Legal', 'pg.priv.h1': 'Privacy <span class="grad-text">Policy</span>', 'pg.priv.lead': 'Your health data is sensitive. Here\'s exactly how we handle it.',
       'pg.contact.eyebrow': 'Get in touch', 'pg.contact.h1': 'Let\'s <span class="grad-text">talk</span>', 'pg.contact.lead': 'Book a demo, ask about partnerships, or just say hello. We usually reply within one business day.',
@@ -279,7 +282,7 @@
       'pr.p2.l1': 'Everything in Personal, for every employee', 'pr.p2.l2': 'HR dashboard & aggregate analytics', 'pr.p2.l3': 'Proactive wellness alerts', 'pr.p2.l4': 'AI HR assistant', 'pr.p2.l5': 'CSV export & PDF employee reports', 'pr.p2.l6': 'Dedicated account manager', 'pr.p2.btn': 'Start free trial',
       'pr.p3.h': 'Labs & Clinics', 'pr.p3.amt': 'Custom', 'pr.p3.desc': 'Branded patient portal & API result delivery.',
       'pr.p3.l1': 'Branded patient-facing portal', 'pr.p3.l2': 'REST API for result uploads', 'pr.p3.l3': 'Automated patient notifications', 'pr.p3.l4': 'Result history & trend charts', 'pr.p3.l5': 'SLA-backed uptime', 'pr.p3.btn': 'Contact sales',
-      'pr.note': 'Prices shown in PKR. Test-package prices vary by lab and are shown before you book.',
+      'pr.note': 'Prices shown in PKR per package. Every test in a package is included in the one price, confirmed before you book.',
       'pr.faq.eye': 'Questions', 'pr.faq.h2': 'Pricing FAQ',
       'pr.q1': 'Is the app really free for individuals?', 'pr.a1': 'Yes. Downloading and using PulsingLabs is free, you only pay the lab for the test packages you choose to book. There is no subscription for personal use.',
       'pr.q2': 'How does the corporate trial work?', 'pr.a2': 'Corporate accounts get 30 days of full access at no charge, no credit card required. After the trial, billing is PKR 1,500 per active employee per month. Cancel anytime.',
@@ -362,10 +365,12 @@
   /* ------------------------------------------------------------------ */
   function buildHeader() {
     var KEY = { 'Home': 'nav.home', 'Features': 'nav.features', 'For Business': 'nav.business', 'Pricing': 'nav.pricing', 'Insights': 'nav.insights', 'About': 'nav.about', 'Contact': 'nav.contact' };
-    // Every top-level item is a plain direct link to its page — no dropdown
+    // Every top-level item is a plain direct link to its page - no dropdown
     // mega-menus / carets (owner request). The old mega sub-items were almost
     // all just links back to these same pages anyway.
-    var links = NAV.map(function (n) {
+    var links = NAV.filter(function (n) {
+      return n.enabled !== false; // disabled tabs stay in NAV (data intact), just not rendered
+    }).map(function (n) {
       var active = (n.href === page) ? ' active' : '';
       var k = KEY[n.label] || '';
       var di = k ? ' data-i18n="' + k + '"' : '';
@@ -396,7 +401,7 @@
   // blur as you arrive; three glass cards (connect / giant menu / newsletter).
   function buildFooter() {
     var html =
-      // NOTE: class must NOT be "mega" — that's the header dropdown's class,
+      // NOTE: class must NOT be "mega" - that's the header dropdown's class,
       // whose CSS would hide the footer (visibility:hidden until hover).
       '<footer class="site mf">' +
         '<div class="mf-horizon" aria-hidden="true"></div>' +
@@ -413,13 +418,12 @@
           '</div>' +
           '<div class="mf-card mf-menu reveal d1">' +
             '<span class="mf-eyebrow" data-i18n="foot.menu">Menu</span>' +
+            // Menu mirrors the header: disabled NAV entries (enabled:false)
+            // never render here either - one flag drives both.
             '<nav class="mf-links">' +
-              '<a href="features.html" data-i18n="nav.features">Features</a>' +
-              '<a href="business.html" data-i18n="nav.business">For Business</a>' +
-              '<a href="pricing.html" data-i18n="nav.pricing">Pricing</a>' +
-              '<a href="insights.html" data-i18n="nav.insights">Insights</a>' +
-              '<a href="about.html" data-i18n="nav.about">About</a>' +
-              '<a href="contact.html" data-i18n="nav.contact">Contact</a>' +
+              NAV.filter(function (n) { return n.enabled !== false && n.href !== 'index.html'; })
+                 .map(function (n) { return '<a href="' + n.href + '">' + n.label + '</a>'; })
+                 .join('') +
             '</nav>' +
           '</div>' +
           '<div class="mf-card mf-touch reveal d2">' +
@@ -436,8 +440,7 @@
         '</div>' +
         '<div class="foot-bottom mf-bottom">' +
           '<span class="mf-logo">' + LOGO_SVG + ' PulsingLabs</span>' +
-          '<span>© <span id="yr"></span> PulsingLabs · <a href="privacy.html" data-i18n="foot.privacy">Privacy</a> · <a href="faq.html" data-i18n="foot.faq">FAQ</a> · <a href="mailto:muneeb@pulsinglabs.com" data-i18n="foot.labs">Labs &amp; clinics</a></span>' +
-          '<span data-i18n="foot.made">Made with care in Pakistan</span>' +
+          '<span>© <span id="yr"></span> PulsingLabs · <a href="privacy.html" data-i18n="foot.privacy">Privacy</a> · <a href="pricing.html#faq" data-i18n="foot.faq">FAQ</a></span>' +
         '</div>' +
       '</div></footer>';
 
@@ -469,9 +472,11 @@
       f.style.borderRadius = hr.toFixed(0) + 'px ' + hr.toFixed(0) + 'px 0 0 / ' +
                              vr.toFixed(0) + 'px ' + vr.toFixed(0) + 'px 0 0';
 
-      // Headline blur-in.
+      // Headline blur-in. Denominator tuned for the COMPACT footer: it must
+      // hit p=1 (fully sharp) even though the short footer never scrolls far
+      // past the viewport middle - 0.55 left it permanently half-blurred.
       var r = h.getBoundingClientRect();
-      var p = clamp01((vh - r.top) / (vh * 0.55));
+      var p = clamp01((vh - r.top) / (vh * 0.28));
       h.style.opacity = (0.15 + 0.85 * p).toFixed(3);
       h.style.filter = 'blur(' + ((1 - p) * 14).toFixed(1) + 'px)';
       h.style.transform = 'translateY(' + ((1 - p) * 46).toFixed(1) + 'px)';
@@ -484,10 +489,13 @@
   }
 
   /* ------------------------------------------------------------------ */
-  /* Page-transition curtain                                            */
+  /* Page-transition curtain - DISABLED (owner request): pages must load
+     and switch instantly with no logo popup. Flip to true to restore.   */
   /* ------------------------------------------------------------------ */
+  var CURTAIN_ENABLED = false;
   var curtain;
   function buildCurtain() {
+    if (!CURTAIN_ENABLED) return;
     curtain = document.createElement('div');
     curtain.className = 'page-curtain';
     curtain.innerHTML = '<div class="pc-logo">' + LOGO_SVG + ' PulsingLabs</div>';
@@ -495,6 +503,7 @@
   }
 
   function reveal() {
+    if (!CURTAIN_ENABLED) { document.body.classList.add('loaded'); return; }
     // entrance: curtain starts covering then lifts away
     curtain.classList.add('cover');
     requestAnimationFrame(function () {
@@ -516,6 +525,8 @@
   }
 
   function bindCurtainNav() {
+    // Curtain disabled: let links navigate natively (instant, no 520ms delay).
+    if (!CURTAIN_ENABLED) return;
     document.addEventListener('click', function (e) {
       var a = e.target.closest('a');
       if (!isInternal(a)) return;
@@ -648,7 +659,7 @@
 
     // How far below the fold to pre-reveal (fraction of a viewport). Touch flings
     // fast AND iOS Safari DEFERS IntersectionObserver callbacks during momentum
-    // scrolling — that was the "text appears late on the stacked cards, dark one
+    // scrolling - that was the "text appears late on the stacked cards, dark one
     // takes forever" bug. So on touch we pre-reveal ~a full screen early.
     var touch = window.matchMedia('(hover: none)').matches;
     var pre = touch ? 0.9 : 0.22;
@@ -735,6 +746,9 @@
   /* Magnetic buttons                                                   */
   /* ------------------------------------------------------------------ */
   function bindMagnetic() {
+    // DISABLED (owner request): buttons were drifting after the cursor on
+    // hover and it read as glitchy. Delete the next line to restore.
+    return;
     if (window.matchMedia('(hover: none)').matches) return;
     document.querySelectorAll('[data-magnetic]').forEach(function (el) {
       el.addEventListener('mousemove', function (e) {
@@ -756,14 +770,14 @@
 
     var root = document.documentElement;
     // Stacked spotlight cards are excluded (owner: "the card in that color is
-    // enough") — a dark .stack-card styles ITSELF dark via CSS and must not
+    // enough") - a dark .stack-card styles ITSELF dark via CSS and must not
     // drag the whole page through the theme crossfade. Driving 3 root vars
     // every scroll frame while a sticky card crawls past centre forced a
     // full-page style recalc per frame = the features-page lag.
     var darkEls = document.querySelectorAll('.s-dark:not(.stack-card), .dark:not(.stack-card)');
     if (!darkEls.length) return;
 
-    // SCROLL-PROGRESSIVE crossfade (owner request — no hard flip): the page
+    // SCROLL-PROGRESSIVE crossfade (owner request - no hard flip): the page
     // dims gradually as a dark band approaches the viewport centre, is fully
     // dark inside it, and brightens gradually on the way out. The three theme
     // tokens are interpolated inline each frame (inline style always beats the
@@ -783,7 +797,7 @@
     }
 
     // iOS Safari colours its own toolbar/status-bar by sampling edge pixels
-    // when no theme-color meta is set — that sampling lags our JS crossfade,
+    // when no theme-color meta is set - that sampling lags our JS crossfade,
     // which reads as the toolbar "jumping" a beat behind the page (owner
     // report on mobile). Driving the meta tag ourselves, every frame, in the
     // exact same loop, makes the browser chrome track the page exactly.
@@ -801,7 +815,7 @@
         var k = 1 - Math.min(Math.max(dist / ramp, 0), 1);
         if (k > t) t = k;
       });
-      var e = t * t * (3 - 2 * t); // smoothstep — gentle at both ends
+      var e = t * t * (3 - 2 * t); // smoothstep - gentle at both ends
       var bg = mix(LIGHT.bg, DARK.bg, e);
       root.style.setProperty('--pg-bg', bg);
       root.style.setProperty('--pg-fg', mix(LIGHT.fg, DARK.fg, e));
@@ -877,15 +891,30 @@
     return window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   }
 
-  /* Lenis smooth (inertia) scrolling — loaded from CDN, degrades to native */
+  /* Lenis smooth (inertia) scrolling - self-hosted (pinned lenis@1.1.13,
+     byte-verified against the CDN's own published SRI hash before vendoring),
+     matching the same pattern as three.module.js/model-viewer.min.js. Was
+     loaded from cdn.jsdelivr.net: on a slow/PK-mobile connection that's a cold
+     DNS+TLS+round-trip to a THIRD origin (on top of the two font hosts) before
+     smooth scroll even engages - during which native scroll is instant, so the
+     page visibly changes feel the moment Lenis lands. Self-hosting removes
+     that origin entirely; the SRI check is kept anyway as defense-in-depth
+     against a compromised deploy. Degrades to native scroll if the file
+     404s/is blocked. */
   function bindLenis() {
+    // PERF (2026-07-24): smooth-scroll (Lenis) intercepts the wheel and glides
+    // the page toward the target with inertia (lerp 0.11). That easing is exactly
+    // the "slow / laggy scroll" feel the owner reported - native scroll is
+    // GPU-composited and responds to the wheel instantly. Disabled so scrolling
+    // feels immediate. Flip to true to bring the smooth momentum back (tune
+    // `lerp` UP, e.g. 0.18-0.25, for a snappier-but-still-smooth compromise).
+    var ENABLE_SMOOTH_SCROLL = false;
+    if (!ENABLE_SMOOTH_SCROLL) return;
     if (reducedMotion()) return;
     if (window.matchMedia('(hover: none)').matches) return; // keep native momentum on touch
     var s = document.createElement('script');
-    s.src = 'https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js';
-    // Subresource Integrity — reject the script if the CDN ever serves tampered bytes.
+    s.src = 'assets/vendor/lenis.min.js?v=1';
     s.integrity = 'sha384-B2WBjDzEjJpYvhmi2UyEn7rektqkf5suS6sNoyyrf0EBAwBHdkiXxIlU0V5Ru2ed';
-    s.crossOrigin = 'anonymous';
     s.onload = function () {
       if (typeof Lenis === 'undefined') return;
       var lenis = new Lenis({ lerp: 0.11, smoothWheel: true, wheelMultiplier: 1 });
@@ -909,7 +938,7 @@
         });
       } else if (n.tagName === 'BR') {
         out.push(n);
-      } else { // inline element (e.g. .grad-text) — keep intact as one animated unit
+      } else { // inline element (e.g. .grad-text) - keep intact as one animated unit
         var w = document.createElement('span'); w.className = 'w'; w.appendChild(n.cloneNode(true)); out.push(w);
       }
     });
@@ -951,7 +980,7 @@
   /* Clip-path wipe reveal on photographic media panels */
   function bindVideoAutoplay() {
     // iOS Low Power Mode (and some data-saver modes) block muted autoplay and
-    // show a play button instead. A user gesture lifts the block — so retry
+    // show a play button instead. A user gesture lifts the block - so retry
     // .play() on the first touch/scroll/click, and when a video scrolls into
     // view. Videos are muted loops, so silent playback is always safe.
     var vids = [].slice.call(document.querySelectorAll('video[autoplay]'));
@@ -974,12 +1003,12 @@
   }
 
   function bindImgFade() {
-    // Photos fade in the moment their bytes finish arriving, instead of
-    // painting scanline-by-scanline on slow connections (owner bug report:
-    // result.jpeg visibly streamed top-to-bottom on first load). Opacity
-    // only, gated behind html.imgfade so no-JS/reduced-motion users simply
-    // see images normally. Runs on ALL devices including touch.
-    if (reducedMotion()) return;
+    // Photos stay invisible until their bytes FULLY arrive, then appear -
+    // instead of painting scanline-by-scanline on slow connections (owner bug
+    // report: images "load halfway" as you scroll). This must run even under
+    // reduced-motion: hiding-until-loaded is not an animation, it just prevents
+    // the ugly partial-paint. Reduced-motion users get an INSTANT reveal (the
+    // CSS zeroes the transition for them); everyone else gets a soft fade.
     var imgs = document.querySelectorAll('img.media-img, img.scene-img, img.sec-bg-img');
     if (!imgs.length) return;
     document.documentElement.classList.add('imgfade');
@@ -1009,7 +1038,7 @@
     els.forEach(function (e) { io.observe(e); });
     // Safety net: Lenis-driven smooth scroll can let a panel cross the
     // visibility threshold between observer callbacks without ever firing
-    // (seen across multiple photo panels sitewide, not just one card) —
+    // (seen across multiple photo panels sitewide, not just one card) -
     // force-reveal anything still hidden once it's plainly on screen, using
     // plain geometry checks as a backup to IntersectionObserver.
     function sweep() {
@@ -1123,7 +1152,7 @@
   }
 
   /* ------------------------------------------------------------------ */
-  /* Mouse-depth parallax — [data-depth] layers drift with the pointer  */
+  /* Mouse-depth parallax - [data-depth] layers drift with the pointer  */
   /* ------------------------------------------------------------------ */
   function bindDepth() {
     if (reducedMotion()) return;
@@ -1232,18 +1261,23 @@
     } catch (e) { return false; }
   }
   function bind3D() {
+    // Owner call (2026-07-25): the 3D helix "tornado" is back ON. To keep the
+    // page fast it is budgeted hard: the engine only downloads AFTER full page
+    // load + a browser-idle moment (never competes with first paint), renders
+    // at capped pixel ratio with no antialiasing and a low-power GPU hint, and
+    // pauses whenever the hero is off-screen or the tab is hidden.
+    var ENABLE_HERO_HELIX = true;
+    if (!ENABLE_HERO_HELIX) return;
+    if (window.matchMedia('(hover: none)').matches) return; // phones keep the light 2D field
     if (reducedMotion()) return;
-    // Phones get the helix too (owner request): the geometry is tiny
-    // (2x132 points + rungs) — buildHelix trims pixel ratio and centres
-    // the group on narrow viewports instead of skipping.
     var hero = document.querySelector('.hero');
     if (!hero || !hasWebGL() || typeof Promise === 'undefined') return;
-    // Self-hosted (pinned three@0.160.0) — no third-party CDN dependency, so
+    // Self-hosted (pinned three@0.160.0) - no third-party CDN dependency, so
     // there's no unpinnable dynamic-import supply-chain surface.
     // NOTE: import() here resolves relative to THIS SCRIPT's URL (/assets/),
     // not the page. './assets/vendor/...' 404'd and silently killed the helix.
     // PERF: the helix is a decorative layer over the 2D particle field, so the
-    // 1.2MB engine must never compete with first paint — wait for the full
+    // 1.2MB engine must never compete with first paint - wait for the full
     // page load, then a browser-idle moment, before fetching it.
     var start = function () {
       import('./vendor/three.module.js')
@@ -1258,12 +1292,22 @@
     else window.addEventListener('load', whenIdle, { once: true });
   }
   /* model-viewer (~1MB module) powers the holographic body band far below
-     the fold — inject it only when the band approaches the viewport. The
+     the fold - inject it only when the band approaches the viewport. The
      stage has a fixed CSS height, so the late upgrade causes no layout
      shift; the <model-viewer> GLB itself stays loading="lazy". */
   function bindModelViewerLoader() {
     var mv = document.querySelector('model-viewer');
     if (!mv) return;
+    // The 3D body loads when its band nears the viewport (as you scroll to it) -
+    // not on click, and NOT preloaded on idle. Idle-preloading front-loaded a live
+    // WebGL render that competed for the main thread and made the whole page feel
+    // heavy; the fix is to defer it until you actually approach the section, so the
+    // cost lands there and nowhere else. Desktop only: touch devices keep the
+    // static glow + score chips (no WebGL) to protect phone performance.
+    if (window.matchMedia && window.matchMedia('(hover: none)').matches) {
+      document.documentElement.classList.add('no-body3d');
+      return;
+    }
     var injected = false;
     var inject = function () {
       if (injected) return; injected = true;
@@ -1273,19 +1317,58 @@
       document.head.appendChild(s);
     };
     if (!('IntersectionObserver' in window)) { inject(); return; }
+    // 900px lead + warmBelowFold() has already cached the engine and GLB bytes,
+    // so injection here is execute-from-cache: the body is fully rendered well
+    // before it scrolls into view, and WebGL still never runs while you're at
+    // the hero (that stays reserved for the helix).
     var io = new IntersectionObserver(function (entries) {
       entries.forEach(function (e) { if (e.isIntersecting) { inject(); io.disconnect(); } });
     }, { rootMargin: '900px 0px' });
     io.observe(mv);
+  }
+
+  /* Owner preference: pre-fetch every below-the-fold lazy image during an idle
+     moment after first paint, so scrolling never reveals a half-loaded photo.
+     The <img loading="lazy"> tags stay as-is (correct for slow links / SEO); we
+     just prime the browser cache so the eventual lazy load is instant. Skipped
+     on Data Saver / 2g. */
+  function warmBelowFold() {
+    var conn = navigator.connection || {};
+    if (conn.saveData || /(^|\b)(slow-)?2g\b/.test(conn.effectiveType || '')) return;
+    var run = function () {
+      document.querySelectorAll('img[loading="lazy"]').forEach(function (img) {
+        var url = img.currentSrc || img.getAttribute('src');
+        if (url) { var pre = new Image(); pre.src = url; }
+      });
+      // Also warm the 3D-body BYTES (engine module + GLB) into the HTTP cache.
+      // Crucially this is a plain download - nothing executes, no WebGL starts,
+      // so it can't repeat the idle-preload regression where a live render
+      // competed with the hero. When the scroll trigger later injects the
+      // script, both files come straight from cache and the body appears
+      // instantly. Desktop only (phones never load the 3D body).
+      if (!window.matchMedia('(hover: none)').matches && document.querySelector('model-viewer') && window.fetch) {
+        ['assets/vendor/model-viewer.min.js?v=1', 'assets/models/body.glb?v=2'].forEach(function (u) {
+          fetch(u, { credentials: 'same-origin' }).catch(function () { /* cache warm is best-effort */ });
+        });
+      }
+    };
+    var go = function () {
+      if ('requestIdleCallback' in window) requestIdleCallback(run, { timeout: 3000 });
+      else setTimeout(run, 1500);
+    };
+    if (document.readyState === 'complete') go();
+    else window.addEventListener('load', go, { once: true });
   }
   function buildHelix(THREE, hero) {
     var canvas = document.createElement('canvas');
     canvas.id = 'hero-3d'; canvas.setAttribute('aria-hidden', 'true');
     hero.insertBefore(canvas, hero.firstChild);
 
-    var isTouch = window.matchMedia('(hover: none)').matches;
-    var renderer = new THREE.WebGLRenderer({ canvas: canvas, alpha: true, antialias: true });
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, isTouch ? 1.5 : 2));
+    // PERF budget: no MSAA (points/lines don't need it), DPR capped at 1.5,
+    // low-power GPU preference - visually identical for a decorative layer,
+    // roughly half the fill cost of the old antialias+DPR2 setup.
+    var renderer = new THREE.WebGLRenderer({ canvas: canvas, alpha: true, antialias: false, powerPreference: 'low-power' });
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 1.5));
     var scene = new THREE.Scene();
     var cam = new THREE.PerspectiveCamera(50, 1, 0.1, 100);
     cam.position.set(0, 0, 15);
@@ -1355,11 +1438,16 @@
       new IntersectionObserver(function (es) {
         es.forEach(function (e) {
           vis = e.isIntersecting;
-          if (vis && !raf) loop();
+          if (vis && !raf && !document.hidden) loop();
           else if (!vis && raf) { cancelAnimationFrame(raf); raf = null; }
         });
       }, { threshold: 0 }).observe(hero);
     }
+    // also stop rendering when the tab is backgrounded
+    document.addEventListener('visibilitychange', function () {
+      if (document.hidden && raf) { cancelAnimationFrame(raf); raf = null; }
+      else if (!document.hidden && vis && !raf) loop();
+    });
   }
 
   /* ------------------------------------------------------------------ */
@@ -1457,7 +1545,7 @@
         p = Math.max(0, Math.min(1, p));
         cards[i].style.transform = p > 0 ? 'scale(' + (1 - p * 0.05).toFixed(4) + ')' : '';
         // Dim via a ::after overlay opacity (--peel, compositor-only) instead of
-        // filter:brightness() — filtering a full-width sticky section repainted
+        // filter:brightness() - filtering a full-width sticky section repainted
         // it every scroll frame and was a big part of the stack-scroll jank.
         cards[i].style.setProperty('--peel', p > 0 ? (p * 0.55).toFixed(3) : '0');
       }
@@ -1470,7 +1558,7 @@
   }
 
   /* ------------------------------------------------------------------ */
-  /* Scroll-drawn progress rail — homepage "Three steps to clarity".    */
+  /* Scroll-drawn progress rail - homepage "Three steps to clarity".    */
   /* A teal line fills top->bottom with scroll progress through the     */
   /* stack; each step lights as the fill reaches its card. Compositor-  */
   /* only (--flow scaleY + class toggles), rAF-throttled.               */
@@ -1492,7 +1580,7 @@
       if (r.height < 2) return;
       var vh = window.innerHeight;
       // fill starts as the stack's top passes 80% of the viewport and
-      // completes when its bottom clears 55% — so the line finishes while
+      // completes when its bottom clears 55% - so the line finishes while
       // the section is still comfortably on screen.
       var p = (vh * 0.8 - r.top) / (r.height + vh * 0.25);
       p = Math.max(0, Math.min(1, p));
@@ -1512,7 +1600,7 @@
   }
 
   /* ------------------------------------------------------------------ */
-  /* Live public stats — progressive enhancement over baked-in numbers  */
+  /* Live public stats - progressive enhancement over baked-in numbers  */
   /* ------------------------------------------------------------------ */
   function bindLiveStats() {
     if (typeof fetch === 'undefined') return;
@@ -1528,7 +1616,7 @@
         map.forEach(function (el) {
           var key = el.getAttribute('data-live');
           if (data[key] == null) return;
-          // Live data only ever RAISES the number — never undercuts the curated
+          // Live data only ever RAISES the number - never undercuts the curated
           // marketing claim (so a small dev DB can't downgrade "50+" to "3+").
           var floor = parseFloat(el.getAttribute('data-count')) || 0;
           var live = parseFloat(data[key]) || 0;
@@ -1557,7 +1645,7 @@
         var payload = {
           name: get('#cn'), email: get('#ce'), company: get('#cc'),
           interest: get('#ct'), message: get('#cm'), source: 'marketing_contact',
-          website: hp ? hp.value : '' // honeypot — empty for humans
+          website: hp ? hp.value : '' // honeypot - empty for humans
         };
         if (!payload.name || !payload.email) {
           if (err) { err.textContent = 'Please enter your name and a valid email.'; err.style.display = 'block'; }
@@ -1659,6 +1747,7 @@
     bindParticles();
     bind3D();
     bindModelViewerLoader();
+    warmBelowFold();
     bindBodyOrbit();
     bindKinetic();
     bindStack();

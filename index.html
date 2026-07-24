@@ -17,15 +17,23 @@
   <meta name="twitter:description" content="Book lab tests, understand your results with AI, and track your family's health in one app." />
   <meta name="twitter:image" content="https://pulsinglabs.pk/og-image.png" />
   <link rel="preconnect" href="https://api.fontshare.com" crossorigin />
-  <link href="https://api.fontshare.com/v2/css?f[]=general-sans@400,500,600,700&display=swap" rel="stylesheet" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="assets/style.css?v=101" />
+  <!-- Fonts load NON-render-blocking (media=print flip): the page paints
+       immediately in the system fallback, then swaps in the web fonts. Both
+       families already use display=swap, so this only removes the first-paint
+       stall from waiting on two external font CSS fetches. -->
+  <link rel="stylesheet" href="https://api.fontshare.com/v2/css?f[]=general-sans@400,500,600,700&display=swap" media="print" onload="this.media='all'" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&display=swap" media="print" onload="this.media='all'" />
+  <noscript>
+    <link rel="stylesheet" href="https://api.fontshare.com/v2/css?f[]=general-sans@400,500,600,700&display=swap" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&display=swap" />
+  </noscript>
+  <link rel="stylesheet" href="assets/style.css?v=106" />
   <link rel="icon" type="image/png" href="assets/img/favicon.png" />
   <!-- 3D engine for the holographic body band (self-hosted, pinned
        model-viewer@3.5.0) is injected on demand by app.js when the band
-       nears the viewport — ~1MB of JS kept off the critical load path. -->
+       nears the viewport - ~1MB of JS kept off the critical load path. -->
 </head>
 <body>
   <div id="site-header"></div>
@@ -41,7 +49,9 @@
         <p class="lead" data-i18n="home.lead">50+ blood-test packages, booked at your lab or your door, with every result explained in plain English by AI. For you, and your whole family.</p>
         <div class="hero-cta">
           <a class="btn btn-primary" href="#" data-cta="app" data-magnetic data-i18n-html="home.cta1">Get started free <span class="arrow">→</span></a>
+          <!-- Disabled per owner request (Features tab disabled) - re-enable by uncommenting.
           <a class="btn btn-ghost" href="features.html" data-i18n="home.cta2">See how it works</a>
+          -->
         </div>
         <div class="hero-note"><span class="ico-inline" data-icon="shield"></span> <span data-i18n="home.note">Private &amp; secure</span></div>
       </div>
@@ -275,7 +285,8 @@
     </div>
   </section>
 
-  <!-- ============ HOME COLLECTION (light) ============ -->
+  <!-- ============ HOME COLLECTION (light) - disabled per owner request, ============
+       kept for easy re-enable. Uncomment to restore.
   <section class="s-cream">
     <div class="wrap">
       <div class="split flip boxed">
@@ -301,6 +312,7 @@
       </div>
     </div>
   </section>
+  -->
 
   <!-- ============ HOW IT WORKS (sticky stack) ============ -->
   <section id="how">
@@ -356,7 +368,8 @@
     </div>
   </section>
 
-  <!-- ============ CINEMATIC SCENE (image expands on scroll) ============ -->
+  <!-- ============ CINEMATIC SCENE (image expands on scroll) - disabled per
+       owner request, kept for easy re-enable. Uncomment to restore.
   <section class="scene">
     <div class="scene-sticky">
       <div class="scene-frame">
@@ -370,10 +383,11 @@
       </div>
     </div>
   </section>
+  -->
 
   <!-- The closing CTA lives in the mega footer now (same headline + Open the
        App button), so the old teal band was removed as a duplicate. -->
   <div id="site-footer"></div>
-  <script src="assets/app.js?v=88"></script>
+  <script src="assets/app.js?v=100"></script>
 </body>
 </html>
