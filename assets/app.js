@@ -457,6 +457,13 @@
     var f = document.querySelector('footer.site.mf');
     if (!h || !f) return;
     if (reducedMotion()) return;
+    // Mobile: skip the scroll-driven dome morph + headline blur-in. On phones
+    // it read as a laggy "oval that slowly opens"; show the footer flat with a
+    // sharp headline immediately (the gentle rounded top still comes from CSS).
+    if (window.matchMedia('(hover: none)').matches) {
+      h.style.opacity = '1'; h.style.filter = 'none'; h.style.transform = 'none';
+      return;
+    }
     var ticking = false;
     function clamp01(v) { return Math.max(0, Math.min(1, v)); }
     function upd() {
@@ -653,6 +660,17 @@
   /* Scroll reveal (IntersectionObserver)                               */
   /* ------------------------------------------------------------------ */
   function bindReveal() {
+    // Mobile-only: the "How it works" step cards are flattened to static on
+    // phones (the desktop sticky-stack scroll effect is off), so they appeared
+    // with no motion. Tag them .reveal (+ stagger) BEFORE the collection below
+    // so they get the same fade-up-on-scroll as every other reveal element.
+    if (window.matchMedia('(hover: none)').matches) {
+      var steps = document.querySelectorAll('.stack .stack-card');
+      for (var si = 0; si < steps.length; si++) {
+        steps[si].classList.add('reveal');
+        if (si > 0) steps[si].classList.add('d' + (si < 3 ? si : 3));
+      }
+    }
     var els = [].slice.call(document.querySelectorAll('.reveal, .reveal-l, .reveal-r, .reveal-zoom'));
     if (!els.length) return;
     if (!('IntersectionObserver' in window)) { els.forEach(function (el) { el.classList.add('in'); }); return; }
@@ -1304,10 +1322,9 @@
     // heavy; the fix is to defer it until you actually approach the section, so the
     // cost lands there and nowhere else. Desktop only: touch devices keep the
     // static glow + score chips (no WebGL) to protect phone performance.
-    if (window.matchMedia && window.matchMedia('(hover: none)').matches) {
-      document.documentElement.classList.add('no-body3d');
-      return;
-    }
+    // Owner call (2026-07-25): the 3D body now loads on phones too (it used to
+    // be skipped on touch). It stays scroll-triggered + lazy below, so it only
+    // downloads/renders as you approach its section — no cost up at the hero.
     var injected = false;
     var inject = function () {
       if (injected) return; injected = true;
