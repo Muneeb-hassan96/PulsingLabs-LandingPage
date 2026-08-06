@@ -466,9 +466,13 @@
     if (window.matchMedia('(hover: none)').matches) {
       f.classList.add('mf-anim');
       if (!('IntersectionObserver' in window)) { f.classList.add('mf-open'); return; }
+      // TOGGLE (not one-shot): expand the clip as the footer enters, and remove
+      // .mf-open when it leaves so the CSS transition REVERSES back to the small
+      // centred shape on scroll-up. Fires only on enter/leave (no per-frame
+      // work); the GPU runs the clip-path morph.
       var fio = new IntersectionObserver(function (es) {
-        es.forEach(function (e) { if (e.isIntersecting) { f.classList.add('mf-open'); fio.disconnect(); } });
-      }, { threshold: 0.12 });
+        es.forEach(function (e) { f.classList.toggle('mf-open', e.isIntersecting); });
+      }, { threshold: 0.15 });
       fio.observe(f);
       return;
     }

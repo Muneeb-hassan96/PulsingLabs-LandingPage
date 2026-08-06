@@ -1631,16 +1631,23 @@ footer.site.mf .mf-bottom a { display: inline; color: rgba(255,255,255,.62); mar
 footer.site.mf .mf-bottom a:hover { color: var(--teal-l); padding-left: 0; }
 @media (max-width: 900px) {
   footer.site.mf { border-radius: 26px 26px 0 0; padding: 90px 0 30px; }
-  /* Phone entrance (owner request): the footer starts as a soft dome and
-     expands to its flat rounded top as it scrolls into view. ONE-TIME and
-     class-driven (JS adds .mf-anim, then .mf-open) so a single CSS transition
-     does the whole morph, with no per-frame scroll work; without JS it simply
-     rests flat. Size/space unchanged, only the entrance is added. */
+  /* Phone entrance (owner request), center-out reveal: the footer starts
+     clipped to a small rounded shape in the CENTRE (~60% width, domed top) and
+     expands to the full width + flat 26px top as it scrolls into view. It uses
+     clip-path, which animates on the GPU compositor (no reflow, no per-frame
+     JS), so it stays smooth. The observer TOGGLES .mf-open, so it plays forward
+     scrolling down and REVERSES back to the small shape scrolling up. The open
+     state uses a negative top inset so the footer's soft top shadow is fully
+     preserved at rest — resting look and size are unchanged, only the entrance
+     is added. Without JS (.mf-anim absent) the footer just rests normally. */
   footer.site.mf.mf-anim {
-    border-radius: 46% 46% 0 0 / 64px 64px 0 0;
-    transition: border-radius .7s cubic-bezier(.22,.61,.36,1);
+    clip-path: inset(0 20% 0 20% round 100px 100px 0 0);
+    transition: clip-path .75s cubic-bezier(.22, .61, .36, 1);
+    will-change: clip-path;
   }
-  footer.site.mf.mf-anim.mf-open { border-radius: 26px 26px 0 0; }
+  footer.site.mf.mf-anim.mf-open {
+    clip-path: inset(-140px 0 0 0 round 26px 26px 0 0);
+  }
   footer.site.mf.mf-anim .mf-headline {
     opacity: 0; transform: translateY(20px); filter: none;
     transition: opacity .55s ease, transform .55s ease;
