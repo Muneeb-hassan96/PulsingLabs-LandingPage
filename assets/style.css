@@ -1392,11 +1392,16 @@ html.theme-dark #to-top .arr { stroke: var(--teal-l); }
   .body3d-grid { grid-template-columns: 1fr; gap: 22px; }
   .body3d-stage { height: 430px; }
   .b3d-chip.c2 { left: 2%; }
-  /* Sticky card-stack is a desktop delight; the peel (bindStack) is disabled
-     on mobile, so the tall cards would just pile up under the header on a short
-     phone screen. Let them flow normally instead — the flow rail still fills
-     and lights each step as you scroll past it. */
+  /* Other stack sections flow normally on mobile (their peel/JS is off). */
   .stack-card { position: relative; top: auto !important; min-height: 0; }
+  /* BUT the "How it works" steps DO stack on phones (owner wants the cards
+     sliding over each other as you scroll, like desktop). Re-enable sticky
+     just there with small phone-tuned offsets so they pin near the top and
+     peel cleanly on a short screen. Pure CSS (compositor), no JS, no perf cost. */
+  #how .stack-card { position: sticky !important; min-height: 0; }
+  #how .stack-card:nth-child(1) { top: 84px !important; }
+  #how .stack-card:nth-child(2) { top: 104px !important; }
+  #how .stack-card:nth-child(3) { top: 124px !important; }
 }
 @media (prefers-reduced-motion: reduce) {
   .b3d-chip, .body3d-glow { animation: none; }
@@ -1626,6 +1631,21 @@ footer.site.mf .mf-bottom a { display: inline; color: rgba(255,255,255,.62); mar
 footer.site.mf .mf-bottom a:hover { color: var(--teal-l); padding-left: 0; }
 @media (max-width: 900px) {
   footer.site.mf { border-radius: 26px 26px 0 0; padding: 90px 0 30px; }
+  /* Phone entrance (owner request): the footer starts as a soft dome and
+     expands to its flat rounded top as it scrolls into view. ONE-TIME and
+     class-driven (JS adds .mf-anim, then .mf-open) so a single CSS transition
+     does the whole morph, with no per-frame scroll work; without JS it simply
+     rests flat. Size/space unchanged, only the entrance is added. */
+  footer.site.mf.mf-anim {
+    border-radius: 46% 46% 0 0 / 64px 64px 0 0;
+    transition: border-radius .7s cubic-bezier(.22,.61,.36,1);
+  }
+  footer.site.mf.mf-anim.mf-open { border-radius: 26px 26px 0 0; }
+  footer.site.mf.mf-anim .mf-headline {
+    opacity: 0; transform: translateY(20px); filter: none;
+    transition: opacity .55s ease, transform .55s ease;
+  }
+  footer.site.mf.mf-anim.mf-open .mf-headline { opacity: 1; transform: none; }
   /* tighter photo-to-footer rhythm on phones (180px reads as a hole) */
   .scene { padding-bottom: 96px; }
   .mf-cards { grid-template-columns: 1fr; }

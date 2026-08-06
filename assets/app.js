@@ -457,11 +457,19 @@
     var f = document.querySelector('footer.site.mf');
     if (!h || !f) return;
     if (reducedMotion()) return;
-    // Mobile: skip the scroll-driven dome morph + headline blur-in. On phones
-    // it read as a laggy "oval that slowly opens"; show the footer flat with a
-    // sharp headline immediately (the gentle rounded top still comes from CSS).
+    // Mobile: ONE-TIME "dome expands to the edges" entrance, class-driven so a
+    // single CSS transition does the whole morph (no per-frame scroll math and
+    // no blur filter, which is what made the old mobile version lag). .mf-anim
+    // arms the rounded start state; an IntersectionObserver adds .mf-open once
+    // the footer nears the viewport, then disconnects. The heavy per-frame
+    // desktop path below is skipped entirely on phones.
     if (window.matchMedia('(hover: none)').matches) {
-      h.style.opacity = '1'; h.style.filter = 'none'; h.style.transform = 'none';
+      f.classList.add('mf-anim');
+      if (!('IntersectionObserver' in window)) { f.classList.add('mf-open'); return; }
+      var fio = new IntersectionObserver(function (es) {
+        es.forEach(function (e) { if (e.isIntersecting) { f.classList.add('mf-open'); fio.disconnect(); } });
+      }, { threshold: 0.12 });
+      fio.observe(f);
       return;
     }
     var ticking = false;
@@ -660,17 +668,6 @@
   /* Scroll reveal (IntersectionObserver)                               */
   /* ------------------------------------------------------------------ */
   function bindReveal() {
-    // Mobile-only: the "How it works" step cards are flattened to static on
-    // phones (the desktop sticky-stack scroll effect is off), so they appeared
-    // with no motion. Tag them .reveal (+ stagger) BEFORE the collection below
-    // so they get the same fade-up-on-scroll as every other reveal element.
-    if (window.matchMedia('(hover: none)').matches) {
-      var steps = document.querySelectorAll('.stack .stack-card');
-      for (var si = 0; si < steps.length; si++) {
-        steps[si].classList.add('reveal');
-        if (si > 0) steps[si].classList.add('d' + (si < 3 ? si : 3));
-      }
-    }
     var els = [].slice.call(document.querySelectorAll('.reveal, .reveal-l, .reveal-r, .reveal-zoom'));
     if (!els.length) return;
     if (!('IntersectionObserver' in window)) { els.forEach(function (el) { el.classList.add('in'); }); return; }
@@ -1286,7 +1283,9 @@
     // pauses whenever the hero is off-screen or the tab is hidden.
     var ENABLE_HERO_HELIX = true;
     if (!ENABLE_HERO_HELIX) return;
-    if (window.matchMedia('(hover: none)').matches) return; // phones keep the light 2D field
+    // Runs on phones too (owner wants the tornado on mobile). Kept lean: loads
+    // only after a browser-idle moment, DPR capped at 1.5, antialias off,
+    // low-power GPU, and pauses whenever the hero is off-screen or tab hidden.
     if (reducedMotion()) return;
     var hero = document.querySelector('.hero');
     if (!hero || !hasWebGL() || typeof Promise === 'undefined') return;
