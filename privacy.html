@@ -15,7 +15,7 @@
     <link rel="stylesheet" href="https://api.fontshare.com/v2/css?f[]=general-sans@400,500,600,700&display=swap" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&display=swap" />
   </noscript>
-  <link rel="stylesheet" href="assets/style.css?v=109" />
+  <link rel="stylesheet" href="assets/style.css?v=110" />
   <link rel="icon" type="image/png" href="assets/img/favicon.png" />
   <style>
     .legal { max-width: 760px; margin: 0 auto; }
@@ -24,6 +24,7 @@
     .legal p, .legal li { color: var(--muted); font-size: 16px; line-height: 1.7; }
     .legal ul { margin: 10px 0 0 20px; display: grid; gap: 8px; }
     .legal .updated { font-size: 14px; color: var(--muted); }
+    .legal ul + p, .legal p + p { margin-top: 14px; }
     .legal .note { background: var(--bg-mint); border: 1px solid rgba(0,191,165,.2); border-radius: 14px; padding: 16px 20px; font-size: 14px; color: var(--teal-d); margin-top: 28px; }
   </style>
 </head>
@@ -42,71 +43,82 @@
   <!-- ============ POLICY BODY (white) ============ -->
   <section style="padding-top:50px;">
     <div class="wrap legal reveal">
-      <p class="updated">Last updated: 4 July 2026</p>
+      <p class="updated">Last updated: 14 October 2026</p>
 
       <h2>1. Who we are</h2>
-      <p>PulsingLabs ("we", "us") is a digital health platform that enables you to book blood test appointments, view lab results with clinical insights, and access AI-powered health guidance. We are committed to protecting your personal and health data. This policy explains what we collect and how we use it.</p>
+      <p>PulsingLabs ("we", "us") is an app for booking home blood tests in Pakistan. A licensed partner laboratory collects your sample at home and does the testing; we take the booking and payment, and show you your results with plain-language explanations. PulsingLabs is based in Karachi, Pakistan. Questions about this policy: <a href="mailto:contact@pulsinglabs.com">contact@pulsinglabs.com</a>.</p>
 
-      <h2>2. Data we collect</h2>
+      <h2>2. What we collect</h2>
       <ul>
-        <li><strong>Identity data:</strong> full name, date of birth and biological sex (used to personalise your reference ranges).</li>
-        <li><strong>Contact data:</strong> email address and phone number.</li>
-        <li><strong>Health data:</strong> blood test results, appointment history, and lab reports you import.</li>
-        <li><strong>Family profiles:</strong> data you add for family members you manage.</li>
-        <li><strong>Usage data:</strong> session activity and your AI chat history (last 30 messages).</li>
-        <li><strong>Device data:</strong> push notification subscription tokens.</li>
-      </ul>
-      <p>We collect only what is necessary to deliver the service.</p>
-
-      <h2>3. How we use your data</h2>
-      <ul>
-        <li>To book and manage lab appointments on your behalf and deliver your results.</li>
-        <li>To display your results with clinical reference ranges, trends and plain-English explanations.</li>
-        <li>To generate AI health insights (see "Third parties" below).</li>
-        <li>To send transactional emails (booking confirmations, result notifications) and push notifications you have opted into.</li>
-        <li>To show your employer, if you join a company programme, anonymised team wellness trends only.</li>
+        <li><strong>Account:</strong> your name and email from Google sign-in, phone number, date of birth and biological sex. We use age and sex to judge your results against the right ranges. We never see your Google password.</li>
+        <li><strong>Health information:</strong> your test results, pregnancy status (if you tell us), height and weight (if you add them), and your answers to the optional wellbeing questionnaire (mood, stress, sleep, lifestyle).</li>
+        <li><strong>Bookings:</strong> the package, date and time, your home address and map pin for the visit, and booking history.</li>
+        <li><strong>Payments:</strong> the amount, status and payment reference. Card and wallet details are entered on Safepay's secure page; we never see or store your card number.</li>
+        <li><strong>Family members:</strong> the name, date of birth, sex and results of relatives you add and book for.</li>
+        <li><strong>AI chat:</strong> your recent conversations with the health assistant (up to your last 5, each with a short running summary).</li>
+        <li><strong>Device and settings:</strong> a notification token so we can send you alerts, your consent choices, and lab ratings you give.</li>
       </ul>
 
-      <h2>4. Legal basis for processing</h2>
+      <h2>3. How we use it</h2>
       <ul>
-        <li>Your explicit consent, given at registration and for optional features.</li>
-        <li>Performance of a contract, providing the service you booked.</li>
-        <li>Legitimate interests, platform security and fraud prevention.</li>
+        <li>To arrange your home visit and send your booking to the partner lab.</li>
+        <li>To show your results, explain them for your age and sex, and track how they change over time.</li>
+        <li>To answer your questions in the AI health assistant.</li>
+        <li>To send booking, payment and results messages by email and notification. A hepatitis result is never shown in a notification or an automatic email; you see it in the app.</li>
+        <li>To process payments, refunds and invoices.</li>
+        <li>Only if you tick "Send me offers from PulsingLabs" when you sign in: to send occasional offers, some on behalf of health partners, chosen using your age, sex and your own latest results. It is off unless you tick it, and you can turn it off any time in your profile. Hepatitis results are never used to choose who gets an offer.</li>
+        <li>To keep the service secure and prevent fraud.</li>
       </ul>
 
-      <h2>5. Third parties</h2>
+      <h2>4. Why we are allowed to use it</h2>
+      <p>We use your information to provide the service you booked, with your consent for optional features (offers, the wellbeing questionnaire, notifications), and where needed to keep the service safe and meet our legal and tax obligations. You can withdraw consent for optional features at any time.</p>
+
+      <h2>5. Who we share it with</h2>
+      <p>We do not sell your data. We share only what each service needs:</p>
       <ul>
-        <li><strong>Email delivery provider:</strong> transactional emails are sent through our email provider, subject to its privacy policy.</li>
-        <li><strong>Google Gemini AI:</strong> powers AI health insights. Prompts contain anonymised data only (never your name or email), subject to Google's AI data usage policy.</li>
-        <li><strong>Your employer (company admin):</strong> if you join a company programme, your admin can see your appointment status and whether results have been received. They cannot see individual test values unless you share them.</li>
+        <li><strong>Partner laboratory:</strong> your name, age, sex, phone number, home address and the tests booked, so they can collect and test your sample and send back the results.</li>
+        <li><strong>Safepay:</strong> to take your payment.</li>
+        <li><strong>Google:</strong> sign-in, and the Gemini AI that powers the health assistant. When you use the assistant, your first name, age, sex, results and booking details are sent with your question. Your email, phone number and address are not.</li>
+        <li><strong>Hosting and messaging:</strong> Supabase (database and sign-in), Render (our server), Firebase (notifications), Brevo (email) and Cloudflare (this website).</li>
+        <li><strong>Health partners</strong> (only if you opted in to offers): we choose who receives an offer ourselves. The partner never receives your name, contact details or results, and never learns who received the message.</li>
       </ul>
-      <p>We do not sell your data to any third party.</p>
 
-      <h2>6. Data retention</h2>
-      <p>Your data is retained for as long as your account is active. If you delete your account, all personal data and health records are permanently erased within 30 days. AI chat sessions are limited to your last 30 messages and are not used to train AI models.</p>
+      <h2>6. Your privacy at work</h2>
+      <p>If you join your employer's PulsingLabs programme, HR can see whether you have booked and completed your health check. <strong>HR never sees your test results.</strong> Group health trends are shown to HR only once at least 5 colleagues have been tested, without names, and hepatitis results are never included. Nothing about family members you book for is ever shared with your employer.</p>
 
-      <h2>7. Your privacy at work</h2>
-      <p>If your account is part of a corporate plan, your employer only ever sees <strong>anonymised, aggregate</strong> statistics. Your individual test values and personal health records are never visible to your employer.</p>
+      <h2>7. Where your data is stored</h2>
+      <p>Your data is stored on secure cloud servers that may be outside Pakistan, including in India and Singapore. By using PulsingLabs you agree to this. We protect it the same way wherever it is stored.</p>
 
-      <h2>8. Your rights (GDPR)</h2>
+      <h2>8. How long we keep it</h2>
+      <p>We keep your data while your account is open. You can ask to delete your account in your profile. Once we approve the request, usually within 30 days, we erase your health data, questionnaire answers, chat history, family members and notification tokens. We keep payment records and invoices, without your health data, for as long as tax and accounting law requires.</p>
+
+      <h2>9. Your rights</h2>
       <ul>
-        <li><strong>Access &amp; export:</strong> download your full account and results at any time.</li>
-        <li><strong>Correction:</strong> correct inaccurate data from your profile.</li>
-        <li><strong>Deletion:</strong> delete your account and all associated data ("right to be forgotten").</li>
-        <li><strong>Portability:</strong> take your data with you in a standard format.</li>
-        <li><strong>Withdrawal:</strong> withdraw consent at any time.</li>
+        <li><strong>See and download your data:</strong> Profile, then "Download my data".</li>
+        <li><strong>Correct it:</strong> edit your profile, or contact us.</li>
+        <li><strong>Delete your account and data:</strong> Profile, then "Delete my account &amp; data".</li>
+        <li><strong>Withdraw consent:</strong> turn off offers or notifications in the app.</li>
       </ul>
-      <p>To exercise these rights, use the account options in your profile or contact us at <a href="mailto:contact@pulsinglabs.com" style="color:var(--teal-d);font-weight:700;">contact@pulsinglabs.com</a>.</p>
+      <p>To use any of these rights, or to complain, email <a href="mailto:contact@pulsinglabs.com">contact@pulsinglabs.com</a>.</p>
 
-      <h2>9. Security</h2>
-      <p>All data is transmitted over HTTPS. Passwords are hashed with bcrypt. Authentication uses short-lived tokens, and access to health data is restricted to the data owner and authorised company admins.</p>
+      <h2>10. Children</h2>
+      <p>You must be 18 or older to create an account. Parents and guardians can add children as family members and book for them, and are responsible for the information they add.</p>
 
-      <h2>10. Contact</h2>
-      <p>Privacy enquiries: <a href="mailto:contact@pulsinglabs.com" style="color:var(--teal-d);font-weight:700;">contact@pulsinglabs.com</a><br />General questions: <a href="mailto:contact@pulsinglabs.com" style="color:var(--teal-d);font-weight:700;">contact@pulsinglabs.com</a></p>
+      <h2>11. Security</h2>
+      <p>All data is sent over encrypted connections (HTTPS). Access to your records is limited to you and to the staff who need it to run your booking, and every staff view of a patient record is logged.</p>
+
+      <h2 id="cookies">12. Cookies</h2>
+      <p>This website does not use advertising or tracking cookies, and we do not run analytics on it. It loads fonts from Google Fonts and Fontshare, which can see your IP address, and our host, Cloudflare, may set a strictly necessary cookie to protect the site from attacks. The PulsingLabs app does not use cookies; it keeps your sign-in and settings on your phone.</p>
+
+      <h2>13. Changes to this policy</h2>
+      <p>If we change this policy, we will update the date at the top. For important changes we will tell you in the app or by email.</p>
+
+      <h2>14. Contact</h2>
+      <p>PulsingLabs, Karachi, Pakistan. Email: <a href="mailto:contact@pulsinglabs.com">contact@pulsinglabs.com</a>.</p>
     </div>
   </section>
 
   <div id="site-footer"></div>
-  <script src="assets/app.js?v=106"></script>
+  <script src="assets/app.js?v=107"></script>
 </body>
 </html>

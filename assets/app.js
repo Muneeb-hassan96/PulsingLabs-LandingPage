@@ -279,7 +279,7 @@
       'pr.p1.h': 'Personal', 'pr.p1.amt': 'Free<span> app</span>', 'pr.p1.desc': 'Pay only for the test packages you book.',
       'pr.p1.l1': 'All 50+ test packages', 'pr.p1.l2': 'AI result explanations & trends', 'pr.p1.l3': 'Family member profiles', 'pr.p1.l4': 'Home sample collection', 'pr.p1.l5': 'Import reports from any lab', 'pr.p1.l6': 'Pay online or at the lab', 'pr.p1.btn': 'Get Started',
       'pr.tag': 'MOST POPULAR', 'pr.p2.h': 'Corporate', 'pr.p2.amt': 'PKR 1,500<span> / employee / mo</span>', 'pr.p2.desc': '30-day free trial. Cancel anytime.',
-      'pr.p2.l1': 'Everything in Personal, for every employee', 'pr.p2.l2': 'HR dashboard & aggregate analytics', 'pr.p2.l3': 'Proactive wellness alerts', 'pr.p2.l4': 'AI HR assistant', 'pr.p2.l5': 'CSV export & PDF employee reports', 'pr.p2.l6': 'Dedicated account manager', 'pr.p2.btn': 'Start free trial',
+      'pr.p2.l1': 'Everything in Personal, for every employee', 'pr.p2.l2': 'HR dashboard & aggregate analytics', 'pr.p2.l3': 'Proactive wellness alerts', 'pr.p2.l4': 'AI HR assistant', 'pr.p2.l5': 'CSV export & PDF participation reports', 'pr.p2.l6': 'Dedicated account manager', 'pr.p2.btn': 'Start free trial',
       'pr.p3.h': 'Labs & Clinics', 'pr.p3.amt': 'Custom', 'pr.p3.desc': 'Branded patient portal & API result delivery.',
       'pr.p3.l1': 'Branded patient-facing portal', 'pr.p3.l2': 'REST API for result uploads', 'pr.p3.l3': 'Automated patient notifications', 'pr.p3.l4': 'Result history & trend charts', 'pr.p3.l5': 'SLA-backed uptime', 'pr.p3.btn': 'Contact sales',
       'pr.note': 'Prices shown in PKR per package. Every test in a package is included in the one price, confirmed before you book.',
@@ -295,7 +295,7 @@
       'biz.stats.eye': 'The cost of poor health', 'biz.stats.h2': 'Ill health is expensive, and largely preventable.', 'biz.stats.lead': 'Sick days, lost productivity and late diagnoses quietly drain your business. Preventive screening is one of the highest-ROI benefits you can offer.',
       'biz.s1': 'employees affected by work-related ill health*', 'biz.s2': 'average sick days per employee, per year*', 'biz.s3': 'of early-stage conditions are manageable if caught in time*', 'biz.s4': 'free trial, no credit card required',
       'biz.wyg.eye': 'What you get', 'biz.wyg.h2': 'An HR wellness platform, not a spreadsheet.',
-      'biz.wyg.l1': 'Company dashboard with aggregate wellness analytics', 'biz.wyg.l2': 'Proactive alerts when the team\'s health needs attention', 'biz.wyg.l3': 'AI HR assistant for appointments & roster questions', 'biz.wyg.l4': 'One-click employee invites & CSV exports', 'biz.wyg.l5': 'Individual employee health reports (PDF)', 'biz.wyg.l6': 'Privacy-first: employees\' results stay private to them',
+      'biz.wyg.l1': 'Company dashboard with aggregate wellness analytics', 'biz.wyg.l2': 'Proactive alerts when the team\'s health needs attention', 'biz.wyg.l3': 'AI HR assistant for appointments & roster questions', 'biz.wyg.l4': 'One-click employee invites & CSV exports', 'biz.wyg.l5': 'Individual participation reports (PDF), never test results', 'biz.wyg.l6': 'Privacy-first: employees\' results stay private to them',
       'biz.calc.h': 'What does poor health cost you?', 'biz.calc.sub': 'Estimate the annual cost of employee sick days, and what prevention could save.',
       'biz.calc.lab1': 'Number of employees', 'biz.calc.r1': 'Employees', 'biz.calc.lab2': 'Avg. sick days per employee / year', 'biz.calc.r2': 'Sick days', 'biz.calc.lab3': 'Avg. daily cost per employee (PKR)', 'biz.calc.r3': 'Daily cost',
       'biz.calc.cap': 'estimated annual cost of absenteeism, preventive screening helps cut it.',
@@ -440,7 +440,7 @@
         '</div>' +
         '<div class="foot-bottom mf-bottom">' +
           '<span class="mf-logo">' + LOGO_SVG + ' PulsingLabs</span>' +
-          '<span>© <span id="yr"></span> PulsingLabs · <a href="privacy.html" data-i18n="foot.privacy">Privacy</a> · <a href="pricing.html#faq" data-i18n="foot.faq">FAQ</a></span>' +
+          '<span>© <span id="yr"></span> PulsingLabs · <a href="privacy.html" data-i18n="foot.privacy">Privacy</a> · <a href="terms.html">Terms</a> · <a href="refunds.html">Refunds</a> · <a href="pricing.html#faq" data-i18n="foot.faq">FAQ</a></span>' +
         '</div>' +
       '</div></footer>';
 
