@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="theme-color" content="#F4EFE7" id="themeColorMeta" />
   <title>Pricing · PulsingLabs</title>
-  <meta name="description" content="Three test packages - Standard, Premium and Platinum. Pay once per package, no subscription. Book at home or a partner lab." />
+  <meta name="description" content="Two test packages - Standard at PKR 9,999 and Premium at PKR 16,999. Pay once per package, no subscription. A phlebotomist collects your sample at home." />
   <link rel="preconnect" href="https://api.fontshare.com" crossorigin />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -15,7 +15,7 @@
     <link rel="stylesheet" href="https://api.fontshare.com/v2/css?f[]=general-sans@400,500,600,700&display=swap" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&display=swap" />
   </noscript>
-  <link rel="stylesheet" href="assets/style.css?v=109" />
+  <link rel="stylesheet" href="assets/style.css?v=110" />
   <link rel="icon" type="image/png" href="assets/img/favicon.png" />
 </head>
 <body>
@@ -27,64 +27,60 @@
     <div class="wrap page-enter">
       <span class="eyebrow" data-i18n="pg.price.eyebrow">Pricing</span>
       <h1 data-i18n-html="pg.price.h1">Simple, <span class="grad-text">transparent</span> pricing</h1>
-      <p class="lead" data-i18n="pg.price.lead">No subscriptions for individuals, pay per test package. Businesses get a flat per-employee plan, and labs get custom white-label terms.</p>
+      <p class="lead" data-i18n="pg.price.lead">Two test packages - pick the depth you want. Pay once per package, no subscription, and a phlebotomist collects your sample at home.</p>
     </div>
   </section>
 
   <!-- ============ PLANS (cream) ============ -->
   <section class="s-cream" style="padding-top:64px;">
     <div class="wrap">
-      <div class="price-grid" style="margin-top:0;">
-        <!-- STANDARD -->
+      <!-- Two packages, because two is what the catalog sells. Platinum and
+           Women's Wellness were retired; this page advertised Platinum at PKR
+           9,900 for months, claiming "everything in Standard & Premium plus"
+           while priced BELOW both of them. Prices and test lists here are
+           copied from /api/packages and /api/packages/:id/tests - if you change
+           one, change the other, because a patient who reads a price here and
+           is charged a different one at checkout has been misled. -->
+      <div class="price-grid price-grid-2" style="margin-top:0;">
+        <!-- STANDARD - package id 10, 12 tests -->
         <div class="plan reveal" data-tilt>
           <h3>Standard</h3>
-          <div class="amt">PKR 1,800<span> / package</span></div>
-          <p class="pdesc">The essential annual baseline - 8 core tests to check you're healthy when you have no symptoms.</p>
+          <div class="amt">PKR 9,999<span> / package</span></div>
+          <p class="pdesc">The essential annual baseline - 12 tests covering your vitals, blood count, sugar, cholesterol, liver and kidneys.</p>
           <ul>
-            <li>Complete Blood Count (CBC)</li>
-            <li>Fasting blood sugar</li>
+            <li>Vitals - pulse and blood pressure</li>
+            <li>Blood count - haemoglobin, RBC, WBC, platelets</li>
+            <li>Random blood sugar</li>
             <li>Total cholesterol</li>
-            <li>ESR - inflammation marker</li>
+            <li>SGPT (ALT) - liver</li>
+            <li>Creatinine - kidney</li>
+            <li>Calcium</li>
             <li>AI explanations &amp; trend charts</li>
-            <li>Home collection or partner lab</li>
+            <li>Sample collected at your home</li>
           </ul>
           <a class="btn btn-ghost" href="#" data-cta="app" style="width:100%;">Book Standard</a>
         </div>
 
-        <!-- PREMIUM (featured - dark card, teal border, like the old Corporate) -->
+        <!-- PREMIUM - package id 11, 23 tests -->
         <div class="plan featured reveal d1" data-tilt>
           <span class="tag">MOST POPULAR</span>
           <h3>Premium</h3>
-          <div class="amt">PKR 4,500<span> / package</span></div>
-          <p class="pdesc">A thorough 22-test work-up - ideal if you're over 30 or have a family history of diabetes, heart or organ disease.</p>
+          <div class="amt">PKR 16,999<span> / package</span></div>
+          <p class="pdesc">A thorough 23-test work-up - worth it if you are over 30, or have a family history of diabetes, heart or liver disease.</p>
           <ul>
             <li><b>Everything in Standard</b>, plus:</li>
-            <li>Full lipid panel (HDL, LDL, triglycerides)</li>
-            <li>Liver function (SGPT, SGOT, bilirubin, ALP, GGT)</li>
-            <li>Kidney function (creatinine, urea, eGFR, uric acid)</li>
-            <li>Thyroid screen (TSH)</li>
             <li>HbA1c - your 3-month sugar average</li>
+            <li>Full lipid panel - LDL, HDL, ratio, triglycerides</li>
+            <li>Ferritin - iron stores</li>
+            <li>ESR - inflammation marker</li>
+            <li>TSH - thyroid screen</li>
+            <li>Vitamin D</li>
+            <li>Hepatitis screening - Anti-HCV &amp; HBsAg</li>
           </ul>
           <a class="btn btn-light" href="#" data-cta="app" style="width:100%;background:#fff;color:var(--teal-d);">Book Premium</a>
         </div>
-
-        <!-- PLATINUM -->
-        <div class="plan reveal d2" data-tilt>
-          <h3>Platinum</h3>
-          <div class="amt">PKR 9,900<span> / package</span></div>
-          <p class="pdesc">The complete preventive work-up - 39 tests covering every major body system in a single booking.</p>
-          <ul>
-            <li><b>Everything in Standard &amp; Premium</b>, plus:</li>
-            <li>Vitamin D &amp; Vitamin B12</li>
-            <li>Complete thyroid (Free T3 &amp; Free T4)</li>
-            <li>Iron studies (ferritin, serum iron, transferrin)</li>
-            <li>Electrolytes (sodium, potassium, calcium, magnesium)</li>
-            <li>CRP &amp; full protein panel (albumin, total protein)</li>
-          </ul>
-          <a class="btn btn-ghost" href="#" data-cta="app" style="width:100%;">Book Platinum</a>
-        </div>
       </div>
-      <p class="reveal center" style="margin-top:26px;color:var(--muted);font-size:14px;" data-i18n="pr.note">Prices shown in PKR. Test-package prices vary by lab and are shown before you book.</p>
+      <p class="reveal center" style="margin-top:26px;color:var(--muted);font-size:14px;" data-i18n="pr.note">Prices shown in PKR and confirmed before you book. Home collection is available at no extra charge.</p>
     </div>
   </section>
 
@@ -119,6 +115,6 @@
   </section>
 
   <div id="site-footer"></div>
-  <script src="assets/app.js?v=105"></script>
+  <script src="assets/app.js?v=106"></script>
 </body>
 </html>

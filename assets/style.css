@@ -1763,13 +1763,20 @@ footer.site.mf .mf-bottom a:hover { color: var(--teal-l); padding-left: 0; }
   flex: 0 0 20px;
 }
 .plan.featured li::before { background: rgba(255,255,255,.14); color: var(--teal-l); }
-/* Platinum (last card): a quiet luxe edge - teal into soft violet. */
-.price-grid .plan:last-child {
+/* Platinum-era third-card edge. Scoped with :not(.featured): with two packages
+   the LAST card is Premium (dark), and this white face would paint over it. */
+.price-grid .plan:last-child:not(.featured) {
   background: linear-gradient(#fff, #fff) padding-box,
               linear-gradient(135deg, rgba(0,191,165,.55), rgba(129,140,248,.42), rgba(0,191,165,.22)) border-box;
   box-shadow: 0 12px 34px rgba(93,95,239,.10), 0 10px 30px rgba(13,31,45,.06);
 }
-.price-grid .plan:last-child h3 {
+.price-grid .plan:last-child:not(.featured) h3 {
   background: linear-gradient(90deg, var(--teal-d), #6D6FF0);
   -webkit-background-clip: text; background-clip: text; color: transparent;
+}
+
+/* Two-package layout: the base grid is 3 columns, which leaves a dead column. */
+.price-grid-2 { grid-template-columns: repeat(2, 1fr); max-width: 860px; margin-left: auto; margin-right: auto; }
+@media (max-width: 860px) {
+  .price-grid-2 { grid-template-columns: 1fr; max-width: 440px; }
 }
