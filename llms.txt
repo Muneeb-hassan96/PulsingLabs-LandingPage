@@ -1,0 +1,32 @@
+# PulsingLabs
+
+> PulsingLabs is a Pakistani health app for booking blood tests at home. A phlebotomist from a licensed partner laboratory collects the sample at the patient's home, and results arrive in the app with plain-language explanations based on the patient's age and sex. Based in Karachi, Pakistan.
+
+## Packages and prices (PKR, home sample collection included)
+
+- Standard check-up, PKR 9,999, 12 tests: pulse, blood pressure (systolic and diastolic), haemoglobin, RBC, WBC, platelets, random blood sugar, total cholesterol, SGPT (ALT), creatinine, calcium.
+- Premium check-up, PKR 16,999, 23 tests: everything in Standard plus HbA1c, LDL, HDL, LDL/HDL ratio, triglycerides, ferritin, ESR, TSH, vitamin D, Anti-HCV and HBsAg (hepatitis C and B screening).
+
+## How it works
+
+1. Choose Standard or Premium in the PulsingLabs app.
+2. Pick a date and time for the home visit and pay in the app (card or wallet).
+3. A phlebotomist collects the sample at home; a licensed partner lab tests it.
+4. Results appear in the app on colour-coded charts, with explanations tuned to age and sex, and an AI assistant that answers questions about them in English or Urdu.
+
+## Also
+
+- Family: add parents, children and a spouse to one account; each gets their own Health ID and age-aware ranges.
+- Privacy: results are private to the patient; companies only ever see anonymised group statistics.
+- Companies: a corporate wellness plan with an HR dashboard (PKR 1,500 per active employee per month after a 30-day free trial).
+- The AI explains results; it does not diagnose or prescribe, and it points urgent symptoms to emergency services.
+
+## Pages
+
+- [Pricing](https://pulsinglabs.com/pricing): both packages and what each includes
+- [FAQ](https://pulsinglabs.com/faq): booking, results, privacy and billing
+- [Features](https://pulsinglabs.com/features)
+- [For business](https://pulsinglabs.com/business)
+- [Refund and cancellation policy](https://pulsinglabs.com/refunds)
+- [Privacy policy](https://pulsinglabs.com/privacy)
+- [Contact](https://pulsinglabs.com/contact): contact@pulsinglabs.com
