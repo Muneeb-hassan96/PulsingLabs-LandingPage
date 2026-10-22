@@ -424,6 +424,8 @@
               NAV.filter(function (n) { return n.enabled !== false && n.href !== 'index.html'; })
                  .map(function (n) { return '<a href="' + n.href + '">' + n.label + '</a>'; })
                  .join('') +
+              // Footer-only: every visitor can reach these from any page.
+              '<a href="how-it-works.html">How it works</a><a href="faq.html">FAQ</a>' +
             '</nav>' +
           '</div>' +
           '<div class="mf-card mf-touch reveal d2">' +
@@ -440,7 +442,7 @@
         '</div>' +
         '<div class="foot-bottom mf-bottom">' +
           '<span class="mf-logo">' + LOGO_SVG + ' PulsingLabs</span>' +
-          '<span>© <span id="yr"></span> PulsingLabs · <a href="privacy.html" data-i18n="foot.privacy">Privacy</a> · <a href="terms.html">Terms</a> · <a href="refunds.html">Refunds</a> · <a href="pricing.html#faq" data-i18n="foot.faq">FAQ</a></span>' +
+          '<span>© <span id="yr"></span> PulsingLabs · <a href="privacy.html" data-i18n="foot.privacy">Privacy</a> · <a href="terms.html">Terms</a> · <a href="refunds.html">Refunds</a> · <a href="faq.html">FAQ</a></span>' +
         '</div>' +
       '</div></footer>';
 

@@ -4,8 +4,9 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="theme-color" content="#F4EFE7" id="themeColorMeta" />
-  <title>Insights · PulsingLabs</title>
-  <meta name="description" content="Plain-English guides to understanding your lab results and staying ahead of chronic illness." />
+  <title>Health Guides | PulsingLabs</title>
+  <meta name="description" content="Plain-language guides to blood tests and results, each reviewed by a doctor before it is published. Until then, see how a home test works and our FAQ." />
+  <meta name="robots" content="noindex, follow" />
   <link rel="canonical" href="https://pulsinglabs.com/insights" />
   <meta property="og:url" content="https://pulsinglabs.com/insights" />
   <link rel="preconnect" href="https://api.fontshare.com" crossorigin />
@@ -17,8 +18,9 @@
     <link rel="stylesheet" href="https://api.fontshare.com/v2/css?f[]=general-sans@400,500,600,700&display=swap" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&display=swap" />
   </noscript>
-  <link rel="stylesheet" href="assets/style.css?v=109" />
+  <link rel="stylesheet" href="assets/style.css?v=111" />
   <link rel="icon" type="image/png" href="assets/img/favicon.png" />
+  <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://pulsinglabs.com/"},{"@type":"ListItem","position":2,"name":"Insights","item":"https://pulsinglabs.com/insights"}]}]}</script>
 </head>
 <body>
   <div id="site-header"></div>
@@ -26,52 +28,22 @@
   <!-- ============ PAGE HERO (cream) ============ -->
   <section class="page-hero s-cream">
     <div class="wrap page-enter">
+      <nav class="crumbs" aria-label="Breadcrumb"><a href="index.html">Home</a> › <span aria-current="page">Insights</span></nav>
       <span class="eyebrow" data-i18n="pg.ins.eyebrow">Insights</span>
       <h1 data-i18n-html="pg.ins.h1">Learn about<br><span class="grad-text">your health</span></h1>
       <p class="lead" data-i18n="pg.ins.lead">Plain-English guides to understanding your lab results and staying ahead of chronic illness.</p>
     </div>
   </section>
 
-  <!-- ============ FEATURED + ARTICLES (white) ============ -->
+  <!-- ============ GUIDES (white) ============
+       The article cards that used to sit here linked nowhere. Guides come back
+       one by one as each is written AND reviewed by a qualified doctor; until
+       then the page is noindex (see <head>) and says so plainly. -->
   <section>
-    <div class="wrap">
-      <!-- Featured -->
-      <a class="media photo tall no-reveal-clip" href="#" style="display:grid;align-items:end;text-decoration:none;padding:36px;">
-        <img class="media-img" src="assets/img/foodnew.webp" alt="" aria-hidden="true" loading="lazy" />
-        <div style="position:relative;z-index:2;max-width:560px;">
-          <span class="eyebrow" style="color:var(--teal-l);" data-i18n="ins.feat.eye">Featured guide</span>
-          <h2 style="color:var(--on-dark);font-size:clamp(28px,4vw,46px);" data-i18n="ins.feat.h2">What your HbA1c really tells you</h2>
-          <p style="color:var(--on-dark-soft);font-size:17px;margin-top:12px;" data-i18n="ins.feat.p">The diabetes marker everyone talks about, what the numbers mean, and what to do at each level.</p>
-        </div>
-      </a>
-
-      <!-- TODO: link these to real blog posts once published -->
-      <div class="art-grid" style="margin-top:28px;">
-        <a class="art reveal" href="#">
-          <div class="thumb" data-icon="droplet"></div>
-          <div class="body"><div class="date" data-i18n="ins.dGuide">Guide</div><h3 data-i18n="ins.a1h">Cholesterol, decoded</h3><p data-i18n="ins.a1p">LDL, HDL, triglycerides, which numbers matter and how to move them in the right direction.</p></div>
-        </a>
-        <a class="art reveal d1" href="#">
-          <div class="thumb t2" data-icon="sparkle"></div>
-          <div class="body"><div class="date" data-i18n="ins.dGuide">Guide</div><h3 data-i18n="ins.a2h">Why Vitamin D matters</h3><p data-i18n="ins.a2p">Low Vitamin D is common and easy to miss. How to read your level and act on it.</p></div>
-        </a>
-        <a class="art reveal d2" href="#">
-          <div class="thumb t3" data-icon="heart"></div>
-          <div class="body"><div class="date" data-i18n="ins.dGuide">Guide</div><h3 data-i18n="ins.a3h">Understanding your thyroid (TSH)</h3><p data-i18n="ins.a3p">What TSH, T3 and T4 mean, and the signs worth a follow-up test.</p></div>
-        </a>
-        <a class="art reveal" href="#">
-          <div class="thumb t2" data-icon="chart"></div>
-          <div class="body"><div class="date" data-i18n="ins.dGuide">Guide</div><h3 data-i18n="ins.a4h">Reading a Complete Blood Count</h3><p data-i18n="ins.a4p">Haemoglobin, RBC, WBC and platelets, a calm walkthrough of the most common panel.</p></div>
-        </a>
-        <a class="art reveal d1" href="#">
-          <div class="thumb t3" data-icon="home"></div>
-          <div class="body"><div class="date" data-i18n="ins.dHowto">How-to</div><h3 data-i18n="ins.a5h">Preparing for a fasting blood test</h3><p data-i18n="ins.a5p">What "fasting" really means, how long, and what you can still do beforehand.</p></div>
-        </a>
-        <a class="art reveal d2" href="#">
-          <div class="thumb" data-icon="users"></div>
-          <div class="body"><div class="date" data-i18n="ins.dFamily">Family</div><h3 data-i18n="ins.a6h">Health checks by age</h3><p data-i18n="ins.a6p">Which screenings make sense in your 20s, 30s, 40s and beyond, for the whole family.</p></div>
-        </a>
-      </div>
+    <div class="wrap center" style="max-width:680px;margin:0 auto;">
+      <h2 class="reveal">Our guides are being written</h2>
+      <p class="lead reveal d1" style="margin:14px auto 0;">Each guide explains one test in plain words and is reviewed by a doctor before it goes up. Until then, these pages answer the most common questions:</p>
+      <p class="reveal d2" style="margin-top:22px;font-size:16px;"><a href="how-it-works.html" style="color:var(--teal-d);font-weight:700;">How a home blood test works</a> · <a href="pricing.html" style="color:var(--teal-d);font-weight:700;">What each package tests</a> · <a href="faq.html" style="color:var(--teal-d);font-weight:700;">Frequently asked questions</a></p>
     </div>
   </section>
 
@@ -96,7 +68,7 @@
     </div>
   </section>
 
-  <div id="site-footer"><nav aria-label="Site pages"><p><a href="index.html">Home</a> · <a href="pricing.html">Pricing</a> · <a href="features.html">Features</a> · <a href="faq.html">FAQ</a> · <a href="business.html">For Business</a> · <a href="about.html">About</a> · <a href="contact.html">Contact</a> · <a href="insights.html">Insights</a> · <a href="refunds.html">Refunds</a> · <a href="privacy.html">Privacy</a> · <a href="terms.html">Terms</a></p><p>PulsingLabs · Blood tests at home · Karachi, Pakistan · <a href="mailto:contact@pulsinglabs.com">contact@pulsinglabs.com</a></p></nav></div>
-  <script src="assets/app.js?v=109"></script>
+  <div id="site-footer"><nav aria-label="Site pages"><p><a href="index.html">Home</a> · <a href="pricing.html">Pricing</a> · <a href="how-it-works.html">How it works</a> · <a href="faq.html">FAQ</a> · <a href="features.html">Features</a> · <a href="business.html">For business</a> · <a href="about.html">About</a> · <a href="contact.html">Contact</a> · <a href="refunds.html">Refund policy</a> · <a href="privacy.html">Privacy policy</a> · <a href="terms.html">Terms</a></p><p>PulsingLabs · Blood tests at home in Karachi · <a href="mailto:contact@pulsinglabs.com">contact@pulsinglabs.com</a></p></nav></div>
+  <script src="assets/app.js?v=110"></script>
 </body>
 </html>

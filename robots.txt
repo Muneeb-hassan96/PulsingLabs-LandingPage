@@ -1,4 +1,4 @@
-# PulsingLabs - blood tests at home, results explained.
+# PulsingLabs - blood tests at home in Karachi, results explained.
 # Search engines and AI assistants are welcome to read and cite this site.
 User-agent: *
 Allow: /
