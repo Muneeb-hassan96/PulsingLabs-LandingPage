@@ -17,11 +17,11 @@
 4. PulsingLabs assigns a licensed partner lab. A phlebotomist visits, checks the visit code shown in the patient's app, takes pulse and blood pressure, and collects the sample.
 5. The lab tests the sample and signs off the results. They appear in the app on colour-coded charts for the patient's age and sex, and an AI assistant answers questions about them in English or Urdu.
 
-## Changes and visit charges
+## Changes and visiting charges
 
 - Reschedule or cancel free up to 24 hours before the visit; cancelling then gives a full refund.
 - In the last 24 hours the patient can't cancel or move the visit in the app; the lab calls them to arrange any change.
-- If the visit has to move in those 24 hours because of the patient, or the patient is not home when the phlebotomist arrives, the first time is free; after that, visit charges of 20% of what they paid apply.
+- If the visit has to move in those 24 hours because of the patient, or the patient is not home when the phlebotomist arrives, the first time is free; after that, visiting charges of 20% of what they paid apply.
 - If PulsingLabs or the lab cancels, the patient gets a full refund.
 
 ## Also

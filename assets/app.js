@@ -17,8 +17,12 @@
   // Backend API base for live data (public, unauthenticated endpoints only).
   // Auto-detects: localhost/file:// -> local Node on :3000; anything else -> the
   // production API host below. Set PROD_API_BASE before deploying the site.
-  var PROD_API_BASE = 'https://api.pulsinglabs.pk/api'; // <-- set to your real API host
-  var _devHost = /^(localhost|127\.|0\.0\.0\.0|10\.|192\.168\.|172\.(1[6-9]|2\d|3[01])\.)/;
+  var PROD_API_BASE = 'https://pulsinglabs.onrender.com/api'; // the live backend (Render). api.pulsinglabs.pk never existed, so forms failed until 2026-10-23
+  // The business's local phone and address (the payment gateway requires them on
+  // the site). Fill these two and every page shows them: footer, contact page,
+  // the service policy on how-it-works. Left empty, those lines stay hidden.
+  var BUSINESS = { phone: '', address: '' };
+  var _devHost =/^(localhost|127\.|0\.0\.0\.0|10\.|192\.168\.|172\.(1[6-9]|2\d|3[01])\.)/;
   var API_BASE = (location.protocol === 'file:' || _devHost.test(location.hostname))
     ? 'http://localhost:3000/api'
     : PROD_API_BASE;
@@ -62,6 +66,8 @@
     compass:    '<circle cx="12" cy="12" r="10"/><polygon points="16.2 7.8 14 14 7.8 16.2 10 10 16.2 7.8"/>',
     heart:      '<path d="M20.8 5.6a5 5 0 0 0-7.1 0L12 7.3l-1.7-1.7a5 5 0 1 0-7.1 7.1L12 21l8.8-8.3a5 5 0 0 0 0-7.1z"/>',
     mail:       '<rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 6-10 7L2 6"/>',
+    phone:      '<path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2z"/>',
+    pin:        '<path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/>',
     briefcase:  '<rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/>',
     lab:        '<path d="M9 3h6"/><path d="M10 3v6.5L5 18a2 2 0 0 0 1.7 3h10.6A2 2 0 0 0 19 18l-5-8.5V3"/><line x1="7.5" y1="14" x2="16.5" y2="14"/>'
   };
@@ -70,6 +76,61 @@
   }
   function paintIcons() {
     document.querySelectorAll('[data-icon]').forEach(function (el) { el.innerHTML = icon(el.getAttribute('data-icon')); });
+  }
+
+  /* ------------------------------------------------------------------ */
+  /* Legal pages (privacy, terms, refunds): section cards, contents list, */
+  /* reading time and progress. Progressive: without JS the text reads   */
+  /* as one column. The legal wording itself is never changed here.      */
+  /* ------------------------------------------------------------------ */
+  function bindLegal() {
+    var article = document.querySelector('article.legal');
+    var toc = document.getElementById('legalToc');
+    if (!article || !toc) return;
+    var links = [];
+    [].slice.call(article.querySelectorAll('h2')).forEach(function (h, i) {
+      // The heading and everything up to the next heading become one card.
+      var sec = document.createElement('section');
+      sec.className = 'legal-sec';
+      h.parentNode.insertBefore(sec, h);
+      var n = h;
+      while (n && !(n !== h && n.nodeType === 1 && n.tagName === 'H2')) { var nx = n.nextSibling; sec.appendChild(n); n = nx; }
+      var m = h.textContent.trim().match(/^(\d+)\.\s*(.*)$/);
+      var num = m ? m[1] : String(i + 1), title = m ? m[2] : h.textContent.trim();
+      h.textContent = '';
+      var badge = document.createElement('span'); badge.className = 'legal-num'; badge.textContent = num;
+      h.appendChild(badge); h.appendChild(document.createTextNode(title));
+      sec.id = 's-' + title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+      var li = document.createElement('li'), a = document.createElement('a');
+      a.href = '#' + sec.id;
+      var sn = document.createElement('span'); sn.className = 'n'; sn.textContent = num;
+      a.appendChild(sn); a.appendChild(document.createTextNode(title));
+      li.appendChild(a); toc.appendChild(li);
+      links.push([sec, a]);
+    });
+    var words = (article.textContent || '').trim().split(/\s+/).length;
+    document.querySelectorAll('[data-read-time]').forEach(function (el) { el.textContent = Math.max(1, Math.round(words / 200)) + ' min read'; });
+    if ('IntersectionObserver' in window) {
+      var io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) {
+          if (!e.isIntersecting) return;
+          links.forEach(function (p) { p[1].classList.toggle('on', p[0] === e.target); });
+        });
+      }, { rootMargin: '-35% 0px -60% 0px' });
+      links.forEach(function (p) { io.observe(p[0]); });
+    }
+    var bar = document.querySelector('.legal-progress span');
+    if (bar) {
+      var ticking = false;
+      var upd = function () {
+        ticking = false;
+        var r = article.getBoundingClientRect();
+        var p = Math.min(1, Math.max(0, (window.innerHeight * 0.35 - r.top) / Math.max(1, r.height - window.innerHeight * 0.3)));
+        bar.style.width = (p * 100).toFixed(1) + '%';
+      };
+      window.addEventListener('scroll', function () { if (!ticking) { ticking = true; requestAnimationFrame(upd); } }, { passive: true });
+      upd();
+    }
   }
 
   var NAV = [
@@ -213,7 +274,7 @@
       'spA.lead': 'Every marker sits on a clinical zone chart (Normal, Borderline, or High), tuned to your age and sex, with a plain-English explanation underneath.',
       'spA.li1': 'Colour-coded healthy ranges, not raw numbers', 'spA.li2': 'AI explanations grounded in your own results', 'spA.li3': 'Trends across months and years, at a glance',
       'spB.eyebrow': 'AI health assistant', 'spB.h2': 'Ask anything. In your language.',
-      'spB.lead': 'Chat about your results like you would with a calm, knowledgeable friend, in English or اردو, and let it book your next test right inside the conversation.',
+      'spB.lead': 'Chat about your results like you would with a calm, knowledgeable friend, in English or اردو, and ask it to move or cancel a visit right inside the conversation.',
       'spB.li1': 'Plain answers, never jargon or scare-talk', 'spB.li2': 'Books, reschedules & cancels conversationally', 'spB.li3': 'Urgent symptoms trigger emergency guidance',
       'spC.eyebrow': 'Family & history', 'spC.h2': 'Your whole household, one account.',
       'spC.lead': 'Add parents, kids and your spouse to one account, each with their own Health ID, so the whole family\'s results live on one timeline.',
@@ -251,7 +312,7 @@
       'scene.eyebrow': 'Why PulsingLabs', 'scene.h2': 'Clarity for the people you love.',
       'scene.p': 'From your own numbers to your whole family\'s, every result explained, tracked, and within reach.',
       'pg.feat.eyebrow': 'Features', 'pg.feat.h1': 'Everything you need to<br><span class="grad-text">own your health</span>', 'pg.feat.lead': 'From the first booking to understanding every number, and doing it for your whole family.',
-      'pg.faq.eyebrow': 'Help centre', 'pg.faq.h1': 'Frequently <span class="grad-text">asked</span>', 'pg.faq.lead': 'Everything about booking, results, privacy and the corporate plan. Can\'t find it? <a href="contact.html" style="color:var(--teal-l);font-weight:600;">Get in touch.</a>',
+      'pg.faq.eyebrow': 'Help centre', 'pg.faq.h1': 'Frequently <span class="grad-text">asked</span>', 'pg.faq.lead': 'Everything about booking, results, privacy and team check-ups for companies. Can\'t find it? <a href="contact.html" style="color:var(--teal-l);font-weight:600;">Get in touch.</a>',
       'pg.biz.eyebrow': 'For Business', 'pg.biz.h1': 'Healthier teams,<br><span class="grad-text">lower absenteeism</span>', 'pg.biz.lead': 'Give employees preventive screening and wellness, with an HR dashboard that turns it into insight, without ever exposing individual medical data.',
       'pg.ins.eyebrow': 'Insights', 'pg.ins.h1': 'Learn about<br><span class="grad-text">your health</span>', 'pg.ins.lead': 'Plain-English guides to understanding your lab results and staying ahead of chronic illness.',
       'pg.price.eyebrow': 'Pricing', 'pg.price.h1': 'Simple, <span class="grad-text">transparent</span> pricing', 'pg.price.lead': 'Two test packages - pick the depth you want. Pay once per package, no subscription, and a phlebotomist collects your sample at home.',
@@ -262,7 +323,7 @@
       'feat.s1.li1': 'Two packages: Standard (12 tests) and Premium (23 tests)', 'feat.s1.li2': 'Real-time home-visit slots', 'feat.s1.li3': 'Home sample collection at your door',
       'feat.s2.eye': 'Understand your results', 'feat.s2.h2': 'See exactly where you stand.', 'feat.s2.lead': 'Every marker sits on a clinical zone chart (Normal, Borderline, High), tuned to your age and sex, with a plain-English explanation underneath.',
       'feat.s2.li1': 'Colour-coded healthy ranges, not raw numbers', 'feat.s2.li2': 'Age-, sex- & pregnancy-aware reference ranges', 'feat.s2.li3': 'Trends across months and years',
-      'feat.s3.eye': 'AI health assistant', 'feat.s3.h2': 'Ask anything. In your language.', 'feat.s3.lead': 'Chat about your results like you would with a calm, knowledgeable friend, in English or اردو, and let it book your next test inside the conversation.',
+      'feat.s3.eye': 'AI health assistant', 'feat.s3.h2': 'Ask anything. In your language.', 'feat.s3.lead': 'Chat about your results like you would with a calm, knowledgeable friend, in English or اردو, and ask it to move or cancel a visit inside the conversation.',
       'feat.s3.li1': 'Plain answers grounded in your own numbers', 'feat.s3.li2': 'Books, reschedules & cancels conversationally', 'feat.s3.li3': 'Urgent symptoms trigger emergency guidance',
       'feat.s3.b1': 'Is my vitamin D low?', 'feat.s3.b2': 'Yes, it\'s 22 ng/mL, below the 30 target. Common here and easy to fix with sunlight, diet or a supplement. Want me to book a recheck in 8 weeks?', 'feat.s3.b3': 'Yes please',
       'feat.s4.eye': 'Family', 'feat.s4.h2': 'Your whole household, one timeline.', 'feat.s4.lead': 'Add family members to your account and book their home visits too, so everyone\'s results, past and present, live in one place.',
@@ -330,7 +391,7 @@
       'fq.u4q': 'Can I manage my family\'s health too?', 'fq.u4a': 'Yes. Add profiles for parents, kids and your spouse, each with age- and sex-aware reference ranges, all from one account.',
       'fq.u5q': 'Is the app available in Urdu?', 'fq.u5a': 'The app itself is in English, but the AI health assistant can chat with you in Urdu if you prefer.',
       'fq.r1q': 'How are my results explained?', 'fq.r1a': 'Each marker is plotted on a clinical zone chart (Normal / Borderline / High) tuned to your age and sex, with a plain-English explanation. The AI assistant can answer follow-up questions in everyday language.',
-      'fq.r2q': 'Are the reference ranges trustworthy?', 'fq.r2a': 'They follow evidence-based guidelines (ADA, AASLD, WHO, NICE and others), differentiated by age, sex and pregnancy, and are kept honest by a 175-case clinical test suite.',
+      'fq.r2q': 'Are the reference ranges trustworthy?', 'fq.r2a': 'They follow evidence-based guidelines (ADA, AASLD, WHO, NICE and others), differentiated by age, sex and pregnancy, and are kept honest by an automated clinical test suite.',
       'fq.r3q': 'Can the AI give me medical advice?', 'fq.r3a': 'It explains your results and general next steps, but it never prescribes drugs or doses, and it escalates urgent symptoms to emergency guidance. It is a guide, not a replacement for your doctor.',
       'fq.p1q': 'Is my health data private?', 'fq.p1a': 'Yes. Your results are private to your account, encrypted in transit, and never sold. For companies, employees\' individual results are never visible to HR, only anonymised aggregate trends.',
       'fq.p2q': 'What does it cost?', 'fq.p2a': 'The app is free. You pay per check-up, with home sample collection included: Standard is PKR 9,999 (12 tests) and Premium is PKR 16,999 (23 tests). Companies pay a flat PKR 1,500 per active employee per month after a 30-day free trial. See <a href="pricing.html" style="color:var(--teal-d);font-weight:700;">pricing</a>.',
@@ -438,6 +499,19 @@
               '<span class="ok-msg" data-i18n="foot.nlOk">Subscribed, see you in your inbox.</span>' +
               '<span class="err-msg" data-i18n="foot.nlErr">That did not work, try again.</span>' +
             '</form>' +
+            // The policies, where people actually look (the bottom line was too small to find).
+            '<div class="mf-legal">' +
+              '<span class="mf-eyebrow">Your data and our policies</span>' +
+              '<div class="mf-legal-links">' +
+                '<a href="privacy.html"><span class="ti" data-icon="shieldcheck"></span>Privacy</a>' +
+                '<a href="terms.html"><span class="ti" data-icon="file"></span>Terms</a>' +
+                '<a href="refunds.html"><span class="ti" data-icon="card"></span>Refunds</a>' +
+                '<a href="how-it-works.html#service-policy"><span class="ti" data-icon="home"></span>Service</a>' +
+              '</div>' +
+              '<p class="mf-biz"><a href="mailto:contact@pulsinglabs.com">contact@pulsinglabs.com</a>' +
+                '<span data-biz-wrap="phone"> · <a data-biz="phone"></a></span>' +
+                '<span data-biz-wrap="address"> · <span data-biz="address"></span></span></p>' +
+            '</div>' +
           '</div>' +
         '</div>' +
         '<div class="foot-bottom mf-bottom">' +
@@ -1733,6 +1807,17 @@
   /* ------------------------------------------------------------------ */
   /* Init                                                               */
   /* ------------------------------------------------------------------ */
+  function fillBusiness() {
+    ['phone', 'address'].forEach(function (k) {
+      var v = BUSINESS[k];
+      document.querySelectorAll('[data-biz="' + k + '"]').forEach(function (el) {
+        el.textContent = v;
+        if (k === 'phone') (el.closest('a') || el).href = 'tel:' + v.replace(/[^\d+]/g, '');
+      });
+      document.querySelectorAll('[data-biz-wrap="' + k + '"]').forEach(function (el) { el.hidden = !v; });
+    });
+  }
+
   function init() {
     // scroll progress bar
     var bar = document.createElement('div'); bar.className = 'scroll-bar'; document.body.appendChild(bar);
@@ -1742,6 +1827,8 @@
     applyLang();
     buildCurtain();
     paintIcons();
+    fillBusiness();
+    bindLegal();
     bindNav();
     bindMega();
     bindCurtainNav();
