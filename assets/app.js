@@ -21,7 +21,7 @@
   // The business's local phone and address (the payment gateway requires them on
   // the site). Fill these two and every page shows them: footer, contact page,
   // the service policy on how-it-works. Left empty, those lines stay hidden.
-  var BUSINESS = { phone: '', address: '' };
+  var BUSINESS = { phone: '+92 333 5556534', address: 'Saima Mall & Residency, Gulshan-e-Iqbal, Karachi' };
   var _devHost =/^(localhost|127\.|0\.0\.0\.0|10\.|192\.168\.|172\.(1[6-9]|2\d|3[01])\.)/;
   var API_BASE = (location.protocol === 'file:' || _devHost.test(location.hostname))
     ? 'http://localhost:3000/api'
