@@ -516,7 +516,7 @@
         '</div>' +
         '<div class="foot-bottom mf-bottom">' +
           '<span class="mf-logo">' + LOGO_SVG + ' PulsingLabs</span>' +
-          '<span>© <span id="yr"></span> PulsingLabs · <a href="privacy.html" data-i18n="foot.privacy">Privacy</a> · <a href="terms.html">Terms</a> · <a href="refunds.html">Refunds</a> · <a href="faq.html">FAQ</a></span>' +
+          '<span>© <span id="yr"></span> PulsingLabs · <a href="privacy.html" data-i18n="foot.privacy">Privacy</a> · <a href="terms.html">Terms</a> · <a href="refunds.html">Refunds</a> · <a href="delete-account.html">Delete account</a> · <a href="faq.html">FAQ</a></span>' +
         '</div>' +
       '</div></footer>';
 
