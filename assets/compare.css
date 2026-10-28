@@ -1,0 +1,131 @@
+/* Pricing: Standard vs Premium, test by test. Used only by pricing.html.
+   Colours follow the site: Standard = teal, Premium = navy with the teal/coral accent. */
+.cmp-wrap { --cmp-gap: 12px; max-width: 980px; margin: 0 auto; }
+.cmp-wrap .sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+/* ---------- tools: filter chips + expand all ---------- */
+.cmp-tools { display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap; margin-bottom: 18px; }
+.cmp-filter { display: flex; gap: 8px; flex-wrap: wrap; }
+.cmp-wrap .chip, .cmp-all {
+  font: inherit; font-size: 14px; font-weight: 700; cursor: pointer;
+  border-radius: 100px; padding: 9px 16px; line-height: 1;
+  border: 1px solid var(--line); background: #fff; color: var(--ink);
+  transition: background .2s, color .2s, border-color .2s, transform .2s var(--ease);
+}
+.cmp-wrap .chip:hover, .cmp-all:hover { border-color: var(--teal); color: var(--teal-d); }
+.cmp-wrap .chip.on { background: var(--ink-dark); border-color: var(--ink-dark); color: #fff; }
+.cmp-all { color: var(--teal-d); background: transparent; }
+
+/* ---------- the table: three "cards" (tests, Standard, Premium) with a gap between ---------- */
+.cmp { width: 100%; border-collapse: separate; border-spacing: var(--cmp-gap) 0; margin: 0 calc(var(--cmp-gap) * -1); width: calc(100% + var(--cmp-gap) * 2); table-layout: fixed; }
+.cmp col.c1, .cmp col.c2 { width: 176px; }
+.cmp th, .cmp td { background: #fff; text-align: left; font-weight: inherit; }
+.cmp td { text-align: center; }
+
+/* header (sticks under the site nav while you scroll the list) */
+.cmp thead th { position: sticky; top: 74px; z-index: 6; padding: 18px 14px 16px; vertical-align: bottom; border-radius: 22px 22px 0 0; text-align: center; color: #fff; }
+.cmp thead .h0 { background: #DCE9E4; color: var(--ink-dark); text-align: left; padding-left: 22px; }
+.cmp thead .h1 { background: var(--grad-teal); }
+.cmp thead .h2 { background: linear-gradient(var(--navy), var(--navy)) padding-box; box-shadow: inset 0 3px 0 #4DEAD0; }
+.cmp thead span { display: block; }
+.cmp .h-t { font-size: 17px; font-weight: 800; letter-spacing: -.01em; }
+.cmp .h-s { font-size: 12.5px; font-weight: 500; opacity: .78; margin-top: 4px; line-height: 1.35; }
+.cmp .h-n { font-size: 13px; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; opacity: .92; }
+.cmp .h-p { font-size: clamp(18px, 2.6vw, 25px); font-weight: 900; letter-spacing: -.02em; line-height: 1.15; margin-top: 2px; }
+.cmp .h-c { font-size: 12.5px; font-weight: 600; opacity: .82; margin-top: 2px; }
+.cmp .h-tag { display: inline-block; font-size: 10.5px; font-weight: 800; letter-spacing: .07em; padding: 4px 11px; border-radius: 100px; margin-bottom: 8px; color: var(--navy); background: linear-gradient(135deg, #4DEAD0, #00BFA5); }
+
+/* rows */
+.cmp tbody th, .cmp tbody td { border-bottom: 1px solid var(--line); }
+.cmp-row th { padding: 14px 18px 14px 22px; }
+.cmp-row .nm { display: block; font-size: 16px; font-weight: 700; color: var(--ink-dark); line-height: 1.3; }
+.cmp-row .sub { display: block; font-size: 13px; color: var(--muted); margin-top: 1px; }
+.cmp-row[data-tier="p"] th { background: linear-gradient(90deg, rgba(10,22,34,.055), #fff 55%); }
+.cmp-row[data-tier="p"] .nm::after { content: "PREMIUM"; margin-left: 8px; font-size: 9.5px; font-weight: 800; letter-spacing: .08em; padding: 2px 7px; border-radius: 100px; vertical-align: 2px; color: #fff; background: var(--navy); }
+.cmp-row:hover th, .cmp-row:hover td { background-color: #F5FBF8; }
+.cmp-row[data-tier="p"]:hover th { background: linear-gradient(90deg, rgba(10,22,34,.08), #F5FBF8 55%); }
+
+/* See more */
+.more { display: inline-flex; align-items: center; gap: 6px; margin-top: 8px; padding: 5px 12px 5px 11px; font: inherit; font-size: 13px; font-weight: 700; color: var(--teal-d); background: var(--bg-mint); border: 1px solid rgba(0,191,165,.25); border-radius: 100px; cursor: pointer; transition: background .2s, color .2s, border-color .2s; }
+.more::after { content: ""; width: 7px; height: 7px; border-right: 2px solid currentColor; border-bottom: 2px solid currentColor; transform: translateY(-2px) rotate(45deg); transition: transform .3s var(--ease); }
+.more:hover { background: var(--teal-d); border-color: var(--teal-d); color: #fff; }
+.more[aria-expanded="true"] { background: var(--ink-dark); border-color: var(--ink-dark); color: #fff; }
+.more[aria-expanded="true"]::after { transform: translateY(1px) rotate(-135deg); }
+
+/* ticks and dashes */
+.cmp-row td { padding: 14px 0; vertical-align: middle; }
+.tk, .no { display: inline-flex; align-items: center; justify-content: center; width: 28px; height: 28px; border-radius: 50%; }
+.tk::before { content: ""; width: 10px; height: 6px; border-left: 2.5px solid currentColor; border-bottom: 2.5px solid currentColor; transform: translateY(-1px) rotate(-45deg); }
+.cmp td.s .tk { background: var(--teal); color: #fff; box-shadow: 0 4px 12px rgba(0,191,165,.35); }
+.cmp td.p .tk { background: var(--navy); color: #4DEAD0; box-shadow: 0 4px 12px rgba(10,22,34,.28); }
+.no::before { content: ""; width: 12px; height: 2px; border-radius: 2px; background: #C9D2D8; }
+
+/* group labels */
+.cmp-cat th, .cmp-cat td { background: #EEF4F1; border-bottom: 0; padding: 9px 22px; font-size: 11.5px; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; color: var(--teal-d); }
+.cmp-cat th small { font-size: 11.5px; font-weight: 600; letter-spacing: .02em; text-transform: none; color: var(--muted); margin-left: 6px; }
+
+/* the "what it tells you" panel, opens under the test */
+.cmp-det td { padding: 0; border-bottom: 0; background: #F3FAF7; text-align: left; }
+.cmp .dw { display: grid; grid-template-rows: 0fr; transition: grid-template-rows .38s var(--ease); }
+.cmp .dw > .di { overflow: hidden; min-height: 0; }
+.cmp-det.open td { border-bottom: 1px solid var(--line); }
+.cmp-det.open .dw { grid-template-rows: 1fr; }
+.cmp .di { box-shadow: inset 4px 0 0 var(--teal); }
+.cmp .di p { padding: 0 24px 0 26px; font-size: 15px; line-height: 1.65; color: var(--ink); max-width: 68ch; }
+.cmp-det.open .di p:first-child { padding-top: 16px; }
+.cmp .di .where { margin: 10px 0 16px; font-size: 12.5px; font-weight: 800; letter-spacing: .04em; color: var(--teal-d); }
+.cmp .di .where.pre { color: var(--navy); }
+.cmp-det.open .di .where { padding-bottom: 0; }
+.cmp-det[hidden], .cmp-row[hidden], .cmp-g[hidden] { display: none; }
+
+/* totals + buttons (bottom of the cards) */
+.cmp tfoot th, .cmp tfoot td { border-bottom: 0; }
+.cmp-tot th { padding: 14px 22px; font-size: 13px; font-weight: 700; color: var(--muted); border-top: 1px solid var(--line); }
+.cmp-tot td { padding: 14px 0; font-size: 20px; font-weight: 900; border-top: 1px solid var(--line); }
+.cmp-tot td.s b { color: var(--teal-d); }
+.cmp-tot td.p b { color: var(--navy); }
+.cmp-btns th { padding: 6px 22px 22px; font-size: 13px; font-weight: 500; color: var(--muted); line-height: 1.5; border-radius: 0 0 22px 22px; }
+.cmp-btns td { padding: 6px 12px 22px; border-radius: 0 0 22px 22px; }
+.cmp-btns td, .cmp-btns th { vertical-align: middle; }
+
+.cbtn { display: inline-flex; align-items: center; justify-content: center; width: 100%; padding: 13px 14px; border-radius: 100px; font-size: 14.5px; font-weight: 800; line-height: 1.15; text-align: center; text-decoration: none; color: #fff; background: var(--grad-teal); box-shadow: 0 10px 24px rgba(0,191,165,.3); transition: transform .25s var(--ease), box-shadow .25s; }
+.cbtn:hover { transform: translateY(-2px); box-shadow: 0 14px 30px rgba(0,191,165,.4); }
+.cbtn.pre { background: var(--navy); color: #fff; box-shadow: 0 10px 24px rgba(10,22,34,.3), inset 0 0 0 1.5px rgba(77,234,208,.55); }
+.cbtn.pre:hover { box-shadow: 0 14px 30px rgba(10,22,34,.4), inset 0 0 0 1.5px #4DEAD0; }
+.cmp-cta { display: none; }
+
+/* side cards look like cards: soft shadow around the whole set */
+.cmp { filter: drop-shadow(0 14px 30px rgba(13,31,45,.09)); }
+
+/* ---------- phones: narrow tick columns, buttons move below ---------- */
+@media (max-width: 640px) {
+  .cmp-wrap { --cmp-gap: 6px; }
+  .cmp col.c1, .cmp col.c2 { width: 86px; }
+  .cmp thead th { top: 62px; padding: 12px 6px 10px; border-radius: 16px 16px 0 0; }
+  .cmp thead .h0 { padding-left: 14px; }
+  .cmp .h-s { display: none; }
+  .cmp .h-t { font-size: 14px; }
+  .cmp .h-n { font-size: 10.5px; letter-spacing: .06em; }
+  .cmp .h-p { font-size: 13.5px; }
+  .cmp .h-c { display: none; }
+  .cmp .h-tag { display: none; }
+  .cmp-row th { padding: 12px 8px 12px 14px; }
+  .cmp-row .nm { font-size: 14.5px; }
+  .cmp-row .sub { font-size: 12px; }
+  .cmp-row[data-tier="p"] .nm::after { display: none; }
+  .cmp-cat th, .cmp-cat td { padding: 8px 14px; font-size: 10.5px; }
+  .cmp-cat th small { display: block; margin: 1px 0 0; font-size: 10.5px; }
+  .tk, .no { width: 24px; height: 24px; }
+  .cmp .di p { padding: 0 16px 0 18px; font-size: 14.5px; }
+  .cmp-tot th { padding: 12px 14px; font-size: 12px; border-radius: 0 0 16px 16px; }
+  .cmp-tot td { border-radius: 0 0 16px 16px; font-size: 17px; }
+  .cmp-btns { display: none; }
+  .cmp-cta { display: grid; gap: 10px; margin-top: 22px; }
+  .cmp-cta .cbtn { padding: 15px 16px; font-size: 15px; }
+  .cmp-tools { gap: 8px; }
+  .cmp-wrap .chip, .cmp-all { font-size: 13px; padding: 8px 13px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cmp .dw, .more::after, .cbtn { transition: none; }
+}

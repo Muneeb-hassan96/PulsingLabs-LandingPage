@@ -4,18 +4,18 @@
 
 ## Packages and prices (PKR, home visit included)
 
-- Standard check-up, PKR 9,999, 12 tests: pulse, blood pressure (systolic and diastolic), haemoglobin, RBC, WBC, platelets, random blood sugar, total cholesterol, SGPT (ALT), creatinine, calcium.
-- Premium check-up, PKR 16,999, 23 tests: everything in Standard plus HbA1c, LDL, HDL, LDL/HDL ratio, triglycerides, ferritin, ESR, TSH, vitamin D, Anti-HCV and HBsAg (hepatitis C and B screening).
+- Standard check-up, PKR 9,999, 16 tests: pulse, blood pressure (systolic and diastolic), haemoglobin, RBC, WBC, platelets, random blood sugar, the full cholesterol profile (total cholesterol, LDL, HDL, LDL/HDL ratio, triglycerides), SGPT (ALT), creatinine, calcium.
+- Premium check-up, PKR 16,999, 23 tests: everything in Standard (16) plus 7 more: HbA1c, ferritin, ESR, TSH, vitamin D, Anti-HCV and HBsAg (hepatitis C and B screening).
 - Every test in both packages is non-fasting: patients eat and drink as usual.
 - The packages are for all ages.
 
 ## How it works
 
 1. Choose Standard or Premium in the PulsingLabs app, for yourself or a family member.
-2. Add the address (map pin) and a phone number, then pick a day and time. Same-day visits need at least 6 hours' notice.
+2. Add the address (map pin) and a phone number, then pick a day and time. Same-day visits need at least 5 hours' notice.
 3. Pay in the app. The booking is made once payment succeeds; an invoice is sent by email and kept in the app.
 4. PulsingLabs assigns a licensed partner lab. A phlebotomist visits, checks the visit code shown in the patient's app, takes pulse and blood pressure, and collects the sample.
-5. The lab tests the sample and signs off the results. They appear in the app on colour-coded charts for the patient's age and sex, and an AI assistant answers questions about them in English or Urdu.
+5. The lab tests the sample and issues the results. They appear in the app on colour-coded charts for the patient's age and sex, and an AI assistant answers questions about them in English or Urdu.
 
 ## Changes and visiting charges
 
@@ -38,5 +38,7 @@
 - [FAQ](https://pulsinglabs.com/faq): booking, fasting, ages, results, privacy and billing
 - [Refund and cancellation policy](https://pulsinglabs.com/refunds)
 - [For business](https://pulsinglabs.com/business)
+- [Terms of service](https://pulsinglabs.com/terms)
 - [Privacy policy](https://pulsinglabs.com/privacy)
+- [Delete your account and data](https://pulsinglabs.com/delete-account)
 - [Contact](https://pulsinglabs.com/contact): contact@pulsinglabs.com

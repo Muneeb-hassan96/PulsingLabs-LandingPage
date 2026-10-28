@@ -367,9 +367,11 @@ body.loaded .hero .page-enter > .hero-cta ~ * {
   opacity: 1; transform: none;
   transition: opacity .6s var(--ease), transform .6s var(--ease);
 }
-body.loaded .hero .page-enter > .lead { transition-delay: 1.15s; }
-body.loaded .hero .page-enter > .hero-cta { transition-delay: 1.35s; }
-body.loaded .hero .page-enter > .hero-cta ~ * { transition-delay: 1.5s; }
+/* SEO: the browser counts the lead paragraph as the page's main content, so a long delay here
+   pushed Largest Contentful Paint to ~3.7s. Kept staggered, but 0.5s sooner. */
+body.loaded .hero .page-enter > .lead { transition-delay: .65s; }
+body.loaded .hero .page-enter > .hero-cta { transition-delay: .8s; }
+body.loaded .hero .page-enter > .hero-cta ~ * { transition-delay: .95s; }
 
 /* ---------- Scroll reveal ---------- */
 .reveal { opacity: 0; transform: translateY(22px); transition: opacity .5s var(--ease), transform .5s var(--ease); will-change: transform, opacity; }

@@ -12,7 +12,7 @@
   // "app" CTA gracefully falls back to the contact page (DEMO_URL) so no button
   // is ever a dead end. Set it once here and all CTAs across all pages light up.
   var APP_URL = '';                  // e.g. 'https://app.pulsinglabs.pk'
-  var DEMO_URL = 'contact.html';     // book-a-demo / contact (always works)
+  var DEMO_URL = '/contact';     // book-a-demo / contact (always works)
 
   // Backend API base for live data (public, unauthenticated endpoints only).
   // Auto-detects: localhost/file:// -> local Node on :3000; anything else -> the
@@ -153,16 +153,16 @@
         items: [
           { href: 'business.html', icon: 'pie',      title: 'Corporate wellness', desc: 'HR dashboard & analytics' },
           { href: 'business.html', icon: 'calc',     title: 'ROI calculator',     desc: 'Cost of absenteeism' },
-          { href: 'pricing.html',  icon: 'card',     title: 'Pricing',            desc: 'Flat per-employee plan' },
+          { href: 'contact.html',  icon: 'card',     title: 'Team pilot',         desc: 'Talk to us about your team' },
           { href: 'contact.html',  icon: 'calendar', title: 'Book a demo',        desc: '15-minute walkthrough' }
         ] } },
     { href: 'pricing.html',  label: 'Pricing', mega: {
-        blurb: 'Simple, transparent pricing. Free for individuals, a flat plan for teams.',
+        blurb: 'Two check-ups, home visit included. A free app and no subscription.',
         items: [
-          { href: 'pricing.html', icon: 'sparkle', title: 'Personal',        desc: 'Free app, pay per test' },
-          { href: 'pricing.html', icon: 'pie',     title: 'Corporate',       desc: 'Flat per-employee plan' },
-          { href: 'pricing.html', icon: 'lab',     title: 'Labs & Clinics',  desc: 'Custom white-label terms' },
-          { href: 'pricing.html', icon: 'card',    title: 'Pricing FAQ',     desc: 'Trials, billing & cancellation' }
+          { href: 'pricing.html', icon: 'sparkle', title: 'Standard check-up', desc: '16 tests, PKR 9,999' },
+          { href: 'pricing.html', icon: 'pie',     title: 'Premium check-up',  desc: '23 tests, PKR 16,999' },
+          { href: 'how-it-works.html', icon: 'lab', title: 'How a visit works', desc: 'Home collection in Karachi' },
+          { href: 'pricing.html#faq', icon: 'card', title: 'Pricing FAQ',       desc: 'Fasting, ages & cancellation' }
         ] } },
     { href: 'insights.html', label: 'Insights', enabled: false, mega: {
         blurb: 'Plain-English guides to understanding your lab results.',
@@ -190,8 +190,15 @@
         ] } }
   ];
 
-  var page = (location.pathname.split('/').pop() || 'index.html');
-  if (page === '') page = 'index.html';
+  // The live site serves clean URLs (/pricing); a bare .html request is a temporary
+  // redirect to them. Links are written clean, and the current page is compared
+  // without ".html" so the active tab is right under both forms.
+  var page = (location.pathname.split('/').pop() || 'index').replace(/\.html$/, '');
+  function cleanLinks(html) {
+    return html.replace(/href="([a-z-]+)\.html((?:#[^"]*)?)"/g, function (_, name, frag) {
+      return 'href="' + (name === 'index' ? '/' : '/' + name) + frag + '"';
+    });
+  }
 
   /* ------------------------------------------------------------------ */
   /* i18n - English only. The site used to also ship a full Urdu UI; that   */
@@ -207,9 +214,9 @@
       'mm.1.b': 'Everything PulsingLabs does, from booking to understanding every number.',
       'mm.1.0t': 'Book in minutes', 'mm.1.0d': 'Packages, labs & slots', 'mm.1.1t': 'Clinical zone charts', 'mm.1.1d': 'See exactly where you stand', 'mm.1.2t': 'AI health assistant', 'mm.1.2d': 'Your results, explained', 'mm.1.3t': 'Trend tracking', 'mm.1.3d': 'Catch changes early', 'mm.1.4t': 'Import any report', 'mm.1.4d': 'OCR from any lab', 'mm.1.5t': 'Family profiles', 'mm.1.5d': 'One account, whole family',
       'mm.2.b': 'Preventive screening & wellness for your team, with privacy-first HR insight.',
-      'mm.2.0t': 'Corporate wellness', 'mm.2.0d': 'HR dashboard & analytics', 'mm.2.1t': 'ROI calculator', 'mm.2.1d': 'Cost of absenteeism', 'mm.2.2t': 'Pricing', 'mm.2.2d': 'Flat per-employee plan', 'mm.2.3t': 'Book a demo', 'mm.2.3d': '15-minute walkthrough',
-      'mm.3.b': 'Simple, transparent pricing. Free for individuals, a flat plan for teams.',
-      'mm.3.0t': 'Personal', 'mm.3.0d': 'Free app, pay per test', 'mm.3.1t': 'Corporate', 'mm.3.1d': 'Flat per-employee plan', 'mm.3.2t': 'Labs & Clinics', 'mm.3.2d': 'Custom white-label terms', 'mm.3.3t': 'Pricing FAQ', 'mm.3.3d': 'Trials, billing & cancellation',
+      'mm.2.0t': 'Corporate wellness', 'mm.2.0d': 'HR dashboard & analytics', 'mm.2.1t': 'ROI calculator', 'mm.2.1d': 'Cost of absenteeism', 'mm.2.2t': 'Team pilot', 'mm.2.2d': 'Talk to us about your team', 'mm.2.3t': 'Book a demo', 'mm.2.3d': '15-minute walkthrough',
+      'mm.3.b': 'Two check-ups, home visit included. A free app and no subscription.',
+      'mm.3.0t': 'Standard check-up', 'mm.3.0d': '16 tests, PKR 9,999', 'mm.3.1t': 'Premium check-up', 'mm.3.1d': '23 tests, PKR 16,999', 'mm.3.2t': 'How a visit works', 'mm.3.2d': 'Home collection in Karachi', 'mm.3.3t': 'Pricing FAQ', 'mm.3.3d': 'Fasting, ages & cancellation',
       'mm.4.b': 'Plain-English guides to understanding your lab results.',
       'mm.4.0t': 'All Insights', 'mm.4.0d': 'Guides & how-tos', 'mm.4.1t': 'Health Guides', 'mm.4.1d': 'Cholesterol, thyroid, vitamins', 'mm.4.2t': 'Newsletter', 'mm.4.2d': 'Updates & health tips',
       'mm.5.b': 'Our mission: make your health make sense, for everyone.',
@@ -291,7 +298,7 @@
       'bento.b6h': 'Import any report', 'bento.b6p': 'Snap a photo, OCR does the rest.',
       'bento.b7h': 'AI that speaks Urdu', 'bento.b7p': 'Ask your health questions in Urdu, too.',
       'how.eyebrow': 'How it works', 'how.h2': 'Three steps to clarity',
-      'how.s1h': 'Choose a package', 'how.s1p': 'Pick Standard (12 tests) or Premium (23 tests).',
+      'how.s1h': 'Choose a package', 'how.s1p': 'Pick Standard (16 tests) or Premium (23 tests).',
       'how.s2h': 'Pick a time', 'how.s2p': 'Choose a date and time for your home visit and pay in the app. A licensed partner lab collects and tests your sample.',
       'how.s3h': 'Get results + insights', 'how.s3p': 'Results arrive in-app with charts, trends, and AI explanations you understand.',
       'why.eyebrow': 'Why it matters', 'why.h2': 'Most chronic illness is caught far too late.',
@@ -312,7 +319,7 @@
       'scene.eyebrow': 'Why PulsingLabs', 'scene.h2': 'Clarity for the people you love.',
       'scene.p': 'From your own numbers to your whole family\'s, every result explained, tracked, and within reach.',
       'pg.feat.eyebrow': 'Features', 'pg.feat.h1': 'Everything you need to<br><span class="grad-text">own your health</span>', 'pg.feat.lead': 'From the first booking to understanding every number, and doing it for your whole family.',
-      'pg.faq.eyebrow': 'Help centre', 'pg.faq.h1': 'Frequently <span class="grad-text">asked</span>', 'pg.faq.lead': 'Everything about booking, results, privacy and team check-ups for companies. Can\'t find it? <a href="contact.html" style="color:var(--teal-l);font-weight:600;">Get in touch.</a>',
+      'pg.faq.eyebrow': 'Help centre', 'pg.faq.h1': 'Frequently <span class="grad-text">asked</span>', 'pg.faq.lead': 'Everything about booking, results, privacy and team check-ups for companies. Can\'t find it? <a href="/contact" style="color:var(--teal-l);font-weight:600;">Get in touch.</a>',
       'pg.biz.eyebrow': 'For Business', 'pg.biz.h1': 'Healthier teams,<br><span class="grad-text">lower absenteeism</span>', 'pg.biz.lead': 'Give employees preventive screening and wellness, with an HR dashboard that turns it into insight, without ever exposing individual medical data.',
       'pg.ins.eyebrow': 'Insights', 'pg.ins.h1': 'Learn about<br><span class="grad-text">your health</span>', 'pg.ins.lead': 'Plain-English guides to understanding your lab results and staying ahead of chronic illness.',
       'pg.price.eyebrow': 'Pricing', 'pg.price.h1': 'Simple, <span class="grad-text">transparent</span> pricing', 'pg.price.lead': 'Two test packages - pick the depth you want. Pay once per package, no subscription, and a phlebotomist collects your sample at home.',
@@ -320,7 +327,7 @@
       'pg.priv.eyebrow': 'Legal', 'pg.priv.h1': 'Privacy <span class="grad-text">Policy</span>', 'pg.priv.lead': 'Your health data is sensitive. Here\'s exactly how we handle it.',
       'pg.contact.eyebrow': 'Get in touch', 'pg.contact.h1': 'Let\'s <span class="grad-text">talk</span>', 'pg.contact.lead': 'Book a demo, ask about partnerships, or just say hello. We usually reply within one business day.',
       'feat.s1.eye': 'Book in minutes', 'feat.s1.h2': 'From "I should get tested" to booked, in two minutes.', 'feat.s1.lead': 'Pick a package, choose a time for your home visit and pay in the app. No queues, no phone calls, no trip to a lab.',
-      'feat.s1.li1': 'Two packages: Standard (12 tests) and Premium (23 tests)', 'feat.s1.li2': 'Real-time home-visit slots', 'feat.s1.li3': 'Home sample collection at your door',
+      'feat.s1.li1': 'Two packages: Standard (16 tests) and Premium (23 tests)', 'feat.s1.li2': 'Real-time home-visit slots', 'feat.s1.li3': 'Home sample collection at your door',
       'feat.s2.eye': 'Understand your results', 'feat.s2.h2': 'See exactly where you stand.', 'feat.s2.lead': 'Every marker sits on a clinical zone chart (Normal, Borderline, High), tuned to your age and sex, with a plain-English explanation underneath.',
       'feat.s2.li1': 'Colour-coded healthy ranges, not raw numbers', 'feat.s2.li2': 'Age-, sex- & pregnancy-aware reference ranges', 'feat.s2.li3': 'Trends across months and years',
       'feat.s3.eye': 'AI health assistant', 'feat.s3.h2': 'Ask anything. In your language.', 'feat.s3.lead': 'Chat about your results like you would with a calm, knowledgeable friend, in English or اردو, and ask it to move or cancel a visit inside the conversation.',
@@ -333,7 +340,7 @@
       'feat.more.c2h': 'Secure online payment', 'feat.more.c2p': 'Pay by card or wallet in the app when you book, no subscription required for individuals.',
       'feat.more.c3h': 'Private & secure', 'feat.more.c3p': 'Encrypted in transit, never sold, and yours to export anytime.',
       'feat.how.eye': 'How it works', 'feat.how.h2': 'Three steps to clarity',
-      'feat.how.s1h': 'Choose a package', 'feat.how.s1p': 'Pick Standard (12 tests) or Premium (23 tests).',
+      'feat.how.s1h': 'Choose a package', 'feat.how.s1p': 'Pick Standard (16 tests) or Premium (23 tests).',
       'feat.how.s2h': 'Pick a time', 'feat.how.s2p': 'Choose a date and time for your home visit and pay in the app. A licensed partner lab collects and tests your sample.',
       'feat.how.s3h': 'Get results + insights', 'feat.how.s3p': 'Results arrive with charts, trends, and AI explanations.',
       'feat.cta.h': 'Ready to understand your health?', 'feat.cta.p': 'Get started free, pay only for the tests you book.', 'feat.cta.btn': 'Get Started <span class="arrow">→</span>',
@@ -354,16 +361,16 @@
       'pr.cta.h': 'Start free today', 'pr.cta.p': 'Individuals start instantly. Businesses get a 30-day trial, no card required.', 'pr.cta.b1': 'Get the app', 'pr.cta.b2': 'Talk to sales',
       'biz.heroB1': 'Book a demo <span class="arrow">→</span>', 'biz.heroB2': 'See pricing',
       'biz.stats.eye': 'The cost of poor health', 'biz.stats.h2': 'Ill health is expensive, and largely preventable.', 'biz.stats.lead': 'Sick days, lost productivity and late diagnoses quietly drain your business. Preventive screening is one of the highest-ROI benefits you can offer.',
-      'biz.s1': 'employees affected by work-related ill health*', 'biz.s2': 'average sick days per employee, per year*', 'biz.s3': 'of early-stage conditions are manageable if caught in time*', 'biz.s4': 'free trial, no credit card required',
+      'biz.s1': 'employees affected by work-related ill health*', 'biz.s2': 'average sick days per employee, per year*', 'biz.s3': 'of early-stage conditions are manageable if caught in time*', 'biz.s4': 'team pilots: talk to us',
       'biz.wyg.eye': 'What you get', 'biz.wyg.h2': 'An HR wellness platform, not a spreadsheet.',
       'biz.wyg.l1': 'Company dashboard with aggregate wellness analytics', 'biz.wyg.l2': 'Proactive alerts when the team\'s health needs attention', 'biz.wyg.l3': 'AI HR assistant for appointments & roster questions', 'biz.wyg.l4': 'One-click employee invites & CSV exports', 'biz.wyg.l5': 'Individual participation reports (PDF), never test results', 'biz.wyg.l6': 'Privacy-first: employees\' results stay private to them',
       'biz.calc.h': 'What does poor health cost you?', 'biz.calc.sub': 'Estimate the annual cost of employee sick days, and what prevention could save.',
       'biz.calc.lab1': 'Number of employees', 'biz.calc.r1': 'Employees', 'biz.calc.lab2': 'Avg. sick days per employee / year', 'biz.calc.r2': 'Sick days', 'biz.calc.lab3': 'Avg. daily cost per employee (PKR)', 'biz.calc.r3': 'Daily cost',
       'biz.calc.cap': 'estimated annual cost of absenteeism, preventive screening helps cut it.',
       'biz.gs.eye': 'Getting started', 'biz.gs.h2': 'Up and running in a day',
-      'biz.gs.s1h': 'Register your company', 'biz.gs.s1p': 'Create your company account and start a 30-day free trial, no credit card.', 'biz.gs.s2h': 'Invite your team', 'biz.gs.s2p': 'Send invites or upload a CSV. Employees join with their own private accounts.', 'biz.gs.s3h': 'See wellness insights', 'biz.gs.s3p': 'Track aggregate trends and proactive alerts, individual results stay private.',
+      'biz.gs.s1h': 'Register your company', 'biz.gs.s1p': 'Create your company account. Our team approves it before you invite employees.', 'biz.gs.s2h': 'Invite your team', 'biz.gs.s2p': 'Send invites or upload a CSV. Employees join with their own private accounts.', 'biz.gs.s3h': 'See wellness insights', 'biz.gs.s3p': 'Track aggregate trends and proactive alerts, individual results stay private.',
       'biz.t.eye': 'From a pilot', 'biz.t.h2': '"The aggregate dashboard helped us spot trends early and plan screening drives, without ever seeing anyone\'s private results."', 'biz.t.who': 'HR Lead, Pilot company (Islamabad)',
-      'biz.cta.h': 'Invest in your team\'s health', 'biz.cta.p': 'Start a 30-day free trial, or book a 15-minute demo to see the HR dashboard.', 'biz.cta.b1': 'Register your company', 'biz.cta.b2': 'Book a demo',
+      'biz.cta.h': 'Invest in your team\'s health', 'biz.cta.p': 'Talk to us about a team pilot, or book a short demo to see the HR dashboard.', 'biz.cta.b1': 'Register your company', 'biz.cta.b2': 'Book a demo',
       'ab.story.eye': 'The story', 'ab.story.h2': 'Built for people who were handed a report and left to guess.', 'ab.story.lead': 'Too many people walk out of a lab with a printout full of acronyms and arrows, and no idea what it means for them. They Google in a panic, or do nothing until it\'s serious.', 'ab.story.p2': 'PulsingLabs closes that gap: book in minutes, get every result explained in plain English (or chat with the AI in Urdu), see exactly where you stand against age- and sex-aware ranges, and track how you trend over time, for you and your whole family.',
       'ab.val.eye': 'What we stand for', 'ab.val.h2': 'Our principles',
       'ab.v1h': 'Clinically grounded', 'ab.v1p': 'Reference ranges follow evidence-based guidelines (ADA, AASLD, WHO, NICE and more), tuned to age, sex and pregnancy, verified by a cross-engine test suite.',
@@ -394,7 +401,7 @@
       'fq.r2q': 'Are the reference ranges trustworthy?', 'fq.r2a': 'They follow evidence-based guidelines (ADA, AASLD, WHO, NICE and others), differentiated by age, sex and pregnancy, and are kept honest by an automated clinical test suite.',
       'fq.r3q': 'Can the AI give me medical advice?', 'fq.r3a': 'It explains your results and general next steps, but it never prescribes drugs or doses, and it escalates urgent symptoms to emergency guidance. It is a guide, not a replacement for your doctor.',
       'fq.p1q': 'Is my health data private?', 'fq.p1a': 'Yes. Your results are private to your account, encrypted in transit, and never sold. For companies, employees\' individual results are never visible to HR, only anonymised aggregate trends.',
-      'fq.p2q': 'What does it cost?', 'fq.p2a': 'The app is free. You pay per check-up, with home sample collection included: Standard is PKR 9,999 (12 tests) and Premium is PKR 16,999 (23 tests). Companies pay a flat PKR 1,500 per active employee per month after a 30-day free trial. See <a href="pricing.html" style="color:var(--teal-d);font-weight:700;">pricing</a>.',
+      'fq.p2q': 'What does it cost?', 'fq.p2a': 'The app is free. You pay per check-up, with home sample collection included: Standard is PKR 9,999 (16 tests) and Premium is PKR 16,999 (23 tests). Companies: talk to us about a team pilot.',
       'fq.p3q': 'Can I export or delete my data?', 'fq.p3a': 'Yes. You can export your full account and results anytime, and request deletion, your data belongs to you.',
       'fq.cta.h': 'Still have a question?', 'fq.cta.p': 'Our team is happy to help, usually within one business day.', 'fq.cta.btn': 'Contact us <span class="arrow">→</span>',
       'ct.ch.eye': 'Reach us directly', 'ct.ch.h2': 'Channels',
@@ -414,7 +421,7 @@
       var v = tr(el.getAttribute('data-i18n')); if (v != null) el.textContent = v;
     });
     document.querySelectorAll('[data-i18n-html]').forEach(function (el) {
-      var v = tr(el.getAttribute('data-i18n-html')); if (v != null) el.innerHTML = v;
+      var v = tr(el.getAttribute('data-i18n-html')); if (v != null) el.innerHTML = cleanLinks(v);
     });
     document.querySelectorAll('[data-i18n-ph]').forEach(function (el) {
       var v = tr(el.getAttribute('data-i18n-ph')); if (v != null) el.setAttribute('placeholder', v);
@@ -432,7 +439,7 @@
     var links = NAV.filter(function (n) {
       return n.enabled !== false; // disabled tabs stay in NAV (data intact), just not rendered
     }).map(function (n) {
-      var active = (n.href === page) ? ' active' : '';
+      var active = (n.href.replace(/\.html$/, '') === page) ? ' active' : '';
       var k = KEY[n.label] || '';
       var di = k ? ' data-i18n="' + k + '"' : '';
       return '<a class="nav-link' + active + '" href="' + n.href + '"' + di + '>' + n.label + '</a>';
@@ -454,6 +461,7 @@
       '<div class="nav-backdrop" id="navBackdrop"></div>';
 
     var host = document.getElementById('site-header');
+    html = cleanLinks(html);
     if (host) host.outerHTML = html; else document.body.insertAdjacentHTML('afterbegin', html);
   }
 
@@ -521,6 +529,7 @@
       '</div></footer>';
 
     var host = document.getElementById('site-footer');
+    html = cleanLinks(html);
     if (host) host.outerHTML = html; else document.body.insertAdjacentHTML('beforeend', html);
     var yr = document.getElementById('yr'); if (yr) yr.textContent = new Date().getFullYear();
   }
