@@ -21,7 +21,7 @@
   // The business's local phone and address (the payment gateway requires them on
   // the site). Fill these two and every page shows them: footer, contact page,
   // the service policy on how-it-works. Left empty, those lines stay hidden.
-  var BUSINESS = { phone: '+92 333 5556534', address: 'Saima Mall & Residency, Gulshan-e-Iqbal, Karachi' };
+  var BUSINESS = { phone: '+92 333 5556534', address: 'Flat # A-705, Plot # 118/F, Stadium Road, Block 10A (Saima Mall & Res), Gulshan-e-Iqbal, Karachi' };
   var _devHost =/^(localhost|127\.|0\.0\.0\.0|10\.|192\.168\.|172\.(1[6-9]|2\d|3[01])\.)/;
   var API_BASE = (location.protocol === 'file:' || _devHost.test(location.hostname))
     ? 'http://localhost:3000/api'
@@ -524,7 +524,7 @@
         '</div>' +
         '<div class="foot-bottom mf-bottom">' +
           '<span class="mf-logo">' + LOGO_SVG + ' PulsingLabs</span>' +
-          '<span>© <span id="yr"></span> PulsingLabs · <a href="privacy.html" data-i18n="foot.privacy">Privacy</a> · <a href="terms.html">Terms</a> · <a href="refunds.html">Refunds</a> · <a href="delete-account.html">Delete account</a> · <a href="faq.html">FAQ</a></span>' +
+          '<span>© <span id="yr"></span> Pulsing Labs (trading as PulsingLabs) · <a href="privacy.html" data-i18n="foot.privacy">Privacy</a> · <a href="terms.html">Terms</a> · <a href="refunds.html">Refunds</a> · <a href="delete-account.html">Delete account</a> · <a href="faq.html">FAQ</a></span>' +
         '</div>' +
       '</div></footer>';
 
