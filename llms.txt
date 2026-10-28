@@ -4,8 +4,8 @@
 
 ## Packages and prices (PKR, home visit included)
 
-- Standard check-up, PKR 9,999, 16 tests: pulse, blood pressure (systolic and diastolic), haemoglobin, RBC, WBC, platelets, random blood sugar, the full cholesterol profile (total cholesterol, LDL, HDL, LDL/HDL ratio, triglycerides), SGPT (ALT), creatinine, calcium.
-- Premium check-up, PKR 16,999, 23 tests: everything in Standard (16) plus 7 more: HbA1c, ferritin, ESR, TSH, vitamin D, Anti-HCV and HBsAg (hepatitis C and B screening).
+- Standard check-up, PKR 9,999, 17 tests: pulse, blood pressure (systolic and diastolic), haemoglobin, RBC, WBC, platelets, random blood sugar, the full cholesterol profile (total cholesterol, LDL, HDL, LDL/HDL ratio, triglycerides), TSH (thyroid screen), SGPT (ALT), creatinine, calcium.
+- Premium check-up, PKR 19,999, 27 tests: everything in Standard (17) plus 10 more: HbA1c, ferritin, ESR, vitamin D, free T3, free T4, total bilirubin, urea, Anti-HCV and HBsAg (hepatitis C and B screening).
 - Every test in both packages is non-fasting: patients eat and drink as usual.
 - The packages are for all ages.
 
