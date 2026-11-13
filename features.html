@@ -24,12 +24,12 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link rel="stylesheet" href="https://api.fontshare.com/v2/css?f[]=general-sans@400,500,600,700&display=swap" media="print" onload="this.media='all'" />
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&display=swap" media="print" onload="this.media='all'" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;700&display=swap" media="print" onload="this.media='all'" />
   <noscript>
     <link rel="stylesheet" href="https://api.fontshare.com/v2/css?f[]=general-sans@400,500,600,700&display=swap" />
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&display=swap" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;700&display=swap" />
   </noscript>
-  <link rel="stylesheet" href="assets/style.css?v=117" />
+  <link rel="stylesheet" href="assets/style.css?v=149" />
   <link rel="icon" type="image/png" href="assets/img/favicon.png" />
   <!-- Warm the last spotlight image during idle so it is ready before the
        user scrolls to it, without competing with the hero (low priority). -->
@@ -41,7 +41,7 @@
 
   <!-- ============ PAGE HERO (dark, futuristic) ============ -->
   <section class="page-hero s-dark">
-    <img class="ph-photo" src="assets/img/result.jpeg" alt="" aria-hidden="true" loading="eager" fetchpriority="high" decoding="async" />
+    <img class="ph-photo" src="assets/img/result-v3.webp" alt="" aria-hidden="true" loading="eager" fetchpriority="high" decoding="async" />
     <div class="wrap page-enter">
       <nav class="crumbs" aria-label="Breadcrumb"><a href="/">Home</a> › <span aria-current="page">Features</span></nav>
       <span class="eyebrow" data-i18n="pg.feat.eyebrow">Features</span>
@@ -74,7 +74,7 @@
               <div class="marker"><span class="name">09:30 to 10:00</span><span class="pill ok">Available</span></div>
               <div class="marker"><span class="name">Home collection</span><span class="pill mid">+ PKR 300</span></div>
             </div>
-            <div class="badge-float bf-br"><span class="bf-ic" data-icon="home"></span><span><b>At your door</b><span>certified phlebotomist</span></span></div>
+            <div class="badge-float bf-br"><span class="bf-ic" data-icon="home"></span><span><b>At your door</b><span>from our partner lab</span></span></div>
           </div>
         </div>
       </div>
@@ -96,9 +96,9 @@
           </ul>
         </div>
         <div class="split-media reveal-l">
-          <div class="media photo tall">
-            <img class="media-img" src="assets/img/result.jpeg" alt="The PulsingLabs results screen showing a Hematocrit trend on a clinical zone chart" loading="lazy" />
-            <div class="badge-float bf-tl"><span class="bf-ic" data-icon="chart"></span><span><b>Hematocrit</b><span>within range</span></span></div>
+          <div class="media photo tall rc-media">
+            <div class="rc" data-result-card></div>
+            <noscript><img class="media-img" src="assets/img/result-v3.webp" alt="The PulsingLabs results screen showing a Hematocrit trend on a clinical zone chart" /></noscript>
           </div>
         </div>
       </div>
@@ -189,7 +189,7 @@
     <div class="wrap">
       <div class="steps">
         <div class="step reveal"><div class="num">1</div><h3 data-i18n="feat.how.s1h">Choose a package</h3><p data-i18n="feat.how.s1p">Pick Standard (22 tests) or Premium (32 tests).</p></div>
-        <div class="step reveal d1"><div class="num">2</div><h3 data-i18n="feat.how.s2h">Pick a time</h3><p data-i18n="feat.how.s2p">Choose a date and time for your home visit and pay in the app. A licensed partner lab collects and tests your sample.</p></div>
+        <div class="step reveal d1"><div class="num">2</div><h3 data-i18n="feat.how.s2h">Pick a time</h3><p data-i18n="feat.how.s2p">Choose a date and time for your home visit and pay in the app. Our partner lab collects and tests your sample.</p></div>
         <div class="step reveal d2"><div class="num">3</div><h3 data-i18n="feat.how.s3h">Get results + insights</h3><p data-i18n="feat.how.s3p">Results arrive with charts, trends, and AI explanations.</p></div>
       </div>
     </div>
@@ -200,13 +200,13 @@
     <div class="wrap">
       <div class="cta-band reveal-zoom">
         <h2 data-i18n="feat.cta.h">Ready to understand your health?</h2>
-        <p data-i18n="feat.cta.p">Get started free, pay only for the tests you book.</p>
-        <a class="btn btn-light" href="#" data-cta="app" data-magnetic style="background:#fff;color:var(--teal-d);" data-i18n-html="feat.cta.btn">Get Started <span class="arrow">→</span></a>
+        <p data-i18n="feat.cta.p">Pay only for the check-up you book. The home visit is included.</p>
+        <a class="btn btn-light" href="#" data-cta="app" data-magnetic style="background:#fff;color:var(--teal-d);" data-i18n-html="feat.cta.btn">Request a check-up <span class="arrow">→</span></a>
       </div>
     </div>
   </section>
 
   <div id="site-footer"><nav aria-label="Site pages"><p><a href="/">Home</a> · <a href="/pricing">Pricing</a> · <a href="/how-it-works">How it works</a> · <a href="/faq">FAQ</a> · <a href="/features">Features</a> · <a href="/business">For business</a> · <a href="/about">About</a> · <a href="/contact">Contact</a> · <a href="/how-it-works#service-policy">Service policy</a> · <a href="/refunds">Refund policy</a> · <a href="/privacy">Privacy policy</a> · <a href="/terms">Terms</a></p><p>PulsingLabs · Blood tests at home in Karachi · <a href="mailto:contact@pulsinglabs.com">contact@pulsinglabs.com</a></p></nav></div>
-  <script src="assets/app.js?v=120"></script>
+  <script src="assets/app.js?v=127"></script>
 </body>
 </html>

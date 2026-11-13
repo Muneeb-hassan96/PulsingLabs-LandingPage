@@ -129,3 +129,8 @@
 @media (prefers-reduced-motion: reduce) {
   .cmp .dw, .more::after, .cbtn { transition: none; }
 }
+
+/* Phones: every control at least 44px tall to tap (desktop look unchanged). */
+@media (max-width: 760px) {
+  .cmp-wrap .chip, .cmp-all, .more { min-height: 44px; }
+}

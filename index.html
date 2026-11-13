@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
@@ -27,54 +27,71 @@
        families already use display=swap, so this only removes the first-paint
        stall from waiting on two external font CSS fetches. -->
   <link rel="stylesheet" href="https://api.fontshare.com/v2/css?f[]=general-sans@400,500,600,700&display=swap" media="print" onload="this.media='all'" />
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&display=swap" media="print" onload="this.media='all'" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;700&display=swap" media="print" onload="this.media='all'" />
   <noscript>
     <link rel="stylesheet" href="https://api.fontshare.com/v2/css?f[]=general-sans@400,500,600,700&display=swap" />
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&display=swap" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;700&display=swap" />
   </noscript>
-  <link rel="stylesheet" href="assets/style.css?v=117" />
+  <link rel="stylesheet" href="assets/style.css?v=149" />
   <link rel="icon" type="image/png" href="assets/img/favicon.png" />
   <!-- 3D engine for the holographic body band (self-hosted, pinned
        model-viewer@3.5.0) is injected on demand by app.js when the band
        nears the viewport - ~1MB of JS kept off the critical load path. -->
-  <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://pulsinglabs.com/#organization","name":"PulsingLabs","legalName":"Pulsing Labs","url":"https://pulsinglabs.com/","logo":"https://pulsinglabs.com/assets/img/logo-mark.png","email":"contact@pulsinglabs.com","description":"PulsingLabs is a Pakistani health app for booking blood tests at home in Karachi. A phlebotomist from a licensed partner laboratory collects the sample at home, and results arrive in the app explained in plain language for the patient's age and sex.","telephone":"+92-333-5556534","address":{"@type":"PostalAddress","streetAddress":"Flat # A-705, Plot # 118/F, Stadium Road, Block 10A (Saima Mall & Res), Gulshan-e-Iqbal","addressLocality":"Karachi","addressCountry":"PK"},"areaServed":{"@type":"City","name":"Karachi"},"contactPoint":{"@type":"ContactPoint","contactType":"customer support","email":"contact@pulsinglabs.com","telephone":"+92-333-5556534","areaServed":"PK","availableLanguage":["English","Urdu"]}},{"@type":"WebSite","@id":"https://pulsinglabs.com/#website","url":"https://pulsinglabs.com/","name":"PulsingLabs","publisher":{"@id":"https://pulsinglabs.com/#organization"},"inLanguage":"en"},{"@type":"Service","@id":"https://pulsinglabs.com/#home-blood-test","name":"Blood test at home in Karachi","serviceType":"Home blood sample collection and laboratory testing","provider":{"@id":"https://pulsinglabs.com/#organization"},"areaServed":{"@type":"City","name":"Karachi"},"url":"https://pulsinglabs.com/pricing","offers":[{"@type":"Offer","name":"Standard check-up","description":"A first check-up for all ages: vitals (pulse, blood pressure), full blood count (haemoglobin, RBC, haematocrit, MCV, MCH, MCHC, RDW, WBC, platelets), random blood sugar, the full cholesterol profile (total, LDL, HDL, ratio, triglycerides), thyroid screen (TSH), SGPT (ALT), creatinine and calcium. No fasting needed. Sample collected at home in Karachi. 22 tests.","price":"9999","priceCurrency":"PKR","url":"https://pulsinglabs.com/pricing","availability":"https://schema.org/InStock"},{"@type":"Offer","name":"Premium check-up","description":"Everything in Standard plus HbA1c, ferritin, ESR, vitamin D, hepatitis screening (Anti-HCV, HBsAg), free T3, free T4, total bilirubin and urea. For all ages, no fasting needed. Sample collected at home in Karachi. 32 tests.","price":"19999","priceCurrency":"PKR","url":"https://pulsinglabs.com/pricing","availability":"https://schema.org/InStock"}]}]}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://pulsinglabs.com/#organization","name":"PulsingLabs","legalName":"Pulsing Labs","url":"https://pulsinglabs.com/","logo":"https://pulsinglabs.com/assets/img/logo-mark.png","email":"contact@pulsinglabs.com","description":"PulsingLabs is a Pakistani health app for booking blood tests at home in Karachi. A phlebotomist from our partner laboratory collects the sample at home, and results arrive in the app explained in plain language for the patient's age and sex.","telephone":"+92-333-5556534","address":{"@type":"PostalAddress","streetAddress":"Flat # A-705, Plot # 118/F, Stadium Road, Block 10A (Saima Mall & Res), Gulshan-e-Iqbal","addressLocality":"Karachi","addressCountry":"PK"},"areaServed":{"@type":"City","name":"Karachi"},"contactPoint":{"@type":"ContactPoint","contactType":"customer support","email":"contact@pulsinglabs.com","telephone":"+92-333-5556534","areaServed":"PK","availableLanguage":["English","Urdu"]}},{"@type":"WebSite","@id":"https://pulsinglabs.com/#website","url":"https://pulsinglabs.com/","name":"PulsingLabs","publisher":{"@id":"https://pulsinglabs.com/#organization"},"inLanguage":"en"},{"@type":"Service","@id":"https://pulsinglabs.com/#home-blood-test","name":"Blood test at home in Karachi","serviceType":"Home blood sample collection and laboratory testing","provider":{"@id":"https://pulsinglabs.com/#organization"},"areaServed":{"@type":"City","name":"Karachi"},"url":"https://pulsinglabs.com/pricing","offers":[{"@type":"Offer","name":"Standard check-up","description":"A first check-up for all ages: vitals (pulse, blood pressure), full blood count (haemoglobin, RBC, haematocrit, MCV, MCH, MCHC, RDW, WBC, platelets), random blood sugar, the full cholesterol profile (total, LDL, HDL, ratio, triglycerides), thyroid screen (TSH), SGPT (ALT), creatinine and calcium. No fasting needed. Sample collected at home in Karachi. 22 tests.","price":"9999","priceCurrency":"PKR","url":"https://pulsinglabs.com/pricing","availability":"https://schema.org/InStock"},{"@type":"Offer","name":"Premium check-up","description":"Everything in Standard plus HbA1c, ferritin, ESR, vitamin D, hepatitis screening (Anti-HCV, HBsAg), free T3, free T4, total bilirubin and urea. For all ages, no fasting needed. Sample collected at home in Karachi. 32 tests.","price":"19999","priceCurrency":"PKR","url":"https://pulsinglabs.com/pricing","availability":"https://schema.org/InStock"}]}]}</script>
 </head>
 <body>
   <div id="site-header"></div>
 
-  <!-- ============ HERO (cream band) ============ -->
+  <!-- ============ HERO: one dark panel, the 3D helix inside it ============ -->
   <section class="hero">
-    <canvas id="hero-particles" aria-hidden="true"></canvas>
-    <div class="hero-deco" data-depth="0.6" aria-hidden="true"><span class="ring r1"></span><span class="ring r2"></span><span class="dots"></span></div>
-    <div class="wrap hero-grid">
-      <div class="page-enter">
-        <span class="eyebrow" data-scramble data-i18n="home.eyebrow">Your health, simplified</span>
-        <h1 data-i18n-html="home.h1">Book lab tests.<br>Then actually <span class="grad-text">understand</span> them.</h1>
-        <p class="lead">Book a blood test at home in Karachi: a phlebotomist collects your sample at your door, and every result comes back explained in plain English by AI. Two check-ups, for all ages, no fasting needed. For you, and your whole family.</p>
+    <div class="hero-panel">
+      <canvas id="hero-particles" aria-hidden="true"></canvas>
+      <div class="hero-glow" aria-hidden="true"></div>
+      <!-- Wide screens: head + foot stack bottom-left, the card sits bottom-right.
+           Phones: head at the top, helix in the middle, card + button at the bottom. -->
+      <!-- Floating cards along the helix: one story (a result, its trend, the AI's words).
+           Decorative sample values, hidden from screen readers. -->
+      <div class="hero-float hf-score" aria-hidden="true"><div class="hf-in">
+        <div class="hf-ring" data-ring="84"><i>0</i></div>
+        <div class="hf-txt"><b>Health score</b><span>From your latest results</span></div>
+      </div></div>
+      <div class="hero-float hf-chart" aria-hidden="true"><div class="hf-in">
+        <div class="hf-row"><b>Vitamin D</b><span class="hf-pill">In range</span></div>
+        <div class="hf-val">38<small>ng/mL</small></div>
+        <svg class="hf-spark" viewBox="0 0 220 70" preserveAspectRatio="none">
+          <defs><linearGradient id="hfLine" x1="0" x2="1"><stop offset="0" stop-color="#F5B342"/><stop offset=".45" stop-color="#00DDB0"/><stop offset="1" stop-color="#00C2FF"/></linearGradient></defs>
+          <rect x="0" y="0" width="220" height="30" rx="6" fill="rgba(0,191,165,.14)"/>
+          <rect x="0" y="30" width="220" height="40" rx="6" fill="rgba(245,179,66,.10)"/>
+          <path class="hf-path" pathLength="1" d="M8 58 C40 56 58 50 78 42 S118 24 146 20 S192 14 210 12" fill="none" stroke="url(#hfLine)" stroke-width="3" stroke-linecap="round"/>
+          <circle cx="8" cy="58" r="3.2" fill="#F5B342"/><circle cx="78" cy="42" r="3.2" fill="#9BE3A0"/><circle cx="146" cy="20" r="3.2" fill="#00DDB0"/>
+          <circle class="hf-end" cx="210" cy="12" r="5" fill="#00C2FF"/>
+        </svg>
+      </div></div>
+      <div class="hero-float hf-ai" aria-hidden="true"><div class="hf-in">
+        <div class="hf-row"><span class="hf-ic" data-icon="sparkle"></span><b>AI explains</b></div>
+        <p>Your vitamin D rose from 18 to 38. It is now in the healthy range.</p>
+      </div></div>
+
+      <div class="hero-head page-enter">
+        <h1>Your <span class="grad-text">health</span>,<br>ahead of time.</h1>
+      </div>
+      <div class="hero-foot page-enter">
+        <p class="lead">A phlebotomist comes to your home. Your results come back personalised, charted over time and explained by AI.</p>
+        <ul class="hero-stats">
+          <li><b>22 or 32</b><span>tests per check-up</span></li>
+          <li><b>At home</b><span>sample collection</span></li>
+          <li><b>One Account</b><span>Complete Family</span></li>
+        </ul>
         <div class="hero-cta">
-          <a class="btn btn-primary" href="#" data-cta="app" data-magnetic data-i18n-html="home.cta1">Get started free <span class="arrow">→</span></a>
-          <!-- Disabled per owner request (Features tab disabled) - re-enable by uncommenting.
-          <a class="btn btn-ghost" href="/features" data-i18n="home.cta2">See how it works</a>
-          -->
-        </div>
-        <div class="hero-note"><span class="ico-inline" data-icon="shield"></span> <span data-i18n="home.note">Private &amp; secure</span></div>
-      </div>
-      <div class="page-enter">
-        <div class="media media-mint tall">
-          <div class="phone-card" aria-hidden="true">
-            <div class="phone-head">
-              <div><strong>Health Score</strong><div class="score">Last updated · today</div></div>
-              <div class="ring" data-ring="88"><i>0</i></div>
-            </div>
-            <div class="marker"><span class="name">HbA1c</span><span class="val">5.4%</span><span class="pill ok">Normal</span></div>
-            <div class="marker"><span class="name">LDL Cholesterol</span><span class="val">145 mg/dL</span><span class="pill hi">High</span></div>
-            <div class="marker"><span class="name">Vitamin D</span><span class="val">22 ng/mL</span><span class="pill mid">Low</span></div>
-            <div class="marker"><span class="name">TSH</span><span class="val">2.1 mIU/L</span><span class="pill ok">Normal</span></div>
-          </div>
-          <div class="badge-float bf-tl" data-depth="1.6"><span class="bf-ic" data-icon="sparkle"></span><span><b>AI explained</b><span>your HbA1c</span></span></div>
-          <div class="badge-float bf-br" data-depth="1.2"><span class="bf-ic" data-icon="trend"></span><span><b>Trending up</b><span>since March</span></span></div>
+          <a class="btn btn-primary" href="#" data-cta="app" data-magnetic data-i18n-html="home.cta1">Request a check-up <span class="arrow">→</span></a>
+          <a class="btn btn-glass" href="/pricing">See the check-ups</a>
         </div>
       </div>
+      <a class="hero-card page-enter" href="/pricing">
+        <span class="hc-mark" aria-hidden="true"><img src="assets/img/logo-mark.png" alt="" width="34" height="34" decoding="async"></span>
+        <span class="hc-body"><b>Standard check-up</b><span>22 tests at home, all ages</span><em>PKR 9,999</em></span>
+        <span class="hc-go" aria-hidden="true">→</span>
+      </a>
     </div>
   </section>
 
@@ -128,80 +145,39 @@
           </ul>
         </div>
         <div class="split-media reveal-r">
-          <div class="media photo tall">
-            <img class="media-img" src="assets/img/result.jpeg" alt="The PulsingLabs results screen showing a Hematocrit trend on a clinical zone chart" loading="eager" fetchpriority="high" decoding="async" />
-            <div class="badge-float bf-br"><span class="bf-ic" data-icon="chart"></span><span><b>Hematocrit</b><span>within range</span></span></div>
+          <div class="media photo tall rc-media">
+            <div class="rc" data-result-card></div>
+            <noscript><img class="media-img" src="assets/img/result-v3.webp" alt="The PulsingLabs results screen showing a Hematocrit trend on a clinical zone chart" /></noscript>
           </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ============ SPOTLIGHT B, AI assistant (DARK, flipped) ============ -->
-  <section class="s-dark">
-    <div class="wrap">
-      <div class="split flip boxed">
-        <div class="split-copy reveal-r">
-          <span class="eyebrow" data-i18n="spB.eyebrow">AI health assistant</span>
-          <h2 data-i18n="spB.h2">Ask anything. In your language.</h2>
-          <p class="lead" data-i18n="spB.lead">Chat about your results like you would with a calm, knowledgeable friend, in English or اردو, and ask it to move or cancel a visit right inside the conversation.</p>
-          <ul class="split-list">
-            <li data-i18n="spB.li1">Plain answers, never jargon or scare-talk</li>
-            <li data-i18n="spB.li2">Books, reschedules &amp; cancels conversationally</li>
-            <li data-i18n="spB.li3">Urgent symptoms trigger emergency guidance</li>
-          </ul>
-        </div>
-        <div class="split-media reveal-l">
-          <!-- AI chat panel: realistic product showcase replacing generic chat bubbles -->
-          <div class="ai-panel">
-            <!-- Header -->
-            <div class="ai-panel-head">
-              <div class="ai-panel-logo">
-                <svg viewBox="0 0 24 24"><path d="M12 2a5 5 0 015 5c0 1.9-1.05 3.56-2.6 4.43L13 12.5V14h-2v-1.5l-1.4-.07A5.002 5.002 0 017 7a5 5 0 015-5zm0 11.5V17h2v1a2 2 0 01-4 0v-1h2v-2.5z"/></svg>
-              </div>
-              <div>
-                <div class="ai-panel-nm">PulsingLabs AI</div>
-                <div class="ai-panel-sub">Your personal health assistant</div>
-              </div>
-              <div class="ai-panel-live">Live</div>
-            </div>
-            <!-- Greeting -->
-            <div class="ai-greeting">
-              <strong>Hello Ahmed,</strong>
-              <span>I reviewed your latest results. Here is what matters most right now.</span>
-            </div>
-            <!-- Conversation -->
-            <div class="ai-msgs">
-              <div class="ai-msg-u">Why is my LDL still high after 3 months?</div>
-              <div class="ai-msg-b">
-                <div class="ai-msg-av">
-                  <svg viewBox="0 0 24 24"><path d="M12 2a5 5 0 015 5c0 1.9-1.05 3.56-2.6 4.43L13 12.5V14h-2v-1.5l-1.4-.07A5.002 5.002 0 017 7a5 5 0 015-5z"/></svg>
-                </div>
-                <div class="ai-msg-tx">
-                  Your LDL is 145 mg/dL, above the 100 optimal target. Combined with your borderline CRP (2.1), this signals mild cardiovascular risk. A Mediterranean-style diet and a lipid recheck in 3 months is the right move.
-                  <div class="ai-badge-watch">&#9888; Watch &middot; Follow up in 3 months</div>
-                </div>
-              </div>
-              <div class="ai-msg-u">Yes please, book next Tuesday</div>
-              <div class="ai-msg-b">
-                <div class="ai-msg-av">
-                  <svg viewBox="0 0 24 24"><path d="M12 2a5 5 0 015 5c0 1.9-1.05 3.56-2.6 4.43L13 12.5V14h-2v-1.5l-1.4-.07A5.002 5.002 0 017 7a5 5 0 015-5z"/></svg>
-                </div>
-                <div class="ai-badge-booked">
-                  <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
-                  Home visit moved &middot; Tue 29 Oct, 10:00 AM
-                </div>
-              </div>
-            </div>
-            <!-- Quick-action chips -->
-            <div class="ai-chips">
-              <button class="ai-chip">Explain my TSH</button>
-              <button class="ai-chip">View trends</button>
-              <button class="ai-chip">Book follow-up</button>
-            </div>
-          </div>
-        </div>
+  <!-- ============ SPOTLIGHT B, AI assistant: editorial head + the demo film as a big screen ============
+       The film is a silent loop (no audio track), no controls. It downloads only when it nears the
+       viewport and plays only while visible; phones get the vertical 540p cut. assets/app.js: bindAiVideo -->
+  <section class="s-cream ai-show">
+    <div class="ai-head">
+      <div class="ai-head-l reveal">
+        <span class="eyebrow" data-i18n="spB.eyebrow">AI health assistant</span>
+        <h2 data-i18n-html="spB.h2">Ask anything.<br>In your language.</h2>
       </div>
+      <div class="ai-head-r reveal">
+        <p class="lead" data-i18n="spB.lead">Chat about your results like you would with a calm, knowledgeable friend, in English or اردو, and ask it to move or cancel a visit right inside the conversation.</p>
+        <ol class="ai-list">
+          <li><b aria-hidden="true">01</b><span data-i18n="spB.li1">Plain answers, never jargon or scare-talk</span></li>
+          <li><b aria-hidden="true">02</b><span data-i18n="spB.li2">Books, reschedules &amp; cancels conversationally</span></li>
+          <li><b aria-hidden="true">03</b><span data-i18n="spB.li3">Urgent symptoms trigger emergency guidance</span></li>
+        </ol>
+      </div>
+    </div>
+    <div class="ai-stage" data-aivideo>
+      <div class="ai-screen">
+        <picture><source media="(max-width: 760px)" srcset="assets/img/ai-chat-poster-v.webp" width="540" height="960" /><img class="ai-poster" src="assets/img/ai-chat-poster.webp" alt="The PulsingLabs AI health assistant explaining a Vitamin D result, with the patient's earlier readings" width="1440" height="810" loading="lazy" decoding="async" /></picture>
+        <video muted playsinline loop preload="none" data-src="assets/img/ai-chat.mp4" data-src-sm="assets/img/ai-chat-sm.mp4" aria-hidden="true" tabindex="-1" disablepictureinpicture disableremoteplayback width="1440" height="810"></video>
+      </div>
+      <p class="ai-cap" aria-hidden="true">Sample conversation · fictional patient</p>
     </div>
   </section>
 
@@ -210,15 +186,15 @@
     <div class="wrap body3d-grid">
       <div class="body3d-copy reveal-l">
         <span class="eyebrow" data-i18n="b3d.eyebrow">Live organ health</span>
-        <h2 data-i18n="b3d.h2">Your body, decoded in 3D.</h2>
-        <p class="lead" data-i18n="b3d.lead">Every result you take maps onto a holographic body inside the app. Spin it, tap an organ, and see its live condition scored from your own blood work.</p>
+        <h2 data-i18n="b3d.h2">Your results, mapped onto your body.</h2>
+        <p class="lead" data-i18n="b3d.lead">Every result you take maps onto a holographic body inside the app. Spin it, tap an organ, and see the results linked to it, scored from your own blood work.</p>
         <ul class="split-list">
           <li data-i18n="b3d.li1">Heart, liver, kidneys, thyroid and more, each scored 0 to 100</li>
           <li data-i18n="b3d.li2">Organs glow green, amber or red with your latest results</li>
           <li data-i18n="b3d.li3">Tap any organ to zoom in and get the full story</li>
         </ul>
         <div class="hero-cta">
-          <a class="btn btn-primary" href="#" data-cta="app" data-magnetic data-i18n-html="b3d.cta">Scan your health <span class="arrow">→</span></a>
+          <a class="btn btn-primary" href="#" data-cta="app" data-magnetic data-i18n-html="b3d.cta">Request a check-up <span class="arrow">→</span></a>
         </div>
       </div>
       <div class="body3d-stage reveal-r" aria-hidden="true">
@@ -260,7 +236,7 @@
         </div>
         <div class="split-media reveal-r">
           <div class="media photo tall">
-            <img class="media-img" style="object-position:center 22%;" src="assets/img/family-tab.jpeg" alt="The Family tab in the PulsingLabs app, one relative under your care with results and health score" loading="lazy" />
+            <img class="media-img" style="object-position:center;" src="assets/img/family-tab-v4.webp" alt="The Family tab in the PulsingLabs app: a family health score, each person with their health age, and what the family has in common" loading="lazy" />
             <div class="badge-float bf-br"><span class="bf-ic" data-icon="users"></span><span><b>Health ID</b><span>for every relative</span></span></div>
           </div>
         </div>
@@ -276,19 +252,19 @@
         <div class="split-copy reveal-r">
           <span class="eyebrow" data-i18n="hc.eyebrow">Home sample collection</span>
           <h2 data-i18n="hc.h2">No lab trip. We come to you.</h2>
-          <p class="lead" data-i18n="hc.lead">Every booking is a home visit: a phlebotomist from a licensed partner lab collects your sample at your door, at a time that suits you. Results arrive in the app, zero travel.</p>
+          <p class="lead" data-i18n="hc.lead">Every booking is a home visit: a phlebotomist from our partner lab collects your sample at your door, at a time that suits you. Results arrive in the app, zero travel.</p>
           <ul class="split-list">
             <li data-i18n="hc.li1">Every booking is a home visit, no extra step</li>
             <li data-i18n="hc.li2">Pick a slot, morning, afternoon or evening</li>
             <li data-i18n="hc.li3">Results flow into the app like any other test</li>
           </ul>
           <div class="hero-cta">
-            <a class="btn btn-primary" href="#" data-cta="home-visit" data-magnetic data-i18n-html="hc.btn">Book a home visit <span class="arrow">→</span></a>
+            <a class="btn btn-primary" href="#" data-cta="home-visit" data-magnetic data-i18n-html="hc.btn">Request a home visit <span class="arrow">→</span></a>
           </div>
         </div>
         <div class="split-media reveal-l">
           <div class="media photo tall">
-            <img class="media-img" src="assets/img/home1new.webp" alt="A certified phlebotomist collecting a sample at a patient's home" loading="lazy" />
+            <img class="media-img" src="assets/img/home1new.webp" alt="A phlebotomist collecting a sample at a patient's home" loading="lazy" />
             <div class="badge-float bf-tl"><span class="bf-ic" data-icon="home"></span><span><b>On the way</b><span>arriving 09:10</span></span></div>
           </div>
         </div>
@@ -305,11 +281,53 @@
         <h2 data-i18n="how.h2">Three steps to clarity</h2>
       </div>
       <div class="stack" style="margin-top:50px;">
-        <div class="stack-card"><div class="sc-num">1</div><div><h3 data-i18n="how.s1h">Choose a package</h3><p data-i18n="how.s1p">Pick Standard (22 tests) or Premium (32 tests).</p></div></div>
-        <div class="stack-card"><div class="sc-num">2</div><div><h3 data-i18n="how.s2h">Pick a time</h3><p data-i18n="how.s2p">Choose a date and time for your home visit and pay in the app. A licensed partner lab collects and tests your sample.</p></div></div>
-        <div class="stack-card"><div class="sc-num">3</div><div><h3 data-i18n="how.s3h">Get results + insights</h3><p data-i18n="how.s3p">Results arrive in-app with charts, trends, and AI explanations you understand.</p></div></div>
+        <div class="stack-card">
+          <div class="step-bg"><img src="assets/img/vials.jpg" style="object-position:center 50%;" alt="" aria-hidden="true" width="1254" height="1254" loading="lazy" decoding="async" /></div>
+          <div class="step-scrim" aria-hidden="true"></div>
+          <div class="sc-top"><div class="sc-badge"><b>01</b><i aria-hidden="true"></i></div><h3 data-i18n="how.s1h">Choose a package</h3><p data-i18n="how.s1p">Pick Standard (22 tests) or Premium (32 tests).</p></div>
+          <div class="step-panel" aria-hidden="true">
+            <div class="sp-cap">Two check-ups</div>
+            <div class="sp-tier"><b>Standard</b><span>22 tests</span><em>PKR 9,999</em></div>
+            <div class="sp-tier"><b>Premium</b><span>32 tests</span><em>PKR 19,999</em></div>
+          </div>
+          <div class="step-phone"><img src="assets/img/app-step1.webp" alt="The PulsingLabs Standard package page: 22 tests, PKR 9,999, the tests grouped by type, and who the booking is for" width="600" height="1298" loading="lazy" decoding="async" /></div>
+        </div>
+        <div class="stack-card">
+          <div class="step-bg flip"><img src="assets/img/home1new.webp" style="object-position:center 42%;" alt="" aria-hidden="true" width="1254" height="1254" loading="lazy" decoding="async" /></div>
+          <div class="step-scrim" aria-hidden="true"></div>
+          <div class="sc-top"><div class="sc-badge"><b>02</b><i aria-hidden="true"></i></div><h3 data-i18n="how.s2h">Pick a time</h3><p data-i18n="how.s2p">Choose a date and time for your home visit and pay in the app. Our partner lab collects and tests your sample.</p></div>
+          <div class="step-panel" aria-hidden="true">
+            <div class="sp-cap">What happens next</div>
+            <ul class="sp-steps">
+              <li class="d"><i></i>Payment received</li>
+              <li class="n"><i></i>We confirm your visit time</li>
+              <li><i></i>Your sample is collected</li>
+              <li><i></i>Results and score, in the app</li>
+            </ul>
+          </div>
+          <div class="step-phone"><img src="assets/img/app-step2.webp" alt="The PulsingLabs home visit booking: a row of dates and the available times, with a time selected" width="600" height="1298" loading="lazy" decoding="async" /></div>
+        </div>
+        <div class="stack-card">
+          <div class="step-bg"><img src="assets/img/home2new.webp" style="object-position:center 18%;" alt="" aria-hidden="true" width="1254" height="1254" loading="lazy" decoding="async" /></div>
+          <div class="step-scrim" aria-hidden="true"></div>
+          <div class="sc-top"><div class="sc-badge"><b>03</b></div><h3 data-i18n="how.s3h">Get results + insights</h3><p data-i18n="how.s3p">Results arrive in-app with charts, trends, and AI explanations you understand.</p></div>
+          <div class="step-panel" aria-hidden="true">
+            <div class="sp-cap">Your health score</div>
+            <div class="sp-score">
+              <div class="sp-ring" style="--p:82"><b>82</b></div>
+              <div class="sp-ov"><b>Overall</b><span>out of 100</span></div>
+              <div class="sp-bars">
+                <div>Vitamins<i style="--w:82%"></i><em>82</em></div>
+                <div>Blood count<i style="--w:96%"></i><em>96</em></div>
+                <div>Diabetes<i style="--w:82%"></i><em>82</em></div>
+                <div>Thyroid<i style="--w:99%"></i><em>99</em></div>
+              </div>
+            </div>
+          </div>
+          <div class="step-phone"><img src="assets/img/app-step3.webp?v=4" alt="A PulsingLabs result: a Vitamin D trend chart rising into the healthy range, with a plain-English explanation" width="600" height="1298" loading="lazy" decoding="async" /></div>
+        </div>
       </div>
-      <p class="center reveal" style="margin-top:28px;font-size:15px;"><a href="/how-it-works" style="color:var(--teal-d);font-weight:700;">See exactly how a home visit in Karachi works <span class="arrow">→</span></a> · <a href="/pricing" style="color:var(--teal-d);font-weight:700;">Compare the two packages</a></p>
+      <p class="center reveal" style="margin-top:28px;font-size:15px;"><span class="step-note" style="display:block;margin:0 0 14px;">The app screens show sample data.</span><a href="/how-it-works" style="color:var(--teal-d);font-weight:700;">See exactly how a home visit in Karachi works <span class="arrow">→</span></a> · <a href="/pricing" style="color:var(--teal-d);font-weight:700;">Compare the two packages</a></p>
     </div>
   </section>
 
@@ -351,6 +369,6 @@
   <!-- The closing CTA lives in the mega footer now (same headline + Open the
        App button), so the old teal band was removed as a duplicate. -->
   <div id="site-footer"><nav aria-label="Site pages"><p><a href="/">Home</a> · <a href="/pricing">Pricing</a> · <a href="/how-it-works">How it works</a> · <a href="/faq">FAQ</a> · <a href="/features">Features</a> · <a href="/business">For business</a> · <a href="/about">About</a> · <a href="/contact">Contact</a> · <a href="/how-it-works#service-policy">Service policy</a> · <a href="/refunds">Refund policy</a> · <a href="/privacy">Privacy policy</a> · <a href="/terms">Terms</a></p><p>PulsingLabs · Blood tests at home in Karachi · <a href="mailto:contact@pulsinglabs.com">contact@pulsinglabs.com</a></p></nav></div>
-  <script src="assets/app.js?v=120"></script>
+  <script src="assets/app.js?v=127"></script>
 </body>
 </html>

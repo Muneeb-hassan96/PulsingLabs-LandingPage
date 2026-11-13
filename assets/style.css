@@ -663,6 +663,9 @@ footer.site a:hover { color: var(--teal-l); padding-left: 4px; }
      without this the drawer covers both. Lift them back on top so the X
      stays visible and tappable while the drawer is open. */
   .nav .logo, .nav-cta { position: relative; z-index: 195; }
+  /* the links leave the grid for the drawer, so drop the empty middle column:
+     otherwise the menu button sat in it, right next to the logo */
+  .nav-inner { grid-template-columns: 1fr auto; }
   /* CRITICAL: backdrop-filter on the scrolled header makes the header the
      containing block for its fixed-position children on mobile Chrome — the
      drawer then renders clipped inside the ~60px header bar ("menu invisible
@@ -1337,7 +1340,9 @@ html.theme-dark #to-top .arr { stroke: var(--teal-l); }
 
 /* ---- Three.js 3D helix canvas (created at runtime; replaces 2D particles) ---- */
 #hero-3d {
-  position: absolute; inset: 0; z-index: 1; pointer-events: none;
+  /* explicit size: a canvas is a replaced element, so inset alone leaves it at its
+     PIXEL size (1.5x on high-density screens) and the helix showed zoomed + cropped */
+  position: absolute; inset: 0; width: 100%; height: 100%; z-index: 1; pointer-events: none;
   opacity: 0; transition: opacity 1.4s var(--ease);
 }
 #hero-3d.lit { opacity: 1; }
@@ -1356,7 +1361,7 @@ html.theme-dark #to-top .arr { stroke: var(--teal-l); }
   .hero .page-enter > .hero-cta ~ * { opacity: 1 !important; transform: none !important; }
   .media .media-img { top: 0 !important; height: 100% !important; }
   #grain, .grad-text { animation: none !important; }
-  #hero-particles, #hero-3d { display: none !important; }
+  #hero-particles { display: none !important; }
   .cursor-dot, .cursor-ring { display: none !important; }
   .card::after, .b-tile::after { display: none !important; }
   html.anim .media.photo { clip-path: none !important; }
@@ -2002,3 +2007,370 @@ footer.site.mf .mf-legal-links a:hover { padding-left: 12px; }
 footer.site.mf .mf-legal-links a .ti { flex: none; width: 30px; height: 30px; border-radius: 9px; display: grid; place-items: center; background: rgba(77,234,208,.12); }
 footer.site.mf .mf-legal-links a::after { content: "→"; margin-left: auto; color: rgba(255,255,255,.35); transition: transform .25s var(--ease), color .25s var(--ease); }
 footer.site.mf .mf-legal-links a:hover::after { transform: translateX(3px); color: var(--teal-l); }
+
+/* =====================================================================
+   Hero panel (2026-11-06): one dark rounded panel on the cream page, the
+   3D helix lives INSIDE it, copy and a stats row are written over it.
+   The helix canvas + 2D particle fallback are absolute layers (z 1),
+   the glow sits under them (z 0), a scrim keeps text legible (z 2).
+   ===================================================================== */
+/* Full-bleed: the panel runs edge to edge and up under the fixed nav, so the logo,
+   links and button are drawn ON it (light colours come from the scroll theme).
+   --hx lines the copy and card up with the nav's own container (max 1180 + 24px). */
+.hero { padding: 0; --hx: max(24px, calc((100% - var(--maxw)) / 2 + 24px)); }
+.hero-panel {
+  position: relative; isolation: isolate; overflow: hidden;
+  width: 100%; margin: 0; border-radius: 0 0 clamp(24px, 3vw, 44px) clamp(24px, 3vw, 44px);
+  min-height: min(100svh, 980px);
+  display: flex; flex-direction: column; justify-content: flex-end;
+  padding: 130px var(--hx) clamp(30px, 4.4vw, 64px);
+  color: var(--on-dark);
+  background:
+    radial-gradient(52% 72% at 76% 46%, rgba(0,191,165,.20), transparent 62%),
+    radial-gradient(44% 60% at 102% 104%, rgba(106,59,255,.30), transparent 70%),
+    radial-gradient(36% 46% at -2% -4%, rgba(0,221,176,.12), transparent 70%),
+    linear-gradient(165deg, #0E2522 0%, #091A18 52%, #060F12 100%);
+}
+/* fine grid, fading out toward the copy, gives the dark some texture */
+.hero-panel::before {
+  content: ""; position: absolute; inset: 0; z-index: 0; pointer-events: none;
+  background-image: linear-gradient(rgba(255,255,255,.035) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.035) 1px, transparent 1px);
+  background-size: 48px 48px;
+  -webkit-mask-image: radial-gradient(60% 80% at 74% 50%, #000, transparent 75%);
+          mask-image: radial-gradient(60% 80% at 74% 50%, #000, transparent 75%);
+}
+/* legibility scrim over the helix, darkest in the bottom-left where the copy sits */
+.hero-panel::after {
+  content: ""; position: absolute; inset: 0; z-index: 2; pointer-events: none;
+  background: radial-gradient(70% 75% at 0% 100%, rgba(6,15,18,.78), rgba(6,15,18,.35) 55%, transparent 80%),
+              linear-gradient(0deg, rgba(6,15,18,.5) 0%, transparent 30%);
+}
+/* soft halo where the helix stands, so the panel is already alive before the 3D engine loads */
+.hero-glow {
+  position: absolute; z-index: 0; pointer-events: none; top: 50%; right: 4%;
+  width: min(48vw, 680px); aspect-ratio: 1; transform: translateY(-50%); border-radius: 50%;
+  background: radial-gradient(closest-side, rgba(0,194,255,.22), rgba(0,191,165,.10) 45%, transparent 72%);
+}
+.hero-panel #hero-particles, .hero-panel #hero-3d { z-index: 1; }
+
+.hero-head, .hero-foot { position: relative; z-index: 3; display: flex; flex-direction: column; align-items: flex-start; max-width: 880px; }
+.hero-panel .eyebrow { color: var(--teal-l); margin-bottom: 18px; }
+.hero-panel .eyebrow::before { background: var(--teal-l); }
+.hero-panel h1 { color: #fff; font-size: clamp(42px, 5.2vw, 80px); line-height: 1.02; letter-spacing: -.035em; }
+.hero-panel .grad-text,
+.hero-panel h1 .grad-text::after { background-image: linear-gradient(90deg, #00DDB0, #00C2FF 60%, #6A8BFF); }
+.hero-panel .grad-text { -webkit-background-clip: text; background-clip: text; color: transparent; }
+.hero-panel p.lead { margin-top: 18px; color: rgba(236,230,218,.74); font-size: clamp(15.5px, 1.2vw, 18px); max-width: 48ch; }
+.hero-panel .hero-cta { margin-top: 26px; }
+.btn-glass { background: rgba(255,255,255,.07); color: #fff; border-color: rgba(255,255,255,.24); -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px); }
+.btn-glass:hover { background: rgba(255,255,255,.13); border-color: rgba(77,234,208,.6); }
+
+/* compact stat row (big value, small label), no rules or boxes */
+.hero-stats { list-style: none; margin: 26px 0 0; padding: 0; display: flex; flex-wrap: wrap; gap: 14px clamp(24px, 3vw, 44px); }
+.hero-stats b { display: block; color: #fff; font-size: clamp(19px, 1.7vw, 26px); font-weight: 600; letter-spacing: -.02em; line-height: 1.1; }
+.hero-stats span { display: block; margin-top: 4px; color: rgba(236,230,218,.6); font-size: 13px; }
+
+/* ---- "Three steps": triptych (design option E) ----
+   Laptop: three tall portrait cards in a row, joined by a dotted line. Phone: the same
+   cards stacked vertically, still peeling over each other (sticky, rules further up).
+   Every card is a graded photo, the step written at the top, a real app screen rising
+   from the bottom and a cut-out of another real screen floating beside it. */
+#how .stack-card {
+  display: block; position: relative; overflow: hidden; isolation: isolate;
+  min-height: 780px; padding: 0; border: 0; border-radius: 30px;
+  background: #0b1513; box-shadow: 0 30px 60px -34px rgba(10,22,20,.55);
+}
+/* one colour grade for all three photos, so they read as a set */
+#how .step-bg { position: absolute; inset: 0; z-index: 0; overflow: hidden; }
+#how .step-bg img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; filter: saturate(.8) contrast(1.06); }
+#how .step-bg.flip img { transform: scaleX(-1); } /* keeps the faces clear of the text */
+#how .step-bg::after { content: ""; position: absolute; inset: 0; background: rgba(12,58,52,.4); mix-blend-mode: multiply; }
+#how .step-scrim { position: absolute; inset: 0; z-index: 2; pointer-events: none;
+  background: linear-gradient(180deg, rgba(6,14,12,.86) 0%, rgba(6,14,12,.55) 36%, rgba(6,14,12,0) 62%),
+              linear-gradient(0deg, rgba(6,14,12,.55) 0%, rgba(6,14,12,0) 26%); }
+#how .sc-top { position: absolute; z-index: 4; left: 32px; right: 32px; top: 30px; }
+#how .sc-badge { display: flex; align-items: center; margin-bottom: 22px; }
+#how .sc-badge b { display: grid; place-items: center; width: 46px; height: 46px; border-radius: 50%; flex: none;
+  border: 1.5px solid rgba(244,239,231,.7); background: rgba(244,239,231,.1); color: #fff; font-size: 15px; font-weight: 600; letter-spacing: .06em; }
+#how .sc-badge i { flex: 1; margin: 0 -52px 0 14px; border-top: 2px dotted rgba(244,239,231,.5); }
+#how .stack-card h3 { color: #fff; font-size: clamp(28px, 2.7vw, 38px); line-height: 1.02; letter-spacing: -.035em; }
+#how .stack-card p { color: rgba(244,239,231,.86); font-size: clamp(15px, 1.15vw, 16.5px); line-height: 1.5; margin-top: 12px; max-width: 40ch; text-wrap: balance; }
+/* the app, as it really looks (rendered from the app's own screens) */
+#how .step-phone {
+  position: absolute; z-index: 4; left: 50%; bottom: -120px; transform: translateX(-50%);
+  width: clamp(176px, 17vw, 226px); aspect-ratio: 1170 / 2532; padding: 6px; border-radius: 38px; background: #090c0c;
+  box-shadow: 0 0 0 1px rgba(255,255,255,.2), 0 34px 56px -18px rgba(0,0,0,.75);
+}
+#how .step-phone img { display: block; width: 100%; height: 100%; object-fit: cover; border-radius: 33px; }
+/* a designed panel (not a screenshot): solid, no blur, cheap to draw */
+#how .step-panel { position: absolute; z-index: 5; box-sizing: border-box; border-radius: 18px; padding: 16px 18px; color: #ECE6DA;
+  background: linear-gradient(160deg, rgba(21,42,41,.95), rgba(9,20,20,.96));
+  box-shadow: 0 0 0 1px rgba(255,255,255,.1), 0 22px 40px -18px rgba(0,0,0,.7); }
+#how .sp-cap { font: 500 10.5px/1 ui-monospace, 'SF Mono', 'Cascadia Mono', Consolas, monospace; letter-spacing: .14em; text-transform: uppercase; color: rgba(236,230,218,.5); margin-bottom: 12px; }
+#how .sp-tier { display: flex; align-items: baseline; gap: 10px; padding: 9px 0; border-top: 1px solid rgba(255,255,255,.1); }
+#how .sp-cap + .sp-tier { border-top: 0; padding-top: 0; }
+#how .sp-tier b { font-size: 15px; font-weight: 600; color: #fff; min-width: 74px; }
+#how .sp-tier span { font-size: 12.5px; color: rgba(236,230,218,.6); }
+#how .sp-tier em { margin-left: auto; font-style: normal; font-size: 15px; font-weight: 600; color: #4DEAD0; white-space: nowrap; }
+#how .sp-steps { list-style: none; margin: 0; padding: 0; }
+#how .sp-steps li { position: relative; display: flex; align-items: center; gap: 12px; font-size: 13.5px; line-height: 1.3; color: rgba(236,230,218,.5); padding: 6px 0; }
+#how .sp-steps li i { flex: none; width: 14px; height: 14px; border-radius: 50%; border: 1.5px solid rgba(236,230,218,.4); background: #0c1a19; position: relative; z-index: 1; }
+#how .sp-steps li.d { color: #fff; } #how .sp-steps li.d i { background: #4DEAD0; border-color: #4DEAD0; }
+#how .sp-steps li.n { color: #fff; } #how .sp-steps li.n i { border-color: #4DEAD0; }
+#how .sp-steps li:not(:last-child)::after { content: ""; position: absolute; left: 6.25px; top: 19px; height: 20px; width: 1.5px; background: rgba(236,230,218,.22); }
+#how .sp-score { display: flex; flex-wrap: wrap; gap: 14px 16px; align-items: center; }
+#how .sp-ring { flex: none; position: relative; width: 62px; height: 62px; border-radius: 50%; display: grid; place-items: center;
+  background: conic-gradient(#4DEAD0 0 calc(var(--p) * 1%), rgba(255,255,255,.1) 0); }
+#how .sp-ring::before { content: ""; position: absolute; inset: 6px; border-radius: 50%; background: #0d1b1a; }
+#how .sp-ring b { position: relative; font-size: 20px; font-weight: 700; color: #fff; }
+#how .sp-ov { display: block; flex: 1; min-width: 0; }
+#how .sp-ov b { display: block; font-size: 15px; font-weight: 600; color: #fff; }
+#how .sp-ov span { display: block; margin-top: 3px; font-size: 12.5px; color: rgba(236,230,218,.6); }
+#how .sp-bars { flex: 1 1 100%; min-width: 0; display: grid; gap: 8px; }
+#how .sp-bars div { display: grid; grid-template-columns: 84px 1fr 26px; align-items: center; gap: 8px; font-size: 12px; color: rgba(236,230,218,.7); }
+#how .sp-bars i { display: block; height: 4px; border-radius: 4px; background: rgba(255,255,255,.12); position: relative; }
+#how .sp-bars i::after { content: ""; position: absolute; left: 0; top: 0; bottom: 0; width: var(--w); border-radius: 4px; background: #4DEAD0; }
+#how .sp-bars em { font-style: normal; font-size: 12px; color: #fff; text-align: right; }
+.step-note { text-align: center; font-size: 13px; margin-top: 22px; color: rgb(var(--pg-muted)); }
+@media (min-width: 901px) {
+  /* Laptop: one wide card per step. Each slides up over the one before it as you scroll
+     (position: sticky; the pinned offsets come from the shared .stack-card:nth-child rules). */
+  #how .stack-card { position: sticky; min-height: 560px; margin-bottom: 26px; --pr: clamp(120px, 13.5vw, 190px); --pw: clamp(210px, 18vw, 250px); }
+  /* darkest under the text (bottom-left) and behind the app cluster (right), so the photo's
+     subject stays clear in the middle */
+  #how .step-scrim { background: linear-gradient(0deg, rgba(6,14,12,.9) 0%, rgba(6,14,12,.5) 30%, rgba(6,14,12,0) 56%),
+                                 linear-gradient(90deg, rgba(6,14,12,.55) 0%, rgba(6,14,12,0) 52%),
+                                 linear-gradient(270deg, rgba(6,14,12,.6) 0%, rgba(6,14,12,.25) 30%, rgba(6,14,12,0) 46%); }
+  #how .sc-top { top: auto; right: auto; left: clamp(32px, 4.6vw, 64px); bottom: clamp(30px, 4vw, 56px); max-width: 440px; }
+  #how .sc-badge i { display: none; }
+  #how .stack-card h3 { font-size: clamp(34px, 3.8vw, 50px); }
+  #how .stack-card p { font-size: clamp(16px, 1.3vw, 18px); max-width: 38ch; }
+  #how .step-phone { left: auto; right: var(--pr); bottom: -90px; transform: none; width: var(--pw); }
+  /* The panel sits on the SAME bottom line as the step text, just left of the phone with a clear
+     gap: it never touches the phone or the photo's faces (upper middle). */
+  #how .step-panel { top: auto; left: auto; bottom: clamp(30px, 4vw, 56px); right: calc(var(--pr) + var(--pw) + 28px); width: 256px; }
+}
+/* narrow laptops: no room for the panel beside the text, the phone alone carries the step */
+@media (min-width: 901px) and (max-width: 1359px) { #how .step-panel { display: none; } }
+@media (max-width: 900px) {
+  /* stacked vertically: each card is full width and slides over the one before it */
+  #how .stack-card { min-height: 0; border-radius: 26px; margin-bottom: 18px; }
+  #how .sc-top { position: relative; left: auto; right: auto; top: auto; padding: 26px 24px 0; }
+  #how .sc-badge i { display: none; }
+  #how .sc-badge { margin-bottom: 18px; }
+  #how .stack-card h3 { font-size: clamp(30px, 8.6vw, 38px); }
+  #how .stack-card p { font-size: 15.5px; }
+  /* text -> panel -> phone, in flow: the panel never covers the text, the phone or the faces.
+     The phone's lower part is clipped by the card (negative bottom margin), as before. */
+  #how .step-panel { position: relative; bottom: auto; right: auto; margin: 22px 24px 0; width: auto; }
+  #how .step-phone { position: relative; left: auto; right: auto; bottom: auto; transform: none; width: 204px; margin: 26px auto -120px; }
+}
+@media (prefers-reduced-motion: reduce) { #how .stack-card { transition: none; } }
+
+/* ---- floating cards along the helix ----
+   Solid dark glass (no backdrop-filter: blurring over a live WebGL canvas would
+   re-blur every frame). Outer = entrance (fade/rise, staggered), inner = idle float,
+   so the two transforms never fight. Positions are panel percentages. */
+.hero-float { position: absolute; z-index: 3; pointer-events: none;
+  opacity: 0; transform: translateY(16px) scale(.97);
+  transition: opacity .8s var(--ease), transform .9s var(--ease); }
+body.loaded .hero-float { opacity: 1; transform: none; }
+body.loaded .hf-score { transition-delay: .9s; }
+body.loaded .hf-chart { transition-delay: 1.15s; }
+body.loaded .hf-ai { transition-delay: 1.4s; }
+.hf-in {
+  border-radius: 18px; padding: 14px 16px; color: #fff;
+  background: linear-gradient(160deg, rgba(22,46,48,.88), rgba(9,22,24,.9));
+  border: 1px solid rgba(255,255,255,.12);
+  box-shadow: 0 24px 48px -20px rgba(0,0,0,.7), inset 0 1px 0 rgba(255,255,255,.07);
+  animation: hfFloat 7s ease-in-out infinite;
+}
+.hf-chart .hf-in { animation-delay: -2.4s; }
+.hf-ai .hf-in { animation-delay: -4.6s; }
+@keyframes hfFloat { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-9px); } }
+
+.hf-score { top: 17%; right: 8%; }
+.hf-score .hf-in { display: flex; align-items: center; gap: 12px; padding: 12px 18px 12px 12px; }
+.hf-ring { --ring-fill: #00DDB0; --ring-track: rgba(255,255,255,.1); position: relative; flex: none;
+  width: 52px; height: 52px; border-radius: 50%; display: grid; place-items: center; background: rgba(255,255,255,.1); }
+.hf-ring::before { content: ""; position: absolute; inset: 5px; border-radius: 50%; background: #0F2527; }
+.hf-ring i { position: relative; font-style: normal; font-weight: 700; font-size: 17px; }
+.hf-txt b { display: block; font-size: 14px; font-weight: 600; }
+.hf-txt span { display: block; font-size: 12px; color: rgba(236,230,218,.6); margin-top: 2px; }
+
+.hf-chart { top: 33%; left: 52%; width: 236px; }
+.hf-row { display: flex; align-items: center; gap: 8px; }
+.hf-row b { font-size: 13.5px; font-weight: 600; }
+.hf-pill { margin-left: auto; font-size: 11px; font-weight: 700; color: #00DDB0; background: rgba(0,221,176,.14); padding: 3px 9px; border-radius: 99px; }
+.hf-val { font-size: 26px; font-weight: 700; letter-spacing: -.02em; margin: 4px 0 8px; }
+.hf-val small { font-size: 12px; font-weight: 500; color: rgba(236,230,218,.6); margin-left: 4px; letter-spacing: 0; }
+.hf-spark { display: block; width: 100%; height: 56px; overflow: visible; }
+/* the trend line draws in once, then the latest reading glows */
+.hf-path { stroke-dasharray: 1; stroke-dashoffset: 1; transition: stroke-dashoffset 1.5s var(--ease) 1.5s; }
+body.loaded .hf-path { stroke-dashoffset: 0; }
+.hf-end { filter: drop-shadow(0 0 6px #00C2FF); }
+
+.hf-ai { top: 56%; right: 6%; width: 270px; }
+.hf-ic { width: 26px; height: 26px; border-radius: 8px; display: grid; place-items: center; color: #04231F;
+  background: linear-gradient(135deg, #00DDB0, #00C2FF); }
+.hf-ic svg { width: 15px; height: 15px; }
+.hf-ai p { margin-top: 9px; font-size: 13.5px; line-height: 1.45; color: rgba(236,230,218,.82); }
+
+/* tablet: no room for all three beside the copy */
+@media (max-width: 1100px) { .hf-chart { display: none; } }
+
+/* the check-up card, bottom-right (the "product" card of the references) */
+.hero-card {
+  position: absolute; z-index: 3; right: var(--hx); bottom: clamp(30px, 4.4vw, 64px);
+  display: flex; align-items: center; gap: 14px; width: 330px; padding: 12px 14px 12px 12px;
+  border-radius: 20px; color: #fff; text-decoration: none;
+  background: rgba(255,255,255,.07); border: 1px solid rgba(255,255,255,.16);
+  -webkit-backdrop-filter: blur(14px); backdrop-filter: blur(14px);
+  box-shadow: 0 18px 40px -18px rgba(0,0,0,.6);
+  transition: background .25s var(--ease), border-color .25s var(--ease);
+}
+.hero-card:hover { background: rgba(255,255,255,.11); border-color: rgba(77,234,208,.5); }
+.hc-mark { flex: none; width: 58px; height: 58px; border-radius: 14px; display: grid; place-items: center;
+  background: radial-gradient(circle at 30% 25%, rgba(77,234,208,.35), rgba(10,40,44,.9) 70%); border: 1px solid rgba(255,255,255,.12); }
+.hc-mark img { width: 34px; height: 34px; }
+.hc-body { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 2px; }
+.hc-body b { font-size: 15px; font-weight: 600; }
+.hc-body span { font-size: 12.5px; color: rgba(236,230,218,.66); }
+.hc-body em { font-style: normal; font-weight: 700; font-size: 15px; color: var(--teal-l); margin-top: 3px; }
+.hc-go { flex: none; width: 32px; height: 32px; border-radius: 50%; display: grid; place-items: center; background: rgba(255,255,255,.1); }
+/* not enough room beside the copy: the card goes */
+@media (max-width: 1100px) { .hero-card { display: none; } }
+
+@media (max-width: 760px) {
+  /* Phone: three bands. Headline under the logo, the helix through the middle,
+     the check-up card and one full-width button on the bottom edge. */
+  .hero-panel { border-radius: 0 0 26px 26px; min-height: 100svh; padding: 104px 22px 26px; justify-content: flex-start; }
+  .hero-panel::before { -webkit-mask-image: radial-gradient(80% 40% at 50% 50%, #000, transparent 75%); mask-image: radial-gradient(80% 40% at 50% 50%, #000, transparent 75%); }
+  .hero-panel::after { background: linear-gradient(180deg, rgba(6,15,18,.72) 0%, rgba(6,15,18,.25) 30%, transparent 46%, transparent 62%, rgba(6,15,18,.82) 100%); }
+  .hero-glow { right: 50%; top: 52%; width: 110vw; transform: translate(50%, -50%); }
+  .hero-head { order: 1; }
+  .hero-panel .eyebrow { margin-bottom: 14px; }
+  .hero-panel h1 { font-size: clamp(38px, 11vw, 50px); }
+  .hero-card { order: 2; position: relative; right: auto; bottom: auto; margin-top: auto; display: flex; width: 100%; }
+  .hero-foot { order: 3; max-width: none; }
+  /* essentials only: the facts are on the card and in the marquee right below,
+     the check-ups link is in the menu */
+  .hero-foot .lead, .hero-stats, .hero-panel .btn-glass { display: none; }
+  .hero-panel .hero-cta { margin-top: 12px; width: 100%; }
+  .hero-panel .hero-cta .btn-primary { width: 100%; }
+  /* middle band: score top-right, AI card lower-left, the helix between them */
+  .hf-score { top: 30%; right: 22px; }
+  .hf-score .hf-in { padding: 10px 14px 10px 10px; }
+  .hf-ring { width: 46px; height: 46px; }
+  .hf-ai { top: 54%; left: 22px; right: auto; width: min(76%, 290px); }
+  .hf-ai p { font-size: 13px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .hero-float { opacity: 1; transform: none; transition: none; }
+  .hf-in { animation: none; }
+  .hf-path { stroke-dashoffset: 0; transition: none; }
+}
+
+/* ---- AI section: editorial head + the film as a big screen (design option C) ----
+   --aiw is the screen width, capped by the window HEIGHT too (140vh = 78.75vh x 16/9) so it never
+   outgrows the window. Where the browser supports scroll-driven animation the screen eases up
+   into place as it scrolls in (no JS); otherwise it is simply there. */
+.ai-show { --aiw: min(calc(100vw - 32px), 1560px, 140vh); padding: clamp(72px, 8vw, 120px) 0 clamp(60px, 6vw, 100px); }
+.ai-head { max-width: 1120px; margin: 0 auto; padding: 0 clamp(20px, 4vw, 40px); text-align: center; }
+.ai-head h2 { margin-top: 18px; font-size: clamp(42px, 5.2vw, 76px); line-height: 1.02; text-wrap: balance; }
+.ai-head .eyebrow { justify-content: center; }
+.ai-head-r .lead { margin: 20px auto 0; max-width: 58ch; }
+.ai-list { list-style: none; margin: 34px auto 0; padding: 20px 0 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); border-top: 1px solid rgba(var(--pg-fg), .16); }
+.ai-list li { display: flex; flex-direction: column; align-items: center; gap: 8px; padding: 0 22px; font-size: 16px; line-height: 1.4; color: rgb(var(--pg-fg)); text-align: center; }
+.ai-list li + li { border-left: 1px solid rgba(var(--pg-fg), .12); }
+.ai-list b { flex: none; font-weight: 600; color: var(--teal-d); }
+.ai-stage { margin-top: clamp(36px, 4.4vw, 64px); }
+.ai-screen {
+  position: relative; width: var(--aiw); margin: 0 auto; aspect-ratio: 16 / 9; overflow: hidden;
+  border-radius: clamp(18px, 2.2vw, 32px); background: #050c0d;
+  box-shadow: 0 50px 90px -50px rgba(14, 37, 34, .7);
+}
+.ai-poster, .ai-screen video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; }
+.ai-screen video { opacity: 0; transition: opacity .7s var(--ease); }
+.ai-stage.is-ready .ai-screen video { opacity: 1; }
+.ai-cap { width: var(--aiw); margin: 14px auto 0; text-align: right;
+  font: 500 11.5px/1 ui-monospace, 'SF Mono', 'Cascadia Mono', Consolas, monospace; letter-spacing: .12em; text-transform: uppercase; color: rgba(var(--pg-fg), .5); }
+@supports (animation-timeline: view()) {
+  .ai-screen { animation: aiRise linear both; animation-timeline: view(); animation-range: entry 0% cover 35%; }
+  @keyframes aiRise { from { transform: translateY(44px) scale(.95); } to { transform: none; } }
+}
+@media (max-width: 760px) {
+  /* phones play the vertical cut of the film: the chat stays readable */
+  .ai-show { --aiw: min(86vw, 380px, 66vh); }
+  .ai-screen { aspect-ratio: 9 / 16; border-radius: 22px; }
+  .ai-cap { text-align: left; font-size: 10px; letter-spacing: .08em; }
+  .ai-list { grid-template-columns: minmax(0, 1fr); border-top: 0; padding-top: 0; max-width: 360px; }
+  .ai-list li, .ai-list li + li { flex-direction: row; align-items: baseline; gap: 14px; padding: 12px 0; border-left: 0; border-top: 1px solid rgba(var(--pg-fg), .14); text-align: left; font-size: 15.5px; }
+}
+@media (prefers-reduced-motion: reduce) { .ai-screen { animation: none; } }
+
+/* Phones: the footer's bottom-line links get a 44px tall tap area without moving
+   the text (padding is cancelled by the negative margin). */
+@media (max-width: 900px) {
+  footer.site.mf .mf-bottom a { display: inline-block; padding: 13px 2px; margin: -13px 0; }
+}
+
+/* ---------- Results band: the app's result card, drawn live (see bindResultCard) ---------- */
+.media.rc-media { background: radial-gradient(90% 90% at 70% 0%, #10312c 0%, #0A0E12 62%); display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 56px 28px 36px; }
+.media.rc-media::before { display: none; }
+.media .rc { position: relative; z-index: 2; width: min(100%, 520px); box-sizing: border-box; color: #E8EEF2; }
+.rc *, .rc *::before, .rc *::after { box-sizing: border-box; }
+.rc-wrap { position: relative; transform-style: preserve-3d; transition: transform .25s ease-out; }
+@media (hover: hover) and (pointer: fine) {
+  .rc-wrap { transform: perspective(1500px) rotateY(var(--ry, -8deg)) rotateX(var(--rx, 4deg)); }
+}
+.rc-card { background: linear-gradient(160deg, #141d24, #0e151b); border: 1px solid rgba(255,255,255,.09); border-radius: 24px; padding: 22px; box-shadow: 0 40px 80px -24px rgba(0,0,0,.7), 0 0 60px rgba(45,212,191,.07); position: relative; }
+.rc-back { position: absolute; left: 10%; right: -3%; top: -34px; padding: 14px 18px; opacity: .55; transform: translateZ(-60px); pointer-events: none; }
+.rc-card.rc-live:not(.rc-back) { z-index: 1; }
+.rc-head { display: flex; align-items: center; gap: 12px; font-size: 17px; font-weight: 600; }
+.rc-head i { width: 11px; height: 11px; border-radius: 50%; flex: none; }
+.rc-head .rc-name { flex: 1; }
+.rc-head .rc-now { font-weight: 700; }
+.rc-head .rc-chev { width: 30px; height: 30px; border-radius: 50%; border: 1.5px solid #14504a; background: #0d2a28; display: grid; place-items: center; flex: none; }
+.rc-head-sm { font-size: 14px; }
+.rc-head-sm .rc-chev { display: none; }
+.rc-plot { margin-top: 14px; }
+.rc-back .rc-plot { margin-top: 8px; }
+.rc-svg { display: block; width: 100%; height: auto; overflow: visible; }
+.rc-svg text { font-family: inherit; }
+.rc-lab { font-size: 13.5px; font-weight: 600; }
+.rc-val { font-size: 17px; font-weight: 800; fill: #fff; text-anchor: middle; }
+.rc-guide { stroke: #fff; stroke-opacity: .16; }
+.rc-dates { position: relative; height: 20px; margin-top: 2px; }
+.rc-dates span { position: absolute; transform: translateX(-50%); font-size: 12.5px; font-weight: 600; color: #8A98A5; white-space: nowrap; }
+.rc-verdict { margin-top: 10px; font-size: 19px; font-weight: 700; line-height: 1.25; min-height: 2.5em; }
+.rc-pills { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 20px; }
+.rc-pill { font: inherit; font-size: 13px; font-weight: 700; padding: 8px 15px; border-radius: 99px; cursor: pointer; color: var(--pc); background: color-mix(in srgb, var(--pc) 9%, transparent); border: 1.5px solid transparent; transition: background .2s, box-shadow .2s, border-color .2s; }
+.rc-pill:hover { background: color-mix(in srgb, var(--pc) 16%, transparent); }
+.rc-pill[aria-pressed="true"] { background: color-mix(in srgb, var(--pc) 20%, transparent); border-color: var(--pc); box-shadow: 0 0 18px color-mix(in srgb, var(--pc) 35%, transparent); }
+.rc-pill:focus-visible { outline: 2px solid #fff; outline-offset: 2px; }
+.rc-note { margin: 12px 0 0; font-size: 12px; color: #7C8B97; }
+/* hidden start, then the sequence plays once when .rc-play is added */
+.rc-live .rc-zones { transform: scaleY(.0001); transform-origin: 0 100%; transform-box: view-box; transition: transform .7s var(--ease); }
+.rc-live .rc-guide, .rc-live .rc-label, .rc-live .rc-area, .rc-live .rc-val, .rc-live .rc-verdict, .rc-live .rc-dates { opacity: 0; transition: opacity .5s ease .3s; }
+.rc-live .rc-area { transition-delay: 1s; }
+.rc-live .rc-val0 { transition-delay: .55s; } .rc-live .rc-val1 { transition-delay: .95s; } .rc-live .rc-val2 { transition-delay: 1.35s; }
+.rc-live .rc-verdict { transition-delay: 1.5s; }
+.rc-live .rc-line { stroke-dasharray: 1; stroke-dashoffset: 1; transition: stroke-dashoffset 1s cubic-bezier(.4,0,.2,1) .35s; }
+.rc-live .rc-pt { transform: scale(0); transform-box: fill-box; transform-origin: center; transition: transform .35s cubic-bezier(.34,1.56,.64,1) .4s; }
+.rc-live .rc-pt1 { transition-delay: .85s; } .rc-live .rc-pt2 { transition-delay: 1.25s; }
+.rc-live .rc-ping { opacity: 0; transform-box: fill-box; transform-origin: center; }
+.rc-play .rc-zones { transform: none; }
+.rc-play .rc-guide, .rc-play .rc-label, .rc-play .rc-area, .rc-play .rc-val, .rc-play .rc-verdict, .rc-play .rc-dates { opacity: 1; }
+.rc-play .rc-line { stroke-dashoffset: 0; }
+.rc-play .rc-pt { transform: none; }
+.rc-play .rc-ping { animation: rcPing 1.3s ease-out 1.55s 1 both; }
+@keyframes rcPing { from { opacity: .7; transform: scale(1); } to { opacity: 0; transform: scale(2.6); } }
+.rc-static *, .rc-static *::before { transition: none !important; animation: none !important; }
+@media (prefers-reduced-motion: reduce) { .rc *, .rc-wrap { transition: none !important; animation: none !important; } }
+@media (max-width: 560px) {
+  .media.rc-media { padding: 48px 14px 28px; }
+  .rc-card { padding: 16px; border-radius: 20px; }
+  .rc-head { font-size: 15px; }
+  .rc-verdict { font-size: 16px; }
+}

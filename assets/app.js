@@ -7,11 +7,16 @@
 (function () {
   'use strict';
 
-  // ---- Launch config - set APP_URL + PROD_API_BASE to your real hosts ----
-  // APP_URL: where the deployed Flutter web app lives. Until it is set, every
-  // "app" CTA gracefully falls back to the contact page (DEMO_URL) so no button
-  // is ever a dead end. Set it once here and all CTAs across all pages light up.
-  var APP_URL = '';                  // e.g. 'https://app.pulsinglabs.pk'
+  // ---- Launch config: ONE switch for every booking / app button ----------
+  // While PLAY_URL and APP_URL are both empty (the app is not public yet), every
+  // booking button ("Request a check-up", the header and footer buttons, the
+  // pricing "Choose Standard/Premium" buttons) opens the contact form with the
+  // topic (and package) already picked, so the visitor sends a real booking
+  // enquiry. Fill PLAY_URL (the Play Store listing) or APP_URL and every one of
+  // those buttons points there instead; nothing else needs editing. The button
+  // text was chosen to stay true in both states. ctaDest() is the only resolver.
+  var PLAY_URL = '';                 // e.g. 'https://play.google.com/store/apps/details?id=com.pulsinglabs'
+  var APP_URL = '';                  // a web app address, if there ever is one
   var DEMO_URL = '/contact';     // book-a-demo / contact (always works)
 
   // Backend API base for live data (public, unauthenticated endpoints only).
@@ -27,15 +32,18 @@
     ? 'http://localhost:3000/api'
     : PROD_API_BASE;
 
-  // Resolve a CTA's destination from its intent. App/home-visit go to the app
-  // when it is deployed, else to the contact page; sales CTAs go to contact.
+  // Resolve a CTA's destination from its intent (data-cta="..."). Booking intents
+  // go to the app once it is public, else to the contact form's enquiry; sales
+  // CTAs always go to the contact form.
   function ctaDest(kind) {
-    var app = (APP_URL && APP_URL !== '#') ? APP_URL : null;
+    var app = PLAY_URL || ((APP_URL && APP_URL !== '#') ? APP_URL : null);
+    var enquiry = DEMO_URL + '?topic=checkup';
     switch (kind) {
-      case 'app':        return app || DEMO_URL;
-      case 'home-visit': return app || DEMO_URL;
-      case 'register':   return DEMO_URL;   // B2B sales - capture as a lead
-      case 'demo':       return DEMO_URL;
+      case 'app':
+      case 'home-visit': return app || enquiry + '#enquiry';
+      case 'standard':
+      case 'premium':    return app || enquiry + '&package=' + kind + '#enquiry';
+      case 'register':   return DEMO_URL + '?topic=company#enquiry';   // B2B sales - capture as a lead
       default:           return DEMO_URL;
     }
   }
@@ -210,7 +218,7 @@
     en: {
       'nav.home': 'Home', 'nav.features': 'Features', 'nav.business': 'For Business',
       'nav.pricing': 'Pricing', 'nav.insights': 'Insights', 'nav.about': 'About', 'nav.contact': 'Contact',
-      'cta.getStarted': 'Get Started', 'mega.viewAll': 'View all',
+      'cta.getStarted': 'Request a check-up', 'mega.viewAll': 'View all',
       'mm.1.b': 'Everything PulsingLabs does, from booking to understanding every number.',
       'mm.1.0t': 'Book in minutes', 'mm.1.0d': 'Packages, labs & slots', 'mm.1.1t': 'Clinical zone charts', 'mm.1.1d': 'See exactly where you stand', 'mm.1.2t': 'AI health assistant', 'mm.1.2d': 'Your results, explained', 'mm.1.3t': 'Trend tracking', 'mm.1.3d': 'Catch changes early', 'mm.1.4t': 'Import any report', 'mm.1.4d': 'OCR from any lab', 'mm.1.5t': 'Family profiles', 'mm.1.5d': 'One account, whole family',
       'mm.2.b': 'Preventive screening & wellness for your team, with privacy-first HR insight.',
@@ -230,7 +238,7 @@
       'foot.head': 'Take charge of your health today.',
       'foot.connect': 'Connect with us',
       'foot.connectSub': 'Questions, partnerships, or ready to start? We reply fast.',
-      'foot.openApp': 'Open the App', 'foot.demo': 'Book a demo',
+      'foot.openApp': 'Request a check-up', 'foot.demo': 'Book a demo',
       'foot.menu': 'Menu',
       'foot.touch': 'Let\'s stay in touch',
       'foot.touchSub': 'Health tips and product news, once a month, no spam.',
@@ -241,24 +249,19 @@
       'kb.decoded': 'Your health, decoded', 'kb.book': 'Book', 'kb.test': 'Test',
       'kb.understand': 'Understand', 'kb.act': 'Act early', 'kb.repeat': 'Repeat',
       'kb.teams': 'Healthier teams', 'kb.sick': 'Fewer sick days', 'kb.roi': 'Real ROI',
-      'home.eyebrow': 'Your health, simplified',
-      'home.h1': 'Book lab tests.<br>Then actually <span class="grad-text">understand</span> them.',
-      'home.lead': 'Book a blood test at home: a phlebotomist collects your sample at your door, and every result comes back explained in plain English by AI. Two check-ups, Standard and Premium. For you, and your whole family.',
-      'home.cta1': 'Get started free <span class="arrow">→</span>',
-      'home.cta2': 'See how it works',
-      'home.note': 'Private & secure',
+      'home.cta1': 'Request a check-up <span class="arrow">→</span>',
       'home.ctaH': 'Take charge of your health today.',
       'home.ctaP': 'Turn confusing lab reports into clarity, for you and your family.',
-      'home.ctaBtn': 'Open the App <span class="arrow">→</span>',
+      'home.ctaBtn': 'Request a check-up <span class="arrow">→</span>',
       'mq.packages': 'Blood tests at home', 'mq.home': 'Home sample collection', 'mq.ai': 'AI-powered insights',
       'mq.family': 'Family profiles', 'mq.trend': 'Trend tracking', 'mq.import': 'Age- and sex-aware ranges', 'mq.lang': 'AI chat understands Urdu',
       'b3d.eyebrow': 'Live organ health',
-      'b3d.h2': 'Your body, decoded in 3D.',
-      'b3d.lead': 'Every result you take maps onto a holographic body inside the app. Spin it, tap an organ, and see its live condition scored from your own blood work.',
+      'b3d.h2': 'Your results, mapped onto your body.',
+      'b3d.lead': 'Every result you take maps onto a holographic body inside the app. Spin it, tap an organ, and see the results linked to it, scored from your own blood work.',
       'b3d.li1': 'Heart, liver, kidneys, thyroid and more, each scored 0 to 100',
       'b3d.li2': 'Organs glow green, amber or red with your latest results',
       'b3d.li3': 'Tap any organ to zoom in and get the full story',
-      'b3d.cta': 'Scan your health <span class="arrow">→</span>',
+      'b3d.cta': 'Request a check-up <span class="arrow">→</span>',
       'bn.eyebrow': 'One app, everything',
       'bn.h2': 'Built like your health deserves it.',
       'bn.score': 'One score for your whole body',
@@ -280,16 +283,16 @@
       'spA.eyebrow': 'Understand your results', 'spA.h2': 'See exactly where you stand.',
       'spA.lead': 'Every marker sits on a clinical zone chart (Normal, Borderline, or High), tuned to your age and sex, with a plain-English explanation underneath.',
       'spA.li1': 'Colour-coded healthy ranges, not raw numbers', 'spA.li2': 'AI explanations grounded in your own results', 'spA.li3': 'Trends across months and years, at a glance',
-      'spB.eyebrow': 'AI health assistant', 'spB.h2': 'Ask anything. In your language.',
+      'spB.eyebrow': 'AI health assistant', 'spB.h2': 'Ask anything.<br>In your language.',
       'spB.lead': 'Chat about your results like you would with a calm, knowledgeable friend, in English or اردو, and ask it to move or cancel a visit right inside the conversation.',
       'spB.li1': 'Plain answers, never jargon or scare-talk', 'spB.li2': 'Books, reschedules & cancels conversationally', 'spB.li3': 'Urgent symptoms trigger emergency guidance',
       'spC.eyebrow': 'Family & history', 'spC.h2': 'Your whole household, one account.',
       'spC.lead': 'Add parents, kids and your spouse to one account, each with their own Health ID, so the whole family\'s results live on one timeline.',
       'spC.li1': 'Age-, sex- & pregnancy-aware reference ranges', 'spC.li2': 'Book a home visit for any family member', 'spC.li3': 'Each person\'s results on their own trend charts',
       'hc.eyebrow': 'Home sample collection', 'hc.h2': 'No lab trip. We come to you.',
-      'hc.lead': 'Every booking is a home visit: a phlebotomist from a licensed partner lab collects your sample at your door, at a time that suits you. Results arrive in the app, zero travel.',
+      'hc.lead': 'Every booking is a home visit: a phlebotomist from our partner lab collects your sample at your door, at a time that suits you. Results arrive in the app, zero travel.',
       'hc.li1': 'Every booking is a home visit, no extra step', 'hc.li2': 'Pick a slot, morning, afternoon or evening', 'hc.li3': 'Results flow into the app like any other test',
-      'hc.btn': 'Book a home visit <span class="arrow">→</span>',
+      'hc.btn': 'Request a home visit <span class="arrow">→</span>',
       'bento.eyebrow': 'One app', 'bento.h2': 'Everything your health needs, in one place.',
       'bento.b1h': 'An AI that explains every result', 'bento.b1p': 'Chat about your numbers in plain English or اردو, and let it book your next test, right in the conversation.',
       'bento.b2h': 'Clinical zone charts', 'bento.b2p': 'See exactly where you stand, tuned to your age & sex.',
@@ -299,7 +302,7 @@
       'bento.b7h': 'AI that speaks Urdu', 'bento.b7p': 'Ask your health questions in Urdu, too.',
       'how.eyebrow': 'How it works', 'how.h2': 'Three steps to clarity',
       'how.s1h': 'Choose a package', 'how.s1p': 'Pick Standard (22 tests) or Premium (32 tests).',
-      'how.s2h': 'Pick a time', 'how.s2p': 'Choose a date and time for your home visit and pay in the app. A licensed partner lab collects and tests your sample.',
+      'how.s2h': 'Pick a time', 'how.s2p': 'Choose a date and time for your home visit and pay in the app. Our partner lab collects and tests your sample.',
       'how.s3h': 'Get results + insights', 'how.s3p': 'Results arrive in-app with charts, trends, and AI explanations you understand.',
       'why.eyebrow': 'Why it matters', 'why.h2': 'Most chronic illness is caught far too late.',
       'why.lead': 'Diabetes, high cholesterol and thyroid disorders develop silently for years. Early screening changes the outcome. PulsingLabs makes it effortless.',
@@ -325,7 +328,7 @@
       'pg.price.eyebrow': 'Pricing', 'pg.price.h1': 'Simple, <span class="grad-text">transparent</span> pricing', 'pg.price.lead': 'Two test packages - pick the depth you want. Pay once per package, no subscription, and a phlebotomist collects your sample at home.',
       'pg.about.eyebrow': 'Our mission', 'pg.about.h1': 'Make your health<br><span class="grad-text">make sense</span>', 'pg.about.lead': 'Lab reports shouldn\'t need a medical degree to read. PulsingLabs turns confusing numbers into clear, personal understanding, for everyone.',
       'pg.priv.eyebrow': 'Legal', 'pg.priv.h1': 'Privacy <span class="grad-text">Policy</span>', 'pg.priv.lead': 'Your health data is sensitive. Here\'s exactly how we handle it.',
-      'pg.contact.eyebrow': 'Get in touch', 'pg.contact.h1': 'Let\'s <span class="grad-text">talk</span>', 'pg.contact.lead': 'Book a demo, ask about partnerships, or just say hello. We usually reply within one business day.',
+      'pg.contact.eyebrow': 'Get in touch', 'pg.contact.h1': 'Let\'s <span class="grad-text">talk</span>', 'pg.contact.lead': 'Ask for a home check-up in Karachi, talk to us about a team pilot, or just say hello. We usually reply within one business day.',
       'feat.s1.eye': 'Book in minutes', 'feat.s1.h2': 'From "I should get tested" to booked, in two minutes.', 'feat.s1.lead': 'Pick a package, choose a time for your home visit and pay in the app. No queues, no phone calls, no trip to a lab.',
       'feat.s1.li1': 'Two packages: Standard (22 tests) and Premium (32 tests)', 'feat.s1.li2': 'Real-time home-visit slots', 'feat.s1.li3': 'Home sample collection at your door',
       'feat.s2.eye': 'Understand your results', 'feat.s2.h2': 'See exactly where you stand.', 'feat.s2.lead': 'Every marker sits on a clinical zone chart (Normal, Borderline, High), tuned to your age and sex, with a plain-English explanation underneath.',
@@ -341,24 +344,10 @@
       'feat.more.c3h': 'Private & secure', 'feat.more.c3p': 'Encrypted in transit, never sold, and yours to export anytime.',
       'feat.how.eye': 'How it works', 'feat.how.h2': 'Three steps to clarity',
       'feat.how.s1h': 'Choose a package', 'feat.how.s1p': 'Pick Standard (22 tests) or Premium (32 tests).',
-      'feat.how.s2h': 'Pick a time', 'feat.how.s2p': 'Choose a date and time for your home visit and pay in the app. A licensed partner lab collects and tests your sample.',
+      'feat.how.s2h': 'Pick a time', 'feat.how.s2p': 'Choose a date and time for your home visit and pay in the app. Our partner lab collects and tests your sample.',
       'feat.how.s3h': 'Get results + insights', 'feat.how.s3p': 'Results arrive with charts, trends, and AI explanations.',
-      'feat.cta.h': 'Ready to understand your health?', 'feat.cta.p': 'Get started free, pay only for the tests you book.', 'feat.cta.btn': 'Get Started <span class="arrow">→</span>',
-      'pr.p1.h': 'Personal', 'pr.p1.amt': 'Free<span> app</span>', 'pr.p1.desc': 'Pay only for the test packages you book.',
-      'pr.p1.l1': 'All Blood tests at home', 'pr.p1.l2': 'AI result explanations & trends', 'pr.p1.l3': 'Family member profiles', 'pr.p1.l4': 'Home sample collection', 'pr.p1.l5': 'Import reports from any lab', 'pr.p1.l6': 'Pay online or at the lab', 'pr.p1.btn': 'Get Started',
-      'pr.tag': 'MOST POPULAR', 'pr.p2.h': 'Corporate', 'pr.p2.amt': 'PKR 1,500<span> / employee / mo</span>', 'pr.p2.desc': '30-day free trial. Cancel anytime.',
-      'pr.p2.l1': 'Everything in Personal, for every employee', 'pr.p2.l2': 'HR dashboard & aggregate analytics', 'pr.p2.l3': 'Proactive wellness alerts', 'pr.p2.l4': 'AI HR assistant', 'pr.p2.l5': 'CSV export & PDF participation reports', 'pr.p2.l6': 'Dedicated account manager', 'pr.p2.btn': 'Start free trial',
-      'pr.p3.h': 'Labs & Clinics', 'pr.p3.amt': 'Custom', 'pr.p3.desc': 'Branded patient portal & API result delivery.',
-      'pr.p3.l1': 'Branded patient-facing portal', 'pr.p3.l2': 'REST API for result uploads', 'pr.p3.l3': 'Automated patient notifications', 'pr.p3.l4': 'Result history & trend charts', 'pr.p3.l5': 'SLA-backed uptime', 'pr.p3.btn': 'Contact sales',
-      'pr.note': 'Prices shown in PKR per package. Every test in a package is included in the one price, confirmed before you book.',
+      'feat.cta.h': 'Ready to understand your health?', 'feat.cta.p': 'Pay only for the check-up you book. The home visit is included.', 'feat.cta.btn': 'Request a check-up <span class="arrow">→</span>',
       'pr.faq.eye': 'Questions', 'pr.faq.h2': 'Pricing FAQ',
-      'pr.q1': 'Is the app really free for individuals?', 'pr.a1': 'Yes. Downloading and using PulsingLabs is free, you only pay the lab for the test packages you choose to book. There is no subscription for personal use.',
-      'pr.q2': 'How does the corporate trial work?', 'pr.a2': 'Corporate accounts get 30 days of full access at no charge, no credit card required. After the trial, billing is PKR 1,500 per active employee per month. Cancel anytime.',
-      'pr.q3': 'What counts as an "active employee"?', 'pr.a3': 'Any approved employee account that logged at least one activity, an appointment booked or a result viewed, in the billing month.',
-      'pr.q4': 'Is my health data private from my employer?', 'pr.a4': 'Always. Corporate dashboards show only anonymised, aggregate statistics. Employers never see individual test values or personal health records.',
-      'pr.q5': 'Can I cancel anytime?', 'pr.a5': 'Yes. Cancel from your account settings and access continues to the end of the current billing period. No lock-in.',
-      'pr.q6': 'Do you offer non-profit or academic discounts?', 'pr.a6': 'Yes, email <a href="mailto:contact@pulsinglabs.com" style="color:var(--teal-d);font-weight:700;">contact@pulsinglabs.com</a> and we will sort out special pricing.',
-      'pr.cta.h': 'Start free today', 'pr.cta.p': 'Individuals start instantly. Businesses get a 30-day trial, no card required.', 'pr.cta.b1': 'Get the app', 'pr.cta.b2': 'Talk to sales',
       'biz.heroB1': 'Book a demo <span class="arrow">→</span>', 'biz.heroB2': 'See pricing',
       'biz.stats.eye': 'The cost of poor health', 'biz.stats.h2': 'Ill health is expensive, and largely preventable.', 'biz.stats.lead': 'Sick days, lost productivity and late diagnoses quietly drain your business. Preventive screening is one of the highest-ROI benefits you can offer.',
       'biz.s1': 'employees affected by work-related ill health*', 'biz.s2': 'average sick days per employee, per year*', 'biz.s3': 'of early-stage conditions are manageable if caught in time*', 'biz.s4': 'team pilots: talk to us',
@@ -381,7 +370,7 @@
       'ab.v6h': 'Safety first', 'ab.v6p': 'The AI assistant escalates urgent symptoms to emergency guidance and never gives unsafe dosing advice.',
       'ab.num.eye': 'By the numbers', 'ab.num.h2': 'A platform that does a lot.',
       'ab.n1': 'tests in our Premium check-up', 'ab.n2': 'clinical test cases keeping our engines honest', 'ab.n3': 'organ systems tracked, from heart to thyroid', 'ab.n4': 'your data is yours, never sold',
-      'ab.cta.h': 'Join us on the mission', 'ab.cta.p': 'Understand your health, and help the people you care about understand theirs.', 'ab.cta.btn': 'Get Started <span class="arrow">→</span>',
+      'ab.cta.h': 'Join us on the mission', 'ab.cta.p': 'Understand your health, and help the people you care about understand theirs.', 'ab.cta.btn': 'Request a check-up <span class="arrow">→</span>',
       'ins.feat.eye': 'Featured guide', 'ins.feat.h2': 'What your HbA1c really tells you', 'ins.feat.p': 'The diabetes marker everyone talks about, what the numbers mean, and what to do at each level.',
       'ins.dGuide': 'Guide', 'ins.dHowto': 'How-to', 'ins.dFamily': 'Family',
       'ins.a1h': 'Cholesterol, decoded', 'ins.a1p': 'LDL, HDL, triglycerides, which numbers matter and how to move them in the right direction.',
@@ -393,7 +382,7 @@
       'ins.nl.eye': 'Stay in the loop', 'ins.nl.h2': 'Get launch updates & health tips', 'ins.nl.p': 'Occasional emails about new features and understanding your health. No spam.', 'ins.nl.btn': 'Subscribe', 'ins.nl.ok': 'Thanks, you are on the list!', 'ins.nl.err': 'Could not subscribe right now. Please try again later.',
       'fq.s1.eye': 'Using PulsingLabs', 'fq.s2.eye': 'Results & AI', 'fq.s3.eye': 'Privacy & billing',
       'fq.u1q': 'How do I book a test?', 'fq.u1a': 'Pick a package, add your address, choose a time, then pay in the app. A phlebotomist comes to you. The whole flow takes a couple of minutes.',
-      'fq.u2q': 'Do you offer home sample collection?', 'fq.u2a': 'Yes, every booking is a home visit: a certified phlebotomist comes to your home at your chosen time, and your results appear in the app.',
+      'fq.u2q': 'Do you offer home sample collection?', 'fq.u2a': 'Yes, every booking is a home visit: a phlebotomist from our partner lab comes to your home at your chosen time, and your results appear in the app.',
       'fq.u3q': 'Can I import results from another lab?', 'fq.u3a': 'Not yet. The app shows results from tests booked through PulsingLabs, so every value is read against the same age- and sex-aware ranges.',
       'fq.u4q': 'Can I manage my family\'s health too?', 'fq.u4a': 'Yes. Add profiles for parents, kids and your spouse, each with age- and sex-aware reference ranges, all from one account.',
       'fq.u5q': 'Is the app available in Urdu?', 'fq.u5a': 'The app itself is in English, but the AI health assistant can chat with you in Urdu if you prefer.',
@@ -407,12 +396,12 @@
       'ct.ch.eye': 'Reach us directly', 'ct.ch.h2': 'Channels',
       'ct.ch1t': 'General & support', 'ct.ch2t': 'Corporate sales & demos', 'ct.ch3t': 'Labs & clinic partnerships',
       'ct.madeIn': 'Made with care in Pakistan',
-      'ct.form.h': 'Send us a message', 'ct.form.sub': 'Tell us a bit about what you need and we will get back to you.',
-      'ct.lbl.name': 'Full name', 'ct.lbl.email': 'Email', 'ct.lbl.company': 'Company (optional)', 'ct.lbl.interest': 'I am interested in', 'ct.lbl.msg': 'Message',
-      'ct.ph.name': 'Your name', 'ct.ph.company': 'Company name', 'ct.ph.msg': 'How can we help?',
-      'ct.opt1': 'Booking a corporate demo', 'ct.opt2': 'Lab / clinic partnership', 'ct.opt3': 'General question', 'ct.opt4': 'Support',
+      'ct.form.h': 'Send us a message', 'ct.form.sub': 'Want a home check-up? Leave your details and we will get back to you to arrange it. Companies and labs, tell us what you need.',
+      'ct.lbl.name': 'Full name', 'ct.lbl.email': 'Email', 'ct.lbl.company': 'Company (optional)', 'ct.lbl.interest': 'What can we help with?', 'ct.lbl.msg': 'Message',
+      'ct.ph.name': 'Your name', 'ct.ph.company': 'Company name', 'ct.ph.msg': 'For a check-up: your area in Karachi and a good time to call.',
+      'ct.opt1': 'Home check-up', 'ct.opt2': 'For my company', 'ct.opt3': 'Lab or clinic partnership', 'ct.opt4': 'Something else', 'ct.lbl.phone': 'Phone (optional)',
       'ct.form.btn': 'Send message <span class="arrow">→</span>', 'ct.form.ok': 'Thanks, your message is on its way! We will be in touch shortly.', 'ct.form.err': 'Something went wrong. Please email contact@pulsinglabs.com.',
-      'ct.cta.h': 'Prefer to just try it?', 'ct.cta.p': 'Download PulsingLabs and start understanding your results in minutes, no demo needed.', 'ct.cta.btn': 'Get the app <span class="arrow">→</span>'
+      'ct.cta.h': 'Want to compare the check-ups first?', 'ct.cta.p': 'Standard has 22 tests and Premium has 32. Both include a home visit in Karachi, and no fasting is needed.', 'ct.cta.btn': 'See the check-ups <span class="arrow">→</span>'
     }
   };
   function tr(key) { return (I18N.en[key] != null) ? I18N.en[key] : null; }
@@ -451,10 +440,10 @@
         '<nav class="nav-links" id="navLinks">' + links +
           // Drawer-only extra (hidden on desktop): primary CTA, since the
           // header version is hidden on small screens.
-          '<a class="btn btn-primary drawer-cta" href="' + ctaDest('app') + '" data-i18n="cta.getStarted">Get Started</a>' +
+          '<a class="btn btn-primary drawer-cta" href="' + ctaDest('app') + '" data-i18n="cta.getStarted">Request a check-up</a>' +
         '</nav>' +
         '<div class="nav-cta">' +
-          '<a class="btn btn-primary" href="' + ctaDest('app') + '" data-i18n="cta.getStarted">Get Started</a>' +
+          '<a class="btn btn-primary" href="' + ctaDest('app') + '" data-i18n="cta.getStarted">Request a check-up</a>' +
           '<button class="nav-toggle" id="navToggle" aria-label="Menu"><span></span><span></span><span></span></button>' +
         '</div>' +
       '</div></header>' +
@@ -481,7 +470,7 @@
             '<span class="mf-eyebrow" data-i18n="foot.connect">Connect with us</span>' +
             '<p class="mf-big" data-i18n="foot.connectSub">Questions, partnerships, or ready to start? We reply fast.</p>' +
             '<div class="mf-ctas">' +
-              '<a class="btn btn-primary" href="' + ctaDest('app') + '" data-magnetic><span data-i18n="foot.openApp">Open the App</span> <span class="arrow">→</span></a>' +
+              '<a class="btn btn-primary" href="' + ctaDest('app') + '" data-magnetic><span data-i18n="foot.openApp">Request a check-up</span> <span class="arrow">→</span></a>' +
               '<a class="btn btn-ghost mf-ghost" href="contact.html" data-i18n="foot.demo">Book a demo</a>' +
             '</div>' +
           '</div>' +
@@ -878,7 +867,8 @@
     // drag the whole page through the theme crossfade. Driving 3 root vars
     // every scroll frame while a sticky card crawls past centre forced a
     // full-page style recalc per frame = the features-page lag.
-    var darkEls = document.querySelectorAll('.s-dark:not(.stack-card), .dark:not(.stack-card)');
+    // .hero-panel: the home hero is a dark band too, so the nav on top of it turns light.
+    var darkEls = document.querySelectorAll('.s-dark:not(.stack-card), .dark:not(.stack-card), .hero-panel');
     if (!darkEls.length) return;
 
     // SCROLL-PROGRESSIVE crossfade (owner request - no hard flip): the page
@@ -1286,7 +1276,8 @@
       function step(ts) {
         if (!start) start = ts;
         var p = Math.min((ts - start) / dur, 1), eased = 1 - Math.pow(1 - p, 3), v = target * eased;
-        ring.style.background = 'conic-gradient(var(--teal) 0 ' + v + '%, #E6ECF0 ' + v + '% 100%)';
+        // colours overridable per ring (the hero's ring sits on a dark card)
+        ring.style.background = 'conic-gradient(var(--ring-fill, var(--teal)) 0 ' + v + '%, var(--ring-track, #E6ECF0) ' + v + '% 100%)';
         if (num) num.textContent = Math.round(v);
         if (p < 1) requestAnimationFrame(step);
       }
@@ -1375,8 +1366,8 @@
     // Runs on phones too (owner wants the tornado on mobile). Kept lean: loads
     // only after a browser-idle moment, DPR capped at 1.5, antialias off,
     // low-power GPU, and pauses whenever the hero is off-screen or tab hidden.
-    if (reducedMotion()) return;
-    var hero = document.querySelector('.hero');
+    // Reduced motion still gets the helix, drawn once and left still (see buildHelix).
+    var hero = document.querySelector('.hero-panel') || document.querySelector('.hero');
     if (!hero || !hasWebGL() || typeof Promise === 'undefined') return;
     // Self-hosted (pinned three@0.160.0) - no third-party CDN dependency, so
     // there's no unpinnable dynamic-import supply-chain surface.
@@ -1475,48 +1466,156 @@
     var renderer = new THREE.WebGLRenderer({ canvas: canvas, alpha: true, antialias: false, powerPreference: 'low-power' });
     renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 1.5));
     var scene = new THREE.Scene();
-    var cam = new THREE.PerspectiveCamera(50, 1, 0.1, 100);
-    cam.position.set(0, 0, 15);
+    // Narrow lens from further back: the same framing with far less perspective,
+    // so the long diagonal strand stays even instead of ballooning at the near end.
+    var cam = new THREE.PerspectiveCamera(28, 1, 0.1, 100);
+    cam.position.set(0, 0, 29);
 
-    var group = new THREE.Group(); scene.add(group);
-    var N = 132, turns = 3.3, R = 3.1, H = 12;
-    var posA = [], posB = [];
+    // tilt = the diagonal (z-rotation, position, scale, pointer parallax);
+    // group = the helix itself, spinning around ITS OWN axis inside the tilt.
+    var tilt = new THREE.Group(), group = new THREE.Group(); tilt.add(group); scene.add(tilt);
+    var N = 220, turns = 5.5, R = 2.5, H = 20; // a long, slimmer strand for the diagonal
+    // Brand line down the helix: teal at the top through cyan to the logo's indigo.
+    var STOPS = [[0, 0x00DDB0], [0.45, 0x00C2FF], [0.8, 0x2B6BFF], [1, 0x6A3BFF]];
+    function colorAt(t, out) {
+      for (var s = 1; s < STOPS.length; s++) {
+        if (t <= STOPS[s][0]) {
+          var a = new THREE.Color(STOPS[s - 1][1]), b = new THREE.Color(STOPS[s][1]);
+          return out.copy(a).lerp(b, (t - STOPS[s - 1][0]) / (STOPS[s][0] - STOPS[s - 1][0]));
+        }
+      }
+      return out.set(STOPS[STOPS.length - 1][1]);
+    }
+    // The strand follows a gentle S-curve (not a ruler-straight line) and "spins" by
+    // advancing the phase of its beads, so the curve itself never wobbles. Radius,
+    // turns and bend are per layout (resize sets them; a phone gets a fuller strand).
+    var shapeR = R, shapeTurns = turns, shapeBend = 0, phase = 0, RN = Math.ceil(N / 5);
+    var posA = new Float32Array(N * 3), posB = new Float32Array(N * 3), rung = new Float32Array(RN * 6);
+    var aPosA = new THREE.BufferAttribute(posA, 3), aPosB = new THREE.BufferAttribute(posB, 3), aRung = new THREE.BufferAttribute(rung, 3);
+    [aPosA, aPosB, aRung].forEach(function (a) { a.setUsage(THREE.DynamicDrawUsage); });
+    function shape() {
+      for (var i = 0; i < N; i++) {
+        var t = i / (N - 1), ang = t * shapeTurns * Math.PI * 2 + phase, y = (0.5 - t) * H;
+        var cx = shapeBend * Math.sin(t * Math.PI * 2), o = i * 3;
+        posA[o] = cx + Math.cos(ang) * shapeR; posA[o + 1] = y; posA[o + 2] = Math.sin(ang) * shapeR;
+        posB[o] = cx - Math.cos(ang) * shapeR; posB[o + 1] = y; posB[o + 2] = -Math.sin(ang) * shapeR;
+      }
+      for (var k = 0, r = 0; k < N; k += 5, r += 6) {
+        rung[r] = posA[k * 3]; rung[r + 1] = posA[k * 3 + 1]; rung[r + 2] = posA[k * 3 + 2];
+        rung[r + 3] = posB[k * 3]; rung[r + 4] = posB[k * 3 + 1]; rung[r + 5] = posB[k * 3 + 2];
+      }
+      aPosA.needsUpdate = aPosB.needsUpdate = aRung.needsUpdate = true;
+    }
+    shape();
+    var colA = [], colB = [], c = new THREE.Color();
     for (var i = 0; i < N; i++) {
-      var t = i / (N - 1), ang = t * turns * Math.PI * 2, y = (t - 0.5) * H;
-      posA.push(Math.cos(ang) * R, y, Math.sin(ang) * R);
-      posB.push(Math.cos(ang + Math.PI) * R, y, Math.sin(ang + Math.PI) * R);
+      var t = i / (N - 1);
+      colorAt(t, c); colA.push(c.r, c.g, c.b);
+      colorAt(Math.min(1, t + 0.12), c); colB.push(c.r, c.g, c.b);
     }
-    function strand(arr, color, size) {
+    // One soft round glow texture for every bead (default points are hard squares).
+    var tc = document.createElement('canvas'); tc.width = tc.height = 64;
+    var tx2 = tc.getContext('2d'), grd = tx2.createRadialGradient(32, 32, 0, 32, 32, 32);
+    grd.addColorStop(0, 'rgba(255,255,255,1)'); grd.addColorStop(0.28, 'rgba(255,255,255,.85)');
+    grd.addColorStop(0.55, 'rgba(255,255,255,.18)'); grd.addColorStop(1, 'rgba(255,255,255,0)');
+    tx2.fillStyle = grd; tx2.fillRect(0, 0, 64, 64);
+    var glow = new THREE.CanvasTexture(tc);
+    function cloud(pos, col, size, opacity) {
       var g = new THREE.BufferGeometry();
-      g.setAttribute('position', new THREE.Float32BufferAttribute(arr, 3));
-      return new THREE.Points(g, new THREE.PointsMaterial({ color: color, size: size, transparent: true, opacity: 0.8, depthWrite: false }));
+      g.setAttribute('position', pos.isBufferAttribute ? pos : new THREE.Float32BufferAttribute(pos, 3));
+      g.setAttribute('color', new THREE.Float32BufferAttribute(col, 3));
+      var pts = new THREE.Points(g, new THREE.PointsMaterial({ size: size, map: glow, vertexColors: true, transparent: true,
+        opacity: opacity, depthWrite: false, blending: THREE.AdditiveBlending }));
+      pts.frustumCulled = false; // positions move every frame; the bounding sphere is never recomputed
+      return pts;
     }
-    group.add(strand(posA, 0x00BFA5, 0.19));
-    group.add(strand(posB, 0x4DEAD0, 0.19));
-    // base-pair "rungs"
-    var rung = [];
+    // sizes are world units: the camera sits ~2x further back than it used to, hence ~2x
+    var beadsA = cloud(aPosA, colA, 0.85, 0.95), beadsB = cloud(aPosB, colB, 0.85, 0.95);
+    group.add(beadsA); group.add(beadsB);
+    // base-pair "rungs", coloured like the strands at their height
+    var rcol = [];
     for (var k = 0; k < N; k += 5) {
-      rung.push(posA[k * 3], posA[k * 3 + 1], posA[k * 3 + 2], posB[k * 3], posB[k * 3 + 1], posB[k * 3 + 2]);
+      rcol.push(colA[k * 3], colA[k * 3 + 1], colA[k * 3 + 2], colB[k * 3], colB[k * 3 + 1], colB[k * 3 + 2]);
     }
     var rg = new THREE.BufferGeometry();
-    rg.setAttribute('position', new THREE.Float32BufferAttribute(rung, 3));
-    group.add(new THREE.LineSegments(rg, new THREE.LineBasicMaterial({ color: 0x00897B, transparent: true, opacity: 0.26 })));
-    // faint ambient point dust
-    var dust = [];
-    for (var d = 0; d < 90; d++) { dust.push((Math.random() - 0.5) * 18, (Math.random() - 0.5) * 16, (Math.random() - 0.5) * 10); }
-    var dg = new THREE.BufferGeometry();
-    dg.setAttribute('position', new THREE.Float32BufferAttribute(dust, 3));
-    scene.add(new THREE.Points(dg, new THREE.PointsMaterial({ color: 0x4DEAD0, size: 0.07, transparent: true, opacity: 0.5, depthWrite: false })));
+    rg.setAttribute('position', aRung);
+    rg.setAttribute('color', new THREE.Float32BufferAttribute(rcol, 3));
+    var rungs = new THREE.LineSegments(rg, new THREE.LineBasicMaterial({ vertexColors: true, transparent: true, opacity: 0.3,
+      blending: THREE.AdditiveBlending, depthWrite: false }));
+    rungs.frustumCulled = false; group.add(rungs);
+    // faint ambient dust around it
+    var dust = [], dcol = [];
+    for (var d = 0; d < 90; d++) {
+      dust.push((Math.random() - 0.5) * 18, (Math.random() - 0.5) * 16, (Math.random() - 0.5) * 10);
+      colorAt(Math.random(), c); dcol.push(c.r, c.g, c.b);
+    }
+    scene.add(cloud(dust, dcol, 0.3, 0.55));
 
-    group.rotation.z = 0.16;
+    // Flowing dotted light ribbons behind the helix. Adapted from ThreeUI's
+    // "Ribbon Field" (MIT, (c) 2026 Meng To, github.com/MengTo/threeui), drawn as a
+    // full-screen quad in THIS renderer: no second WebGL context, no extra frame loop.
+    // The ribbons run along the helix's diagonal (angle/mid set in resize()).
+    var ribbonU = { resolution: { value: new THREE.Vector2(1, 1) }, time: { value: 4 },
+      pointer: { value: new THREE.Vector2(0.5, 0.5) }, aspect: { value: 1 }, ang: { value: 0.6 }, mid: { value: new THREE.Vector2(0.5, 0.5) } };
+    var ribbon = new THREE.Mesh(new THREE.PlaneGeometry(2, 2), new THREE.ShaderMaterial({
+      uniforms: ribbonU, transparent: true, depthTest: false, depthWrite: false, blending: THREE.AdditiveBlending,
+      vertexShader: 'void main(){ gl_Position = vec4(position.xy, 0.0, 1.0); }',
+      fragmentShader: [
+        'uniform vec2 resolution; uniform float time; uniform vec2 pointer; uniform float aspect; uniform float ang; uniform vec2 mid;',
+        'float hash(vec2 p){ p = fract(p * vec2(123.34, 456.21)); p += dot(p, p + 45.32); return fract(p.x * p.y); }',
+        // a wave around the diagonal: x = distance along it, y = distance across it
+        'float rib(vec2 q, float off, float w, float ph){',
+        '  float y = 0.07 * sin(q.x * 3.2 + ph) + 0.02 * sin(q.x * 9.0 - ph * 0.7);',
+        '  float d = abs(q.y - y - off); return exp(-(d * d) / w); }',
+        'void main(){',
+        '  vec2 uv = gl_FragCoord.xy / resolution.xy;',
+        '  vec2 p = uv - mid; p.x *= aspect;',
+        '  float c = cos(ang), s = sin(ang);',
+        '  vec2 q = vec2(c * p.x + s * p.y, -s * p.x + c * p.y);',
+        '  float t = time * 0.22, drift = (pointer.x - 0.5) * 0.05;',
+        '  float r1 = rib(q + vec2(drift, 0.0), 0.0, 0.0012, t + 0.9);',
+        '  float r2 = rib(q - vec2(drift * 0.7, 0.0), -0.11, 0.0018, t + 3.25);',
+        '  float r3 = rib(q + vec2(drift * 0.4, 0.0), 0.12, 0.0026, t + 1.85);',
+        '  vec3 col = vec3(0.22, 0.82, 0.96) * r1 * 0.92 + vec3(0.17, 0.83, 0.75) * r1 * 0.62',
+        '           + vec3(0.39, 0.38, 0.92) * r3 * 0.42 + vec3(0.23, 0.51, 0.96) * r2 * 0.66',
+        '           + vec3(0.66, 0.33, 0.98) * (r2 + r3) * 0.30;',
+        '  vec2 g = fract(gl_FragCoord.xy / 7.0) - 0.5;',
+        '  float dots = smoothstep(0.29, 0.11, length(g)) * (0.48 + 0.52 * hash(floor(gl_FragCoord.xy / 7.0)))',
+        '             * (0.72 + 0.28 * sin((uv.x + uv.y) * 38.0 + time * 1.3));',
+        // quiet behind the copy (left), strongest toward the top-right
+        '  float fade = smoothstep(0.22, 0.62, uv.x) * smoothstep(0.08, 0.42, uv.y);',
+        '  float a = clamp((r1 * 1.14 + r2 * 1.05 + r3 * 0.6) * 1.4 * dots * fade, 0.0, 1.0);',
+        '  gl_FragColor = vec4(col * 1.5, a);',
+        '}'
+      ].join('\n')
+    }));
+    ribbon.frustumCulled = false; ribbon.renderOrder = -1; scene.add(ribbon);
+    var bufSize = new THREE.Vector2(), t0 = performance.now();
 
+    var baseZ = 0;
     function resize() {
       var r = hero.getBoundingClientRect();
       renderer.setSize(r.width, r.height, false);
       cam.aspect = r.width / r.height; cam.updateProjectionMatrix();
-      // Wide: bias toward the product mock on the right. Narrow (single
-      // column): centre the helix behind the hero copy.
-      group.position.x = window.matchMedia('(max-width: 960px)').matches ? 0 : 1.0;
+      var wide = cam.aspect > 0.8, visH = 2 * cam.position.z * Math.tan(cam.fov * Math.PI / 360), visW = visH * cam.aspect;
+      // The helix lies on a diagonal from bottom-left to top-right of the panel
+      // (panel fractions, x from the left, y from the top), sized to that line.
+      // copy sits bottom-left, so the strand rises from the bottom edge past it;
+      // on a phone it fills the empty top half above the copy
+      // phone: through the middle band, between the headline (top) and the card (bottom)
+      var a = wide ? [0.40, 1.08] : [-0.12, 0.8], b = wide ? [1.02, -0.06] : [1.12, 0.2];
+      // phone: a fuller, more open strand with a stronger sweep; wide: slimmer, more turns
+      shapeR = wide ? 2.5 : 3.7; shapeTurns = wide ? 5.5 : 4.2; shapeBend = wide ? 1.1 : 1.7; shape();
+      var dx = (b[0] - a[0]) * visW, dy = (a[1] - b[1]) * visH;
+      baseZ = Math.atan2(dy, dx) - Math.PI / 2;
+      tilt.rotation.z = baseZ;
+      tilt.position.set(((a[0] + b[0]) / 2 - 0.5) * visW, (0.5 - (a[1] + b[1]) / 2) * visH, 0);
+      // length along the line, but never so fat that the near beads leave the panel
+      tilt.scale.setScalar(Math.min(Math.hypot(dx, dy) / H, (wide ? 0.42 : 0.4) * Math.min(visW, visH) / R));
+      renderer.getDrawingBufferSize(bufSize); ribbonU.resolution.value.copy(bufSize);
+      ribbonU.aspect.value = cam.aspect; ribbonU.ang.value = Math.atan2(dy, dx);
+      ribbonU.mid.value.set((a[0] + b[0]) / 2, 1 - (a[1] + b[1]) / 2);
+      ribbon.visible = wide; // phone panels: the copy fills it, ribbons there only fought the text
     }
     resize(); window.addEventListener('resize', resize, { passive: true });
 
@@ -1531,10 +1630,13 @@
     requestAnimationFrame(function () { canvas.classList.add('lit'); });
 
     var raf = null, vis = true;
+    if (reducedMotion()) { renderer.render(scene, cam); window.addEventListener('resize', function () { renderer.render(scene, cam); }, { passive: true }); return; }
     function loop() {
-      group.rotation.y += 0.0034;
-      group.rotation.x += (ty * 0.45 - group.rotation.x) * 0.04;
-      group.rotation.z += ((0.16 + tx * 0.25) - group.rotation.z) * 0.04;
+      ribbonU.time.value = 4 + (performance.now() - t0) / 1000;
+      ribbonU.pointer.value.x += (0.5 + tx * 0.6 - ribbonU.pointer.value.x) * 0.035;
+      phase -= 0.0034; shape(); // the spin (see shape())
+      tilt.rotation.x += (ty * 0.3 - tilt.rotation.x) * 0.04;
+      tilt.rotation.z += ((baseZ + tx * 0.12) - tilt.rotation.z) * 0.04;
       renderer.render(scene, cam);
       raf = requestAnimationFrame(loop);
     }
@@ -1627,6 +1729,40 @@
         }, { threshold: 0 }).observe(track.parentElement);
       }
       raf = requestAnimationFrame(loop);
+    });
+  }
+
+
+  /* ------------------------------------------------------------------ */
+  /* AI section film: a silent loop that behaves like a GIF. Nothing is */
+  /* downloaded until it nears the viewport; it plays only while seen;  */
+  /* phones get the 480p file; reduced-motion / Data Saver keep the     */
+  /* poster and never download the video.                               */
+  /* ------------------------------------------------------------------ */
+  function bindAiVideo() {
+    var box = document.querySelector('[data-aivideo]');
+    if (!box) return;
+    var v = box.querySelector('video');
+    var conn = navigator.connection || {};
+    if (reducedMotion() || conn.saveData || /(^|\b)(slow-)?2g\b/.test(conn.effectiveType || '')) return;
+    var loaded = false, visible = false;
+    function load() {
+      if (loaded) return; loaded = true;
+      var small = window.matchMedia('(max-width: 760px)').matches;
+      v.src = v.getAttribute(small ? 'data-src-sm' : 'data-src'); v.load();
+    }
+    function play() { load(); var p = v.play(); if (p && p.catch) p.catch(function () {}); }
+    v.addEventListener('playing', function () { box.classList.add('is-ready'); });
+    if (!('IntersectionObserver' in window)) { play(); return; }
+    new IntersectionObserver(function (es, io) {
+      if (es[0].isIntersecting) { load(); io.disconnect(); }
+    }, { rootMargin: '800px 0px' }).observe(box); // ~one screen ahead, so it is ready without loading for visitors who never scroll that far
+    new IntersectionObserver(function (es) {
+      visible = es[0].isIntersecting;
+      if (visible) play(); else if (!v.paused) v.pause();
+    }, { threshold: 0.25 }).observe(box);
+    document.addEventListener('visibilitychange', function () {
+      if (document.hidden) { if (!v.paused) v.pause(); } else if (visible) play();
     });
   }
 
@@ -1739,7 +1875,17 @@
   /* ------------------------------------------------------------------ */
   function bindLeadForm() {
     if (typeof fetch === 'undefined') return;
+    // ?topic=checkup|company|lab|other preselects "What can we help with?";
+    // ?package=standard|premium (pricing buttons) prefills the message.
+    var qs = {};
+    location.search.replace(/[?&]([a-z]+)=([a-z]+)/g, function (_, k, v) { qs[k] = v; });
     document.querySelectorAll('form[data-lead]').forEach(function (f) {
+      var opt = qs.topic && f.querySelector('option[data-topic="' + qs.topic + '"]');
+      if (opt) opt.selected = true;
+      var msg = f.querySelector('#cm');
+      if (msg && !msg.value && (qs['package'] === 'standard' || qs['package'] === 'premium')) {
+        msg.value = 'I would like the ' + (qs['package'] === 'standard' ? 'Standard (22 tests, PKR 9,999)' : 'Premium (32 tests, PKR 19,999)') + ' home check-up.';
+      }
       f.addEventListener('submit', function (e) {
         e.preventDefault();
         var ok = f.querySelector('.ok-msg'), err = f.querySelector('.err-msg'), btn = f.querySelector('button[type=submit]');
@@ -1748,7 +1894,7 @@
         function get(sel) { var el = f.querySelector(sel); return el ? el.value.trim() : ''; }
         var hp = f.querySelector('[name=website]');
         var payload = {
-          name: get('#cn'), email: get('#ce'), company: get('#cc'),
+          name: get('#cn'), email: get('#ce'), phone: get('#cp'), company: get('#cc'),
           interest: get('#ct'), message: get('#cm'), source: 'marketing_contact',
           website: hp ? hp.value : '' // honeypot - empty for humans
         };
@@ -1814,6 +1960,177 @@
   }
 
   /* ------------------------------------------------------------------ */
+  /* Results card: the app's own result card, drawn live (Results band). */
+  /* Sample numbers only. Built with DOM calls (no innerHTML), so CSP and */
+  /* XSS stay clean; pills swap the card; the chart draws once on view.   */
+  /* ------------------------------------------------------------------ */
+  var RC_G = '#34D399', RC_AM = '#FBBF24', RC_RO = '#FB7185';
+  var RC_DATA = {
+    hct: { name: 'Haematocrit', unit: '%', vals: [39, 49, 43], min: 28, max: 58, g: [34.5, 50.7], a: [32, 55], col: RC_G,
+      labs: [['55', 55, RC_AM, 0], ['50.7', 50.7, RC_G, 0], ['34.5', 34.5, RC_AM, 0], ['32', 32, RC_RO, 0]], verdict: 'Your levels are within a healthy range' },
+    vitd: { name: 'Vitamin D', unit: 'ng/mL', vals: [18, 24, 34], min: 0, max: 115, g: [30, 100], a: [20, 115], col: RC_AM,
+      labs: [['100', 100, RC_G, 0], ['30', 30, RC_AM, 0], ['20', 20, RC_RO, 0]], verdict: 'A little below the healthy range' },
+    fer: { name: 'Ferritin', unit: 'ng/mL', vals: [18, 11, 7], min: 0, max: 100, g: [15, 100], a: [12, 100], col: RC_RO,
+      labs: [['15', 15, RC_G, -3], ['12', 12, RC_RO, 13]], verdict: 'Below the healthy range. Worth discussing with your doctor' }
+  };
+  var RC_PILLS = [['hct', 'Healthy', RC_G], ['vitd', 'Borderline', RC_AM], ['fer', 'Needs attention', RC_RO]];
+  var RC_BACK = { hct: 'vitd', vitd: 'fer', fer: 'hct' };
+  var rcUid = 0;
+
+  function rcEl(tag, attrs, parent, text) {
+    var isSvg = /^(svg|path|circle|line|rect|g|defs|clipPath|linearGradient|stop|text)$/.test(tag);
+    var e = isSvg ? document.createElementNS('http://www.w3.org/2000/svg', tag) : document.createElement(tag);
+    for (var k in attrs) { if (Object.prototype.hasOwnProperty.call(attrs, k)) e.setAttribute(k, attrs[k]); }
+    if (text != null) e.textContent = text;
+    if (parent) parent.appendChild(e);
+    return e;
+  }
+  function rcSmooth(t) { return t * t * t * (t * (t * 6 - 15) + 10); }
+
+  // Builds the zone chart (same look as the app: exclusive bands, S-curve, ruler labels).
+  function rcChart(key, opts) {
+    opts = opts || {};
+    var c = RC_DATA[key], W = 476, H = opts.h || 210, padL = 14, padR = opts.noLabels ? 14 : 60, n = 3, uid = ++rcUid;
+    var plotW = W - padR + 8;
+    function X(i) { return padL + (W - padL - padR) * ((i + 0.5) / n); }
+    function Y(v) { return H * (c.max - Math.max(c.min, Math.min(c.max, v))) / (c.max - c.min); }
+    var svg = rcEl('svg', { 'class': 'rc-svg', viewBox: '0 0 ' + W + ' ' + H, 'aria-hidden': 'true', focusable: 'false' });
+    var defs = rcEl('defs', {}, svg);
+    var clip = rcEl('clipPath', { id: 'rcc' + uid }, defs);
+    rcEl('rect', { x: 0, y: 0, width: plotW, height: H, rx: 10 }, clip);
+    var grad = rcEl('linearGradient', { id: 'rcg' + uid, x1: 0, y1: 0, x2: 0, y2: 1 }, defs);
+    rcEl('stop', { offset: 0, 'stop-color': c.col, 'stop-opacity': 0.4 }, grad);
+    rcEl('stop', { offset: 1, 'stop-color': c.col, 'stop-opacity': 0 }, grad);
+    var plot = rcEl('g', { 'clip-path': 'url(#rcc' + uid + ')' }, svg);
+    var zones = rcEl('g', { 'class': 'rc-zones' }, plot);
+    function band(lo, hi, fill) {
+      var h = Math.max(0, Y(lo) - Y(hi));
+      if (h > 0) rcEl('rect', { x: 0, y: Y(hi), width: plotW, height: h, fill: fill }, zones);
+    }
+    band(c.min, c.a[0], 'rgba(251,113,133,.20)'); band(c.a[1], c.max, 'rgba(251,113,133,.20)');
+    band(c.a[0], c.g[0], 'rgba(251,191,36,.19)'); band(c.g[1], c.a[1], 'rgba(251,191,36,.19)');
+    band(c.g[0], c.g[1], 'rgba(45,212,191,.17)');
+    var pts = [], i, s;
+    for (i = 0; i < n - 1; i++) for (s = 0; s <= 30; s++) {
+      var t = s / 30;
+      pts.push([X(i) + (X(i + 1) - X(i)) * t, Y(c.vals[i] + (c.vals[i + 1] - c.vals[i]) * rcSmooth(t))]);
+    }
+    var d = pts.map(function (p, j) { return (j ? 'L' : 'M') + p[0].toFixed(1) + ' ' + p[1].toFixed(1); }).join(' ');
+    rcEl('path', { 'class': 'rc-area', d: d + ' L' + X(n - 1) + ' ' + H + ' L' + X(0) + ' ' + H + ' Z', fill: 'url(#rcg' + uid + ')' }, plot);
+    for (i = 0; i < n; i++) rcEl('line', { 'class': 'rc-guide', x1: X(i), x2: X(i), y1: 0, y2: H }, svg);
+    c.labs.forEach(function (L) {
+      var g = rcEl('g', { 'class': 'rc-label' }, svg), y = Y(L[1]);
+      rcEl('line', { x1: 0, x2: plotW, y1: y, y2: y, stroke: L[2], 'stroke-opacity': 0.28 }, g);
+      if (!opts.noLabels) {
+        rcEl('text', { 'class': 'rc-lab', x: W - padR + 14, y: y + 4 + L[3], fill: L[2] }, g, L[0]);
+        rcEl('line', { x1: W - padR + 14 + L[0].length * 8 + 4, x2: W - padR + 14 + L[0].length * 8 + 14, y1: y, y2: y, stroke: L[2], 'stroke-width': 2, 'stroke-opacity': 0.8 }, g);
+      }
+    });
+    rcEl('path', { 'class': 'rc-line rc-glow', d: d, pathLength: 1, fill: 'none', stroke: c.col, 'stroke-width': 8, 'stroke-opacity': 0.22 }, svg);
+    rcEl('path', { 'class': 'rc-line', d: d, pathLength: 1, fill: 'none', stroke: c.col, 'stroke-width': 3.4, 'stroke-linecap': 'round' }, svg);
+    c.vals.forEach(function (v, j) {
+      var g = rcEl('g', { 'class': 'rc-pt rc-pt' + j }, svg), cx = X(j), cy = Y(v);
+      if (j === n - 1) {
+        rcEl('circle', { cx: cx, cy: cy, r: 17, fill: c.col, 'fill-opacity': 0.16 }, g);
+        rcEl('circle', { 'class': 'rc-ping', cx: cx, cy: cy, r: 9, fill: 'none', stroke: c.col, 'stroke-width': 2 }, g);
+      }
+      rcEl('circle', { cx: cx, cy: cy, r: opts.noLabels ? 6 : 8, fill: c.col, stroke: '#0A0E12', 'stroke-width': 3 }, g);
+      if (!opts.noLabels) rcEl('text', { 'class': 'rc-val rc-val' + j, x: cx, y: cy - 18 }, svg, String(v));
+    });
+    svg.rcX = X;
+    return svg;
+  }
+
+  function rcHead(key, cls) {
+    var c = RC_DATA[key], h = rcEl('div', { 'class': 'rc-head' + (cls ? ' ' + cls : '') });
+    var dot = rcEl('i', {}, h); dot.style.background = c.col; dot.style.boxShadow = '0 0 12px ' + c.col;
+    rcEl('span', { 'class': 'rc-name' }, h, c.name);
+    rcEl('span', { 'class': 'rc-now' }, h, c.vals[2] + ' ' + c.unit);
+    var chev = rcEl('span', { 'class': 'rc-chev', 'aria-hidden': 'true' }, h);
+    var sv = rcEl('svg', { width: 13, height: 13, viewBox: '0 0 24 24', fill: 'none', stroke: '#2DD4BF', 'stroke-width': 3, 'stroke-linecap': 'round', 'stroke-linejoin': 'round' }, chev);
+    rcEl('path', { d: 'M6 15l6-6 6 6' }, sv);
+    return h;
+  }
+
+  function bindResultCard() {
+    var hosts = document.querySelectorAll('[data-result-card]');
+    if (!hosts.length) return;
+    var still = reducedMotion();
+    Array.prototype.forEach.call(hosts, function (host) {
+      var wrap = rcEl('div', { 'class': 'rc-wrap', role: 'group', 'aria-label': 'Example PulsingLabs result. Choose a colour to see how each kind of result reads.' }, host);
+      var back = rcEl('div', { 'class': 'rc-card rc-back rc-static', 'aria-hidden': 'true' }, wrap);
+      var card = rcEl('div', { 'class': 'rc-card rc-live' + (still ? ' rc-static' : '') }, wrap);
+      var cur = 'hct', played = false;
+
+      function render(key) {
+        cur = key;
+        card.textContent = ''; back.textContent = '';
+        var c = RC_DATA[key];
+        card.appendChild(rcHead(key));
+        var box = rcEl('div', { 'class': 'rc-plot' }, card);
+        box.appendChild(rcChart(key));
+        var dates = rcEl('div', { 'class': 'rc-dates', 'aria-hidden': 'true' }, card);
+        ['10 Mar', '22 Jul', '2 Nov'].forEach(function (t, i) {
+          var sp = rcEl('span', {}, dates, t);
+          sp.style.left = ((14 + (476 - 14 - 60) * ((i + 0.5) / 3)) / 476 * 100).toFixed(2) + '%';
+        });
+        var v = rcEl('div', { 'class': 'rc-verdict', 'aria-live': 'polite' }, card, c.verdict);
+        v.style.color = c.col;
+        var bk = RC_BACK[key];
+        back.appendChild(rcHead(bk, 'rc-head-sm'));
+        var bb = rcEl('div', { 'class': 'rc-plot' }, back);
+        bb.appendChild(rcChart(bk, { h: 90, noLabels: true }));
+        back.className = 'rc-card rc-back rc-live rc-static rc-play';
+        card.classList.remove('rc-play');
+        if (still || played) { void card.offsetWidth; card.classList.add('rc-play'); }
+      }
+
+      var pills = rcEl('div', { 'class': 'rc-pills' }, host);
+      var btns = RC_PILLS.map(function (p) {
+        var b = rcEl('button', { type: 'button', 'class': 'rc-pill', 'aria-pressed': p[0] === cur ? 'true' : 'false' }, pills);
+        b.style.setProperty('--pc', p[2]);
+        rcEl('span', { 'aria-hidden': 'true' }, b, '● ');
+        b.appendChild(document.createTextNode(p[1]));
+        b.addEventListener('click', function () {
+          if (p[0] === cur) return;
+          played = true;
+          btns.forEach(function (x) { x.setAttribute('aria-pressed', x === b ? 'true' : 'false'); });
+          render(p[0]);
+        });
+        return b;
+      });
+      rcEl('p', { 'class': 'rc-note' }, host, 'Tap a colour to see an example. Sample numbers, not a real patient.');
+      render('hct');
+
+      // Draw once when the card is on screen (finished at once under reduced motion).
+      function play() { if (played) return; played = true; setTimeout(function () { card.classList.add('rc-play'); }, 350); }
+      if (still || !('IntersectionObserver' in window)) { played = true; card.classList.add('rc-play'); }
+      else {
+        var io = new IntersectionObserver(function (es) {
+          es.forEach(function (e) { if (e.isIntersecting) { io.disconnect(); play(); } });
+        }, { threshold: 0.35 });
+        io.observe(host);
+        setTimeout(function () { var r = host.getBoundingClientRect(); if (r.top < innerHeight * 0.8 && r.bottom > 0) { io.disconnect(); play(); } }, 2500);
+      }
+
+      // Desktop only: the card leans a few degrees toward the mouse.
+      if (!still && window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
+        var media = host.closest('.media') || host, raf = 0;
+        media.addEventListener('pointermove', function (ev) {
+          if (raf) return;
+          raf = requestAnimationFrame(function () {
+            raf = 0;
+            var r = media.getBoundingClientRect(), px = (ev.clientX - r.left) / r.width, py = (ev.clientY - r.top) / r.height;
+            wrap.style.setProperty('--ry', (-8 + (0.5 - px) * 12).toFixed(2) + 'deg');
+            wrap.style.setProperty('--rx', (4 + (py - 0.5) * 8).toFixed(2) + 'deg');
+          });
+        });
+        media.addEventListener('pointerleave', function () { wrap.style.removeProperty('--ry'); wrap.style.removeProperty('--rx'); });
+      }
+    });
+  }
+
+  /* ------------------------------------------------------------------ */
   /* Init                                                               */
   /* ------------------------------------------------------------------ */
   function fillBusiness() {
@@ -1858,6 +2175,7 @@
     bindImgFade();
     bindVideoAutoplay();
     bindClipReveal();
+    bindResultCard();
     bindSpotlight();
     bindLenis();
     // bindCursor() intentionally not called: keep the normal system pointer,
@@ -1869,7 +2187,8 @@
     bindBodyOrbit();
     bindKinetic();
     bindStack();
-    bindFlowRail();
+    bindAiVideo();
+    // bindFlowRail() retired with the editorial "three steps" cards (no rail any more)
     bindFooterReveal();
     bindDepth();
     bindRing();

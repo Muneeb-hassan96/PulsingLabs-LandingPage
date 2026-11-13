@@ -1,6 +1,6 @@
 # PulsingLabs
 
-> PulsingLabs is a Pakistani health app for booking blood tests at home in Karachi. A phlebotomist from a licensed partner laboratory collects the sample at the patient's home, and results arrive in the app with plain-language explanations based on the patient's age and sex. Home collection is in Karachi only for now.
+> PulsingLabs is a Pakistani health app for booking blood tests at home in Karachi. A phlebotomist from our partner laboratory collects the sample at the patient's home, and results arrive in the app with plain-language explanations based on the patient's age and sex. Home collection is in Karachi only for now.
 
 ## Packages and prices (PKR, home visit included)
 
@@ -14,7 +14,7 @@
 1. Choose Standard or Premium in the PulsingLabs app, for yourself or a family member.
 2. Add the address (map pin) and a phone number, then pick a day and time. Same-day visits need at least 5 hours' notice.
 3. Pay in the app. The booking is made once payment succeeds; an invoice is sent by email and kept in the app.
-4. PulsingLabs assigns a licensed partner lab. A phlebotomist visits, checks the visit code shown in the patient's app, takes pulse and blood pressure, and collects the sample.
+4. PulsingLabs assigns a partner lab. A phlebotomist visits, checks the visit code shown in the patient's app, takes pulse and blood pressure, and collects the sample.
 5. The lab tests the sample and issues the results. They appear in the app on colour-coded charts for the patient's age and sex, and an AI assistant answers questions about them in English or Urdu.
 
 ## Changes and visiting charges
