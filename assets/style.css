@@ -863,25 +863,17 @@ html.theme-dark .s-dark::after, html.theme-dark .dark::after { opacity: .6; }
 /* HERO gets the full choreography: words start as the curtain lifts, rise
    further with a slower per-word cadence so the line visibly "builds". */
 .hero h1 .w {
-  transform: translateY(.75em); filter: blur(10px);
-  transition-duration: .75s, .85s, .75s;
-  /* base .6s: the curtain needs ~.65s to clear the headline — starting earlier
-     hides the first words' entrance behind it (owner: "can't find the wow") */
-  transition-delay: calc(.6s + var(--wi, 0) * .08s);
+  transform: translateY(.6em); filter: none;
+  transition-duration: .55s, .65s, .55s;
+  /* starts at once: the page curtain is off (CURTAIN_ENABLED = false), so the old
+     0.6 s wait only delayed the headline (it is the page's largest paint) */
+  transition-delay: calc(var(--wi, 0) * .06s);
+  will-change: transform, opacity;
 }
 /* End state MUST outrank the rule above (it beats the generic .split-in .w on
    specificity, which left hero words permanently blurred — bug). */
 .hero h1.split-in .w { opacity: 1; transform: none; filter: none; }
-/* Signature moment: an underline sweeps beneath the key gradient word once
-   the headline has landed (scaleX 0->1, compositor-only). */
-.hero h1 .grad-text { position: relative; display: inline-block; }
-.hero h1 .grad-text::after {
-  content: ""; position: absolute; left: 2%; right: 2%; bottom: .02em; height: .09em;
-  border-radius: 99px; background: var(--grad-teal);
-  transform: scaleX(0); transform-origin: left center;
-  transition: transform .6s var(--ease-curtain) 1.5s;
-}
-.hero h1.split-in .grad-text::after { transform: scaleX(1); }
+.hero h1 .grad-text { display: inline-block; }
 
 /* ---------- Lenis smooth scroll (loaded from CDN at runtime) ---------- */
 html.lenis, html.lenis body { height: auto; }
@@ -1354,7 +1346,6 @@ html.theme-dark #to-top .arr { stroke: var(--teal-l); }
   .reveal-l .split-list li, .reveal-r .split-list li { opacity: 1 !important; transform: none !important; }
   .reveal .eyebrow::before, .reveal-l .eyebrow::before, .reveal-r .eyebrow::before { width: 28px !important; }
   .w { opacity: 1 !important; transform: none !important; filter: none !important; }
-  .hero h1 .grad-text::after { transform: scaleX(1) !important; }
   .stack.flow::after { transform: scaleY(1) !important; }
   .stack.flow .stack-card .sc-num { filter: none !important; opacity: 1 !important; }
   .hero .page-enter > .lead, .hero .page-enter > .hero-cta,
@@ -2057,8 +2048,7 @@ footer.site.mf .mf-legal-links a:hover::after { transform: translateX(3px); colo
 .hero-panel .eyebrow { color: var(--teal-l); margin-bottom: 18px; }
 .hero-panel .eyebrow::before { background: var(--teal-l); }
 .hero-panel h1 { color: #fff; font-size: clamp(42px, 5.2vw, 80px); line-height: 1.02; letter-spacing: -.035em; }
-.hero-panel .grad-text,
-.hero-panel h1 .grad-text::after { background-image: linear-gradient(90deg, #00DDB0, #00C2FF 60%, #6A8BFF); }
+.hero-panel .grad-text { background-image: linear-gradient(90deg, #00DDB0, #00C2FF 60%, #6A8BFF); background-size: auto; animation: none; }
 .hero-panel .grad-text { -webkit-background-clip: text; background-clip: text; color: transparent; }
 .hero-panel p.lead { margin-top: 18px; color: rgba(236,230,218,.74); font-size: clamp(15.5px, 1.2vw, 18px); max-width: 48ch; }
 .hero-panel .hero-cta { margin-top: 26px; }
@@ -2191,10 +2181,14 @@ body.loaded .hf-ai { transition-delay: 1.4s; }
 
 .hf-score { top: 17%; right: 8%; }
 .hf-score .hf-in { display: flex; align-items: center; gap: 12px; padding: 12px 18px 12px 12px; }
-.hf-ring { --ring-fill: #00DDB0; --ring-track: rgba(255,255,255,.1); position: relative; flex: none;
-  width: 52px; height: 52px; border-radius: 50%; display: grid; place-items: center; background: rgba(255,255,255,.1); }
-.hf-ring::before { content: ""; position: absolute; inset: 5px; border-radius: 50%; background: #0F2527; }
-.hf-ring i { position: relative; font-style: normal; font-weight: 700; font-size: 17px; }
+/* the app's health-age orb: black centre, neon points thickest at the rim, a
+   slow soft "bubble" breath (transform only, so it never repaints) */
+.hf-orb { position: relative; flex: none; width: 58px; height: 58px; display: grid; place-items: center;
+  border-radius: 50%; box-shadow: 0 0 22px rgba(52,245,160,.22); animation: hfOrb 6s ease-in-out infinite; }
+.hf-orb canvas { position: absolute; inset: 0; width: 100%; height: 100%; }
+.hf-orb i { position: relative; font-style: normal; font-weight: 700; font-size: 18px; letter-spacing: -.02em; }
+@keyframes hfOrb { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.035); } }
+.hf-txt .hf-young { color: #5FF0B6; font-weight: 600; }
 .hf-txt b { display: block; font-size: 14px; font-weight: 600; }
 .hf-txt span { display: block; font-size: 12px; color: rgba(236,230,218,.6); margin-top: 2px; }
 
@@ -2261,13 +2255,13 @@ body.loaded .hf-path { stroke-dashoffset: 0; }
   /* middle band: score top-right, AI card lower-left, the helix between them */
   .hf-score { top: 30%; right: 22px; }
   .hf-score .hf-in { padding: 10px 14px 10px 10px; }
-  .hf-ring { width: 46px; height: 46px; }
+  .hf-orb { width: 52px; height: 52px; }
   .hf-ai { top: 54%; left: 22px; right: auto; width: min(76%, 290px); }
   .hf-ai p { font-size: 13px; }
 }
 @media (prefers-reduced-motion: reduce) {
   .hero-float { opacity: 1; transform: none; transition: none; }
-  .hf-in { animation: none; }
+  .hf-in, .hf-orb { animation: none; }
   .hf-path { stroke-dashoffset: 0; transition: none; }
 }
 
@@ -2374,3 +2368,6 @@ body.loaded .hf-path { stroke-dashoffset: 0; }
   .rc-head { font-size: 15px; }
   .rc-verdict { font-size: 16px; }
 }
+
+/* phones: no film grain (a screen-sized layer over everything, unseen at that size) */
+@media (hover: none) { #grain { display: none; } }

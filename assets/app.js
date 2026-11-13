@@ -1265,6 +1265,30 @@
   }
 
   /* ------------------------------------------------------------------ */
+  /* Hero health-age orb: drawn ONCE (static points, seeded), the card's  */
+  /* CSS gives the gentle bubble breath. No per-frame work at all.       */
+  /* ------------------------------------------------------------------ */
+  function bindHeroOrb() {
+    var cv = document.querySelector('.hf-orb canvas');
+    if (!cv || !cv.getContext) return;
+    var css = cv.offsetWidth || 58, dpr = Math.min(window.devicePixelRatio || 1, 2);
+    var S = Math.round(css * dpr); cv.width = cv.height = S;
+    var c = cv.getContext('2d'), R = S / 2 * 0.9, cx = S / 2, cy = S / 2, u = S / 116;
+    var seed = 11; function rnd() { seed = (seed * 16807) % 2147483647; return seed / 2147483647; }
+    var g = c.createRadialGradient(cx, cy, 0, cx, cy, R);
+    g.addColorStop(0, '#000'); g.addColorStop(0.62, '#010604'); g.addColorStop(0.86, '#04241a'); g.addColorStop(1, 'rgba(18,120,80,.9)');
+    c.fillStyle = g; c.beginPath(); c.arc(cx, cy, R, 0, 6.2832); c.fill();
+    for (var i = 0; i < 420; i++) {
+      var band = rnd(), d = band < 0.62 ? 1 - Math.pow(rnd(), 1.5) * 0.09 : band < 0.9 ? 1 - Math.pow(rnd(), 1.6) * 0.38 : 0.35 + rnd() * 0.4;
+      var a = rnd() * 6.2832, x = cx + Math.cos(a) * R * d, y = cy + Math.sin(a) * R * d;
+      var big = rnd() < 0.05, al = (d > 0.9 ? 1 : d > 0.6 ? 0.78 : 0.5) * (0.55 + rnd() * 0.45);
+      var col = rnd() < 0.22 ? '170,255,215' : '52,245,160', r = (big ? 1.5 : 0.55 + rnd() * 0.5) * u;
+      c.fillStyle = 'rgba(' + col + ',' + al.toFixed(2) + ')'; c.beginPath(); c.arc(x, y, r, 0, 6.2832); c.fill();
+    }
+    c.strokeStyle = 'rgba(120,255,200,.38)'; c.lineWidth = 1.2 * u; c.beginPath(); c.arc(cx, cy, R, 0, 6.2832); c.stroke();
+  }
+
+  /* ------------------------------------------------------------------ */
   /* Animated score ring (conic sweep + count-up)                       */
   /* ------------------------------------------------------------------ */
   function bindRing() {
@@ -2192,6 +2216,7 @@
     bindFooterReveal();
     bindDepth();
     bindRing();
+    bindHeroOrb();
     bindScramble();
     bindToTop();
     bindLiveStats();
