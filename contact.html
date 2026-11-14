@@ -22,7 +22,7 @@
   <meta name="twitter:image" content="https://pulsinglabs.com/og-image.png" />
   <link rel="preload" href="assets/fonts/general-sans-600.woff2" as="font" type="font/woff2" crossorigin />
   <link rel="preload" href="assets/fonts/general-sans-400.woff2" as="font" type="font/woff2" crossorigin />
-  <link rel="stylesheet" href="assets/style.css?v=171" />
+  <link rel="stylesheet" href="assets/style.css?v=173" />
   <link rel="icon" type="image/png" href="assets/img/favicon.png" />
   <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://pulsinglabs.com/"},{"@type":"ListItem","position":2,"name":"Contact","item":"https://pulsinglabs.com/contact"}]}]}</script>
 </head>
@@ -82,22 +82,24 @@
             </div>
             <div class="form-row">
               <div class="field"><label for="cn" data-i18n="ct.lbl.name">Full name</label><input id="cn" name="name" type="text" placeholder="Your name" data-i18n-ph="ct.ph.name" autocomplete="name" maxlength="120" required /></div>
-              <div class="field"><label for="ce" data-i18n="ct.lbl.email">Email</label><input id="ce" name="email" type="email" placeholder="you@email.com" autocomplete="email" maxlength="200" required /></div>
+              <div class="field"><label for="cp" data-i18n="ct.lbl.phone">Phone</label><input id="cp" name="phone" type="tel" placeholder="03XX XXXXXXX" autocomplete="tel" inputmode="tel" maxlength="20" pattern="\+?[\d\s()\-]{10,20}" title="A Pakistani mobile or landline, e.g. 0300 1234567" required /></div>
             </div>
             <div class="form-row">
-              <div class="field"><label for="cp" data-i18n="ct.lbl.phone">Phone (optional)</label><input id="cp" name="phone" type="tel" placeholder="03XX XXXXXXX" autocomplete="tel" inputmode="tel" maxlength="40" /></div>
+              <div class="field"><label for="ce" data-i18n="ct.lbl.email">Email (optional)</label><input id="ce" name="email" type="email" placeholder="you@email.com" autocomplete="email" maxlength="200" /></div>
               <div class="field"><label for="cc" data-i18n="ct.lbl.company">Company (optional)</label><input id="cc" name="company" type="text" placeholder="Company name" data-i18n-ph="ct.ph.company" autocomplete="organization" maxlength="160" /></div>
             </div>
             <div class="field">
               <label for="ct" data-i18n="ct.lbl.interest">What can we help with?</label>
               <select id="ct" name="interest">
-                <option data-topic="checkup" data-i18n="ct.opt1">Home check-up</option>
+                <option data-topic="checkup" data-i18n="ct.opt1">Book appointment</option>
                 <option data-topic="company" data-i18n="ct.opt2">For my company</option>
                 <option data-topic="lab" data-i18n="ct.opt3">Lab or clinic partnership</option>
                 <option data-topic="other" data-i18n="ct.opt4">Something else</option>
               </select>
             </div>
-            <div class="field"><label for="cm" data-i18n="ct.lbl.msg">Message</label><textarea id="cm" name="message" placeholder="For a check-up: your area in Karachi and a good time to call." data-i18n-ph="ct.ph.msg" maxlength="4000"></textarea></div>
+            <!-- Shown only for "Book appointment" (bindLeadForm). Approximate: we call to confirm the time. -->
+            <div class="field" id="cdWrap"><label for="cd" data-i18n="ct.lbl.date">Preferred date (approx.)</label><input id="cd" name="preferredDate" type="date" /></div>
+            <div class="field"><label for="cm" data-i18n="ct.lbl.msg">Message (optional)</label><textarea id="cm" name="message" placeholder="For a check-up: your area in Karachi and a good time to call." data-i18n-ph="ct.ph.msg" maxlength="4000"></textarea></div>
             <button type="submit" class="btn btn-primary" style="width:100%;" data-magnetic data-i18n-html="ct.form.btn">Send message <span class="arrow">→</span></button>
             <div class="ok-msg" data-i18n="ct.form.ok">Thanks, your message is on its way! We'll be in touch shortly.</div>
             <div class="err-msg" data-i18n="ct.form.err">Something went wrong. Please email contact@pulsinglabs.com.</div>
@@ -118,7 +120,7 @@
     </div>
   </section>
 
-  <div id="site-footer"><nav aria-label="Site pages"><p><a href="/">Home</a> · <a href="/pricing">Pricing</a> · <a href="/how-it-works">How it works</a> · <a href="/faq">FAQ</a> · <a href="/features">Features</a> · <a href="/business">For business</a> · <a href="/about">About</a> · <a href="/contact">Contact</a> · <a href="/how-it-works#service-policy">Service policy</a> · <a href="/refunds">Refund policy</a> · <a href="/privacy">Privacy policy</a> · <a href="/terms">Terms</a></p><p>PulsingLabs · Blood tests at home in Karachi · <a href="mailto:contact@pulsinglabs.com">contact@pulsinglabs.com</a></p></nav></div>
-  <script src="assets/app.js?v=139"></script>
+  <div id="site-footer"><nav aria-label="Site pages"><p><a href="/">Home</a> · <a href="/pricing">Pricing</a> · <a href="/faq">FAQ</a> · <a href="/features">Features</a> · <a href="/business">For business</a> · <a href="/about">About</a> · <a href="/contact">Contact</a> · <a href="/refunds#service-policy">Service policy</a> · <a href="/refunds">Refund policy</a> · <a href="/privacy">Privacy policy</a> · <a href="/terms">Terms</a></p><p>PulsingLabs · Blood tests at home in Karachi · <a href="mailto:contact@pulsinglabs.com">contact@pulsinglabs.com</a></p></nav></div>
+  <script src="assets/app.js?v=141"></script>
 </body>
 </html>

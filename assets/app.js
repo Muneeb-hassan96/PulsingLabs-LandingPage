@@ -25,7 +25,7 @@
   var PROD_API_BASE = 'https://api.pulsinglabs.com/api'; // the live backend (Render, custom domain since 2026-10-24; pulsinglabs.onrender.com still answers)
   // The business's local phone and address (the payment gateway requires them on
   // the site). Fill these two and every page shows them: footer, contact page,
-  // the service policy on how-it-works. Left empty, those lines stay hidden.
+  // the service policy on refunds. Left empty, those lines stay hidden.
   var BUSINESS = { phone: '+92 333 5556534', address: 'Flat # A-705, Plot # 118/F, Stadium Road, Block 10A (Saima Mall & Res), Gulshan-e-Iqbal, Karachi', labLicence: '' };
   var _devHost =/^(localhost|127\.|0\.0\.0\.0|10\.|192\.168\.|172\.(1[6-9]|2\d|3[01])\.)/;
   var API_BASE = (location.protocol === 'file:' || _devHost.test(location.hostname))
@@ -169,7 +169,6 @@
         items: [
           { href: 'pricing.html', icon: 'sparkle', title: 'Standard check-up', desc: '22 tests, PKR 9,999' },
           { href: 'pricing.html', icon: 'pie',     title: 'Premium check-up',  desc: '32 tests, PKR 19,999' },
-          { href: 'how-it-works.html', icon: 'lab', title: 'How a visit works', desc: 'Home collection in Karachi' },
           { href: 'pricing.html#faq', icon: 'card', title: 'Pricing FAQ',       desc: 'Fasting, ages & cancellation' }
         ] } },
     { href: 'insights.html', label: 'Insights', enabled: false, mega: {
@@ -249,7 +248,7 @@
       'kb.decoded': 'Your health, decoded', 'kb.book': 'Book', 'kb.test': 'Test',
       'kb.understand': 'Understand', 'kb.act': 'Act early', 'kb.repeat': 'Repeat',
       'kb.teams': 'Healthier teams', 'kb.sick': 'Fewer sick days', 'kb.roi': 'Real ROI',
-      'home.cta1': 'Request a check-up <span class="arrow">→</span>',
+      'home.cta1': 'Book Appointment <span class="arrow">→</span>',
       'home.ctaH': 'Take charge of your health today.',
       'home.ctaP': 'Turn confusing lab reports into clarity, for you and your family.',
       'home.ctaBtn': 'Request a check-up <span class="arrow">→</span>',
@@ -396,10 +395,10 @@
       'ct.ch.eye': 'Reach us directly', 'ct.ch.h2': 'Channels',
       'ct.ch1t': 'General & support', 'ct.ch2t': 'Corporate sales & demos', 'ct.ch3t': 'Labs & clinic partnerships',
       'ct.madeIn': 'Made with care in Pakistan',
-      'ct.form.h': 'Send us a message', 'ct.form.sub': 'Want a home check-up? Leave your details and we will get back to you to arrange it. Companies and labs, tell us what you need.',
-      'ct.lbl.name': 'Full name', 'ct.lbl.email': 'Email', 'ct.lbl.company': 'Company (optional)', 'ct.lbl.interest': 'What can we help with?', 'ct.lbl.msg': 'Message',
+      'ct.form.h': 'Send us a message', 'ct.form.sub': 'Want a home check-up? Leave your name and number and we will call you to arrange it. Companies and labs, tell us what you need.',
+      'ct.lbl.name': 'Full name', 'ct.lbl.email': 'Email (optional)', 'ct.lbl.date': 'Preferred date (approx.)', 'ct.lbl.company': 'Company (optional)', 'ct.lbl.interest': 'What can we help with?', 'ct.lbl.msg': 'Message (optional)',
       'ct.ph.name': 'Your name', 'ct.ph.company': 'Company name', 'ct.ph.msg': 'For a check-up: your area in Karachi and a good time to call.',
-      'ct.opt1': 'Home check-up', 'ct.opt2': 'For my company', 'ct.opt3': 'Lab or clinic partnership', 'ct.opt4': 'Something else', 'ct.lbl.phone': 'Phone (optional)',
+      'ct.opt1': 'Book appointment', 'ct.opt2': 'For my company', 'ct.opt3': 'Lab or clinic partnership', 'ct.opt4': 'Something else', 'ct.lbl.phone': 'Phone',
       'ct.form.btn': 'Send message <span class="arrow">→</span>', 'ct.form.ok': 'Thanks, your message is on its way! We will be in touch shortly.', 'ct.form.err': 'Something went wrong. Please email contact@pulsinglabs.com.',
       'ct.cta.h': 'Want to compare the check-ups first?', 'ct.cta.p': 'Standard has 22 tests and Premium has 32. Both include a home visit in Karachi, and no fasting is needed.', 'ct.cta.btn': 'See the check-ups <span class="arrow">→</span>'
     }
@@ -442,8 +441,8 @@
           // header version is hidden on small screens.
           '<a class="btn btn-primary drawer-cta" href="' + ctaDest('app') + '" data-i18n="cta.getStarted">Request a check-up</a>' +
         '</nav>' +
+        // Owner 2026-11-15: no header button on desktop (the hero has "Book Appointment").
         '<div class="nav-cta">' +
-          '<a class="btn btn-primary" href="' + ctaDest('app') + '" data-i18n="cta.getStarted">Request a check-up</a>' +
           '<button class="nav-toggle" id="navToggle" aria-label="Menu"><span></span><span></span><span></span></button>' +
         '</div>' +
       '</div></header>' +
@@ -466,14 +465,15 @@
         '<div class="wrap">' +
         '<h2 class="mf-headline" id="mfHeadline" data-i18n="foot.head">Take charge of your health today.</h2>' +
         '<div class="mf-cards">' +
-          '<div class="mf-card mf-connect reveal">' +
+          // Owner 2026-11-15: the connect card only on the Contact page.
+          (/contact(\.html)?\/?$/.test(location.pathname) ? '<div class="mf-card mf-connect reveal">' +
             '<span class="mf-eyebrow" data-i18n="foot.connect">Connect with us</span>' +
             '<p class="mf-big" data-i18n="foot.connectSub">Questions, partnerships, or ready to start? We reply fast.</p>' +
             '<div class="mf-ctas">' +
               '<a class="btn btn-primary" href="' + ctaDest('app') + '" data-magnetic><span data-i18n="foot.openApp">Request a check-up</span> <span class="arrow">→</span></a>' +
               '<a class="btn btn-ghost mf-ghost" href="contact.html" data-i18n="foot.demo">Book a demo</a>' +
             '</div>' +
-          '</div>' +
+          '</div>' : '') +
           '<div class="mf-card mf-menu reveal d1">' +
             '<span class="mf-eyebrow" data-i18n="foot.menu">Menu</span>' +
             // Menu mirrors the header: disabled NAV entries (enabled:false)
@@ -483,7 +483,7 @@
                  .map(function (n) { return '<a href="' + n.href + '">' + n.label + '</a>'; })
                  .join('') +
               // Footer-only: every visitor can reach these from any page.
-              '<a href="how-it-works.html">How it works</a><a href="faq.html">FAQ</a>' +
+              '<a href="faq.html">FAQ</a>' +
             '</nav>' +
           '</div>' +
           '<div class="mf-card mf-touch reveal d2">' +
@@ -503,7 +503,7 @@
                 '<a href="privacy.html"><span class="ti" data-icon="shieldcheck"></span>Privacy</a>' +
                 '<a href="terms.html"><span class="ti" data-icon="file"></span>Terms</a>' +
                 '<a href="refunds.html"><span class="ti" data-icon="card"></span>Refunds</a>' +
-                '<a href="how-it-works.html#service-policy"><span class="ti" data-icon="home"></span>Service</a>' +
+                '<a href="refunds.html#service-policy"><span class="ti" data-icon="home"></span>Service</a>' +
               '</div>' +
               '<p class="mf-biz"><a href="mailto:contact@pulsinglabs.com">contact@pulsinglabs.com</a>' +
                 '<span data-biz-wrap="phone"> · <a data-biz="phone"></a></span>' +
@@ -1937,6 +1937,14 @@
       var opt = qs.topic && f.querySelector('option[data-topic="' + qs.topic + '"]');
       if (opt) opt.selected = true;
       var msg = f.querySelector('#cm');
+      // 'Book appointment' shows an approximate date (today .. +1 year); other topics hide it.
+      var sel = f.querySelector('#ct'), dWrap = f.querySelector('#cdWrap'), dIn = f.querySelector('#cd');
+      if (dIn) {
+        var d0 = new Date(), d1 = new Date(Date.now() + 365 * 864e5), ymd = function (d) { return d.getFullYear() + '-' + ('0' + (d.getMonth() + 1)).slice(-2) + '-' + ('0' + d.getDate()).slice(-2); };
+        dIn.min = ymd(d0); dIn.max = ymd(d1);
+      }
+      function syncDate() { if (dWrap && sel) dWrap.hidden = !(sel.selectedOptions[0] && sel.selectedOptions[0].getAttribute('data-topic') === 'checkup'); }
+      if (sel) { sel.addEventListener('change', syncDate); syncDate(); }
       if (msg && !msg.value && (qs['package'] === 'standard' || qs['package'] === 'premium')) {
         msg.value = 'I would like the ' + (qs['package'] === 'standard' ? 'Standard (22 tests, PKR 9,999)' : 'Premium (32 tests, PKR 19,999)') + ' home check-up.';
       }
@@ -1950,10 +1958,13 @@
         var payload = {
           name: get('#cn'), email: get('#ce'), phone: get('#cp'), company: get('#cc'),
           interest: get('#ct'), message: get('#cm'), source: 'marketing_contact',
+          preferredDate: dWrap && !dWrap.hidden ? get('#cd') : '',
           website: hp ? hp.value : '' // honeypot - empty for humans
         };
-        if (!payload.name || !payload.email) {
-          if (err) { err.textContent = 'Please enter your name and a valid email.'; err.style.display = 'block'; }
+        // Owner 2026-11-15: phone required, email optional (we call people back).
+        var digits = payload.phone.replace(/\D/g, '');
+        if (!payload.name || digits.length < 10 || digits.length > 13) {
+          if (err) { err.textContent = 'Please enter your name and a phone number, e.g. 0300 1234567.'; err.style.display = 'block'; }
           return;
         }
         var label = btn ? btn.innerHTML : '';
@@ -1965,6 +1976,7 @@
           .then(function () {
             if (ok) ok.style.display = 'block';
             f.querySelectorAll('input, textarea').forEach(function (i) { if (i.type !== 'submit') i.value = ''; });
+            syncDate();
           })
           .catch(function () {
             if (err) { err.textContent = 'Could not reach our server. Please email contact@pulsinglabs.com.'; err.style.display = 'block'; }
@@ -2124,7 +2136,7 @@
         var box = rcEl('div', { 'class': 'rc-plot' }, card);
         box.appendChild(rcChart(key));
         var dates = rcEl('div', { 'class': 'rc-dates', 'aria-hidden': 'true' }, card);
-        ['10 Mar', '22 Jul', '2 Nov'].forEach(function (t, i) {
+        ['Mar ’24', 'Jul ’25', 'Nov ’26'].forEach(function (t, i) {
           var sp = rcEl('span', {}, dates, t);
           sp.style.left = ((14 + (476 - 14 - 60) * ((i + 0.5) / 3)) / 476 * 100).toFixed(2) + '%';
         });

@@ -33,7 +33,6 @@
 
 ## Pages
 
-- [How a home blood test works](https://pulsinglabs.com/how-it-works)
 - [Pricing](https://pulsinglabs.com/pricing): both packages and what each includes
 - [FAQ](https://pulsinglabs.com/faq): booking, fasting, ages, results, privacy and billing
 - [Refund and cancellation policy](https://pulsinglabs.com/refunds)

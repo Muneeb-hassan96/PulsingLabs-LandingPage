@@ -134,3 +134,39 @@
 @media (max-width: 760px) {
   .cmp-wrap .chip, .cmp-all, .more { min-height: 44px; }
 }
+
+/* Owner 2026-11-15: thinner table. The "See more" pill became a small chevron on the
+   right of the test's name cell (the whole name cell is tappable, see compare.js). */
+.cmp-row th { position: relative; padding: 10px 46px 10px 22px; cursor: pointer; }
+.cmp-row .nm { font-size: 15px; }
+.cmp-row .sub { font-size: 12.5px; }
+.cmp-row td { padding: 10px 0; }
+.cmp .tk { transform: scale(.82); }
+.more { position: absolute; right: 10px; top: 50%; margin: -14px 0 0; width: 28px; height: 28px; min-height: 0 !important; padding: 0; border-radius: 50%;
+  justify-content: center; font-size: 0; gap: 0; background: transparent; border: 1px solid rgba(0,137,123,.25); }
+.more::after { width: 6px; height: 6px; border-width: 0 1.8px 1.8px 0; transform: translateY(-1.5px) rotate(45deg); }
+.more:hover { background: rgba(0,191,165,.10); border-color: var(--teal-d); color: var(--teal-d); }
+.more[aria-expanded="true"] { background: var(--teal-d); border-color: var(--teal-d); color: #fff; }
+.more[aria-expanded="true"]::after { transform: translateY(1.5px) rotate(-135deg); }
+.more:focus-visible { outline: 2px solid var(--teal); outline-offset: 2px; }
+@media (max-width: 640px) {
+  .cmp-row th { padding: 9px 38px 9px 12px; }
+  .cmp-row .nm { font-size: 14px; }
+  .cmp-row .sub { font-size: 11.5px; }
+  .cmp-row td { padding: 9px 0; }
+  .more { right: 6px; width: 26px; height: 26px; margin-top: -13px; }
+}
+
+@media (max-width: 640px) { .cmp thead th { top: 50px; } }
+
+/* Owner 2026-11-15: table visible on first screen; "not included" is a small cross. */
+.cmp-sec { padding-top: 22px; }
+.cmp-h { margin: 0 auto 14px; max-width: 760px; text-align: center; font-size: clamp(19px, 2.2vw, 26px); line-height: 1.2; font-weight: 700; }
+.no::before { content: "×"; width: auto; height: auto; background: none; border-radius: 0; font-size: 22px; line-height: 1; font-weight: 400; color: #B9C4CB; transform: translateY(-1px); }
+.cmp td.s .no { background: rgba(10,22,34,.04); }
+.no { width: 24px; height: 24px; }
+.cmp-wrap { margin-top: 0; }
+
+/* "Not included" cross in the site's soft coral (was grey). */
+.no::before { color: #F0665A; font-weight: 500; }
+.cmp td.s .no { background: rgba(255,107,92,.12); box-shadow: inset 0 0 0 1px rgba(255,107,92,.28); }

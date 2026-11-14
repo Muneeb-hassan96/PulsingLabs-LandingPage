@@ -1,9 +1,8 @@
-/* Pricing comparison: "See more" under every test, filter chips, expand all. */
+/* Pricing comparison: a small chevron (or the test's name) opens what each test tells you.
+   Owner 2026-11-15: no filter chips and no "Expand all". */
 (function () {
   var table = document.getElementById('cmp');
   if (!table) return;
-  var allBtn = document.getElementById('cmpAll');
-  var rows = [].slice.call(table.querySelectorAll('.cmp-row'));
 
   function detailOf(row) { return row.nextElementSibling; }
 
@@ -11,53 +10,21 @@
     var det = detailOf(row), btn = row.querySelector('.more'), dw = det.querySelector('.dw');
     det.classList.toggle('open', open);
     btn.setAttribute('aria-expanded', open ? 'true' : 'false');
-    btn.textContent = open ? 'Show less' : 'See more';
+    btn.setAttribute('aria-label', (open ? 'Hide details: ' : 'What it tells you: ') + row.querySelector('.nm').textContent);
     dw.setAttribute('aria-hidden', open ? 'false' : 'true');
     if (open) dw.removeAttribute('inert'); else dw.setAttribute('inert', '');
   }
 
-  function visibleRows() { return rows.filter(function (r) { return !r.hidden; }); }
-
-  function syncAll() {
-    var vis = visibleRows();
-    var allOpen = vis.length > 0 && vis.every(function (r) { return detailOf(r).classList.contains('open'); });
-    allBtn.textContent = allOpen ? 'Collapse all' : 'Expand all';
-    allBtn.setAttribute('aria-pressed', allOpen ? 'true' : 'false');
-  }
-
+  // The chevron is the real button (keyboard + screen readers); a tap anywhere on the
+  // test's name cell does the same, so the small chevron is never a fiddly target.
+  table.querySelectorAll('.cmp-row').forEach(function (row) {
+    var btn = row.querySelector('.more');
+    if (btn) btn.setAttribute('aria-label', 'What it tells you: ' + row.querySelector('.nm').textContent);
+  });
   table.addEventListener('click', function (e) {
-    var btn = e.target.closest('.more');
-    if (!btn) return;
-    var row = btn.closest('.cmp-row');
+    var cell = e.target.closest('.cmp-row th');
+    if (!cell) return;
+    var row = cell.closest('.cmp-row');
     setOpen(row, !detailOf(row).classList.contains('open'));
-    syncAll();
-  });
-
-  allBtn.addEventListener('click', function () {
-    var vis = visibleRows();
-    var open = !vis.every(function (r) { return detailOf(r).classList.contains('open'); });
-    vis.forEach(function (r) { setOpen(r, open); });
-    syncAll();
-  });
-
-  [].forEach.call(document.querySelectorAll('.cmp-filter .chip'), function (chip) {
-    chip.addEventListener('click', function () {
-      var f = chip.getAttribute('data-f');
-      [].forEach.call(document.querySelectorAll('.cmp-filter .chip'), function (c) {
-        var on = c === chip;
-        c.classList.toggle('on', on);
-        c.setAttribute('aria-pressed', on ? 'true' : 'false');
-      });
-      rows.forEach(function (r) {
-        var tier = r.getAttribute('data-tier');
-        var show = f === 'all' || (f === 'std' && tier === 'both') || (f === 'pre' && tier === 'p');
-        r.hidden = !show;
-        detailOf(r).hidden = !show;
-      });
-      [].forEach.call(table.querySelectorAll('.cmp-g'), function (g) {
-        g.hidden = !g.querySelector('.cmp-row:not([hidden])');
-      });
-      syncAll();
-    });
   });
 })();

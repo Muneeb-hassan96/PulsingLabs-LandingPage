@@ -2722,3 +2722,41 @@ section.ai-show { contain-intrinsic-size: auto 1219px; } #how { contain-intrinsi
 }
 
 @media (max-width: 860px) { .pp6 .pp-idx { gap: 8px; } .pp6 .pp-idx span { width: 32px; height: 32px; } }
+
+/* Owner 2026-11-15: compact page hero (pricing) so the useful content is on the first screen. */
+.page-hero.ph-compact { padding: 118px 0 34px; }
+.page-hero.ph-compact .crumbs { margin-bottom: 10px; }
+.page-hero.ph-compact h1 { font-size: clamp(30px, 4.4vw, 52px); }
+.page-hero.ph-compact .lead { margin-top: 10px; font-size: 16px; }
+@media (max-width: 760px) { .page-hero.ph-compact { padding: 92px 0 22px; } .page-hero.ph-compact .eyebrow { display: none; } }
+/* footer without the connect card (every page except Contact): two even columns */
+@media (min-width: 961px) { .mf-cards:not(:has(.mf-connect)) { grid-template-columns: .9fr 1.1fr; } }
+
+/* Owner 2026-11-15: a slimmer header bar on phones, on every page (was ~84px tall). */
+@media (max-width: 960px) {
+  .nav, .nav.scrolled { padding: 6px 0; }
+  .logo { font-size: 21px; gap: 8px; }
+  .logo .dot, .logo .dot .logo-mark { width: 36px; height: 36px; }
+  .nav-toggle { width: 38px; height: 38px; }
+}
+@media (max-width: 760px) {
+  .hero-panel { padding-top: 78px; }
+}
+
+/* Owner 2026-11-15: wider Three steps cards on phones (still inset from the screen edge). */
+@media (max-width: 760px) { #how .wrap.section-box { padding-inline: 10px; margin-inline: 12px; } }
+
+/* Owner 2026-11-15 ("hero breaks after a fast scroll back up"): every heading word and
+   every revealed block kept its own GPU layer forever (will-change), hundreds of them.
+   On a phone fling the compositor could not raster them in time, so the hero showed
+   blank tiles. A layer is only needed while the element animates; release it after. */
+.split-in .w, .reveal.in, .reveal-l.in, .reveal-r.in, .reveal-zoom.in { will-change: auto; }
+.hero-panel { contain: paint; }
+
+/* pricing: an even tighter hero so the table is on the first screen */
+.page-hero.ph-compact { padding: 96px 0 18px; }
+.page-hero.ph-compact .crumbs { margin-bottom: 6px; font-size: 13px; }
+.page-hero.ph-compact .eyebrow { display: none; }
+.page-hero.ph-compact h1 { font-size: clamp(28px, 3.6vw, 42px); }
+.page-hero.ph-compact .lead { margin-top: 6px; font-size: 15px; }
+@media (max-width: 760px) { .page-hero.ph-compact { padding: 74px 0 12px; } .page-hero.ph-compact h1 { font-size: 28px; } .page-hero.ph-compact .lead { font-size: 14px; } }
