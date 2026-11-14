@@ -19,20 +19,9 @@
   <meta name="twitter:title" content="Blood tests at home in Karachi, results explained · PulsingLabs" />
   <meta name="twitter:description" content="Book lab tests, understand your results with AI, and track your family's health in one app." />
   <meta name="twitter:image" content="https://pulsinglabs.com/og-image.png" />
-  <link rel="preconnect" href="https://api.fontshare.com" crossorigin />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <!-- Fonts load NON-render-blocking (media=print flip): the page paints
-       immediately in the system fallback, then swaps in the web fonts. Both
-       families already use display=swap, so this only removes the first-paint
-       stall from waiting on two external font CSS fetches. -->
-  <link rel="stylesheet" href="https://api.fontshare.com/v2/css?f[]=general-sans@400,500,600,700&display=swap" media="print" onload="this.media='all'" />
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;700&display=swap" media="print" onload="this.media='all'" />
-  <noscript>
-    <link rel="stylesheet" href="https://api.fontshare.com/v2/css?f[]=general-sans@400,500,600,700&display=swap" />
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;700&display=swap" />
-  </noscript>
-  <link rel="stylesheet" href="assets/style.css?v=150" />
+  <link rel="preload" href="assets/fonts/general-sans-600.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="preload" href="assets/fonts/general-sans-400.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="stylesheet" href="assets/style.css?v=171" />
   <link rel="icon" type="image/png" href="assets/img/favicon.png" />
   <!-- 3D engine for the holographic body band (self-hosted, pinned
        model-viewer@3.5.0) is injected on demand by app.js when the band
@@ -87,11 +76,6 @@
           <a class="btn btn-glass" href="/pricing">See the check-ups</a>
         </div>
       </div>
-      <a class="hero-card page-enter" href="/pricing">
-        <span class="hc-mark" aria-hidden="true"><img src="assets/img/logo-mark.png" alt="" width="34" height="34" decoding="async"></span>
-        <span class="hc-body"><b>Standard check-up</b><span>22 tests at home, all ages</span><em>PKR 9,999</em></span>
-        <span class="hc-go" aria-hidden="true">→</span>
-      </a>
     </div>
   </section>
 
@@ -115,40 +99,49 @@
     </div>
   </div>
 
-  <!-- ============ BIG STATEMENT (white) ============ -->
-  <section>
-    <div class="wrap section-box">
-      <div class="split wide-text">
-        <div class="reveal-l">
-          <span class="eyebrow" data-i18n="prob.eyebrow">The problem</span>
-          <h2 data-i18n="prob.h2">Understanding your health shouldn't need a medical degree.</h2>
+  <!-- ============ HOW IT READS YOU: one pinned S1 story (owner pick) ============
+       Six scenes open through the corner ring as you scroll. bindPeople() drives it (clip-path / transform /
+       opacity only). Scene pictures are small WebP stills of the designs; all values are sample data. -->
+  <section class="pp pp6" aria-labelledby="pp-h" data-pp data-pp-scenes>
+    <h2 id="pp-h" class="pp-sr">What PulsingLabs shows you</h2>
+    <div class="pp-pin">
+      <div class="wrap pp-grid">
+        <div class="pp-names">
+          <div class="pp-name on"><h3 class="pp-n">Your report,<br><i>untangled.</i></h3><p class="pp-line">Arrows and acronyms in, plain words out.</p></div>
+          <div class="pp-name"><h3 class="pp-n">One sample,<br><i>32 answers.</i></h3><p class="pp-line">Collected at your home in Karachi.</p></div>
+          <div class="pp-name"><h3 class="pp-n">Look<br><i>closer.</i></h3><p class="pp-line">Up to 32 tests from one small sample.</p></div>
+          <div class="pp-name"><h3 class="pp-n">Your health,<br><i>in one line.</i></h3><p class="pp-line">Your results, plotted over time.</p></div>
+          <div class="pp-name"><h3 class="pp-n">Your results,<br><i>as art.</i></h3><p class="pp-line">Every check-up draws a new one.</p></div>
+          <div class="pp-name"><h3 class="pp-n">One roof,<br><i>one account.</i></h3><p class="pp-line">Book a home visit for anyone in it.</p></div>
         </div>
-        <div class="reveal-r">
-          <p class="lead" data-i18n="prob.lead">Most people leave the lab with a printout full of arrows and acronyms, and no idea what it means for them. PulsingLabs turns those numbers into clear, personal answers, and helps you act on them in time.</p>
+        <div class="pp-card">
+          <div class="pp-ph pp-sc" style="background:#0E151B"><img src="assets/img/sc-1.webp" alt="A lab report turned into three simple dials: liver worth a look, vitamin D a little low, sugar in range" loading="eager" decoding="async" /></div>
+          <div class="pp-ph pp-sc" style="background:#D5E0D9;clip-path:circle(0 at 85% 87%)"><img src="assets/img/sc-2.webp" alt="A single blood tube with a PulsingLabs label" loading="lazy" decoding="async" /></div>
+          <div class="pp-ph pp-sc" style="background:#F5E9E3;clip-path:circle(0 at 85% 87%)"><img src="assets/img/sc-3.webp" alt="Blood cells under a lens, with a reading: haemoglobin in range" loading="lazy" decoding="async" /></div>
+          <div class="pp-ph pp-sc" style="background:#0B201D;clip-path:circle(0 at 85% 87%)"><img src="assets/img/sc-4.webp" alt="Vitamin D rising from 18 to 29 to 38, back in the healthy range" loading="lazy" decoding="async" /></div>
+          <div class="pp-ph pp-sc" style="background:#08110f;clip-path:circle(0 at 85% 87%)"><img src="assets/img/sc-5.webp" alt="A glowing orb of points with a health age of 29, five years younger" loading="lazy" decoding="async" /></div>
+          <div class="pp-ph pp-sc" style="background:#15110b;clip-path:circle(0 at 85% 87%)"><img src="assets/img/sc-6.webp" alt="A house with one lit window per family member and their health age" loading="lazy" decoding="async" /></div>
+          <span class="pp-th" aria-hidden="true" style="background:#D5E0D9 url(assets/img/sc-2.webp) center/contain no-repeat"></span>
+          <span class="pp-th" aria-hidden="true" style="background:#F5E9E3 url(assets/img/sc-3.webp) center/contain no-repeat"></span>
+          <span class="pp-th" aria-hidden="true" style="background:#0B201D url(assets/img/sc-4.webp) center/contain no-repeat"></span>
+          <span class="pp-th" aria-hidden="true" style="background:#08110f url(assets/img/sc-5.webp) center/contain no-repeat"></span>
+          <span class="pp-th" aria-hidden="true" style="background:#15110b url(assets/img/sc-6.webp) center/contain no-repeat"></span>
+          <span class="pp-ring" aria-hidden="true"></span>
         </div>
+        <div class="pp-idx" aria-hidden="true"><span class="on" style="background:#0E151B url(assets/img/sc-1.webp) center/230% no-repeat"></span><span class="" style="background:#D5E0D9 url(assets/img/sc-2.webp) center/230% no-repeat"></span><span class="" style="background:#F5E9E3 url(assets/img/sc-3.webp) center/230% no-repeat"></span><span class="" style="background:#0B201D url(assets/img/sc-4.webp) center/230% no-repeat"></span><span class="" style="background:#08110f url(assets/img/sc-5.webp) center/230% no-repeat"></span><span class="" style="background:#15110b url(assets/img/sc-6.webp) center/230% no-repeat"></span></div>
+        <p class="pp-cap">Sample results · fictional patient</p>
       </div>
     </div>
   </section>
 
-  <!-- ============ SPOTLIGHT A, Understand (cream) ============ -->
-  <section class="s-cream">
+  <!-- ============ SEE EXACTLY WHERE YOU STAND: the live result card, full width ============ -->
+  <section class="v3-sec v3-res" aria-labelledby="res-h">
     <div class="wrap">
-      <div class="split boxed">
-        <div class="split-copy reveal-l">
-          <span class="eyebrow" data-i18n="spA.eyebrow">Understand your results</span>
-          <h2 data-i18n="spA.h2">See exactly where you stand.</h2>
-          <p class="lead" data-i18n="spA.lead">Every marker sits on a clinical zone chart (Normal, Borderline, or High), tuned to your age and sex, with a plain-English explanation underneath.</p>
-          <ul class="split-list">
-            <li data-i18n="spA.li1">Colour-coded healthy ranges, not raw numbers</li>
-            <li data-i18n="spA.li2">AI explanations grounded in your own results</li>
-            <li data-i18n="spA.li3">Trends across months and years, at a glance</li>
-          </ul>
-        </div>
-        <div class="split-media reveal-r">
-          <div class="media photo tall rc-media">
-            <div class="rc" data-result-card></div>
-            <noscript><img class="media-img" src="assets/img/result-v3.webp" alt="The PulsingLabs results screen showing a Hematocrit trend on a clinical zone chart" /></noscript>
-          </div>
+      <h2 id="res-h" class="v3-h center reveal">See exactly where you stand.</h2>
+      <div class="v3-res-card reveal">
+        <div class="media photo tall rc-media">
+          <div class="rc" data-result-card></div>
+          <noscript><img class="media-img" src="assets/img/result-v3.webp" alt="The PulsingLabs results screen showing a Hematocrit trend on a clinical zone chart" /></noscript>
         </div>
       </div>
     </div>
@@ -163,14 +156,6 @@
         <span class="eyebrow" data-i18n="spB.eyebrow">AI health assistant</span>
         <h2 data-i18n-html="spB.h2">Ask anything.<br>In your language.</h2>
       </div>
-      <div class="ai-head-r reveal">
-        <p class="lead" data-i18n="spB.lead">Chat about your results like you would with a calm, knowledgeable friend, in English or اردو, and ask it to move or cancel a visit right inside the conversation.</p>
-        <ol class="ai-list">
-          <li><b aria-hidden="true">01</b><span data-i18n="spB.li1">Plain answers, never jargon or scare-talk</span></li>
-          <li><b aria-hidden="true">02</b><span data-i18n="spB.li2">Books, reschedules &amp; cancels conversationally</span></li>
-          <li><b aria-hidden="true">03</b><span data-i18n="spB.li3">Urgent symptoms trigger emergency guidance</span></li>
-        </ol>
-      </div>
     </div>
     <div class="ai-stage" data-aivideo>
       <div class="ai-screen">
@@ -181,66 +166,41 @@
     </div>
   </section>
 
-  <!-- ============ 3D HOLOGRAPHIC BODY (dark band) ============ -->
-  <section class="s-dark body3d-band">
-    <div class="wrap body3d-grid">
-      <div class="body3d-copy reveal-l">
-        <span class="eyebrow" data-i18n="b3d.eyebrow">Live organ health</span>
-        <h2 data-i18n="b3d.h2">Your results, mapped onto your body.</h2>
-        <p class="lead" data-i18n="b3d.lead">Every result you take maps onto a holographic body inside the app. Spin it, tap an organ, and see the results linked to it, scored from your own blood work.</p>
-        <ul class="split-list">
-          <li data-i18n="b3d.li1">Heart, liver, kidneys, thyroid and more, each scored 0 to 100</li>
-          <li data-i18n="b3d.li2">Organs glow green, amber or red with your latest results</li>
-          <li data-i18n="b3d.li3">Tap any organ to zoom in and get the full story</li>
-        </ul>
-        <div class="hero-cta">
-          <a class="btn btn-primary" href="#" data-cta="app" data-magnetic data-i18n-html="b3d.cta">Request a check-up <span class="arrow">→</span></a>
-        </div>
-      </div>
-      <div class="body3d-stage reveal-r" aria-hidden="true">
+  <!-- ============ YOUR RESULTS, ON YOUR BODY (dark band) ============
+       Four results, each joined by a hairline to its organ. The lines draw once on reveal; the model
+       turns only a little with scroll so the organs stay under their lines. -->
+  <section class="s-dark body3d-band v3-body" aria-labelledby="b3d-h">
+    <div class="wrap">
+      <h2 id="b3d-h" class="v3-h center reveal">Your results, on your body.</h2>
+      <div class="body3d-stage v3-stage reveal" aria-hidden="true">
         <div class="body3d-glow"></div>
-        <!-- Horizontal-only orbit: phi pinned on both bounds so vertical drags
-             never tip the figure; touch-action pan-y lets vertical swipes
-             scroll the page through the model. -->
         <model-viewer id="mv-body"
           src="assets/models/body.glb?v=2"
           alt="Holographic 3D body with glowing organs"
-          auto-rotate rotation-per-second="12deg"
           camera-controls disable-zoom disable-pan
+          camera-orbit="0deg 82deg auto"
           min-camera-orbit="-Infinity 75deg auto"
-          max-camera-orbit="Infinity 75deg auto"
+          max-camera-orbit="Infinity 90deg auto"
           touch-action="pan-y"
           interaction-prompt="none"
           exposure="0.65" shadow-intensity="0"
           loading="lazy"></model-viewer>
-        <div class="b3d-chip c1"><span class="dot ok"></span> Heart · 92</div>
-        <div class="b3d-chip c2"><span class="dot warn"></span> Liver · 61</div>
-        <div class="b3d-chip c3"><span class="dot ok"></span> Thyroid · 95</div>
+        <svg class="v3-lines" viewBox="0 0 100 100" preserveAspectRatio="none">
+          <path d="M73 25 L61.5 25 L50 24.5" pathLength="1"/>
+          <path d="M27 33 L39.5 33 L52 34" pathLength="1"/>
+          <path d="M73 45 L59.25 45 L45.5 41.5" pathLength="1"/>
+          <path d="M27 54 L38.5 54 L50 48" pathLength="1"/>
+        </svg>
+        <span class="v3-org ok" style="left:50%;top:24.5%"></span>
+        <span class="v3-org ok" style="left:52%;top:34%"></span>
+        <span class="v3-org warn" style="left:45.5%;top:41.5%"></span>
+        <span class="v3-org ok" style="left:50%;top:48%"></span>
+        <div class="v3-chip r" style="top:25%"><span class="dot ok"></span>Thyroid<b>95</b></div>
+        <div class="v3-chip l" style="top:33%"><span class="dot ok"></span>Heart<b>92</b></div>
+        <div class="v3-chip r" style="top:45%"><span class="dot warn"></span>Liver<b>61</b></div>
+        <div class="v3-chip l" style="top:54%"><span class="dot ok"></span>Kidneys<b>88</b></div>
       </div>
-    </div>
-  </section>
-
-  <!-- ============ SPOTLIGHT C, Family + import (cream) ============ -->
-  <section class="s-cream">
-    <div class="wrap">
-      <div class="split boxed">
-        <div class="split-copy reveal-l">
-          <span class="eyebrow" data-i18n="spC.eyebrow">Family &amp; history</span>
-          <h2 data-i18n="spC.h2">Your whole household, one account.</h2>
-          <p class="lead" data-i18n="spC.lead">Add parents, kids and your spouse to one account, each with their own Health ID, so the whole family's results live on one timeline.</p>
-          <ul class="split-list">
-            <li data-i18n="spC.li1">Age-, sex- &amp; pregnancy-aware reference ranges</li>
-            <li data-i18n="spC.li2">Book a home visit for any family member</li>
-            <li data-i18n="spC.li3">Each person's results on their own trend charts</li>
-          </ul>
-        </div>
-        <div class="split-media reveal-r">
-          <div class="media photo tall">
-            <img class="media-img" style="object-position:center;" src="assets/img/family-tab-v4.webp" alt="The Family tab in the PulsingLabs app: a family health score, each person with their health age, and what the family has in common" loading="lazy" />
-            <div class="badge-float bf-br"><span class="bf-ic" data-icon="users"></span><span><b>Health ID</b><span>for every relative</span></span></div>
-          </div>
-        </div>
-      </div>
+      <p class="v3-cap center">Sample scores · every organ is scored from your own results in the app</p>
     </div>
   </section>
 
@@ -331,21 +291,17 @@
     </div>
   </section>
 
-  <!-- ============ WHY IT MATTERS (light) ============ -->
-  <section class="s-cream sec-photo-bg">
-    <img class="sec-bg-img" src="assets/img/iceberghomenew.webp" alt="" aria-hidden="true" loading="lazy" />
-    <div class="wrap center" style="max-width:760px;margin:0 auto;position:relative;z-index:2;">
-      <span class="eyebrow reveal" data-i18n="why.eyebrow">Why it matters</span>
-      <h2 class="reveal d1">Many conditions grow quietly for years.</h2>
-      <p class="lead reveal d2" style="margin:16px auto 0;">Diabetes, high cholesterol and thyroid problems often have no symptoms at first. A regular check-up shows where you stand while there is time to act.</p>
-    </div>
-    <div class="wrap" style="position:relative;z-index:2;">
-      <div class="stat-cards three">
-        <div class="stat reveal"><div class="n"><span data-count="27" data-suffix="%">0</span></div><div class="l">of Pakistani adults with diabetes don't know they have it*</div></div>
-        <div class="stat reveal d1"><div class="n"><span data-count="23">0</span></div><div class="l">tests in our Premium check-up</div></div>
-        <div class="stat reveal d2"><div class="n"><span data-count="7">0</span></div><div class="l">organ systems scored in the app</div></div>
+  <!-- ============ WHY IT MATTERS: one number over the iceberg ============ -->
+  <section class="v3-sec" aria-labelledby="why-h">
+    <div class="wrap">
+      <div class="why reveal">
+        <img class="why-img" src="assets/img/iceberghomenew.webp" alt="" aria-hidden="true" loading="lazy" decoding="async" width="1280" height="720" />
+        <div class="why-in">
+          <div class="why-n" id="why-h"><span data-count="27">0</span><small>%</small></div>
+          <p class="why-l">of adults with diabetes in Pakistan don't know they have it.</p>
+          <a class="why-src" href="https://diabetesatlas.org/data-by-location/country/pakistan/" rel="noopener" target="_blank">IDF Diabetes Atlas, Pakistan</a>
+        </div>
       </div>
-      <p class="reveal center" style="margin-top:22px;font-size:13px;color:var(--muted);">* 26.9% of adults with diabetes in Pakistan are undiagnosed. Source: <a href="https://diabetesatlas.org/data-by-location/country/pakistan/" rel="noopener" target="_blank" style="color:inherit;text-decoration:underline;">IDF Diabetes Atlas, Pakistan</a>.</p>
     </div>
   </section>
 
@@ -369,6 +325,6 @@
   <!-- The closing CTA lives in the mega footer now (same headline + Open the
        App button), so the old teal band was removed as a duplicate. -->
   <div id="site-footer"><nav aria-label="Site pages"><p><a href="/">Home</a> · <a href="/pricing">Pricing</a> · <a href="/how-it-works">How it works</a> · <a href="/faq">FAQ</a> · <a href="/features">Features</a> · <a href="/business">For business</a> · <a href="/about">About</a> · <a href="/contact">Contact</a> · <a href="/how-it-works#service-policy">Service policy</a> · <a href="/refunds">Refund policy</a> · <a href="/privacy">Privacy policy</a> · <a href="/terms">Terms</a></p><p>PulsingLabs · Blood tests at home in Karachi · <a href="mailto:contact@pulsinglabs.com">contact@pulsinglabs.com</a></p></nav></div>
-  <script src="assets/app.js?v=128"></script>
+  <script src="assets/app.js?v=139"></script>
 </body>
 </html>

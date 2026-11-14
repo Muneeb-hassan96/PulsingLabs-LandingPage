@@ -646,7 +646,7 @@
     // Auto-hide header: slides up on scroll-down, reappears on scroll-up.
     // Skipped entirely under reduced-motion (header just stays put).
     var hideEnabled = !reducedMotion();
-    var lastY = window.scrollY || document.documentElement.scrollTop;
+    var lastY = 0; // not read at start-up: reading the scroll position forces a full layout before the first paint
     var REVEAL_TOP = 80; // always visible near the top, no flicker on load
 
     function onScroll() {
@@ -670,7 +670,9 @@
       lastY = y;
     }
     window.addEventListener('scroll', onScroll, { passive: true });
-    onScroll();
+    // At the top nothing needs updating (bar empty, header shown); measuring
+    // scrollHeight here forced a full layout before the first paint.
+    setTimeout(onScroll, 300); // after the first paint: covers a page restored mid-way
 
     var mobileMq = window.matchMedia('(max-width: 960px)');
 
@@ -786,7 +788,8 @@
     }
     window.addEventListener('scroll', onScroll, { passive: true });
     window.addEventListener('resize', onScroll, { passive: true });
-    sweep();
+    // No immediate sweep(): the observer reports the first state on its own,
+    // and a sweep here forced a whole-page layout before the first paint.
     setTimeout(sweep, 400); // catch late layout (fonts/images) settling
   }
 
@@ -922,7 +925,21 @@
     }
     window.addEventListener('scroll', onScroll, { passive: true });
     window.addEventListener('resize', onScroll, { passive: true });
-    apply(); // initial state synchronously (no light flash on dark-hero pages)
+    // First state WITHOUT measuring: apply() reads layout, and calling it during
+    // init forced a full-page layout before the first paint (1.5 s on a slow
+    // phone). At the top of a page that opens on a dark hero the answer is known
+    // (fully dark), so set it directly; the first scroll measures for real.
+    // (Reading window.scrollY here also forces that layout, so it isn't read:
+    // a page restored mid-way is corrected by the idle measurement below.)
+    if (darkEls[0] && darkEls[0].matches('.hero-panel, .page-hero.dark, .page-hero.s-dark')) {
+      root.style.setProperty('--pg-bg', DARK.bg.join(','));
+      root.style.setProperty('--pg-fg', DARK.fg.join(','));
+      root.style.setProperty('--pg-muted', DARK.muted.join(','));
+      root.classList.add('theme-dark');
+      if (themeMeta) themeMeta.setAttribute('content', 'rgb(' + DARK.bg.join(',') + ')');
+    }
+    // One real measurement once the browser is idle (after the first paint).
+    if ('requestIdleCallback' in window) requestIdleCallback(onScroll, { timeout: 2000 }); else setTimeout(onScroll, 600);
   }
 
   /* ------------------------------------------------------------------ */
@@ -1401,13 +1418,19 @@
     // 1.2MB engine must never compete with first paint - wait for the full
     // page load, then a browser-idle moment, before fetching it.
     var start = function () {
-      import('./vendor/three.module.js')
+      import('./vendor/three.module.min.js') // same pinned r160, minified (655 KB vs 1.3 MB)
         .then(function (THREE) { buildHelix(THREE, hero); })
         .catch(function () { /* offline / blocked → the 2D particle field stays */ });
     };
+    // Only after the page is on screen: wait for the first paint, then a
+    // short beat, then an idle moment. On a slow phone, building the helix
+    // before the first paint used to delay the whole page by over a second.
     var whenIdle = function () {
-      if ('requestIdleCallback' in window) requestIdleCallback(start, { timeout: 2500 });
-      else setTimeout(start, 1200);
+      var go = function () {
+        if ('requestIdleCallback' in window) requestIdleCallback(start, { timeout: 4000 });
+        else setTimeout(start, 1200);
+      };
+      requestAnimationFrame(function () { requestAnimationFrame(function () { setTimeout(go, 900); }); });
     };
     if (document.readyState === 'complete') whenIdle();
     else window.addEventListener('load', whenIdle, { once: true });
@@ -1472,12 +1495,17 @@
         });
       }
     };
+    // Warm only once the visitor starts scrolling (the first scroll is a strong
+    // sign they will see the rest): someone who reads the hero and leaves never
+    // downloads ~3 MB of photos, video poster and 3D body.
+    var started = false;
     var go = function () {
-      if ('requestIdleCallback' in window) requestIdleCallback(run, { timeout: 3000 });
-      else setTimeout(run, 1500);
+      if (started) return; started = true;
+      ['scroll', 'touchstart', 'keydown'].forEach(function (ev) { window.removeEventListener(ev, go); });
+      if ('requestIdleCallback' in window) requestIdleCallback(run, { timeout: 1500 });
+      else setTimeout(run, 300);
     };
-    if (document.readyState === 'complete') go();
-    else window.addEventListener('load', go, { once: true });
+    ['scroll', 'touchstart', 'keydown'].forEach(function (ev) { window.addEventListener(ev, go, { passive: true }); });
   }
   function buildHelix(THREE, hero) {
     var canvas = document.createElement('canvas');
@@ -1706,7 +1734,9 @@
       var total = window.innerHeight + r.height;
       var p = 1 - (r.top + r.height) / total; // 0 entering -> 1 leaving
       if (p < 0 || p > 1) return;
-      mv.cameraOrbit = (p * 300 - 150).toFixed(1) + 'deg 82deg auto';
+      // A gentle +-18deg turn (was 300deg): the result chips point at organs, so
+      // the body must stay facing front enough for the lines to stay true.
+      mv.cameraOrbit = (p * 36 - 18).toFixed(1) + 'deg 82deg auto';
     }
     window.addEventListener('scroll', function () {
       if (!ticking) { ticking = true; requestAnimationFrame(scrub); }
@@ -2194,9 +2224,85 @@
     bindCtas();
     addGrain();
     splitHeadlines();
+    bindImgFade();
+    // Show the page NOW. Everything below works on things further down the page
+    // or decorates the hero, so it runs right after the first frame is painted
+    // instead of holding the whole page invisible (on a slow phone the full list
+    // used to delay the first paint by ~2 s).
+    reveal();
+    var later = function () { initLater(); };
+    if (window.requestAnimationFrame) requestAnimationFrame(function () { setTimeout(later, 0); });
+    else setTimeout(later, 0);
+  }
+
+  /* ------------------------------------------------------------------ */
+  /* S1 portrait story: scroll position -> scene. The next person waits in */
+  /* the corner ring and opens to fill the frame. Per frame it only writes */
+  /* clip-path / transform / opacity, and only while the section is seen.  */
+  /* ------------------------------------------------------------------ */
+  function bindPeople() {
+    var sec = document.querySelector('[data-pp]');
+    if (!sec) return;
+    if (reducedMotion()) { sec.classList.add('pp-static'); return; }
+    var card = sec.querySelector('.pp-card');
+    var layers = [].slice.call(sec.querySelectorAll('.pp-ph'));
+    var thumbs = [null].concat([].slice.call(sec.querySelectorAll('.pp-th')));
+    var names = [].slice.call(sec.querySelectorAll('.pp-name'));
+    var dots = [].slice.call(sec.querySelectorAll('.pp-idx span'));
+    var ring = sec.querySelector('.pp-ring');
+    var n = layers.length, W = 0, H = 0, R0 = 0, RX = 0, RY = 0, DIAG = 0, span = 1, active = false, ticking = false, lastOn = 0;
+    var clamp = function (v) { return v < 0 ? 0 : v > 1 ? 1 : v; };
+    var ease = function (x) { return x < .5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2; };
+    function measure() {
+      W = card.clientWidth; H = card.clientHeight;
+      R0 = Math.max(26, W * 0.097); RX = W - W * 0.148; RY = H - H * 0.133; DIAG = Math.hypot(W, H) * 0.62;
+      span = Math.max(1, sec.offsetHeight - window.innerHeight);
+      // fixed size; the opening is a scale() so no frame changes layout
+      thumbs.concat([ring]).forEach(function (t) { if (t) t.style.width = t.style.height = (2 * R0).toFixed(1) + 'px'; });
+    }
+    function place(el, x, y, r) { el.style.transform = 'translate(' + (x - r).toFixed(1) + 'px,' + (y - r).toFixed(1) + 'px) scale(' + (r / R0).toFixed(4) + ')'; }
+    function render() {
+      ticking = false;
+      // read the live position: sections above size themselves late (content-visibility)
+      var p = clamp(-sec.getBoundingClientRect().top / span), seg = p * (n - 1), i = Math.min(Math.floor(seg), n - 1);
+      var u = i >= n - 1 ? 0 : clamp((seg - i - 0.2) / 0.6), e = ease(u);
+      for (var k = 1; k < n; k++) {
+        var L = layers[k], T = thumbs[k];
+        if (k <= i) { L.style.clipPath = 'none'; T.style.opacity = 0; }
+        else if (k === i + 1) {
+          var rr = R0 + (DIAG - R0) * e, cx = RX + (W / 2 - RX) * e, cy = RY + (H / 2 - RY) * e;
+          L.style.clipPath = 'circle(' + rr.toFixed(1) + 'px at ' + cx.toFixed(1) + 'px ' + cy.toFixed(1) + 'px)';
+          place(T, cx, cy, rr);
+          T.style.opacity = (1 - clamp(e * 3.4)).toFixed(3);
+        } else { L.style.clipPath = 'circle(0px at ' + RX + 'px ' + RY + 'px)'; T.style.opacity = 0; }
+      }
+      if (i < n - 1) {
+        var r2 = R0 + (DIAG - R0) * e, x2 = RX + (W / 2 - RX) * e, y2 = RY + (H / 2 - RY) * e;
+        place(ring, x2, y2, r2);
+        ring.style.opacity = (1 - clamp(e * 3)).toFixed(3);
+      } else ring.style.opacity = 0;
+      for (var j = 0; j < n; j++) {
+        var nm = names[j], o = 0, y = 0;
+        if (j === i) { o = 1 - clamp(u * 2.5); y = -u * 22; }
+        else if (j === i + 1) { var q = clamp((u - 0.45) / 0.55); o = q; y = (1 - ease(q)) * 26; }
+        nm.style.opacity = o.toFixed(3); nm.style.transform = 'translateY(' + y.toFixed(1) + 'px)';
+      }
+      var on = Math.round(i + u);
+      if (on !== lastOn) { dots[lastOn].classList.remove('on'); dots[on].classList.add('on'); lastOn = on; }
+    }
+    function onScroll() { if (active && !ticking) { ticking = true; requestAnimationFrame(render); } }
+    names.forEach(function (nm) { nm.classList.remove('on'); });
+    measure(); render();
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', function () { measure(); onScroll(); }, { passive: true });
+    window.addEventListener('load', function () { measure(); onScroll(); });
+    if ('IntersectionObserver' in window) {
+      new IntersectionObserver(function (es) { active = es[0].isIntersecting; if (active) { measure(); onScroll(); } }, { rootMargin: '200px 0px' }).observe(sec);
+    } else active = true;
+  }
+  function initLater() {
     // bindParallax() and bindScene() intentionally not called: photos on the
     // site must stay static, not drift/expand on scroll.
-    bindImgFade();
     bindVideoAutoplay();
     bindClipReveal();
     bindResultCard();
@@ -2220,7 +2326,7 @@
     bindScramble();
     bindToTop();
     bindLiveStats();
-    reveal();
+    bindPeople();
   }
 
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init); else init();
