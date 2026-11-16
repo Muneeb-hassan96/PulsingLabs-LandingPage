@@ -9,16 +9,15 @@ lists. It is not served as a page. If the host ignores it, nothing breaks.
 
 What it does:
 - **Security headers on every page:** HTTPS-only for a year (`Strict-Transport-Security`,
-  includes subdomains, no preload), no MIME sniffing, a tidy referrer, no framing of the
-  site by other sites, and camera / microphone / location / payment switched off.
-- **A Content Security Policy in report-only mode.** It blocks nothing; the browser only
-  writes warnings in the DevTools console when something outside the list loads. After a
-  few days with no warnings on every page, it can be switched on by renaming the header
-  `Content-Security-Policy-Report-Only` to `Content-Security-Policy`.
-  It allows: the site itself, the fonts (Fontshare + Google Fonts), the API
-  (`https://api.pulsinglabs.com`, used by the contact and newsletter forms) and Cloudflare
-  Web Analytics, in case that is switched on. If anything new is added to the site from
-  another address (a chat widget, a map, a captcha), add that address first.
+  no `includeSubDomains` until partner. and hr. are live on HTTPS, no preload), no MIME
+  sniffing, a tidy referrer, no framing of the site by other sites, and camera / microphone /
+  location / payment switched off.
+- **A Content Security Policy, enforced (2026-11-16).** Every page was loaded in Chrome with
+  it blocking first: 0 violations. Scripts only from the site itself (no inline script or
+  handler anywhere) and Cloudflare Web Analytics; fonts are self-hosted; the API
+  (`https://api.pulsinglabs.com`) is the only outside address the forms call. If anything new
+  is added from another address (a chat widget, a map, a captcha), add that address first,
+  or it will silently not load.
 - **Caching:** CSS and JS for a year (their links carry `?v=N`, bumped on every change),
   images and videos for 7 days, the 3D model and 3D engine files for 30 days. Pages
   (HTML) keep Cloudflare's default, which re-checks on every visit.
