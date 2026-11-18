@@ -248,10 +248,10 @@
       'kb.decoded': 'Your health, decoded', 'kb.book': 'Book', 'kb.test': 'Test',
       'kb.understand': 'Understand', 'kb.act': 'Act early', 'kb.repeat': 'Repeat',
       'kb.teams': 'Healthier teams', 'kb.sick': 'Fewer sick days', 'kb.roi': 'Real ROI',
-      'home.cta1': 'Book Appointment <span class="arrow">→</span>',
+      'home.cta1': 'Book Appointment <span class="arrow" aria-hidden="true"></span>',
       'home.ctaH': 'Take charge of your health today.',
       'home.ctaP': 'Turn confusing lab reports into clarity, for you and your family.',
-      'home.ctaBtn': 'Request a check-up <span class="arrow">→</span>',
+      'home.ctaBtn': 'Request a check-up <span class="arrow" aria-hidden="true"></span>',
       'mq.packages': 'Blood tests at home', 'mq.home': 'Home sample collection', 'mq.ai': 'AI-powered insights',
       'mq.family': 'Family profiles', 'mq.trend': 'Trend tracking', 'mq.import': 'Age- and sex-aware ranges', 'mq.lang': 'AI chat understands Urdu',
       'b3d.eyebrow': 'Live organ health',
@@ -260,7 +260,7 @@
       'b3d.li1': 'Heart, liver, kidneys, thyroid and more, each scored 0 to 100',
       'b3d.li2': 'Organs glow green, amber or red with your latest results',
       'b3d.li3': 'Tap any organ to zoom in and get the full story',
-      'b3d.cta': 'Request a check-up <span class="arrow">→</span>',
+      'b3d.cta': 'Request a check-up <span class="arrow" aria-hidden="true"></span>',
       'bn.eyebrow': 'One app, everything',
       'bn.h2': 'Built like your health deserves it.',
       'bn.score': 'One score for your whole body',
@@ -291,7 +291,7 @@
       'hc.eyebrow': 'Home sample collection', 'hc.h2': 'No lab trip. We come to you.',
       'hc.lead': 'Every booking is a home visit: a phlebotomist from our partner lab collects your sample at your door, at a time that suits you. Results arrive in the app, zero travel.',
       'hc.li1': 'Every booking is a home visit, no extra step', 'hc.li2': 'Pick a slot, morning, afternoon or evening', 'hc.li3': 'Results flow into the app like any other test',
-      'hc.btn': 'Request a home visit <span class="arrow">→</span>',
+      'hc.btn': 'Request a home visit <span class="arrow" aria-hidden="true"></span>',
       'bento.eyebrow': 'One app', 'bento.h2': 'Everything your health needs, in one place.',
       'bento.b1h': 'An AI that explains every result', 'bento.b1p': 'Chat about your numbers in plain English or اردو, and let it book your next test, right in the conversation.',
       'bento.b2h': 'Clinical zone charts', 'bento.b2p': 'See exactly where you stand, tuned to your age & sex.',
@@ -309,7 +309,7 @@
       'why.s3': 'tests in our Premium check-up', 'why.s4': 'organ systems scored in real time',
       'fb.eyebrow': 'For Business', 'fb.h2': 'Healthier teams, lower absenteeism.',
       'fb.lead': 'Give employees preventive screening and wellness, with an HR dashboard that turns it into insight, without ever exposing individual medical data.',
-      'fb.btn1': 'See the business plan <span class="arrow">→</span>', 'fb.btn2': 'Book a demo',
+      'fb.btn1': 'See the business plan <span class="arrow" aria-hidden="true"></span>', 'fb.btn2': 'Book a demo',
       'fb.c1h': 'Aggregate analytics', 'fb.c1p': 'Wellness trends, never individual records.',
       'fb.c2h': 'Proactive alerts', 'fb.c2p': 'Know when the team needs attention.',
       'fb.c3h': 'AI HR assistant', 'fb.c3p': 'Appointments & roster answers.',
@@ -345,9 +345,9 @@
       'feat.how.s1h': 'Choose a package', 'feat.how.s1p': 'Pick Standard (22 tests) or Premium (32 tests).',
       'feat.how.s2h': 'Pick a time', 'feat.how.s2p': 'Choose a date and time for your home visit and pay in the app. Our partner lab collects and tests your sample.',
       'feat.how.s3h': 'Get results + insights', 'feat.how.s3p': 'Results arrive with charts, trends, and AI explanations.',
-      'feat.cta.h': 'Ready to understand your health?', 'feat.cta.p': 'Pay only for the check-up you book. The home visit is included.', 'feat.cta.btn': 'Request a check-up <span class="arrow">→</span>',
+      'feat.cta.h': 'Ready to understand your health?', 'feat.cta.p': 'Pay only for the check-up you book. The home visit is included.', 'feat.cta.btn': 'Request a check-up <span class="arrow" aria-hidden="true"></span>',
       'pr.faq.eye': 'Questions', 'pr.faq.h2': 'Pricing FAQ',
-      'biz.heroB1': 'Book a demo <span class="arrow">→</span>', 'biz.heroB2': 'See pricing',
+      'biz.heroB1': 'Book a demo <span class="arrow" aria-hidden="true"></span>', 'biz.heroB2': 'See pricing',
       'biz.stats.eye': 'The cost of poor health', 'biz.stats.h2': 'Ill health is expensive, and largely preventable.', 'biz.stats.lead': 'Sick days, lost productivity and late diagnoses quietly drain your business. Preventive screening is one of the highest-ROI benefits you can offer.',
       'biz.s1': 'employees affected by work-related ill health*', 'biz.s2': 'average sick days per employee, per year*', 'biz.s3': 'of early-stage conditions are manageable if caught in time*', 'biz.s4': 'team pilots: talk to us',
       'biz.wyg.eye': 'What you get', 'biz.wyg.h2': 'An HR wellness platform, not a spreadsheet.',
@@ -369,7 +369,7 @@
       'ab.v6h': 'Safety first', 'ab.v6p': 'The AI assistant escalates urgent symptoms to emergency guidance and never gives unsafe dosing advice.',
       'ab.num.eye': 'By the numbers', 'ab.num.h2': 'A platform that does a lot.',
       'ab.n1': 'tests in our Premium check-up', 'ab.n2': 'clinical test cases keeping our engines honest', 'ab.n3': 'organ systems tracked, from heart to thyroid', 'ab.n4': 'your data is yours, never sold',
-      'ab.cta.h': 'Join us on the mission', 'ab.cta.p': 'Understand your health, and help the people you care about understand theirs.', 'ab.cta.btn': 'Request a check-up <span class="arrow">→</span>',
+      'ab.cta.h': 'Join us on the mission', 'ab.cta.p': 'Understand your health, and help the people you care about understand theirs.', 'ab.cta.btn': 'Request a check-up <span class="arrow" aria-hidden="true"></span>',
       'ins.feat.eye': 'Featured guide', 'ins.feat.h2': 'What your HbA1c really tells you', 'ins.feat.p': 'The diabetes marker everyone talks about, what the numbers mean, and what to do at each level.',
       'ins.dGuide': 'Guide', 'ins.dHowto': 'How-to', 'ins.dFamily': 'Family',
       'ins.a1h': 'Cholesterol, decoded', 'ins.a1p': 'LDL, HDL, triglycerides, which numbers matter and how to move them in the right direction.',
@@ -391,7 +391,7 @@
       'fq.p1q': 'Is my health data private?', 'fq.p1a': 'Yes. Your results are private to your account, encrypted in transit, and never sold. For companies, employees\' individual results are never visible to HR, only anonymised aggregate trends.',
       'fq.p2q': 'What does it cost?', 'fq.p2a': 'The app is free. You pay per check-up, with home sample collection included: Standard is PKR 9,999 (22 tests) and Premium is PKR 19,999 (32 tests). Companies: talk to us about a team pilot.',
       'fq.p3q': 'Can I export or delete my data?', 'fq.p3a': 'Yes. You can export your full account and results anytime, and request deletion, your data belongs to you.',
-      'fq.cta.h': 'Still have a question?', 'fq.cta.p': 'Our team is happy to help, usually within one business day.', 'fq.cta.btn': 'Contact us <span class="arrow">→</span>',
+      'fq.cta.h': 'Still have a question?', 'fq.cta.p': 'Our team is happy to help, usually within one business day.', 'fq.cta.btn': 'Contact us <span class="arrow" aria-hidden="true"></span>',
       'ct.ch.eye': 'Reach us directly', 'ct.ch.h2': 'Channels',
       'ct.ch1t': 'General & support', 'ct.ch2t': 'Corporate sales & demos', 'ct.ch3t': 'Labs & clinic partnerships',
       'ct.madeIn': 'Made with care in Pakistan',
@@ -399,8 +399,8 @@
       'ct.lbl.name': 'Full name', 'ct.lbl.email': 'Email (optional)', 'ct.lbl.date': 'Preferred date (approx.)', 'ct.lbl.company': 'Company (optional)', 'ct.lbl.interest': 'What can we help with?', 'ct.lbl.msg': 'Message (optional)',
       'ct.ph.name': 'Your name', 'ct.ph.company': 'Company name', 'ct.ph.msg': 'For a check-up: your area in Karachi and a good time to call.',
       'ct.opt1': 'Book appointment', 'ct.opt2': 'For my company', 'ct.opt3': 'Lab or clinic partnership', 'ct.opt4': 'Something else', 'ct.lbl.phone': 'Phone',
-      'ct.form.btn': 'Send message <span class="arrow">→</span>', 'ct.form.ok': 'Thanks, your message is on its way! We will be in touch shortly.', 'ct.form.err': 'Something went wrong. Please email contact@pulsinglabs.com.',
-      'ct.cta.h': 'Want to compare the check-ups first?', 'ct.cta.p': 'Standard has 22 tests and Premium has 32. Both include a home visit in Karachi, and no fasting is needed.', 'ct.cta.btn': 'See the check-ups <span class="arrow">→</span>'
+      'ct.form.btn': 'Send message <span class="arrow" aria-hidden="true"></span>', 'ct.form.ok': 'Thanks, your message is on its way! We will be in touch shortly.', 'ct.form.err': 'Something went wrong. Please email contact@pulsinglabs.com.',
+      'ct.cta.h': 'Want to compare the check-ups first?', 'ct.cta.p': 'Standard has 22 tests and Premium has 32. Both include a home visit in Karachi, and no fasting is needed.', 'ct.cta.btn': 'See the check-ups <span class="arrow" aria-hidden="true"></span>'
     }
   };
   function tr(key) { return (I18N.en[key] != null) ? I18N.en[key] : null; }
@@ -470,7 +470,7 @@
             '<span class="mf-eyebrow" data-i18n="foot.connect">Connect with us</span>' +
             '<p class="mf-big" data-i18n="foot.connectSub">Questions, partnerships, or ready to start? We reply fast.</p>' +
             '<div class="mf-ctas">' +
-              '<a class="btn btn-primary" href="' + ctaDest('app') + '" data-magnetic><span data-i18n="foot.openApp">Request a check-up</span> <span class="arrow">→</span></a>' +
+              '<a class="btn btn-primary" href="' + ctaDest('app') + '" data-magnetic><span data-i18n="foot.openApp">Request a check-up</span> <span class="arrow" aria-hidden="true"></span></a>' +
               '<a class="btn btn-ghost mf-ghost" href="contact.html" data-i18n="foot.demo">Book a demo</a>' +
             '</div>' +
           '</div>' : '') +
@@ -2155,7 +2155,7 @@
       var btns = RC_PILLS.map(function (p) {
         var b = rcEl('button', { type: 'button', 'class': 'rc-pill', 'aria-pressed': p[0] === cur ? 'true' : 'false' }, pills);
         b.style.setProperty('--pc', p[2]);
-        rcEl('span', { 'aria-hidden': 'true' }, b, '● ');
+        rcEl('span', { 'aria-hidden': 'true', 'class': 'rc-dot' }, b);
         b.appendChild(document.createTextNode(p[1]));
         b.addEventListener('click', function () {
           if (p[0] === cur) return;
