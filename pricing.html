@@ -23,17 +23,16 @@
   <link rel="preload" href="assets/fonts/general-sans-600.woff2" as="font" type="font/woff2" crossorigin />
   <link rel="preload" href="assets/fonts/general-sans-400.woff2" as="font" type="font/woff2" crossorigin />
   <link rel="stylesheet" href="assets/style.css?v=174" />
-  <link rel="stylesheet" href="assets/compare.css?v=5" />
+  <link rel="stylesheet" href="assets/compare.css?v=6" />
   <link rel="icon" type="image/png" href="assets/img/favicon.png" />
   <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://pulsinglabs.com/#organization","name":"PulsingLabs","legalName":"Pulsing Labs","url":"https://pulsinglabs.com/","logo":"https://pulsinglabs.com/assets/img/logo-mark.png","email":"contact@pulsinglabs.com","description":"PulsingLabs is a Pakistani health app for booking blood tests at home in Karachi. A phlebotomist from our partner laboratory collects the sample at home, and results arrive in the app explained in plain language for the patient's age and sex.","telephone":"+92-333-5556534","address":{"@type":"PostalAddress","streetAddress":"Flat # A-705, Plot # 118/F, Stadium Road, Block 10A (Saima Mall & Res), Gulshan-e-Iqbal","addressLocality":"Karachi","addressCountry":"PK"},"areaServed":{"@type":"City","name":"Karachi"},"contactPoint":{"@type":"ContactPoint","contactType":"customer support","email":"contact@pulsinglabs.com","telephone":"+92-333-5556534","areaServed":"PK","availableLanguage":["English","Urdu"]}},{"@type":"Service","@id":"https://pulsinglabs.com/#home-blood-test","name":"Blood test at home in Karachi","serviceType":"Home blood sample collection and laboratory testing","provider":{"@id":"https://pulsinglabs.com/#organization"},"areaServed":{"@type":"City","name":"Karachi"},"url":"https://pulsinglabs.com/pricing","offers":[{"@type":"Offer","name":"Standard check-up","description":"A first check-up for all ages: vitals (pulse, blood pressure), full blood count (haemoglobin, RBC, haematocrit, MCV, MCH, MCHC, RDW, WBC, platelets), random blood sugar, the full cholesterol profile (total, LDL, HDL, ratio, triglycerides), thyroid screen (TSH), SGPT (ALT), creatinine and calcium. No fasting needed. Sample collected at home in Karachi. 22 tests.","price":"9999","priceCurrency":"PKR","url":"https://pulsinglabs.com/pricing","availability":"https://schema.org/InStock"},{"@type":"Offer","name":"Premium check-up","description":"Everything in Standard plus HbA1c, ferritin, ESR, vitamin D, hepatitis screening (Anti-HCV, HBsAg), free T3, free T4, total bilirubin and urea. For all ages, no fasting needed. Sample collected at home in Karachi. 32 tests.","price":"19999","priceCurrency":"PKR","url":"https://pulsinglabs.com/pricing","availability":"https://schema.org/InStock"}]},{"@type":"FAQPage","@id":"https://pulsinglabs.com/pricing#faq","mainEntity":[{"@type":"Question","name":"Is the app free?","acceptedAnswer":{"@type":"Answer","text":"Yes. Downloading and using PulsingLabs is free. You pay only for the check-up you book, and the price includes the home visit. There is no subscription."}},{"@type":"Question","name":"Do I need to fast before the test?","acceptedAnswer":{"@type":"Answer","text":"No. Every test in both packages is non-fasting, so you can eat and drink as usual before your visit."}},{"@type":"Question","name":"Who are the packages for?","acceptedAnswer":{"@type":"Answer","text":"Everyone, at any age. Standard is a clear first check-up; Premium adds 10 more tests for a fuller picture. You can also book for family members from your account."}},{"@type":"Question","name":"Which cities do you cover?","acceptedAnswer":{"@type":"Answer","text":"Home sample collection is in Karachi for now. We will add more cities."}},{"@type":"Question","name":"What if I can't make my visit?","acceptedAnswer":{"@type":"Answer","text":"Reschedule or cancel free up to 24 hours before it. In the last 24 hours our lab calls you to arrange any change. If the visit has to move because of you then, or you are not home when we arrive, the first time is free; after that, visiting charges of 20% apply. Full details are in our refund and cancellation policy."}},{"@type":"Question","name":"Is my health data private from my employer?","acceptedAnswer":{"@type":"Answer","text":"Always. If your company runs a health programme, HR sees only whether you booked and completed your check-up, never your results."}}]},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://pulsinglabs.com/"},{"@type":"ListItem","position":2,"name":"Pricing","item":"https://pulsinglabs.com/pricing"}]}]}</script>
 </head>
 <body>
   <div id="site-header"></div>
 
-  <!-- ============ PAGE HERO (dark futuristic) ============ -->
-  <section class="page-hero s-dark ph-compact">
-    <img class="ph-photo" src="assets/img/vials.jpg" alt="" aria-hidden="true" loading="eager" fetchpriority="high" decoding="async" />
-    <div class="wrap page-enter">
+  <!-- ============ PAGE HERO (light, like About and Privacy) ============ -->
+  <section class="page-hero s-cream ph-compact">
+    <div class="wrap">
       <nav class="crumbs" aria-label="Breadcrumb"><a href="/">Home</a> › <span aria-current="page">Pricing</span></nav>
       <span class="eyebrow" data-i18n="pg.price.eyebrow">Pricing</span>
       <h1 data-i18n-html="pg.price.h1">Simple, <span class="grad-text">transparent</span> pricing</h1>
@@ -49,7 +48,7 @@
            If you change one, change the other: a patient who reads a price here and is
            charged a different one at checkout has been misled. Two packages only. -->
       <h2 class="cmp-h">Compare Standard and Premium, test by test</h2>
-      <div class="cmp-wrap reveal">
+      <div class="cmp-wrap">
 <table class="cmp" id="cmp">
           <caption class="sr">Standard and Premium check-ups compared, test by test</caption>
           <colgroup><col class="c0" /><col class="c1" /><col class="c2" /></colgroup>
@@ -291,30 +290,30 @@
         </div>
         <noscript><style>.cmp-det .dw{grid-template-rows:1fr!important}.cmp .more,.cmp-tools{display:none!important}</style></noscript>
       </div>
-      <p class="reveal center" style="margin-top:26px;color:var(--muted);font-size:14px;">Prices in PKR, confirmed before you pay. Home collection in Karachi is included. No fasting needed for any test.</p>
+      <p class="center" style="margin-top:26px;color:var(--muted);font-size:14px;">Prices in PKR, confirmed before you pay. Home collection in Karachi is included. No fasting needed for any test.</p>
     </div>
   </section>
 
   <!-- ============ FAQ (white) ============ -->
   <section id="faq">
     <div class="wrap center" style="max-width:680px;margin:0 auto;">
-      <span class="eyebrow reveal" data-i18n="pr.faq.eye">Questions</span>
-      <h2 class="reveal d1">Pricing questions</h2>
+      <span class="eyebrow" data-i18n="pr.faq.eye">Questions</span>
+      <h2>Pricing questions</h2>
     </div>
     <div class="wrap faq">
-      <details class="reveal" open><summary>Is the app free?</summary><p>Yes. Downloading and using PulsingLabs is free. You pay only for the check-up you book, and the price includes the home visit. There is no subscription.</p></details>
-      <details class="reveal"><summary>Do I need to fast before the test?</summary><p>No. Every test in both packages is non-fasting, so you can eat and drink as usual before your visit.</p></details>
-      <details class="reveal"><summary>Who are the packages for?</summary><p>Everyone, at any age. Standard is a clear first check-up; Premium adds 10 more tests for a fuller picture. You can also book for family members from your account.</p></details>
-      <details class="reveal"><summary>Which cities do you cover?</summary><p>Home sample collection is in Karachi for now. We will add more cities.</p></details>
-      <details class="reveal"><summary>What if I can't make my visit?</summary><p>Reschedule or cancel free up to 24 hours before it. In the last 24 hours our lab calls you to arrange any change. If the visit has to move because of you then, or you are not home when we arrive, the first time is free; after that, visiting charges of 20% apply. Full details are in our <a href="/refunds" style="color:var(--teal-d);font-weight:700;">refund and cancellation policy</a>.</p></details>
-      <details class="reveal"><summary>Is my health data private from my employer?</summary><p>Always. If your company runs a health programme, HR sees only whether you booked and completed your check-up, never your results.</p></details>
+      <details open><summary>Is the app free?</summary><p>Yes. Downloading and using PulsingLabs is free. You pay only for the check-up you book, and the price includes the home visit. There is no subscription.</p></details>
+      <details><summary>Do I need to fast before the test?</summary><p>No. Every test in both packages is non-fasting, so you can eat and drink as usual before your visit.</p></details>
+      <details><summary>Who are the packages for?</summary><p>Everyone, at any age. Standard is a clear first check-up; Premium adds 10 more tests for a fuller picture. You can also book for family members from your account.</p></details>
+      <details><summary>Which cities do you cover?</summary><p>Home sample collection is in Karachi for now. We will add more cities.</p></details>
+      <details><summary>What if I can't make my visit?</summary><p>Reschedule or cancel free up to 24 hours before it. In the last 24 hours our lab calls you to arrange any change. If the visit has to move because of you then, or you are not home when we arrive, the first time is free; after that, visiting charges of 20% apply. Full details are in our <a href="/refunds" style="color:var(--teal-d);font-weight:700;">refund and cancellation policy</a>.</p></details>
+      <details><summary>Is my health data private from my employer?</summary><p>Always. If your company runs a health programme, HR sees only whether you booked and completed your check-up, never your results.</p></details>
     </div>
   </section>
 
   <!-- ============ CTA ============ -->
   <section style="padding-top:0;">
     <div class="wrap">
-      <div class="cta-band reveal-zoom">
+      <div class="cta-band">
         <h2>Book your check-up</h2>
         <p>A phlebotomist comes to your home in Karachi. No fasting, for all ages, results explained in the app.</p>
         <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;">
