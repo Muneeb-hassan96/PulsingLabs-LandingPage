@@ -36,3 +36,12 @@ Check after deploying: `curl -sI https://pulsinglabs.com/ | grep -i strict` and
 
 Check: `http://pulsinglabs.com`, `http://www.pulsinglabs.com` and
 `https://www.pulsinglabs.com/pricing` should all end on `https://pulsinglabs.com/...`.
+
+## Type rules: one typeface, two weights (owner 2026-11-19)
+
+The site uses **General Sans** in only **normal (400)** and **bold (700)**. Quicksand is used only for the PulsingLabs wordmark and the nav links. Anything declared 100-500 draws as normal and 600-900 as bold, so a stray weight can never add a third look.
+
+- **Bold (700):** every heading, eyebrow and small uppercase label, button, form label, table row titles / prices / column heads, FAQ questions, chips, pills and badges, numbers and stats, footer menu links, the moving strip.
+- **Normal (400):** paragraphs and lead text, descriptions and sub-lines under a title, FAQ answers, text typed into form fields and their placeholders, the footer small print, breadcrumbs, units like ng/mL, notes.
+- Adding new text: ask "is this something you read, or something you scan?" Read = normal, scan = bold. Do not add 500 or 600 anywhere.
+- Only two General Sans files ship (`general-sans-400.woff2`, `general-sans-700.woff2`); both are preloaded on every page.

@@ -28,12 +28,12 @@
 .cmp thead .h1 { background: var(--grad-teal); }
 .cmp thead .h2 { background: linear-gradient(var(--navy), var(--navy)) padding-box; box-shadow: inset 0 3px 0 #4DEAD0; }
 .cmp thead span { display: block; }
-.cmp .h-t { font-size: 17px; font-weight: 800; letter-spacing: -.01em; }
-.cmp .h-s { font-size: 12.5px; font-weight: 500; opacity: .78; margin-top: 4px; line-height: 1.35; }
-.cmp .h-n { font-size: 13px; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; opacity: .92; }
-.cmp .h-p { font-size: clamp(18px, 2.6vw, 25px); font-weight: 900; letter-spacing: -.02em; line-height: 1.15; margin-top: 2px; }
-.cmp .h-c { font-size: 12.5px; font-weight: 600; opacity: .82; margin-top: 2px; }
-.cmp .h-tag { display: inline-block; font-size: 10.5px; font-weight: 800; letter-spacing: .07em; padding: 4px 11px; border-radius: 100px; margin-bottom: 8px; color: var(--navy); background: linear-gradient(135deg, #4DEAD0, #00BFA5); }
+.cmp .h-t { font-size: 17px; font-weight: 700; letter-spacing: -.01em; }
+.cmp .h-s { font-size: 12.5px; font-weight: 400; opacity: .78; margin-top: 4px; line-height: 1.35; }
+.cmp .h-n { font-size: 13px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; opacity: .92; }
+.cmp .h-p { font-size: clamp(18px, 2.6vw, 25px); font-weight: 700; letter-spacing: -.02em; line-height: 1.15; margin-top: 2px; }
+.cmp .h-c { font-size: 12.5px; font-weight: 700; opacity: .82; margin-top: 2px; }
+.cmp .h-tag { display: inline-block; font-size: 10.5px; font-weight: 700; letter-spacing: .07em; padding: 4px 11px; border-radius: 100px; margin-bottom: 8px; color: var(--navy); background: linear-gradient(135deg, #4DEAD0, #00BFA5); }
 
 /* rows */
 .cmp tbody th, .cmp tbody td { border-bottom: 1px solid var(--line); }
@@ -41,7 +41,7 @@
 .cmp-row .nm { display: block; font-size: 16px; font-weight: 700; color: var(--ink-dark); line-height: 1.3; }
 .cmp-row .sub { display: block; font-size: 13px; color: var(--muted); margin-top: 1px; }
 .cmp-row[data-tier="p"] th { background: linear-gradient(90deg, rgba(10,22,34,.055), #fff 55%); }
-.cmp-row[data-tier="p"] .nm::after { content: "PREMIUM"; margin-left: 8px; font-size: 9.5px; font-weight: 800; letter-spacing: .08em; padding: 2px 7px; border-radius: 100px; vertical-align: 2px; color: #fff; background: var(--navy); }
+.cmp-row[data-tier="p"] .nm::after { content: "PREMIUM"; margin-left: 8px; font-size: 9.5px; font-weight: 700; letter-spacing: .08em; padding: 2px 7px; border-radius: 100px; vertical-align: 2px; color: #fff; background: var(--navy); }
 .cmp-row:hover th, .cmp-row:hover td { background-color: #F5FBF8; }
 .cmp-row[data-tier="p"]:hover th { background: linear-gradient(90deg, rgba(10,22,34,.08), #F5FBF8 55%); }
 
@@ -62,8 +62,8 @@
 .no::before { content: ""; width: 12px; height: 2px; border-radius: 2px; background: #C9D2D8; }
 
 /* group labels */
-.cmp-cat th, .cmp-cat td { background: #EEF4F1; border-bottom: 0; padding: 9px 22px; font-size: 11.5px; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; color: var(--teal-d); }
-.cmp-cat th small { font-size: 11.5px; font-weight: 600; letter-spacing: .02em; text-transform: none; color: var(--muted); margin-left: 6px; }
+.cmp-cat th, .cmp-cat td { background: #EEF4F1; border-bottom: 0; padding: 9px 22px; font-size: 11.5px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--teal-d); }
+.cmp-cat th small { font-size: 11.5px; font-weight: 700; letter-spacing: .02em; text-transform: none; color: var(--muted); margin-left: 6px; }
 
 /* the "what it tells you" panel, opens under the test */
 .cmp-det td { padding: 0; border-bottom: 0; background: #F3FAF7; text-align: left; }
@@ -74,7 +74,7 @@
 .cmp .di { box-shadow: inset 4px 0 0 var(--teal); }
 .cmp .di p { padding: 0 24px 0 26px; font-size: 15px; line-height: 1.65; color: var(--ink); max-width: 68ch; }
 .cmp-det.open .di p:first-child { padding-top: 16px; }
-.cmp .di .where { margin: 10px 0 16px; font-size: 12.5px; font-weight: 800; letter-spacing: .04em; color: var(--teal-d); }
+.cmp .di .where { margin: 10px 0 16px; font-size: 12.5px; font-weight: 700; letter-spacing: .04em; color: var(--teal-d); }
 .cmp .di .where.pre { color: var(--navy); }
 .cmp-det.open .di .where { padding-bottom: 0; }
 .cmp-det[hidden], .cmp-row[hidden], .cmp-g[hidden] { display: none; }
@@ -82,14 +82,14 @@
 /* totals + buttons (bottom of the cards) */
 .cmp tfoot th, .cmp tfoot td { border-bottom: 0; }
 .cmp-tot th { padding: 14px 22px; font-size: 13px; font-weight: 700; color: var(--muted); border-top: 1px solid var(--line); }
-.cmp-tot td { padding: 14px 0; font-size: 20px; font-weight: 900; border-top: 1px solid var(--line); }
+.cmp-tot td { padding: 14px 0; font-size: 20px; font-weight: 700; border-top: 1px solid var(--line); }
 .cmp-tot td.s b { color: var(--teal-d); }
 .cmp-tot td.p b { color: var(--navy); }
-.cmp-btns th { padding: 6px 22px 22px; font-size: 13px; font-weight: 500; color: var(--muted); line-height: 1.5; border-radius: 0 0 22px 22px; }
+.cmp-btns th { padding: 6px 22px 22px; font-size: 13px; font-weight: 400; color: var(--muted); line-height: 1.5; border-radius: 0 0 22px 22px; }
 .cmp-btns td { padding: 6px 12px 22px; border-radius: 0 0 22px 22px; }
 .cmp-btns td, .cmp-btns th { vertical-align: middle; }
 
-.cbtn { display: inline-flex; align-items: center; justify-content: center; width: 100%; padding: 13px 14px; border-radius: 100px; font-size: 14.5px; font-weight: 800; line-height: 1.15; text-align: center; text-decoration: none; color: #fff; background: var(--grad-teal); box-shadow: 0 10px 24px rgba(0,191,165,.3); transition: transform .25s var(--ease), box-shadow .25s; }
+.cbtn { display: inline-flex; align-items: center; justify-content: center; width: 100%; padding: 13px 14px; border-radius: 100px; font-size: 14.5px; font-weight: 700; line-height: 1.15; text-align: center; text-decoration: none; color: #fff; background: var(--grad-teal); box-shadow: 0 10px 24px rgba(0,191,165,.3); transition: transform .25s var(--ease), box-shadow .25s; }
 .cbtn:hover { transform: translateY(-2px); box-shadow: 0 14px 30px rgba(0,191,165,.4); }
 .cbtn.pre { background: var(--navy); color: #fff; box-shadow: 0 10px 24px rgba(10,22,34,.3), inset 0 0 0 1.5px rgba(77,234,208,.55); }
 .cbtn.pre:hover { box-shadow: 0 14px 30px rgba(10,22,34,.4), inset 0 0 0 1.5px #4DEAD0; }
@@ -169,7 +169,7 @@
 .cmp-wrap { margin-top: 0; }
 
 /* "Not included" cross in the site's soft coral (was grey). */
-.no::before { color: #F0665A; font-weight: 500; }
+.no::before { color: #F0665A; font-weight: 400; }
 .cmp td.s .no, .cmp td.p .no { background: rgba(255,107,92,.12); box-shadow: inset 0 0 0 1px rgba(255,107,92,.28); }
 /* The cross is one colour (coral red) wherever it appears. */
 .cmp .no::before { color: #F0665A; }
