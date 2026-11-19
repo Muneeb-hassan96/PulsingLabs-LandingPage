@@ -7,6 +7,22 @@
 (function () {
   'use strict';
 
+  // ---- Google Analytics (GA4): visits and page views only --------------------
+  // Ad personalisation and Google signals are off; never send names, phones,
+  // emails or health values to it (privacy page section 12 promises this).
+  // Live site only, so local testing never counts as a visit.
+  var GA_ID = 'G-QZL3NXQTJ7';
+  if (/(^|\.)pulsinglabs\.com$/.test(location.hostname)) {
+    window.dataLayer = window.dataLayer || [];
+    window.gtag = function () { window.dataLayer.push(arguments); };
+    window.gtag('js', new Date());
+    window.gtag('config', GA_ID, { allow_google_signals: false, allow_ad_personalization_signals: false });
+    var ga = document.createElement('script');
+    ga.async = true;
+    ga.src = 'https://www.googletagmanager.com/gtag/js?id=' + GA_ID;
+    document.head.appendChild(ga);
+  }
+
   // ---- Launch config: ONE switch for every booking / app button ----------
   // While PLAY_URL and APP_URL are both empty (the app is not public yet), every
   // booking button ("Request a check-up", the header and footer buttons, the

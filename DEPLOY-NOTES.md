@@ -18,6 +18,11 @@ What it does:
   (`https://api.pulsinglabs.com`) is the only outside address the forms call. If anything new
   is added from another address (a chat widget, a map, a captcha), add that address first,
   or it will silently not load.
+- **Google Analytics (GA4, `G-QZL3NXQTJ7`, 2026-11-20)** is loaded by `assets/app.js` on the live
+  host only (never localhost), with ad personalisation and Google signals off. The CSP allows
+  Google's documented GA4 addresses (`*.googletagmanager.com`, `*.google-analytics.com`,
+  `*.analytics.google.com`). Privacy page section 12 says what it collects; never send names,
+  phones, emails or health values to it.
 - **Caching:** CSS and JS for a year (their links carry `?v=N`, bumped on every change),
   images and videos for 7 days, the 3D model and 3D engine files for 30 days. Pages
   (HTML) keep Cloudflare's default, which re-checks on every visit.
